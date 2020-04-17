@@ -2,12 +2,12 @@
 Declares the deploys to kubernetes-aws--flux-test cluster using fluxcd
 
 ## Useful commands
-4. Check if flux is applying charts
-   ```sh
-   fluxctl list-workloads --all-namespaces
-   helm list --all-namespaces
-   fluxctl sync  # forces flux to sync git repo
-   ```
+
+```sh
+fluxctl list-workloads --all-namespaces
+helm list --all-namespaces
+fluxctl sync  # forces flux to sync git repo
+```
 
 ## Bootstrapping the cluster to use flux
 
