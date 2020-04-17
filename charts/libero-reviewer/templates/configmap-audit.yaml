@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "libero-reviewer.fullname" . }}-audit
+  labels:
+    app.kubernetes.io/name: {{ include "libero-reviewer.name" . }}
+    helm.sh/chart: {{ include "libero-reviewer.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+  config.json: |
+    {
+      "port": 3004,
+      "rabbitmq_url": "{{ include "libero-reviewer.fullname" . }}-rabbitmq",
+      "database": {
+        "type": "pg",
+        "host": "{{ include "libero-reviewer.fullname" . }}-postgresql",
+        "username": "{{ .Values.postgresql.postgresqlUsername }}",
+        "database": "{{ .Values.postgresql.postgresqlDatabase }}",
+        "password": "{{ .Values.postgresql.postgresqlPassword }}",
+        "port": 5432
+      }
+    }

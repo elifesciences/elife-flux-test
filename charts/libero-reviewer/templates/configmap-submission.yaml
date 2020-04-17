@@ -1,0 +1,87 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "libero-reviewer.fullname" . }}-submission
+  labels:
+    app.kubernetes.io/name: {{ include "libero-reviewer.name" . }}
+    helm.sh/chart: {{ include "libero-reviewer.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+  config.json: |
+    {
+      "port": 3000,
+      "max_ql_complexity": 100,
+      "max_ql_depth": 5,
+      "knex": {
+          "client": "pg",
+          "connection": {
+              "host": "{{ include "libero-reviewer.fullname" . }}-postgresql",
+              "database": "{{ .Values.postgresql.postgresqlDatabase }}",
+              "user": "{{ .Values.postgresql.postgresqlUsername }}",
+              "password": "{{ .Values.postgresql.postgresqlPassword }}",
+              "port": 5432
+          }
+      },
+      "max_file_size_in_bytes": {{ .Values.submission.maxFileSizeInBytes }},
+      "authentication_jwt_secret": "{{ .Values.continuumAdaptor.authenticationJwtSecret }}",
+      "user_adapter_url": "http://{{ include "libero-reviewer.fullname" . }}-continuum-adaptor/current-user",
+      "science_beam": {
+        "api_url": "{{ .Values.submission.scienceBeam.apiUrl }}",
+        "timeout": {{ .Values.submission.scienceBeam.timeout }}
+      },
+      "s3": {
+        "accessKeyId": "{{ .Values.submission.aws.accessKeyId }}",
+        "secretAccessKey": "{{ .Values.submission.aws.secretAccessKey }}",
+        "s3ForcePathStyle": true,
+        "fileBucket": "{{ .Values.submission.aws.s3Bucket }}",
+        "awsEndPoint": false
+      }
+    }
+  config.client.json: |
+    {
+      "client": {
+        "majorSubjectAreas": {
+          "biochemistry-chemical-biology": "Biochemistry and Chemical Biology",
+          "cancer-biology": "Cancer Biology",
+          "cell-biology": "Cell Biology",
+          "chromosomes-gene-expression": "Chromosomes and Gene Expression",
+          "computational-systems-biology": "Computational and Systems Biology",
+          "developmental-biology": "Developmental Biology",
+          "ecology": "Ecology",
+          "epidemiology-global-health": "Epidemiology and Global Health",
+          "evolutionary-biology": "Evolutionary Biology",
+          "genetics-genomics": "Genetics and Genomics",
+          "human-biology-medicine": "Human Biology and Medicine",
+          "immunology-inflammation": "Immunology and Inflammation",
+          "microbiology-infectious-disease": "Microbiology and Infectious Disease",
+          "neuroscience": "Neuroscience",
+          "physics-living-systems": "Physics of Living Systems",
+          "plant-biology": "Plant Biology",
+          "stem-cells-and-regenerative-medicine": "Stem Cells and Regenerative Medicine",
+          "structural-biology-molecular-biophysics": "Structural Biology and Molecular Biophysics"
+        }
+      },
+      "fileUpload": {
+        "maxSizeMB": 100
+      },
+      "newrelic": {
+        "licenseKey": "",
+        "applicationID": ""
+      },
+      "googleAnalytics": {
+        "trackingId": ""
+      },
+      "hotJar": {
+        "enabled": true,
+        "snippetVersion": 6
+      },
+      "titles": {
+        "": "Dashboard | eLife",
+        "author-guide": "Author guide | eLife",
+        "reviewer-guide": "Reviewer guide | eLife",
+        "contact-us": "Contact us | eLife",
+        "login": "Login | eLife",
+        "submit": "Submit | eLife"
+      }
+    }

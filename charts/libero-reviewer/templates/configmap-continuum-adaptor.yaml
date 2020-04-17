@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "libero-reviewer.fullname" . }}-continuum-adaptor
+  labels:
+    app.kubernetes.io/name: {{ include "libero-reviewer.name" . }}
+    helm.sh/chart: {{ include "libero-reviewer.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+  config.json: |
+    {
+        "port": 3001,
+        "rabbitmq_url": "{{ include "libero-reviewer.fullname" . }}-rabbitmq",
+        "login_url": "{{ .Values.continuumLogin.url }}",
+        "login_return_url": "https://{{ include "libero-reviewer.fullname" . }}.elifesciences.org/login",
+        "authentication_jwt_secret": "{{ .Values.continuumAdaptor.authenticationJwtSecret }}",
+        "continuum_jwt_secret": "{{ .Values.continuumAdaptor.continuumJwtSecret }}",
+        "continuum_api_url": "{{ .Values.continuumAdaptor.continuumApiUrl }}",
+        "knex": {
+            "client": "pg",
+            "connection": {
+                "host": "{{ include "libero-reviewer.fullname" . }}-postgresql",
+                "user": "{{ .Values.postgresql.postgresqlUsername }}",
+                "database": "{{ .Values.postgresql.postgresqlDatabase }}",
+                "password": "{{ .Values.postgresql.postgresqlPassword }}",
+                "port": 5432
+            }
+        }
+    }

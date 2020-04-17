@@ -1,0 +1,62 @@
+# Default values for libero-reviewer.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+images:
+  tag: latest
+  pullPolicy: Always
+  submission:
+    repository: liberoadmin/reviewer-submission
+  client:
+    repository: liberoadmin/reviewer-client
+  continuumAdaptor:
+    repository: liberoadmin/continuum-adaptor
+  audit:
+    repository: liberoadmin/audit
+
+clientCertificate: "arn:aws:iam::512686554592:server-certificate/cloudfront/wildcard.elifesciences.org/2019.wildcard.elifesciences.org"
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  port: 80
+
+postgresql:
+  enabled: true
+  image:
+    tag: "11.4.0"
+  persistence:
+    enabled: false
+  postgresqlDatabase: "postgres"
+  postgresqlPassword: "change_this_password_or_else"
+
+rabbitmq:
+  image:
+    tag: "3.8.1-ol-7-r13"
+  persistence:
+    enabled: false
+
+# todo, set this to proper values
+continuumLogin:
+  url: "http://localhost"
+
+submission:
+  port: 3000
+  maxFileSizeInBytes: 100000000
+  scienceBeam:
+    api_url: ""
+    timeout: 20000
+  aws:
+    accessKeyId: ""
+    secretAccessKey: ""
+    s3Bucket: ""
+
+continuumAdaptor:
+  port: 3001
+  continuumApiUrl: "http://continuum.gateway.url"
+  database: "reviewer_continuum_adaptor"
+  continuumJwtSecret: "some_secret_from_journal"
+  authenticationJwtSecret: "super_secret_jam"

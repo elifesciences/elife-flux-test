@@ -1,0 +1,62 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ include "libero-reviewer.fullname" . }}-submission
+  labels:
+    app.kubernetes.io/name: {{ include "libero-reviewer.name" . }}
+    helm.sh/chart: {{ include "libero-reviewer.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/component: submission
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "libero-reviewer.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: submission
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "libero-reviewer.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/component: submission
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-submission
+          image: "{{ .Values.images.submission.repository }}:{{ .Values.images.tag }}"
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/reviewer
+      initContainers:
+        - name: {{ .Chart.Name }}-load-db-schema
+          image: "liberoadmin/reviewer-xpub-postgres"
+          command: ["sh", "-c", "(psql -q -t -c \"select count(*) from information_schema.tables where table_schema='public';\" | xargs ) && psql -f  /docker-entrypoint-initdb.d/xpub-schema.sql"]
+          env:
+            - name: PGHOST
+              value: "{{ include "libero-reviewer.fullname" . }}-postgresql"
+            - name: PGPORT
+              value: "5432"
+            - name: PGUSER
+              value: "{{ .Values.postgresql.postgresqlUsername }}"
+            - name: PGPASSWORD
+              value: "{{ .Values.postgresql.postgresqlPassword }}"
+            - name: PGDATABASE
+              value: "{{ .Values.postgresql.postgresqlDatabase }}"
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ include "libero-reviewer.fullname" . }}-submission
