@@ -1,0 +1,17 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: libero-reviewer 
+  namespace: stg
+  annotations:
+    fluxcd.io/automated: "true"
+    filter.fluxcd.io/chart-image: glob:master-*
+spec:
+  releaseName: libero-reviewer--staging
+  chart:
+    git: git@github.com:elifesciences/elife-flux-test
+    path: charts/libero-reviewer
+    ref: master
+  values:
+    replicaCount: 1
