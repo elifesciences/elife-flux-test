@@ -15,3 +15,16 @@ spec:
     ref: master
   values:
     replicaCount: 1
+
+    continuumLogin:
+      url: "https://continuumtest--cdn-journal.elifesciences.org/submit"
+
+    continuumAdaptor:
+      port: 3001
+      continuumApiUrl: "http://continuumtest--gateway.elife.internal"
+
+    submission:
+      scienceBeam:
+        apiUrl: "https://sciencebeam-texture.elifesciences.org/api/convert"
+      aws:
+        s3Bucket: "staging-libero-reviewer"
