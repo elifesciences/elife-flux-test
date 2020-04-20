@@ -2,14 +2,14 @@
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
-  name: libero-reviewer 
+  name: libero-reviewer
   namespace: stg
   annotations:
     fluxcd.io/automated: "true"
-    filter.fluxcd.io/submission:       glob:master-*
-    filter.fluxcd.io/client:           glob:master-*-*
+    filter.fluxcd.io/submission: glob:master-*
+    filter.fluxcd.io/client: glob:master-*-*
     filter.fluxcd.io/continuumAdaptor: glob:master-*
-    filter.fluxcd.io/audit:            glob:master-*
+    filter.fluxcd.io/audit: glob:master-*
 spec:
   releaseName: libero-reviewer--stg
   chart:
@@ -22,7 +22,7 @@ spec:
     submission:
       image:
         repository: liberoadmin/reviewer-submission
-        tag: master-6cdb0084-20200414.1024
+        tag: master-f508398e
       scienceBeam:
         apiUrl: "https://sciencebeam-texture.elifesciences.org/api/convert"
       aws:
@@ -30,7 +30,7 @@ spec:
     client:
       image:
         repository: liberoadmin/reviewer-client
-        tag: master-0545c35d-20200409.1600
+        tag: master-6da5f1b1-20200417.1546
     continuumAdaptor:
       image:
         tag: master-2ffc7599-20200414.1004
