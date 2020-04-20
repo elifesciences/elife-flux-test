@@ -24,8 +24,8 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-client
-          image: "{{ .Values.images.client.repository }}:{{ .Values.images.client.tag }}"
-          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          image: "{{ .Values.client.image.repository }}:{{ .Values.client.image.tag }}"
+          imagePullPolicy: {{ .Values.client.image.pullPolicy }}
           ports:
             - name: http
               containerPort: 9000

@@ -24,8 +24,8 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-audit
-          image: "{{ .Values.images.audit.repository }}:{{ .Values.images.audit.tag }}"
-          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          image: "{{ .Values.audit.image.repository }}:{{ .Values.audit.image.tag }}"
+          imagePullPolicy: {{ .Values.audit.image.pullPolicy }}
           ports:
             - name: http
               containerPort: 3004

@@ -24,8 +24,8 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-submission
-          image: "{{ .Values.images.submission.repository }}:{{ .Values.images.submission.tag }}"
-          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          image: "{{ .Values.submission.image.repository }}:{{ .Values.submission.image.tag }}"
+          imagePullPolicy: {{ .Values.submission.image.pullPolicy }}
           ports:
             - name: http
               containerPort: 3000
