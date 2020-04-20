@@ -14,7 +14,7 @@ spec:
   values:
     replicas: 2
     aws:
-      assumeRoleArn: "arn:aws:iam::512686554592:instance-profile/kubernetes-aws--flux-test--worker"
+      assumeRoleArn: "arn:aws:iam::512686554592:policy/kubernetes-aws--flux-test--AmazonRoute53KubernetesExternalDNS"
   resources:
     limits:
       cpu: 50m
