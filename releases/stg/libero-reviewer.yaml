@@ -21,6 +21,7 @@ spec:
 
     submission:
       image:
+        repository: liberoadmin/submission
         tag: master-6cdb0084-20200414.1024
       scienceBeam:
         apiUrl: "https://sciencebeam-texture.elifesciences.org/api/convert"
