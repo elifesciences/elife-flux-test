@@ -15,3 +15,10 @@ spec:
     replicas: 2
     aws:
       assumeRoleArn: "arn:aws:iam::512686554592:instance-profile/kubernetes-aws--flux-test--worker"
+  resources:
+    limits:
+      cpu: 50m
+      memory: 50Mi
+    requests:
+      memory: 50Mi
+      cpu: 10m
