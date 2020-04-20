@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-submission
-          image: "{{ .Values.images.submission.repository }}:{{ .Values.images.tag }}"
+          image: "{{ .Values.images.submission.repository }}:{{ .Values.images.submission.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           ports:
             - name: http

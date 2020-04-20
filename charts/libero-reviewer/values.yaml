@@ -5,16 +5,19 @@
 replicaCount: 1
 
 images:
-  tag: latest
   pullPolicy: Always
   submission:
     repository: liberoadmin/reviewer-submission
+    tag: latest
   client:
     repository: liberoadmin/reviewer-client
+    tag: latest
   continuumAdaptor:
     repository: liberoadmin/continuum-adaptor
+    tag: latest
   audit:
     repository: liberoadmin/audit
+    tag: latest
 
 clientCertificate: "arn:aws:iam::512686554592:server-certificate/cloudfront/wildcard.elifesciences.org/2019.wildcard.elifesciences.org"
 

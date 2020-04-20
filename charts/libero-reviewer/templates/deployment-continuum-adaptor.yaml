@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-continuum-adaptor
-          image: "{{ .Values.images.continuumAdaptor.repository }}:{{ .Values.images.tag }}"
+          image: "{{ .Values.images.continuumAdaptor.repository }}:{{ .Values.images.continuumAdaptor.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           ports:
             - name: http
