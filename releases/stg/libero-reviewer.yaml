@@ -6,7 +6,10 @@ metadata:
   namespace: stg
   annotations:
     fluxcd.io/automated: "true"
-    filter.fluxcd.io/chart-image: glob:master-*
+    filter.fluxcd.io/submission:       glob:master-*
+    filter.fluxcd.io/client:           glob:master-*
+    filter.fluxcd.io/continuumAdaptor: glob:master-*
+    filter.fluxcd.io/audit:            glob:master-*
 spec:
   releaseName: libero-reviewer--stg
   chart:
