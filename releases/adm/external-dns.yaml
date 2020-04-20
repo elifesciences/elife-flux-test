@@ -12,8 +12,6 @@ spec:
     path: bitnami/external-dns
     ref: master
   values:
-    aws:
-      assumeRoleArn: "arn:aws:iam::512686554592:policy/kubernetes-aws--flux-test--AmazonRoute53KubernetesExternalDNS"
     replicas: 1
   resources:
     limits:
