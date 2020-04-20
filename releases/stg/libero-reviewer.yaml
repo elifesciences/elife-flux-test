@@ -2,7 +2,7 @@
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
-  name: libero-reviewer 
+  name: libero-reviewer
   namespace: stg
   annotations:
     fluxcd.io/automated: "true"
@@ -22,7 +22,7 @@ spec:
     submission:
       image:
         repository: liberoadmin/reviewer-submission
-        tag: master-6cdb0084-20200414.1024
+        tag: master-f508398e
       scienceBeam:
         apiUrl: "https://sciencebeam-texture.elifesciences.org/api/convert"
       aws:
@@ -30,7 +30,7 @@ spec:
     client:
       image:
         repository: liberoadmin/reviewer-client
-        tag: master-0545c35d-20200409.1600
+        tag: master-6da5f1b1-20200417.1546
     continuumAdaptor:
       image:
         repository: liberoadmin/continuum-adaptor
