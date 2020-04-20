@@ -10,6 +10,10 @@ metadata:
     filter.fluxcd.io/client:           glob:master-*
     filter.fluxcd.io/continuumAdaptor: glob:master-*
     filter.fluxcd.io/audit:            glob:master-*
+    repository.fluxcd.io/submission:       images.submission.repository
+    repository.fluxcd.io/client:           images.client.repository
+    repository.fluxcd.io/continuumAdaptor: images.continuumAdaptor.repository
+    repository.fluxcd.io/audit:            images.audit.repository
     tag.fluxcd.io/submission:       images.submission.tag
     tag.fluxcd.io/client:           images.client.tag
     tag.fluxcd.io/continuumAdaptor: images.continuumAdaptor.tag
