@@ -12,6 +12,6 @@ spec:
     path: bitnami/external-dns
     ref: master
   values:
-    replicaCount: 2
+    replicas: 2
     aws:
       assumeRoleArn: "arn:aws:iam::512686554592:instance-profile/kubernetes-aws--flux-test--worker"
