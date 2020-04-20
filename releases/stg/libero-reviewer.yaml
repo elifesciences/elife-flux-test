@@ -19,28 +19,27 @@ spec:
   values:
     replicaCount: 1
 
-    images:
-      pullPolicy: Always
-      submission:
+    submission:
+      image:
         tag: master-6cdb0084-20200414.1024
-      client:
+      scienceBeam:
+        apiUrl: "https://sciencebeam-texture.elifesciences.org/api/convert"
+      aws:
+        s3Bucket: "staging-libero-reviewer"
+    client:
+      image:
         tag: master-0545c35d-20200409.1600
-      continuumAdaptor:
+    continuumAdaptor:
+      image:
         tag: master-2ffc7599-20200414.1004
-      audit:
+      port: 3001
+      continuumApiUrl: "http://continuumtest--gateway.elife.internal"
+    audit:
+      image:
         tag: master-37d7544b-20200414.1005
 
     continuumLogin:
       url: "https://continuumtest--cdn-journal.elifesciences.org/submit"
 
-    continuumAdaptor:
-      port: 3001
-      continuumApiUrl: "http://continuumtest--gateway.elife.internal"
-
-    submission:
-      scienceBeam:
-        apiUrl: "https://sciencebeam-texture.elifesciences.org/api/convert"
-      aws:
-        s3Bucket: "staging-libero-reviewer"
 
 
