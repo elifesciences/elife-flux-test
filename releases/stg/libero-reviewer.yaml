@@ -6,10 +6,10 @@ metadata:
   namespace: stg
   annotations:
     fluxcd.io/automated: "true"
-    filter.fluxcd.io/submission:       glob:master-*
+    filter.fluxcd.io/submission:       glob:master-*-*
     filter.fluxcd.io/client:           glob:master-*-*
-    filter.fluxcd.io/continuumAdaptor: glob:master-*
-    filter.fluxcd.io/audit:            glob:master-*
+    filter.fluxcd.io/continuumAdaptor: glob:master-*-*
+    filter.fluxcd.io/audit:            glob:master-*-*
 spec:
   releaseName: libero-reviewer--stg
   chart:
@@ -33,11 +33,13 @@ spec:
         tag: master-0545c35d-20200409.1600
     continuumAdaptor:
       image:
+        repository: liberoadmin/continuum-adaptor
         tag: master-2ffc7599-20200414.1004
       port: 3001
       continuumApiUrl: "http://continuumtest--gateway.elife.internal"
     audit:
       image:
+        repository: liberoadmin/audit
         tag: master-37d7544b-20200414.1005
 
     continuumLogin:
