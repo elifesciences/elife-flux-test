@@ -7,6 +7,10 @@ Declares the deploys to kubernetes-aws--flux-test cluster using fluxcd
 fluxctl list-workloads --all-namespaces
 helm list --all-namespaces
 fluxctl sync  # forces flux to sync git repo
+
+# List all image versions running on cluster
+kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.containers[*]}{.image}{", "}{end}{end}' |
+sort | column -t
 ```
 
 ## Bootstrapping the cluster to use flux
