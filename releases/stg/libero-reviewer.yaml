@@ -29,6 +29,7 @@ spec:
         s3Bucket: "staging-libero-reviewer"
     client:
       image:
+        repository: liberoadmin/reviewer-client
         tag: master-0545c35d-20200409.1600
     continuumAdaptor:
       image:
