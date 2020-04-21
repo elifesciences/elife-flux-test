@@ -18,4 +18,4 @@ spec:
         annotations:
           kubernetes.io/tls-acme: "true"
         hosts:
-          - grafana.eks-flux-test.elifesciences.org
+          - grafana--eks-flux-test.elifesciences.org
