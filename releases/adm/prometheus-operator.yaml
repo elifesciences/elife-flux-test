@@ -13,9 +13,9 @@ spec:
     ref: master
   values:
     grafana:
-    ingress:
-      enabled: false
-      annotations:
-        kubernetes.io/tls-acme: "true"
-      hosts:
-        - grafana.eks-flux-test.elifesciences.org
+      ingress:
+        enabled: false
+        annotations:
+          kubernetes.io/tls-acme: "true"
+        hosts:
+          - grafana.eks-flux-test.elifesciences.org
