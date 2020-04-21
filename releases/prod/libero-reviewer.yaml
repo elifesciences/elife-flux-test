@@ -6,10 +6,10 @@ metadata:
   namespace: prod
   annotations:
     fluxcd.io/automated: "true"
-    filter.fluxcd.io/submission:       semver:*
-    filter.fluxcd.io/client:           semver:*
+    filter.fluxcd.io/submission: semver:*
+    filter.fluxcd.io/client: semver:*
     filter.fluxcd.io/continuumAdaptor: semver:*
-    filter.fluxcd.io/audit:            semver:*
+    filter.fluxcd.io/audit: semver:*
 spec:
   releaseName: libero-reviewer--prod
   chart:
@@ -22,7 +22,7 @@ spec:
     submission:
       image:
         repository: liberoadmin/reviewer-submission
-        tag: master-f508398e
+        tag: 0.0.2
       scienceBeam:
         apiUrl: "https://sciencebeam-texture.elifesciences.org/api/convert"
       aws:
@@ -30,17 +30,17 @@ spec:
     client:
       image:
         repository: liberoadmin/reviewer-client
-        tag: master-6da5f1b1-20200417.1546
+        tag: 0.0.2
     continuumAdaptor:
       image:
         repository: liberoadmin/continuum-adaptor
-        tag: master-2ffc7599-20200414.1004
+        tag: 0.0.3
       port: 3001
       continuumApiUrl: "http://continuumtest--gateway.elife.internal"
     audit:
       image:
         repository: liberoadmin/audit
-        tag: master-37d7544b-20200414.1005
+        tag: 0.0.2
 
     continuumLogin:
       url: "https://continuumtest--cdn-journal.elifesciences.org/submit"
