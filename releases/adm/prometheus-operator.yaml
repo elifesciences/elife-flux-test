@@ -14,7 +14,7 @@ spec:
   values:
     grafana:
       ingress:
-        enabled: false
+        enabled: "true"
         annotations:
           kubernetes.io/tls-acme: "true"
         hosts:
