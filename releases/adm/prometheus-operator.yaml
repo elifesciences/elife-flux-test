@@ -11,3 +11,11 @@ spec:
     git: git@github.com:helm/charts
     path: stable/prometheus-operator
     ref: master
+  values:
+    grafana:
+    ingress:
+      enabled: false
+      annotations:
+        kubernetes.io/tls-acme: "true"
+      hosts:
+        - grafana.eks-flux-test.elifesciences.org
