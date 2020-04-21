@@ -1,0 +1,49 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: libero-reviewer
+  namespace: prod
+  annotations:
+    fluxcd.io/automated: "true"
+    filter.fluxcd.io/submission:       semver:*
+    filter.fluxcd.io/client:           semver:*
+    filter.fluxcd.io/continuumAdaptor: semver:*
+    filter.fluxcd.io/audit:            semver:*
+spec:
+  releaseName: libero-reviewer--prod
+  chart:
+    git: git@github.com:elifesciences/elife-flux-test
+    path: charts/libero-reviewer
+    ref: master
+  values:
+    replicaCount: 1
+
+    submission:
+      image:
+        repository: liberoadmin/reviewer-submission
+        tag: master-f508398e
+      scienceBeam:
+        apiUrl: "https://sciencebeam-texture.elifesciences.org/api/convert"
+      aws:
+        s3Bucket: "staging-libero-reviewer"
+    client:
+      image:
+        repository: liberoadmin/reviewer-client
+        tag: master-6da5f1b1-20200417.1546
+    continuumAdaptor:
+      image:
+        repository: liberoadmin/continuum-adaptor
+        tag: master-2ffc7599-20200414.1004
+      port: 3001
+      continuumApiUrl: "http://continuumtest--gateway.elife.internal"
+    audit:
+      image:
+        repository: liberoadmin/audit
+        tag: master-37d7544b-20200414.1005
+
+    continuumLogin:
+      url: "https://continuumtest--cdn-journal.elifesciences.org/submit"
+
+
+
