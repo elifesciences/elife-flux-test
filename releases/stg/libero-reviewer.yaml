@@ -34,7 +34,7 @@ spec:
     continuumAdaptor:
       image:
         repository: liberoadmin/continuum-adaptor
-        tag: master-02247467-20200416.1439
+        tag: master-485b4b86-20200422.1406
       port: 3001
       continuumApiUrl: "http://continuumtest--gateway.elife.internal"
     audit:
