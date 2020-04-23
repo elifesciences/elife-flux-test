@@ -35,8 +35,7 @@ spec:
           value: "Viewer"
       admin:
         user: "admin"
-        existingSecret: grafan-temp-admin-pwd
-        existingSecretPasswordKey: password  # secret also needs admin-user: admin key
+        existingSecret: grafana-temp-admin-pwd
 
     prometheus:
       service:
