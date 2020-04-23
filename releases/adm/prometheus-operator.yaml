@@ -31,3 +31,12 @@ spec:
         user: "admin"
         existingSecret: grafan-temp-admin-pwd
         existingSecretPasswordKey: password  # secret also needs admin-user: admin key
+
+    prometheus:
+      service:
+        type: LoadBalancer
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: prometheus--eks-flux-test.elifesciences.org
+          service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:iam::512686554592:server-certificate/cloudfront/wildcard.elifesciences.org/2019.wildcard.elifesciences.org"
+          service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+          service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
