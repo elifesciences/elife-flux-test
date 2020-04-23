@@ -6,6 +6,12 @@ metadata:
   namespace: adm
   annotations:
     fluxcd.io/automated: "true"
+  rollback:
+    enable: "true"
+    retry: "true"
+    maxRetries: 3
+    force: "true"
+
 spec:
   chart:
     git: git@github.com:helm/charts
