@@ -30,7 +30,7 @@ spec:
         - name: GF_AUTH_ANONYMOUS_ENABLED
           value: "true"
         - name: GF_AUTH_ANONYMOUS_ORG_NAME
-          value: "Anon"
+          value: "Main Org."
         - name: GF_AUTH_ANONYMOUS_ORG_ROLE
           value: "Viewer"
       admin:
