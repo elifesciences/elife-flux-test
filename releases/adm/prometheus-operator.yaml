@@ -20,3 +20,10 @@ spec:
           service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:iam::512686554592:server-certificate/cloudfront/wildcard.elifesciences.org/2019.wildcard.elifesciences.org"
           service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
           service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+      extraEnvVars:
+        - name: GF_AUTH_ANONYMOUS_ENABLED
+          value: "true"
+        - name: GF_AUTH_ANONYMOUS_ORG_NAME
+          value: "Anon"
+        - name: GF_AUTH_ANONYMOUS_ORG_ROLE
+          value: "Viewer"
