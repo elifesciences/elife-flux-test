@@ -30,4 +30,4 @@ spec:
       admin:
         user: "admin"
         existingSecret: grafan-temp-admin-pwd
-        existingSecretPasswordKey: password
+        existingSecretPasswordKey: password  # secret also needs admin-user: admin key
