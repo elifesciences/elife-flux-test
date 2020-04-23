@@ -33,10 +33,6 @@ spec:
           value: "Anon"
         - name: GF_AUTH_ANONYMOUS_ORG_ROLE
           value: "Viewer"
-      admin:
-        user: "admin"
-        existingSecret: grafan-temp-admin-pwd
-        existingSecretPasswordKey: password  # secret also needs admin-user: admin key
 
     prometheus:
       service:
