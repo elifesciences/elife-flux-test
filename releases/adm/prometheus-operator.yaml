@@ -28,12 +28,9 @@ spec:
           service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
           service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
       env:
-        - key: GF_AUTH_ANONYMOUS_ENABLED
-          value: "true"
-        - key: GF_AUTH_ANONYMOUS_ORG_NAME
-          value: "Main Org."
-        - key: GF_AUTH_ANONYMOUS_ORG_ROLE
-          value: "Viewer"
+        GF_AUTH_ANONYMOUS_ENABLED: "true"
+        GF_AUTH_ANONYMOUS_ORG_NAME: "Main Org."
+        GF_AUTH_ANONYMOUS_ORG_ROLE: "Viewer"
 
     prometheus:
       service:
