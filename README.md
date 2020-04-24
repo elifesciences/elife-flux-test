@@ -3,14 +3,27 @@ Declares the deploys to kubernetes-aws--flux-test cluster using fluxcd
 
 ## Useful commands
 
+If flux is installed to a namespace `fluxctl` needs to be invoked as:
+
+```
+fluxctl --k8s-fwd-ns flux
+```
+
+__Observing state__
 ```sh
+fluxctl sync  # forces flux to sync git repo
 fluxctl list-workloads --all-namespaces
 helm list --all-namespaces
-fluxctl sync --k8s-fwd-ns flux  # forces flux to sync git repo
 
 # List all image versions running on cluster
 kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.containers[*]}{.image}{", "}{end}{end}' |
 sort | column -t
+```
+
+__Debugging__
+```sh
+kubectl -n flux logs helm-operator-86b8f67577-wldq5 --follow
+helm -n adm history adm-prometheus-operator -o yaml
 ```
 
 ## Bootstrapping the cluster to use flux
