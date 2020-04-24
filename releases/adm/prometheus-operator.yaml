@@ -43,8 +43,7 @@ spec:
       additionalServiceMonitors:
         - name: flux-monitor
           selector:
-            matchLabels:
-              release: flux
+            app: flux
           namespaceSelector:
             matchNames:
               - flux
