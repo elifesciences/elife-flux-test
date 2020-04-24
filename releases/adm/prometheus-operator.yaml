@@ -44,10 +44,9 @@ spec:
         - name: flux
           selector:
             matchLabels:
-              app: flux
+              release: flux
           namespaceSelector:
             matchNames:
               - flux
           endpoints:
             - port: 3030
-
