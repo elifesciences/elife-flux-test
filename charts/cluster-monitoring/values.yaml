@@ -2,5 +2,5 @@
 ## Override grafana.ini with our configmap
 grafana:
     config:
-        useGrafanaIniFile: false
+        useGrafanaIniFile: true
         grafanaIniConfigMap: grafana-ini
