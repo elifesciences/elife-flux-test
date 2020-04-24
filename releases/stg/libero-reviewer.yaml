@@ -30,7 +30,7 @@ spec:
     client:
       image:
         repository: liberoadmin/reviewer-client
-        tag: master-a9ff9207-20200423.1047
+        tag: master-08d50aeb-20200424.1442
     continuumAdaptor:
       image:
         repository: liberoadmin/continuum-adaptor
