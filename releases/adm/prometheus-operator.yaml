@@ -50,3 +50,5 @@ spec:
               - flux
           endpoints:
             - port: "3030"
+          targetLabels:
+            - app
