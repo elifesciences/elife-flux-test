@@ -34,6 +34,8 @@ spec:
           value: "Main Org."
         - name: GF_AUTH_ANONYMOUS_ORG_ROLE
           value: "Viewer"
+      admin:
+        existingSecret: grafana-temp-admin-pwd
 
     prometheus:
       service:
