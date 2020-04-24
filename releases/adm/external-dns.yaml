@@ -20,3 +20,5 @@ spec:
     requests:
       memory: 50Mi
       cpu: 10m
+  metrics:
+    enabled: "true"
