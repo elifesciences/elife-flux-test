@@ -49,4 +49,4 @@ spec:
             matchNames:
               - flux
           endpoints:
-            - port: 3030
+            - port: "3030"
