@@ -41,7 +41,7 @@ spec:
           service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
           service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
       additionalServiceMonitors:
-        - name: flux
+        - name: flux-monitor
           selector:
             matchLabels:
               release: flux
