@@ -15,8 +15,8 @@ metadata:
 
 spec:
   chart:
-    git: git@github.com:helm/charts
-    path: stable/prometheus-operator
+    git: git@github.com:elifesciences/elife-flux-test
+    path: charts/cluster-monitoring
     ref: master
   values:
     grafana:
