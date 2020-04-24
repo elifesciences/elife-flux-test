@@ -46,7 +46,6 @@ spec:
             matchLabels:
               release: flux
           namespaceSelector:
-            matchNames:
-              - flux
+            any: "true"
           endpoints:
             - port: 3030
