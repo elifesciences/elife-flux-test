@@ -51,4 +51,8 @@ spec:
           endpoints:
             - port: "3030"
           targetLabels:
-            - app
+            - job
+            - endpoint
+            - service
+            - instance
+            - namespace
