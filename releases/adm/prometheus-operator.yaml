@@ -56,3 +56,5 @@ spec:
             - service
             - instance
             - namespace
+      prometheusSpec:
+        serviceMonitorSelectorNilUsesHelmValues: false
