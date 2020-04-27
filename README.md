@@ -26,6 +26,15 @@ kubectl -n flux logs helm-operator-86b8f67577-wldq5 --follow
 helm -n adm history adm-prometheus-operator -o yaml
 ```
 
+__helm-operator can't upgrade due to `failed` helm state__
+
+In this case it appears one has to manually upgrade the helm chart. See [this issue](https://github.com/fluxcd/helm-operator/issues/241#issuecomment-578351380).
+
+```sh
+helm -n <namespace> list
+helm -n <namespace> -i <release> upgrade --reuse-values <any additional flags> <chart>
+```
+
 ## Bootstrapping the cluster to use flux
 
 This only needs to be done upon creation of the cluster.
