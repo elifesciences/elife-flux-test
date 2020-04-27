@@ -10,6 +10,7 @@ metadata:
 spec:
   chart:
     git: git@github.com:hashicorp/vault-helm
+    path: .
     ref: master
 
   values:
