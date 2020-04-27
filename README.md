@@ -51,11 +51,15 @@ This follows [flux get-started-helm](https://docs.fluxcd.io/en/stable/tutorials/
    helm upgrade -i flux fluxcd/flux \
      --set git.url=git@github.com:elifesciences/elife-flux-test \
      --set syncGarbageCollection.enabled=true \
+    --set prometheus.serviceMonitor.create=true \
+    --set prometheus.serviceMonitor.namespace=adm \
      --namespace flux
 
    helm upgrade -i helm-operator fluxcd/helm-operator \
     --set git.ssh.secretName=flux-git-deploy \
     --set helm.versions=v3 \
+    --set prometheus.serviceMonitor.create=true \
+    --set prometheus.serviceMonitor.namespace=adm \
     --namespace flux
    ```
 
