@@ -43,8 +43,11 @@ spec:
       additionalServiceMonitors:
         - name: flux-monitor
           selector:
-            matchLabels:
-              app: flux
+            matchExpressions:
+              - keys: app
+                operator: In
+                values:
+                  - flux
           namespaceSelector:
             matchNames:
               - flux
