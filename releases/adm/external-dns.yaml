@@ -6,13 +6,20 @@ metadata:
   namespace: adm
   annotations:
     fluxcd.io/automated: "true"
+
 spec:
   chart:
     git: git@github.com:bitnami/charts
     path: bitnami/external-dns
     ref: master
+
   values:
     replicas: 1
+    metrics:
+      enabled: "true"
+      serviceMonitor:
+        enabled: "true"
+
   resources:
     limits:
       cpu: 50m
@@ -20,7 +27,3 @@ spec:
     requests:
       memory: 50Mi
       cpu: 10m
-  metrics:
-    enabled: "true"
-    serviceMonitor:
-      enabled: "true"
