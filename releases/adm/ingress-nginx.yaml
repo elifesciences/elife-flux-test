@@ -12,3 +12,10 @@ spec:
     git: git@github.com:kubernetes/ingress-nginx
     path: charts/ingress-nginx
     ref: master
+
+  values:
+    controller:
+      metrics:
+        enabled: "true"
+        serviceMonitor:
+          enabled: "true"
