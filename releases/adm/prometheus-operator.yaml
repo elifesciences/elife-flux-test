@@ -24,6 +24,9 @@ spec:
         enabled: "true"
         hosts:
           - grafana--test-cluster.elifesciences.org
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
       env:
         GF_AUTH_ANONYMOUS_ENABLED: "true"
         GF_AUTH_ANONYMOUS_ORG_NAME: "Main Org."
@@ -34,5 +37,8 @@ spec:
         enabled: "true"
         hosts:
           - prometheus--test-cluster.elifesciences.org
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
       prometheusSpec:
         serviceMonitorSelectorNilUsesHelmValues: false
