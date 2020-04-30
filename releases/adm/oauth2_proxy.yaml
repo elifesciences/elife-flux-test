@@ -1,0 +1,22 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: oauth2-proxy
+  namespace: adm
+
+spec:
+  chart:
+    git: git@github.com:helm/charts
+    path: stable/oauth2-proxy
+    ref: master
+  values:
+    config:
+      existingSecret: oauth2-github
+    extraArgs:
+      provider: github
+      github-org: elifesciences
+    ingress:
+      enabled: "true"
+      hosts:
+        - auth--test-cluster.elifesciences.org
