@@ -16,6 +16,8 @@ spec:
     extraArgs:
       provider: github
       github-org: elifesciences
+      whitelist-domain: .elifesciences.org
+      cookie-domain: .elifesciences.org
     ingress:
       enabled: "true"
       hosts:
