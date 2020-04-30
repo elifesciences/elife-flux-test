@@ -30,7 +30,7 @@ spec:
     client:
       image:
         repository: liberoadmin/reviewer-client
-        tag: 0.0.2
+        tag: 0.0.3
     continuumAdaptor:
       image:
         repository: liberoadmin/continuum-adaptor
