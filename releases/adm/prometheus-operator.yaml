@@ -23,7 +23,7 @@ spec:
       ingress:
         enabled: "true"
         hosts:
-          - grafana.test-cluster.elifesciences.org
+          - grafana--test-cluster.elifesciences.org
       env:
         GF_AUTH_ANONYMOUS_ENABLED: "true"
         GF_AUTH_ANONYMOUS_ORG_NAME: "Main Org."
@@ -33,6 +33,6 @@ spec:
       ingress:
         enabled: "true"
         hosts:
-          - prometheus.test-cluster.elifesciences.org
+          - prometheus--test-cluster.elifesciences.org
       prometheusSpec:
         serviceMonitorSelectorNilUsesHelmValues: false
