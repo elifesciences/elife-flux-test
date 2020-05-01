@@ -1,0 +1,19 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: sciencebeam
+  namespace: prod
+
+spec:
+  releaseName: sciencebeam--prod
+  chart:
+    git: git@github.com:elifesciences/sciencebeam-charts
+    path: sciencebeam
+    ref: master
+
+  values:
+    ingress:
+      enabled: "true"
+      hosts:
+        - sciencebeam--prod--test-cluster.elifesciences.org
