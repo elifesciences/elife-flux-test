@@ -16,4 +16,4 @@ spec:
     ingress:
       enabled: "true"
       hosts:
-        - sciencebeam--prod--test-cluster.elifesciences.org
+        - host: sciencebeam--prod--test-cluster.elifesciences.org
