@@ -30,7 +30,7 @@ spec:
         repository: liberoadmin/reviewer-submission
         tag: master-ce13a5e8-20200421.0744
       scienceBeam:
-        apiUrl: "https://sciencebeam--prod--test-cluster.elifesciences.org/api/convert"
+        apiUrl: "http://sciencebeam--prod:8075/api/convert"
       aws:
         s3Bucket: "staging-libero-reviewer"
     client:
