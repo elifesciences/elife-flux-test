@@ -23,7 +23,7 @@ spec:
     ingress:
       enabled: "true"
       hosts:
-        - reviewer--staging--test-cluster.elifesciences.org
+      - reviewer--staging--test-cluster.elifesciences.org
 
     submission:
       image:
@@ -36,7 +36,7 @@ spec:
     client:
       image:
         repository: liberoadmin/reviewer-client
-        tag: master-a5b31534-20200429.1615
+        tag: master-f8cba3ee-20200501.1213
     continuumAdaptor:
       image:
         repository: liberoadmin/continuum-adaptor
