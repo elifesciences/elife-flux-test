@@ -10,7 +10,7 @@ spec:
   chart:
     git: git@github.com:elifesciences/sciencebeam-charts
     path: sciencebeam
-    ref: master
+    ref: develop
 
   values:
     ingress:
