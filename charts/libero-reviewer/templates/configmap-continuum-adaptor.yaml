@@ -12,15 +12,15 @@ data:
     {
         "port": 3001,
         "rabbitmq_url": "{{ include "libero-reviewer.fullname" . }}-rabbitmq",
-        "login_url": "{{ .Values.continuumAdaptor.loginUrl }}",
+        "login_url": {{ .Values.continuumAdaptor.loginUrl | quote }},
         {{- if .Values.continuumAdaptor.loginReturnUrl }}
-        "login_return_url": {{ .Values.continuumAdaptor.loginReturnUrl }}",
+        "login_return_url": {{ .Values.continuumAdaptor.loginReturnUrl | quote }},
         {{- else }}
         "login_return_url": "https://{{ include "libero-reviewer.fullname" . }}.elifesciences.org",
         {{- end }}
-        "authentication_jwt_secret": "{{ .Values.continuumAdaptor.authenticationJwtSecret }}",
-        "continuum_jwt_secret": "{{ .Values.continuumAdaptor.continuumJwtSecret }}",
-        "continuum_api_url": "{{ .Values.continuumAdaptor.continuumApiUrl }}",
+        "authentication_jwt_secret": {{ .Values.continuumAdaptor.authenticationJwtSecret | quote }}",
+        "continuum_jwt_secret": {{ .Values.continuumAdaptor.continuumJwtSecret | quote }}",
+        "continuum_api_url": {{ .Values.continuumAdaptor.continuumApiUrl | quote }}",
         "knex": {
             "client": "pg",
             "connection": {

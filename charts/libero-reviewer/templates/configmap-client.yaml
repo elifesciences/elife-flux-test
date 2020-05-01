@@ -12,7 +12,7 @@ data:
     {
         "client_login_url": "{{ .Values.continuumAdaptor.loginUrl }}",
         {{- if .Values.client.apiUrl }}
-        "client_api_url": {{ .Values.client.apiUrl }},
+        "client_api_url": {{ .Values.client.apiUrl | quote }},
         {{- else }}
         "client_api_url": "https://{{ include "libero-reviewer.fullname" . }}.elifesciences.org"
         {{- end }}
