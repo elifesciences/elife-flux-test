@@ -37,7 +37,7 @@ spec:
       image:
         repository: liberoadmin/reviewer-client
         tag: 0.0.3
-      apiUrl: https://reviewer--production--test-cluster.elifesciences.org
+      apiUrl: "https://reviewer--production--test-cluster.elifesciences.org"
     continuumAdaptor:
       image:
         repository: liberoadmin/continuum-adaptor
