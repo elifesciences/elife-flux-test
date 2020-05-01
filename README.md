@@ -26,9 +26,16 @@ kubectl -n flux logs helm-operator-86b8f67577-wldq5 --follow
 helm -n adm history adm-prometheus-operator -o yaml
 ```
 
+If `helm lint` is happy but operator is complaining:
+
+- copy `values` section from the `HelmRelease` to a `dummy.yaml`
+- run `helm dependency update charts/libero-reviewer`
+- now you can run `helm install --dry-run` or `helm template --debug`
+
+
 __helm-operator can't upgrade due to `failed` helm state__
 
-In this case it appears one has to manually upgrade the helm chart. See [this issue](https://github.com/fluxcd/helm-operator/issues/241#issuecomment-578351380).
+In this case it appears one has to manually upgrade the helm chart. See [faq](https://docs.fluxcd.io/projects/helm-operator/en/stable/faq/#a-helmrelease-is-stuck-in-a-failed-release-state-how-do-i-force-it-through) and [this issue](https://github.com/fluxcd/helm-operator/issues/241#issuecomment-578351380).
 
 ```sh
 helm -n <namespace> list
