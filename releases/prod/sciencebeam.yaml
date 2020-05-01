@@ -17,3 +17,5 @@ spec:
       enabled: "true"
       hosts:
         - host: sciencebeam--prod--test-cluster.elifesciences.org
+          paths:
+            - "/"
