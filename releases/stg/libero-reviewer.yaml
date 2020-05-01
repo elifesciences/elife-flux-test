@@ -37,20 +37,16 @@ spec:
       image:
         repository: liberoadmin/reviewer-client
         tag: master-f8cba3ee-20200501.1213
+      apiUrl: https://reviewer--staging--test-cluster.elifesciences.org
     continuumAdaptor:
       image:
         repository: liberoadmin/continuum-adaptor
         tag: master-d74013d1-20200424.1553
       port: 3001
       continuumApiUrl: "http://continuumtest--gateway.elife.internal"
+      loginUrl: "https://continuumtest--cdn-journal.elifesciences.org/submit"
       loginReturnUrl: "https://reviewer--staging--test-cluster.elifesciences.org/login"
     audit:
       image:
         repository: liberoadmin/audit
         tag: master-48b4c609-20200416.1445
-
-    continuumLogin:
-      url: "https://continuumtest--cdn-journal.elifesciences.org/submit"
-
-
-

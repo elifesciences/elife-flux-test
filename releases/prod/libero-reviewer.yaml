@@ -23,7 +23,7 @@ spec:
     ingress:
       enabled: "true"
       hosts:
-        - reviewer--staging--test-cluster.elifesciences.org
+        - reviewer--production--test-cluster.elifesciences.org
 
     submission:
       image:
@@ -37,13 +37,15 @@ spec:
       image:
         repository: liberoadmin/reviewer-client
         tag: 0.0.3
+      apiUrl: https://reviewer--production--test-cluster.elifesciences.org
     continuumAdaptor:
       image:
         repository: liberoadmin/continuum-adaptor
         tag: 0.0.3
       port: 3001
       continuumApiUrl: "http://continuumtest--gateway.elife.internal"
-      loginReturnUrl: "https://reviewer--staging--test-cluster.elifesciences.org/login"
+      loginUrl: "https://continuumtest--cdn-journal.elifesciences.org/submit"
+      loginReturnUrl: "https://reviewer--production--test-cluster.elifesciences.org/login"
     audit:
       image:
         repository: liberoadmin/audit
@@ -51,6 +53,3 @@ spec:
 
     continuumLogin:
       url: "https://continuumtest--cdn-journal.elifesciences.org/submit"
-
-
-

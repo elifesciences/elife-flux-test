@@ -11,7 +11,11 @@ data:
   config.public.json: |
     {
         "client_login_url": "{{ .Values.continuumLogin.url }}",
+        {{- if .Values.continuumAdaptor.loginReturnUrl }}
+        "client_api_url": {{ .Values.client.apiUrl }}",
+        {{- else }}
         "client_api_url": "https://{{ include "libero-reviewer.fullname" . }}.elifesciences.org"
+        {{- end }}
     }
   config.infra.json: |
     {
