@@ -19,3 +19,5 @@ spec:
         - host: sciencebeam--prod--test-cluster.elifesciences.org
           paths:
             - "/"
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: 120m
