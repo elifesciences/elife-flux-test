@@ -13,7 +13,11 @@ data:
         "port": 3001,
         "rabbitmq_url": "{{ include "libero-reviewer.fullname" . }}-rabbitmq",
         "login_url": "{{ .Values.continuumLogin.url }}",
-        "login_return_url": "https://{{ include "libero-reviewer.fullname" . }}.elifesciences.org/login",
+        {{ if .Values.continuumLogin.loginReturnUrl }}
+        "login_return_url": {{ .Values.continuumAdaptor.loginReturnUrl }}",
+        {{ else }}
+        "login_return_url": "https://{{ include "libero-reviewer.fullname" . }}.elifesciences.org",
+        {{ end }}
         "authentication_jwt_secret": "{{ .Values.continuumAdaptor.authenticationJwtSecret }}",
         "continuum_jwt_secret": "{{ .Values.continuumAdaptor.continuumJwtSecret }}",
         "continuum_api_url": "{{ .Values.continuumAdaptor.continuumApiUrl }}",
