@@ -10,14 +10,20 @@ metadata:
     filter.fluxcd.io/client: semver:*
     filter.fluxcd.io/continuumAdaptor: semver:*
     filter.fluxcd.io/audit: semver:*
+
 spec:
   releaseName: libero-reviewer--prod
   chart:
     git: git@github.com:elifesciences/elife-flux-test
     path: charts/libero-reviewer
     ref: master
+
   values:
     replicaCount: 1
+    ingress:
+      enabled: "true"
+      hosts:
+        - reviewer--staging--test-cluster.elifesciences.org
 
     submission:
       image:

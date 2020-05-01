@@ -4,8 +4,6 @@
 
 replicaCount: 1
 
-clientCertificate: "arn:aws:iam::512686554592:server-certificate/cloudfront/wildcard.elifesciences.org/2019.wildcard.elifesciences.org"
-
 submission:
   image:
     repository: liberoadmin/reviewer-submission
@@ -68,3 +66,18 @@ fullnameOverride: ""
 
 service:
   port: 80
+
+ingress:
+  enabled: false
+  path: /
+  # Used to create an Ingress record.
+  # hosts:
+    # - chart-example.local
+  # annotations:
+  #   kubernetes.io/ingress.class: nginx
+  #   kubernetes.io/tls-acme: "true"
+  # tls:
+    # Secrets must be manually created in the namespace.
+    # - secretName: chart-example-tls
+    #   hosts:
+    #     - chart-example.local
