@@ -3,7 +3,7 @@ apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
   name: sciencebeam
-  namespace: prod
+  namespace: stg
 
 spec:
   releaseName: sciencebeam--stg
