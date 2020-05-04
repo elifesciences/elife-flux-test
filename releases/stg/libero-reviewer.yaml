@@ -28,7 +28,7 @@ spec:
     submission:
       image:
         repository: liberoadmin/reviewer-submission
-        tag: master-ce13a5e8-20200421.0744
+        tag: master-d215cfc6-20200504.0840
       scienceBeam:
         apiUrl: "http://sciencebeam--stg:8075/api/convert"
       aws:
@@ -36,7 +36,7 @@ spec:
     client:
       image:
         repository: liberoadmin/reviewer-client
-        tag: master-f8cba3ee-20200501.1213
+        tag: master-09616697-20200504.0902
       apiUrl: "https://reviewer--staging--test-cluster.elifesciences.org"
     continuumAdaptor:
       image:
