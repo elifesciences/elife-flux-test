@@ -1,0 +1,32 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: libero-editor
+  namespace: stg
+  annotations:
+    fluxcd.io/automated: 'true'
+    filter.fluxcd.io/client: glob:master-*-*
+    filter.fluxcd.io/articleStore: glob:master-*-*
+
+spec:
+  releaseName: libero-editor--stg
+  chart:
+    git: git@github.com:elifesciences/libero-editor-forumla
+    path: charts/libero-editor
+    ref: feat/update-chart-for-new-editor
+
+  values:
+    replicaCount: 1
+    ingress:
+      host: libero-editor--staging--test-cluster.elifesciences.org
+
+    client:
+      image:
+        repository: liberoadmin/editor-client
+        tag: latest
+
+    articleStore:
+      image:
+        repository: liberoadmin/editor-client
+        tag: latest
