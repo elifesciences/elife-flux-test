@@ -14,9 +14,8 @@ spec:
     git: git@github.com:elifesciences/sciencebeam-charts
     path: sciencebeam
     ref: develop
-  
+
   values:
     image:
       repository: elifesciences/sciencebeam
-      tag: 0.0.3
-      
+      tag: 0.0.6
