@@ -13,6 +13,9 @@ spec:
     ref: develop
 
   values:
+    image:
+      repository: elifesciences/sciencebeam
+      tag: 0.0.6
     ingress:
       enabled: "true"
       hosts:
