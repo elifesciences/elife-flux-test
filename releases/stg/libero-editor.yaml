@@ -12,7 +12,7 @@ metadata:
 spec:
   releaseName: libero-editor--stg
   chart:
-    git: git@github.com:elifesciences/libero-editor-forumla
+    git: git@github.com:elifesciences/libero-editor-formula
     path: helm/libero-editor
     ref: feat/update-chart-for-new-editor
 
