@@ -12,7 +12,7 @@ metadata:
 spec:
   releaseName: libero-editor--stg
   chart:
-    git: https://github.com/elifesciences/libero-editor-forumla
+    git: https://github.com/elifesciences/libero-editor-formula
     path: charts/libero-editor
     ref: feat/update-chart-for-new-editor
 
@@ -28,5 +28,5 @@ spec:
 
     articleStore:
       image:
-        repository: liberoadmin/editor-client
+        repository: liberoadmin/editor-article-store
         tag: latest
