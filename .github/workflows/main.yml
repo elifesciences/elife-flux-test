@@ -16,5 +16,16 @@ jobs:
       - name: Validate Helm Releases
         uses: erkannt/hrval-action@master
         with:
-          helmRelease: releases/
+          helmRelease: releases/prod/
           helmVersion: v3
+
+      - name: Validate Helm Releases
+        uses: erkannt/hrval-action@master
+        with:
+          helmRelease: releases/stg/
+          helmVersion: v3
+
+      - name: Validate Helm Releases
+        uses: erkannt/hrval-action@master
+        with:
+          helmRelease: releases/adm/
