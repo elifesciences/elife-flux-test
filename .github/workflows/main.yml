@@ -14,8 +14,7 @@ jobs:
           submodules: "true"
 
       - name: Validate Helm Releases
-        uses: erkannt/hrval-action
+        uses: erkannt/hrval-action@master
         with:
           helmRelease: releases/
           helmVersion: v3
-          
