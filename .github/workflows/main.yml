@@ -14,7 +14,8 @@ jobs:
           submodules: "true"
 
       - name: Validate Helm Releases
-        uses: stefanprodan/hrval-action@v3.2.0
+        uses: erkannt/hrval-action
         with:
           helmRelease: releases/
           helmVersion: v3
+          
