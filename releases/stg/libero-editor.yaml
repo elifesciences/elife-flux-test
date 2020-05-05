@@ -6,7 +6,7 @@ metadata:
   namespace: stg
   annotations:
     fluxcd.io/automated: 'true'
-    filter.fluxcd.io/client: glob:master-*-*
+    filter.fluxcd.io/client: semver:*
     filter.fluxcd.io/articleStore: glob:master-*-*
 
 spec:
@@ -24,7 +24,7 @@ spec:
     client:
       image:
         repository: liberoadmin/editor-client
-        tag: latest
+        tag: 0.0.2
 
     articleStore:
       image:
