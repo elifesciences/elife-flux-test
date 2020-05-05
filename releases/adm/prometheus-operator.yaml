@@ -15,7 +15,7 @@ metadata:
 
 spec:
   chart:
-    git: git@github.com:helm/charts
+    git: https://github.com/helm/charts
     path: stable/prometheus-operator
     ref: master
   values:

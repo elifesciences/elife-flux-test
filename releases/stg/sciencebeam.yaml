@@ -11,7 +11,7 @@ metadata:
 spec:
   releaseName: sciencebeam--stg
   chart:
-    git: git@github.com:elifesciences/sciencebeam-charts
+    git: https://github.com/elifesciences/sciencebeam-charts
     path: sciencebeam
     ref: develop
 

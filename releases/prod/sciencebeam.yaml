@@ -8,7 +8,7 @@ metadata:
 spec:
   releaseName: sciencebeam--prod
   chart:
-    git: git@github.com:elifesciences/sciencebeam-charts
+    git: https://github.com/elifesciences/sciencebeam-charts
     path: sciencebeam
     ref: develop
 

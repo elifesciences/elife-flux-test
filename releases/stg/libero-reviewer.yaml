@@ -14,7 +14,7 @@ metadata:
 spec:
   releaseName: libero-reviewer--stg
   chart:
-    git: git@github.com:elifesciences/elife-flux-test
+    git: https://github.com/elifesciences/elife-flux-test
     path: charts/libero-reviewer
     ref: master
 

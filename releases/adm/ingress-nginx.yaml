@@ -9,7 +9,7 @@ metadata:
 
 spec:
   chart:
-    git: git@github.com:kubernetes/ingress-nginx
+    git: https://github.com/kubernetes/ingress-nginx
     path: charts/ingress-nginx
     ref: master
 

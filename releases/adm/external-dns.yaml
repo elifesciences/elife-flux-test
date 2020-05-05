@@ -9,7 +9,7 @@ metadata:
 
 spec:
   chart:
-    git: git@github.com:bitnami/charts
+    git: https://github.com/bitnami/charts
     path: bitnami/external-dns
     ref: master
 
