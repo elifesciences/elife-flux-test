@@ -13,17 +13,8 @@ jobs:
         with:
           submodules: "true"
 
-      - name: Validate Helm Releases in adm
-        uses: stefanprodan/hrval-action@v3.1.0
+      - name: Validate Helm Releases
+        uses: stefanprodan/hrval-action@v3.2.0
         with:
-          helmRelease: releases/adm/
-
-      - name: Validate Helm Releases in prod
-        uses: stefanprodan/hrval-action@v3.1.0
-        with:
-          helmRelease: releases/prod/
-          
-      - name: Validate Helm Releases in stg
-        uses: stefanprodan/hrval-action@v3.1.0
-        with:
-          helmRelease: releases/stg/
+          helmRelease: releases/
+          helmVersion: v3
