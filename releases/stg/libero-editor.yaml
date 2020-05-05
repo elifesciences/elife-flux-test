@@ -13,7 +13,7 @@ spec:
   releaseName: libero-editor--stg
   chart:
     git: https://github.com/elifesciences/libero-editor-formula
-    path: charts/libero-editor
+    path: helm/libero-editor
     ref: feat/update-chart-for-new-editor
 
   values:
