@@ -15,15 +15,14 @@ jobs:
       - name: Validate Helm Releases in prod
         uses: stefanprodan/hrval-action@v3.1.0
         with:
-          helmRelease: prod/
+          helmRelease: releases/prod/
           
       - name: Validate Helm Releases in stg
         uses: stefanprodan/hrval-action@v3.1.0
         with:
-          helmRelease: stg/
+          helmRelease: releases/stg/
 
       - name: Validate Helm Releases in adm
         uses: stefanprodan/hrval-action@v3.1.0
         with:
-          helmRelease: adm/
-          
+          helmRelease: releases/adm/
