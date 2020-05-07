@@ -3,14 +3,14 @@ apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
   name: libero-editor
-  namespace: stg
+  namespace: prod
   annotations:
     fluxcd.io/automated: 'true'
-    filter.fluxcd.io/client: glob:master-*-*
-    filter.fluxcd.io/articleStore: glob:master-*-*
+    filter.fluxcd.io/client: semver:*
+    filter.fluxcd.io/articleStore: semver:*
 
 spec:
-  releaseName: libero-editor--stg
+  releaseName: libero-editor--prod
   chart:
     git: https://github.com/elifesciences/libero-editor-formula
     path: helm/libero-editor
@@ -19,14 +19,14 @@ spec:
   values:
     replicaCount: 1
     ingress:
-      host: libero-editor--staging--test-cluster.elifesciences.org
+      host: libero-editor--test-cluster.elifesciences.org
 
     client:
       image:
         repository: liberoadmin/editor-client
-        tag: master-a6f42b68-20200505.1634
+        tag: 0.0.2
 
     articleStore:
       image:
         repository: liberoadmin/editor-article-store
-        tag: master-bb63127c-20200505.1639
+        tag: 0.0.1
