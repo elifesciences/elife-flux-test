@@ -30,9 +30,6 @@ spec:
             - name: http
               containerPort: 9000
               protocol: TCP
-          volumeMounts:
-            - name: config-volume
-              mountPath: /etc/reviewer
           livenessProbe:
             httpGet:
               path: /health
@@ -41,7 +38,3 @@ spec:
             httpGet:
               path: /health
               port: http
-      volumes:
-        - name: config-volume
-          configMap:
-            name: {{ include "libero-reviewer.fullname" . }}-client
