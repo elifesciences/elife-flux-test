@@ -19,6 +19,11 @@ submission:
     secretAccessKey: ""
     s3Bucket: ""
 
+submissionDbSchema:
+  image:
+    repository: liberoadmin/reviewer-xpub-postgres
+    tag: latest
+
 client:
   image:
     repository: liberoadmin/reviewer-client
