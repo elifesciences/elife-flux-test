@@ -38,9 +38,6 @@ spec:
             httpGet:
               path: /health
               port: http
-          volumeMounts:
-            - name: config-volume
-              mountPath: /etc/reviewer
       initContainers:
         - name: {{ .Chart.Name }}-load-db-schema
           image: "liberoadmin/reviewer-xpub-postgres"
@@ -56,7 +53,3 @@ spec:
               value: "{{ .Values.postgresql.postgresqlPassword }}"
             - name: PGDATABASE
               value: "{{ .Values.postgresql.postgresqlDatabase }}"
-      volumes:
-        - name: config-volume
-          configMap:
-            name: {{ include "libero-reviewer.fullname" . }}-submission
