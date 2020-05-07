@@ -28,7 +28,7 @@ spec:
     submission:
       image:
         repository: liberoadmin/reviewer-submission
-        tag: master-dfafec51-20200505.0850
+        tag: master-2ce5e1a4-20200507.1158
       scienceBeam:
         apiUrl: "http://sciencebeam--stg:8075/api/convert"
       aws:
