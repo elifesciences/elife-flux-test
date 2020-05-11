@@ -1,2 +1,0 @@
-NOTE: It may take a few minutes for the DNS entry to propagate to your machine.
-      {{ .values.ingress.host }}
