@@ -15,15 +15,15 @@ metadata:
 {{- end }}
 spec:
   rules:
-    - host: {{ .values.ingress.host }}
+    - host: {{ .Values.ingress.host | quote }}
       http:
         paths:
           - path: /
             backend:
               serviceName: {{ printf "%s-%s" (include "libero-reviewer.fullname" . ) ("client") }}
-              servicePort: {{ .values.client.port}}
+              servicePort: {{ .Values.client.port}}
           - path: /graphql
             backend:
               serviceName: {{ printf "%s-%s" (include "libero-reviewer.fullname" . ) ("submission") }}
-              servicePort: {{ .values.submission.port}}
+              servicePort: {{ .Values.submission.port}}
 {{- end -}}

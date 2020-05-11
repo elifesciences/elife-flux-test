@@ -9,13 +9,13 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
   annotations:
-    nginx.ingress.kubernetes.io/permanent-redirect: {{ .values.continuumAdaptor.continuumLoginUrl | quote }}
+    nginx.ingress.kubernetes.io/permanent-redirect: {{ .Values.continuumAdaptor.continuumLoginUrl | quote }}
 {{- with .Values.ingress.annotations }}
 {{ toYaml . | indent 4 }}
 {{- end }}
 spec:
   rules:
-    - host: {{ .values.ingress.host }}
+    - host: {{ .Values.ingress.host }}
       http:
         paths:
           - path: /continuum-login

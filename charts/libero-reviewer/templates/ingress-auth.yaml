@@ -15,11 +15,11 @@ metadata:
 {{- end }}
 spec:
   rules:
-    - host: {{ .values.ingress.host }}
+    - host: {{ .Values.ingress.host }}
       http:
         paths:
           - path: /auth
             backend:
               serviceName: {{ printf "%s-%s" (include "libero-reviewer.fullname" . ) ("continuum-adaptor") }}
-              servicePort: {{ .values.client.port}}
+              servicePort: {{ .Values.client.port}}
 {{- end -}}
