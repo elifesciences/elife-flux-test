@@ -22,8 +22,7 @@ spec:
     replicaCount: 1
     ingress:
       enabled: "true"
-      hosts:
-      - reviewer--production--test-cluster.elifesciences.org
+      host: reviewer--production--test-cluster.elifesciences.org
 
     submission:
       image:
