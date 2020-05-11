@@ -36,7 +36,7 @@ spec:
     client:
       image:
         repository: liberoadmin/reviewer-client
-        tag: master-a6bcb283-20200507.1456
+        tag: master-61d9da38-20200511.1102
       apiUrl: "https://reviewer--staging--test-cluster.elifesciences.org"
     continuumAdaptor:
       image:
