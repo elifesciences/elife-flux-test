@@ -23,12 +23,12 @@ spec:
     ingress:
       enabled: "true"
       hosts:
-        - reviewer--production--test-cluster.elifesciences.org
+      - reviewer--production--test-cluster.elifesciences.org
 
     submission:
       image:
         repository: liberoadmin/reviewer-submission
-        tag: 0.0.2
+        tag: 0.0.3
       scienceBeam:
         apiUrl: "http://sciencebeam--prod:8075/api/convert"
       aws:
@@ -36,12 +36,12 @@ spec:
     client:
       image:
         repository: liberoadmin/reviewer-client
-        tag: 0.0.3
+        tag: 0.0.4
       apiUrl: "https://reviewer--production--test-cluster.elifesciences.org"
     continuumAdaptor:
       image:
         repository: liberoadmin/continuum-adaptor
-        tag: 0.0.3
+        tag: 0.0.4
       port: 3001
       continuumApiUrl: "http://continuumtest--gateway.elife.internal"
       loginUrl: "https://continuumtest--cdn-journal.elifesciences.org/submit"
