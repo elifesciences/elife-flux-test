@@ -21,31 +21,26 @@ spec:
     replicaCount: 1
     ingress:
       enabled: "true"
-      hosts:
-      - reviewer--staging--test-cluster.elifesciences.org
+      host: reviewer--staging--test-cluster.elifesciences.org
 
     submission:
       image:
         repository: liberoadmin/reviewer-submission
         tag: master-2ce5e1a4-20200507.1158
+      userAdapterUrl: http://reviewer-mocks:3003/current-user
       scienceBeam:
-        apiUrl: "http://sciencebeam--stg:8075/api/convert"
-      aws:
-        s3Bucket: "staging-libero-reviewer"
+        convertUrl: "http://sciencebeam--prod:8075/api/convert"
+      s3:
+        bucket: "staging-libero-reviewer"
+
     client:
       image:
         repository: liberoadmin/reviewer-client
         tag: master-61d9da38-20200511.1102
-      apiUrl: "https://reviewer--staging--test-cluster.elifesciences.org"
+
     continuumAdaptor:
       image:
         repository: liberoadmin/continuum-adaptor
         tag: master-fc328369-20200507.1153
-      port: 3001
       continuumApiUrl: "http://continuumtest--gateway.elife.internal"
       loginUrl: "https://continuumtest--cdn-journal.elifesciences.org/submit"
-      loginReturnUrl: "https://reviewer--staging--test-cluster.elifesciences.org/login"
-    audit:
-      image:
-        repository: liberoadmin/audit
-        tag: master-48b4c609-20200416.1445

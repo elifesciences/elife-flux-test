@@ -42,4 +42,4 @@ spec:
       image:
         repository: liberoadmin/continuum-adaptor
         tag: 0.0.4
-      continuumLoginUrl: "http://continuumtest--gateway.elife.internal"
+      loginUrl: "https://continuumtest--cdn-journal.elifesciences.org/submit"
