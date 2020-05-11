@@ -38,3 +38,29 @@ spec:
             httpGet:
               path: /health
               port: http
+          env:
+            - name: PORT
+              value: {{ .Values.continuumAdaptor.port }}
+            - name: LOGIN_URL
+              value: {{ .Values.ingress.host | quote }}/submit"
+            - name: LOGIN_RETURN_URL
+              value: "{{ .Values.ingress.host }}/login"
+            - name: AUTHENTICATION_JWT_SECRET
+              value: {{ .Values.submission.authSecret | quote }}
+            - name: CONTINUUM_JWT_SECRET
+              value: {{ .Values.continuumAdaptor.continuumJwtSecret | quote }}
+            - name: CONTINUUM_API_URL
+              value: {{ .Values.continuumAdaptor.continuumApiUrl | quote }}
+            - name: ELIFE_API_GATEWAY_SECRET
+              value: {{ .Values.continuumAdaptor.elifeApiSecret | quote }}
+
+            - name: DATABASE_NAME
+              value: {{ .Values.postgresql.postgresqlDatabase | quote }}
+            - name: DATABASE_USER
+              value: {{ .Values.postgresql.postgresqlUsername | quote }}
+            - name: DATABASE_PASSWORD
+              value: {{ .Values.postgresql.postgresqlPassword | quote }}
+            - name: DATABASE_HOST
+              value: "{{ include "libero-reviewer.fullname" . }}-postgresql"
+            - name: DATABASE_PORT
+              value: 5432
