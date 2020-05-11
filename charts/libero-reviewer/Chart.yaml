@@ -9,6 +9,3 @@ dependencies:
     version: "~6.2"
     repository: "https://kubernetes-charts.storage.googleapis.com/"
     condition: postgresql.enabled
-  - name: "rabbitmq"
-    version: "~6.12"
-    repository: "https://kubernetes-charts.storage.googleapis.com/"
