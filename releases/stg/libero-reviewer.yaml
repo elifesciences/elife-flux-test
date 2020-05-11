@@ -9,7 +9,6 @@ metadata:
     filter.fluxcd.io/submission: glob:master-*-*
     filter.fluxcd.io/client: glob:master-*-*
     filter.fluxcd.io/continuumAdaptor: glob:master-*-*
-    filter.fluxcd.io/audit: glob:master-*-*
 
 spec:
   releaseName: libero-reviewer--stg

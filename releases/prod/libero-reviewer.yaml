@@ -9,7 +9,6 @@ metadata:
     filter.fluxcd.io/submission: semver:*
     filter.fluxcd.io/client: semver:*
     filter.fluxcd.io/continuumAdaptor: semver:*
-    filter.fluxcd.io/audit: semver:*
 
 spec:
   releaseName: libero-reviewer--prod
