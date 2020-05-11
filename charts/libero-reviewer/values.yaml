@@ -13,7 +13,7 @@ submission:
 
   # auth secret shared with continuum-adaptor
   authSecret: super_secret_jam
-  # external user authentication url
+  # Continuum Adaptor endpoint for getting current user
   userAdapterUrl: http://reviewer-mocks:3003/current-user
   # probably needs to be replaced with a configmap
   newRelicHome: /etc/reviewer

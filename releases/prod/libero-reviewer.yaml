@@ -29,27 +29,19 @@ spec:
       image:
         repository: liberoadmin/reviewer-submission
         tag: 0.0.3
+      userAdapterUrl: http://reviewer-mocks:3003/current-user
       scienceBeam:
-        apiUrl: "http://sciencebeam--prod:8075/api/convert"
-      aws:
-        s3Bucket: "staging-libero-reviewer"
+        convertUrl: "http://sciencebeam--prod:8075/api/convert"
+      s3:
+        bucket: "staging-libero-reviewer"
+
     client:
       image:
         repository: liberoadmin/reviewer-client
         tag: 0.0.4
-      apiUrl: "https://reviewer--production--test-cluster.elifesciences.org"
+
     continuumAdaptor:
       image:
         repository: liberoadmin/continuum-adaptor
         tag: 0.0.4
-      port: 3001
-      continuumApiUrl: "http://continuumtest--gateway.elife.internal"
-      loginUrl: "https://continuumtest--cdn-journal.elifesciences.org/submit"
-      loginReturnUrl: "https://reviewer--production--test-cluster.elifesciences.org/login"
-    audit:
-      image:
-        repository: liberoadmin/audit
-        tag: 0.0.2
-
-    continuumLogin:
-      url: "https://continuumtest--cdn-journal.elifesciences.org/submit"
+      continuumLoginUrl: "http://continuumtest--gateway.elife.internal"
