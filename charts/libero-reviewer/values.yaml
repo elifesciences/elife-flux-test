@@ -45,6 +45,7 @@ client:
     repository: liberoadmin/reviewer-client
     tag: latest
     pullPolicy: Always
+  port: 80
 
 continuumAdaptor:
   image:
@@ -52,7 +53,7 @@ continuumAdaptor:
     tag: latest
     pullPolicy: Always
   port: 3001
-  continuumApiUrl: "http://continuum.gateway.url"
+  continuumLoginUrl: "http://continuum.gateway.url/submit"
   continuumJwtSecret: "some_secret_from_journal"
   elifeApiSecret: "some_secret_from_journal"
 
@@ -66,20 +67,9 @@ postgresql:
   postgresqlUsername: "postgres"
   postgresqlPassword: "change_this_password_or_else"
 
-service:
-  port: 80
-
 ingress:
   enabled: false
-  path: /
-  # Used to create an Ingress record.
-  # hosts:
-    # - libero-reviewer--staging.elifesciences.org
+  host: libereo-reviewer--staging.domain.tld
+  # annotations applied to _all_ reviewer ingress records
   # annotations:
   #   kubernetes.io/ingress.class: nginx
-  #   kubernetes.io/tls-acme: "true"
-  # tls:
-    # Secrets must be manually created in the namespace.
-    # - secretName: chart-example-tls
-    #   hosts:
-    #     - chart-example.local

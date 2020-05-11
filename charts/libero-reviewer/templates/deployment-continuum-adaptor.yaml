@@ -42,7 +42,7 @@ spec:
             - name: PORT
               value: {{ .Values.continuumAdaptor.port }}
             - name: LOGIN_URL
-              value: {{ .Values.ingress.host | quote }}/submit"
+              value: {{ .Values.continuumAdaptor.loginUrl | quote }}
             - name: LOGIN_RETURN_URL
               value: "{{ .Values.ingress.host }}/login"
             - name: AUTHENTICATION_JWT_SECRET

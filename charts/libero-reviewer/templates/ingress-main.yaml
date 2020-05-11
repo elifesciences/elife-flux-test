@@ -1,7 +1,5 @@
 {{- if .Values.ingress.enabled -}}
 {{- $serviceName := printf "%s-%s" (include "libero-reviewer.fullname" .) ("client") -}}
-{{- $servicePort := .Values.service.port -}}
-{{- $ingressPath := .Values.ingress.path -}}
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
@@ -17,17 +15,15 @@ metadata:
 {{- end }}
 spec:
   rules:
-    {{- range $host := .Values.ingress.hosts }}
-    - host: {{ $host }}
+    - host: {{ .values.ingress.host }}
       http:
         paths:
-          - path: {{ $ingressPath }}
+          - path: /
             backend:
-              serviceName: {{ $serviceName }}
-              servicePort: {{ $servicePort }}
-    {{- end -}}
-  {{- if .Values.ingress.tls }}
-  tls:
-{{ toYaml .Values.ingress.tls | indent 4 }}
-  {{- end -}}
+              serviceName: {{ printf "%s-%s" (include "libero-reviewer.fullname" . ) ("client") }}
+              servicePort: {{ .values.client.port}}
+          - path: /graphql
+            backend:
+              serviceName: {{ printf "%s-%s" (include "libero-reviewer.fullname" . ) ("submission") }}
+              servicePort: {{ .values.submission.port}}
 {{- end -}}
