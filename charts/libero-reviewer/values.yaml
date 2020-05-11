@@ -10,14 +10,30 @@ submission:
     tag: latest
     pullPolicy: Always
   port: 3000
+
+  # auth secret shared with continuum-adaptor
+  authSecret: super_secret_jam
+  # external user authentication url
+  userAdapterUrl: http://reviewer-mocks:3003/current-user
+  # probably needs to be replaced with a configmap
+  newRelicHome: /etc/reviewer
   maxFileSizeInBytes: 100000000
-  scienceBeam:
-    api_url: ""
+
+  s3:
+    id: ""
+    secret: ""
+    bucket: ""
+    # Overide the default aws s3 endpoint, set to 'false' to use default
+    endpoint: false
+    forcePathStyle: true
+
+  sciencebeam:
+    convertUrl: "sciencebeam--prod--test-cluster.elifesciences.org"
     timeout: 20000
-  aws:
-    accessKeyId: ""
-    secretAccessKey: ""
-    s3Bucket: ""
+  
+  graphQL:
+    maxComplexity: 100
+    maxDepth: 5
 
 submissionDbSchema:
   image:
@@ -48,6 +64,7 @@ postgresql:
   persistence:
     enabled: false
   postgresqlDatabase: "postgres"
+  postgresqlUsername: "postgres"
   postgresqlPassword: "change_this_password_or_else"
 
 # todo, set this to proper values
@@ -65,7 +82,7 @@ ingress:
   path: /
   # Used to create an Ingress record.
   # hosts:
-    # - chart-example.local
+    # - libero-reviewer--staging.elifesciences.org
   # annotations:
   #   kubernetes.io/ingress.class: nginx
   #   kubernetes.io/tls-acme: "true"

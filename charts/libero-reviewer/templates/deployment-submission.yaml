@@ -38,6 +38,49 @@ spec:
             httpGet:
               path: /health
               port: http
+
+          env:
+            - name: AUTHENTICATION_JWT_SECRET
+              value: "{{ .Values.submission.authSecret}}"
+            - name: USER_ADAPTER_URL
+              value: "{{ .Values.submission.userAdapterUrl}}"
+            - name: NEW_RELIC_HOME
+              value: "{{ .Values.submission.newRelicHome}}"
+            - name: MAX_FILE_SIZE_IN_BYTES
+              value: "{{ .Values.submission.maxFilesizeInBytes}}"
+
+            - name: DATABASE_NAME
+              value: "{{ .Values.postgresql.postgresqlDatabase }}"
+            - name: DATABASE_USER
+              value: "{{ .Values.postgresql.postgresqlUsername }}"
+            - name: DATABASE_PASSWORD
+              value: "{{ .Values.postgresql.postgresqlPassword }}"
+            - name: DATABASE_HOST
+              value: "{{ include "libero-reviewer.fullname" . }}-postgresql"
+            - name: DATABASE_PORT
+              value: "5432"
+
+            - name: S3_AWS_ENDPOINT
+              value: "{{ .Values.submission.s3.endpoint}}"
+            - name: S3_ACCESS_KEY_ID
+              value: "{{ .Values.submission.s3.id}}"
+            - name: S3_SECRET_ACCESS_KEY
+              value: "{{ .Values.submission.s3.secret}}"
+            - name: S3_FORCE_PATH_STYLE
+              value: "{{ .Values.submission.s3.forcePathStyle}}"
+            - name: S3_FILE_BUCKET
+              value: "{{ .Values.submission.s3.bucket}}"
+
+            - name: MAX_QL_COMPLEXITY
+              value: "{{ .Values.submission.graphQL.maxComplexity}}"
+            - name: MAX_QL_DEPTH
+              value: "{{ .Values.submission.graphQL.maxDepth}}"
+
+            - name: SCIENCE_BEAM_URL
+              value: "{{ .Values.submission.sciencebeam.convertUrl}}"
+            - name: SCIENCE_BEAM_TIMEOUT
+              value: "{{ .Values.submission.sciencebeam.timeout}}"
+
       initContainers:
         - name: {{ .Chart.Name }}-load-db-schema
           image: "{{ .Values.submissionDbSchema.image.repository }}:{{ .Values.submissionDbSchema.image.tag }}"
