@@ -21,7 +21,7 @@ spec:
     replicaCount: 1
     ingress:
       enabled: "true"
-      host: reviewer--staging--test-cluster.elifesciences.org
+      host: libero-reviewer--staging.elifesciences.org
 
     submission:
       image:
