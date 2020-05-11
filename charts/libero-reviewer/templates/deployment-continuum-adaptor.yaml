@@ -40,7 +40,7 @@ spec:
               port: http
           env:
             - name: PORT
-              value: {{ .Values.continuumAdaptor.port }}
+              value: {{ .Values.continuumAdaptor.port | quote }}
             - name: LOGIN_URL
               value: {{ .Values.continuumAdaptor.loginUrl | quote }}
             - name: LOGIN_RETURN_URL
@@ -63,4 +63,4 @@ spec:
             - name: DATABASE_HOST
               value: "{{ include "libero-reviewer.fullname" . }}-postgresql"
             - name: DATABASE_PORT
-              value: 5432
+              value: "5432"
