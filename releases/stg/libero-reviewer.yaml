@@ -26,7 +26,7 @@ spec:
     submission:
       image:
         repository: liberoadmin/reviewer-submission
-        tag: master-2ce5e1a4-20200507.1158
+        tag: master-04cf110f-20200512.1540
       userAdapterUrl: http://reviewer-mocks:3003/current-user
       scienceBeam:
         convertUrl: "http://sciencebeam--prod:8075/api/convert"
