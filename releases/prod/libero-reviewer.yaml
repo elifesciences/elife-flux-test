@@ -43,3 +43,4 @@ spec:
         repository: liberoadmin/continuum-adaptor
         tag: 0.0.4
       loginUrl: "https://continuumtest--cdn-journal.elifesciences.org/submit"
+      elifeApiSecret: "libero-reviewer--prod-elife-api"

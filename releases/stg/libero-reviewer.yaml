@@ -44,3 +44,4 @@ spec:
         tag: master-fc328369-20200507.1153
       continuumApiUrl: "http://continuumtest--gateway.elife.internal"
       loginUrl: "https://continuumtest--cdn-journal.elifesciences.org/submit"
+      elifeApiSecret: "libero-reviewer--stg-elife-api"

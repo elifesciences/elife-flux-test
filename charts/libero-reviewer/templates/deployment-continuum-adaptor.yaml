@@ -56,7 +56,10 @@ spec:
             - name: CONTINUUM_API_URL
               value: {{ .Values.continuumAdaptor.continuumApiUrl | quote }}
             - name: ELIFE_API_GATEWAY_SECRET
-              value: {{ .Values.continuumAdaptor.elifeApiSecret | quote }}
+              valueFrom:
+                  secretKeyRef:
+                    name: {{ .Values.continuumAdaptor.elifeApiSecret | quote }}
+                    key: token
 
             - name: DATABASE_NAME
               value: {{ .Values.postgresql.postgresqlDatabase | quote }}
