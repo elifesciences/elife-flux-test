@@ -18,7 +18,7 @@ spec:
     - host: {{ .Values.ingress.host }}
       http:
         paths:
-          - path: /auth-redirect(#.*)
+          - path: /auth-redirect(.*)
             backend:
               serviceName: {{ printf "%s-%s" (include "libero-reviewer.fullname" . ) ("continuum-adaptor") }}
               servicePort: {{ .Values.continuumAdaptor.port}}
