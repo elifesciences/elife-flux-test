@@ -63,7 +63,8 @@ postgresql:
     enabled: false
   postgresqlDatabase: "postgres"
   postgresqlUsername: "postgres"
-  postgresqlPassword: "change_this_password_or_else"
+  # postgresql generates a secret that we use in the reviewer components
+  # postgresqlPassword: "change_this_password_or_else"
 
 ingress:
   enabled: false

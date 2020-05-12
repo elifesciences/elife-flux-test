@@ -63,7 +63,10 @@ spec:
             - name: DATABASE_USER
               value: {{ .Values.postgresql.postgresqlUsername | quote }}
             - name: DATABASE_PASSWORD
-              value: {{ .Values.postgresql.postgresqlPassword | quote }}
+              valueFrom:
+                  secretKeyRef:
+                    name: {{ template "libero-reviewer.fullname" . }}-postgresql
+                    key: postgresql-password
             - name: DATABASE_HOST
               value: "{{ include "libero-reviewer.fullname" . }}-postgresql"
             - name: DATABASE_PORT

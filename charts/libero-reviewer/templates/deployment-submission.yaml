@@ -41,7 +41,10 @@ spec:
 
           env:
             - name: AUTHENTICATION_JWT_SECRET
-              value: "{{ .Values.submission.authSecret}}"
+              valueFrom:
+                  secretKeyRef:
+                    name: {{ template "libero-reviewer.fullname" . }}
+                    key: reviewer-auth-secret
             - name: USER_ADAPTER_URL
               value: "{{ .Values.submission.userAdapterUrl}}"
             - name: NEW_RELIC_HOME
@@ -54,7 +57,10 @@ spec:
             - name: DATABASE_USER
               value: "{{ .Values.postgresql.postgresqlUsername }}"
             - name: DATABASE_PASSWORD
-              value: "{{ .Values.postgresql.postgresqlPassword }}"
+              valueFrom:
+                  secretKeyRef:
+                    name: {{ template "libero-reviewer.fullname" . }}-postgresql
+                    key: postgresql-password
             - name: DATABASE_HOST
               value: "{{ include "libero-reviewer.fullname" . }}-postgresql"
             - name: DATABASE_PORT
