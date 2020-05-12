@@ -11,7 +11,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: {{ .Values.client.port }}
+    - port: 80
       targetPort: http
       protocol: TCP
       name: http

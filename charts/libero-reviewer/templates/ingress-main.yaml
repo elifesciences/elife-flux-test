@@ -21,7 +21,7 @@ spec:
           - path: /
             backend:
               serviceName: {{ printf "%s-%s" (include "libero-reviewer.fullname" . ) ("client") }}
-              servicePort: {{ .Values.client.port}}
+              servicePort: 80
           - path: /graphql
             backend:
               serviceName: {{ printf "%s-%s" (include "libero-reviewer.fullname" . ) ("submission") }}

@@ -45,7 +45,6 @@ client:
     repository: liberoadmin/reviewer-client
     tag: latest
     pullPolicy: Always
-  port: 80
 
 continuumAdaptor:
   image:
