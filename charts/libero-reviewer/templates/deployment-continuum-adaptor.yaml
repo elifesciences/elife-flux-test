@@ -52,7 +52,10 @@ spec:
                     key: reviewer-auth-secret
               value: {{ .Values.submission.authSecret | quote }}
             - name: CONTINUUM_JWT_SECRET
-              value: {{ .Values.continuumAdaptor.continuumJwtSecret | quote }}
+              valueFrom:
+                  secretKeyRef:
+                  name: {{ .Values.continuumAdaptor.continuumJwtSecret | quote }}
+                  key: continuumJwtSecret
             - name: CONTINUUM_API_URL
               value: {{ .Values.continuumAdaptor.continuumApiUrl | quote }}
             - name: ELIFE_API_GATEWAY_SECRET

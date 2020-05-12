@@ -52,9 +52,10 @@ continuumAdaptor:
   port: 3001
   loginUrl: "http://continuum.gateway.url/submit"
   continuumApiUrl: "http://continuumtest--gateway.elife.internal"
-  continuumJwtSecret: "some_secret_from_journal"
+  # Name of an existing secret with a 'continuumJwtSecret' entry
+  continuumJwtSecret: "libero-reviewer--continuum-journal-jwt"
   # Name of an existing secret with a 'token' entry
-  elifeApiSecret: "libero-reviewer--stg-elife-api"
+  elifeApiSecret: "libero-reviewer--elife-api"
 
 postgresql:
   enabled: true

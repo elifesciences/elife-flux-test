@@ -45,3 +45,4 @@ spec:
       continuumApiUrl: "http://continuumtest--gateway.elife.internal"
       loginUrl: "https://continuumtest--cdn-journal.elifesciences.org/submit"
       elifeApiSecret: "libero-reviewer--stg-elife-api"
+      continuumJwtSecret: "libero-reviewer--stg-continuum-journal-jwt"
