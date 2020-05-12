@@ -11,8 +11,6 @@ submission:
     pullPolicy: Always
   port: 3000
 
-  # auth secret shared with continuum-adaptor
-  authSecret: super_secret_jam
   # Continuum Adaptor endpoint for getting current user
   userAdapterUrl: http://reviewer-mocks:3003/current-user
   # probably needs to be replaced with a configmap

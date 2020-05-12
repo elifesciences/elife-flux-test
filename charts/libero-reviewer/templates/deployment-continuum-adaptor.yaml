@@ -46,6 +46,10 @@ spec:
             - name: LOGIN_RETURN_URL
               value: "{{ .Values.ingress.host }}/login"
             - name: AUTHENTICATION_JWT_SECRET
+              valueFrom:
+                  secretKeyRef:
+                    name: {{ template "libero-reviewer.fullname" . }}
+                    key: reviewer-auth-secret
               value: {{ .Values.submission.authSecret | quote }}
             - name: CONTINUUM_JWT_SECRET
               value: {{ .Values.continuumAdaptor.continuumJwtSecret | quote }}
