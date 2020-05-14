@@ -2,7 +2,7 @@ apiVersion: v2
 appVersion: "latest"
 description: elife specific deployment of Libero Reviewer
 name: libero-reviewer
-version: 0.8.0
+version: 0.9.0
 
 dependencies:
   - name: "postgresql"

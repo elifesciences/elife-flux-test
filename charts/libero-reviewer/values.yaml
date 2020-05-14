@@ -18,7 +18,7 @@ submission:
   maxFileSizeInBytes: 100000000
 
   s3:
-    id: ""
+    # name of a secret with 'id' and 'access-key' entries
     secret: ""
     bucket: ""
     # Overide the default aws s3 endpoint, set to 'false' to use default

@@ -31,6 +31,7 @@ spec:
       scienceBeam:
         convertUrl: "http://sciencebeam--prod:8075/api/convert"
       s3:
+        secret: libero-reviewer--prod-s3
         bucket: "staging-libero-reviewer"
 
     client:
