@@ -15,6 +15,7 @@ submission:
   port: 3000
 
   newRelicHome: /etc/reviewer
+  # Sets both an submission internal value as well as ingree max_request
   maxFileSizeInBytes: 100000000
 
   authenticationJwtSecret: libero-reviewer--auth-jwt
