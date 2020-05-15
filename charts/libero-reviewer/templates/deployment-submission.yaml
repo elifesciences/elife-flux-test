@@ -105,6 +105,9 @@ spec:
             - name: PGUSER
               value: "{{ .Values.postgresql.postgresqlUsername }}"
             - name: PGPASSWORD
-              value: "{{ .Values.postgresql.postgresqlPassword }}"
+              valueFrom:
+                  secretKeyRef:
+                    name: {{ template "libero-reviewer.fullname" . }}-postgresql
+                    key: postgresql-password
             - name: PGDATABASE
               value: "{{ .Values.postgresql.postgresqlDatabase }}"
