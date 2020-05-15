@@ -25,13 +25,13 @@ spec:
 
     postgresql:
       existingSecret: libero-reviewer--stg-postgresql
-    
+
     authenticationJwtSecret: libero-reviewer--stg-auth-jwt
 
     submission:
       image:
         repository: liberoadmin/reviewer-submission
-        tag: master-b51145f4-20200515.0808
+        tag: master-ccb8d13c-20200515.1127
       scienceBeam:
         convertUrl: "http://sciencebeam--prod:8075/api/convert"
       s3:
