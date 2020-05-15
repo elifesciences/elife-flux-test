@@ -50,7 +50,7 @@ spec:
             - name: NEW_RELIC_HOME
               value: "{{ .Values.submission.newRelicHome }}"
             - name: MAX_FILE_SIZE_IN_BYTES
-              value: "{{ .Values.submission.maxFilesizeInBytes }}"
+              value: "{{ .Values.submission.maxFileSizeInBytes }}"
 
             - name: DATABASE_NAME
               value: "{{ .Values.postgresql.postgresqlDatabase }}"
