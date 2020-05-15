@@ -11,7 +11,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: {{ .Values.continuumAdaptor.port | quote }}
+    - port: {{ .Values.continuumAdaptor.port }}
       targetPort: http
       protocol: TCP
       name: http
