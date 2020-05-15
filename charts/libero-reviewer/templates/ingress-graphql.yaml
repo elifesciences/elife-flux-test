@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
   annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: {{ div .Values.submission.maxFilesizeInBytes 1000000 }}
+    nginx.ingress.kubernetes.io/proxy-body-size: {{ div .Values.submission.maxFilesizeInBytes 1000000 | quote }}
 spec:
   rules:
     - host: {{ .Values.ingress.host | quote }}
