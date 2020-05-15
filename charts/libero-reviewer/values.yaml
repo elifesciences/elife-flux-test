@@ -4,6 +4,9 @@
 
 replicaCount: 1
 
+database:
+  secret: libero-reviewer--postgresql
+
 submission:
   image:
     repository: liberoadmin/reviewer-submission
@@ -65,12 +68,12 @@ postgresql:
     enabled: false
   postgresqlDatabase: "postgres"
   postgresqlUsername: "postgres"
-  # postgresql generates a secret that we use in the reviewer components
-  # postgresqlPassword: "change_this_password_or_else"
+  # a secret also used by the reviewer components
+  existingSecret: "libero-reviewer--postgresql"
 
 ingress:
   enabled: false
-  host: libereo-reviewer--staging.domain.tld
+  host: libero-reviewer--staging.domain.tld
   # annotations applied to _all_ reviewer ingress records
   # annotations:
   #   kubernetes.io/ingress.class: nginx

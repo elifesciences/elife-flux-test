@@ -23,6 +23,9 @@ spec:
       enabled: "true"
       host: reviewer--production--test-cluster.elifesciences.org
 
+    postgresql:
+      existingSecret: libero-reviewer--prod-postgresql
+
     submission:
       image:
         repository: liberoadmin/reviewer-submission

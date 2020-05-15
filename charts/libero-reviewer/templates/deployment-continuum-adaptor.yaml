@@ -71,7 +71,7 @@ spec:
             - name: DATABASE_PASSWORD
               valueFrom:
                   secretKeyRef:
-                    name: {{ template "libero-reviewer.fullname" . }}-postgresql
+                    name: {{ .Values.submission.postgresql.existingSecret | quote }}
                     key: postgresql-password
             - name: DATABASE_HOST
               value: "{{ include "libero-reviewer.fullname" . }}-postgresql"
