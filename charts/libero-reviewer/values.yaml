@@ -20,6 +20,8 @@ submission:
   newRelicHome: /etc/reviewer
   maxFileSizeInBytes: 100000000
 
+  authenticationJwtSecret: libero-reviewer--auth-jwt
+
   s3:
     # name of a secret with 'id' and 'access-key' entries
     secret: ""

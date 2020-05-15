@@ -25,6 +25,8 @@ spec:
 
     postgresql:
       existingSecret: libero-reviewer--stg-postgresql
+    
+    authenticationJwtSecret: libero-reviewer--stg-auth-jwt
 
     submission:
       image:

@@ -48,7 +48,7 @@ spec:
             - name: AUTHENTICATION_JWT_SECRET
               valueFrom:
                   secretKeyRef:
-                    name: {{ template "libero-reviewer.fullname" . }}
+                    name: {{ .Values.authenticationJwtSecret | quote }}
                     key: reviewer-auth-secret
               value: {{ .Values.submission.authSecret | quote }}
             - name: CONTINUUM_JWT_SECRET
