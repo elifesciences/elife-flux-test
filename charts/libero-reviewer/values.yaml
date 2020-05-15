@@ -24,8 +24,8 @@ submission:
     # name of a secret with 'id' and 'access-key' entries
     secret: ""
     bucket: ""
-    # Overide the default aws s3 endpoint, set to 'false' to use default
-    endpoint: false
+    # Overide the default aws s3 endpoint, set to "" when using aws s3
+    endpoint: ""
     forcePathStyle: true
 
   sciencebeam:
