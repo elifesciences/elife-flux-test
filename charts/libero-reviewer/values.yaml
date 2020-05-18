@@ -29,7 +29,7 @@ submission:
     forcePathStyle: true
 
   sciencebeam:
-    convertUrl: "sciencebeam--prod--test-cluster.elifesciences.org"
+    convertUrl: "sciencebeam--prod--test-cluster.elifesciences.org/api/convert"
     timeout: 20000
   
   graphQL:
