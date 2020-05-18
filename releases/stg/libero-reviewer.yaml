@@ -34,6 +34,7 @@ spec:
         tag: master-d871d35f-20200518.1003
       sciencebeam:
         convertUrl: "http://sciencebeam--stg:8075/api/convert"
+        timeout: 60000
       s3:
         secret: libero-reviewer--stg-s3
         bucket: "staging-libero-reviewer"
