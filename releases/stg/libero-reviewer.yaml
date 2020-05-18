@@ -33,7 +33,7 @@ spec:
         repository: liberoadmin/reviewer-submission
         tag: master-ccb8d13c-20200515.1127
       sciencebeam:
-        convertUrl: "http://sciencebeam--prod:8075/api/convert"
+        convertUrl: "http://sciencebeam--stg:8075/api/convert"
       s3:
         secret: libero-reviewer--stg-s3
         bucket: "staging-libero-reviewer"
