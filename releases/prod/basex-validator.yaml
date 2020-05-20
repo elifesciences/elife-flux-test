@@ -12,7 +12,7 @@ metadata:
 spec:
   releaseName: basex-validator--prod
   chart:
-    git: https://github.com/elifesciences/basex-validator-formula
+    git: https://github.com/elifesciences/basex-validator-docker-formula
     path: helm/basex-validator
     ref: master
 
