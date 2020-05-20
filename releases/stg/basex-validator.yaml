@@ -1,0 +1,27 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: basex-validator
+  namespace: stg
+  annotations:
+    fluxcd.io/automated: 'true'
+    filter.fluxcd.io/client: glob:master-*-*
+    filter.fluxcd.io/articleStore: glob:master-*-*
+
+spec:
+  releaseName: basex-validator--stg
+  chart:
+    git: https://github.com/elifesciences/basex-validator-formula
+    path: helm/basex-validator
+    ref: master
+
+  values:
+    replicaCount: 1
+    ingress:
+      host: basex-validator--staging--test-cluster.elifesciences.org
+
+    basex-validator:
+      image:
+        repository: elifesciences/basex-validator
+        tag: master-080a9ac2-20200519.1545
