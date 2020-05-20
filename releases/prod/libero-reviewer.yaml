@@ -41,7 +41,7 @@ spec:
     client:
       image:
         repository: liberoadmin/reviewer-client
-        tag: 0.0.4
+        tag: 0.0.5
 
     continuumAdaptor:
       image:
