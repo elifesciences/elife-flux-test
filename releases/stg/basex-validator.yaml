@@ -12,9 +12,9 @@ metadata:
 spec:
   releaseName: basex-validator--stg
   chart:
-    git: https://github.com/elifesciences/basex-validator-docker-formula
+    git: https://github.com/elifesciences/basex-validator-formula
     path: helm/basex-validator
-    ref: master
+    ref: wip/migrate-to-new-cluster
 
   values:
     replicaCount: 1
