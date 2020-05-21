@@ -41,7 +41,7 @@ spec:
     client:
       image:
         repository: liberoadmin/reviewer-client
-        tag: master-3aef776f-20200521.1341
+        tag: master-08456434-20200521.1531
 
     continuumAdaptor:
       image:
