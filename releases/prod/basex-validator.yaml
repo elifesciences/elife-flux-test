@@ -20,7 +20,7 @@ spec:
     ingress:
       host: basex-validator--test-cluster.elifesciences.org
 
-    basex-validator:
+      basexValidator:
       image:
         repository: elifesciences/basex-validator
         tag: 0.0.1

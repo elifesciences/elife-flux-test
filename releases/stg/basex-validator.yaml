@@ -20,7 +20,7 @@ spec:
     ingress:
       host: basex-validator--staging--test-cluster.elifesciences.org
 
-    basex-validator:
+      basexValidator:
       image:
         repository: elifesciences/basex-validator
         tag: master-080a9ac2-20200519.1545
