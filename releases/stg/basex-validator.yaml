@@ -6,8 +6,7 @@ metadata:
   namespace: stg
   annotations:
     fluxcd.io/automated: 'true'
-    filter.fluxcd.io/client: glob:master-*-*
-    filter.fluxcd.io/articleStore: glob:master-*-*
+    filter.fluxcd.io/basexValidator: glob:master-*-*
 
 spec:
   releaseName: basex-validator--stg
