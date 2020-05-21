@@ -46,7 +46,7 @@ spec:
     continuumAdaptor:
       image:
         repository: liberoadmin/continuum-adaptor
-        tag: master-e036f03f-20200518.1618
+        tag: master-880f07bd-20200521.1524
       continuumApiUrl: "http://continuumtest--gateway.elife.internal"
       loginUrl: "https://continuumtest--cdn-journal.elifesciences.org/submit"
       elifeApiSecret: "libero-reviewer--stg-elife-api"
