@@ -16,11 +16,11 @@ spec:
     ref: wip/migrate-to-new-cluster
 
   values:
-    replicaCount: 1
     ingress:
       host: basex-validator--test-cluster.elifesciences.org
 
     basexValidator:
+      replicaCount: 1
       image:
         repository: elifesciences/basex-validator
         tag: 0.0.1
