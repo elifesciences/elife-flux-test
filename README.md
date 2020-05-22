@@ -1,6 +1,12 @@
 # elife-flux-test
 Declares the deploys to kubernetes-aws--flux-test cluster using fluxcd
 
+- [Kubernetes Dashboard](https://dashboard--test-cluster.elifesciences.org)
+- [Grafana Dashboards](https://grafana--test-cluster.elifesciences.org)
+- [Prometheus](https://prometheus--test-cluster.elifesciences.org)
+- [Alertmanager](https://alertmanager--test-cluster.elifesciences.org)
+
+
 ## Useful commands
 
 If flux is installed to a namespace `fluxctl` needs to be invoked as:
@@ -10,6 +16,7 @@ fluxctl --k8s-fwd-ns flux
 ```
 
 __Observing state__
+
 ```sh
 fluxctl sync  # forces flux to sync git repo
 fluxctl list-workloads --all-namespaces
