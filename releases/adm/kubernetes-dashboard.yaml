@@ -25,5 +25,4 @@ spec:
        allowPrivilegeEscalation: false
        readOnlyRootFilesystem: true
     serviceAccount:
-      create: false
       name: kubernetes-dashboard
