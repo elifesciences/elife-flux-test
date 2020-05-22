@@ -31,7 +31,7 @@ spec:
     submission:
       image:
         repository: liberoadmin/reviewer-submission
-        tag: 0.0.5
+        tag: 0.0.6
       sciencebeam:
         convertUrl: "http://sciencebeam--prod:8075/api/convert"
       s3:
@@ -46,7 +46,7 @@ spec:
     continuumAdaptor:
       image:
         repository: liberoadmin/continuum-adaptor
-        tag: 0.0.5
+        tag: 0.0.6
       continuumApiUrl: "http://continuumtest--gateway.elife.internal"
       loginUrl: "https://continuumtest--cdn-journal.elifesciences.org/submit"
       elifeApiSecret: "libero-reviewer--prod-elife-api"
