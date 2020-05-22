@@ -142,4 +142,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: kubernetes-dashboard
-  namespace: adm
+  namespace: kube-system
