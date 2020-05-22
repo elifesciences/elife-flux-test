@@ -1,0 +1,29 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: kubernetes-dashboard
+  namespace: adm
+  annotations:
+    fluxcd.io/automated: "true"
+
+spec:
+  chart:
+    git: https://github.com/helm/charts
+    path: stable/kubernetes-dashboard
+    ref: master
+  values:
+    ingress:
+      enabled: "true"
+      hosts:
+        - dashboard--test-cluster.elifesciences.org
+      annotations:
+        nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
+        nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
+    enableSkipLogin: true
+    dashboardContainerSecurityContext:
+       allowPrivilegeEscalation: false
+       readOnlyRootFilesystem: true
+    serviceAccount:
+      create: false
+      name: kubernetes-dashboard
