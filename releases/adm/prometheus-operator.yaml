@@ -19,6 +19,11 @@ spec:
     path: stable/prometheus-operator
     ref: master
   values:
+    defaultRules:
+      rules:
+        kubeScheduler: false  # lives on EKS
+    kubeControllerManager:
+      enabled: false  # lives on EKS
     grafana:
       ingress:
         enabled: "true"
