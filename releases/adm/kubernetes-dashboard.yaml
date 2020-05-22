@@ -3,7 +3,7 @@ apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
   name: kubernetes-dashboard
-  namespace: kube-system
+  namespace: adm
   annotations:
     fluxcd.io/automated: "true"
 
