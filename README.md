@@ -84,3 +84,11 @@ This follows [flux get-started-helm](https://docs.fluxcd.io/en/stable/tutorials/
    fluxctl identity --k8s-fwd-ns flux
    # add this as deploy key with push rights to the github repo
    ```
+
+4. Make kube-proxy metrics accessible to prometheus
+   By default kube-proxy metrics are only accessible on localhost.  
+   See prometheus operator (readme)[https://github.com/helm/charts/tree/master/stable/prometheus-operator#kubeproxy]
+
+   - edit configmap `kubectl -n kube-system edit cm kube-proxy-config`
+   - set `metricsBindAddress: 0.0.0.0:10249`
+   - delete all `kube-proxy` pods, they will be recreated with the new config
