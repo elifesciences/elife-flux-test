@@ -21,7 +21,7 @@ spec:
     replicaCount: 1
     ingress:
       enabled: "true"
-      host: reviewer--production--test-cluster.elifesciences.org
+      host: reviewer--test-cluster.elifesciences.org
 
     postgresql:
       existingSecret: libero-reviewer--prod-postgresql
