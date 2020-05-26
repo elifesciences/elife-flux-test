@@ -68,7 +68,7 @@ spec:
               replacement: ${1}://${2}${3}
               target_label: __param_target
             - target_label: __address__
-              replacement: blackbox-exporter.example.com:9115
+              replacement: adm-blackbox-exporter-prometheus-blackbox-exporter:9115
             - source_labels: [__param_target]
               target_label: instance
             - action: labelmap
