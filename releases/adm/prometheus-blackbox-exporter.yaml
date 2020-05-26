@@ -1,0 +1,14 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: blackbox-exporter
+  namespace: adm
+  annotations:
+    fluxcd.io/automated: "true"
+
+spec:
+  chart:
+    git: https://github.com/helm/charts
+    path: stable/prometheus-blackbox-exporter
+    ref: master
