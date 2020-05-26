@@ -22,6 +22,7 @@ spec:
     defaultRules:
       rules:
         kubeScheduler: false  # lives on EKS
+        kubeApiserver: false  # too memory intensive
     kubeControllerManager:
       enabled: false  # lives on EKS
     grafana:
