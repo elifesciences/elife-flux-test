@@ -4,8 +4,7 @@ metadata:
   name: flux.rules
   namespace: adm
   labels:
-    app: prometheus-operator
-    release: adm-prometheus-operator
+    app: flux
 spec:
   groups:
   - name: ./flux.rules

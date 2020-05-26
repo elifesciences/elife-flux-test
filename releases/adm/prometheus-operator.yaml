@@ -48,6 +48,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
       prometheusSpec:
         serviceMonitorSelectorNilUsesHelmValues: false
+        ruleSelector: {}  # All PrometheusRule objects
 
     alertmanager:
       alertmanagerSpec:
