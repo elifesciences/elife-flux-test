@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: flux.rules
+  namespace: adm
+  labels:
+    app: prometheus-operator
+    release: adm-prometheus-operator
+spec:
+  groups:
+  - name: ./flux.rules
+    rules:
+    - alert: HelmOperatorLowThroughput
+      expr: flux_helm_operator_release_queue_length_count > 0
+      for: 30m
+    - alert: HelmReleaseRolledBack
+      expr: flux_helm_operator_release_condition_info{condition="RolledBack"} == 1
+    - alert: HelmReleaseError
+      expr: flux_helm_operator_release_phase_info{condition="Released"} == -1
+
