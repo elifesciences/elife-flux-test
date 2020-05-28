@@ -12,25 +12,25 @@ Declares the deploys to kubernetes-aws--flux-test cluster using fluxcd
 == Adding/Editing the Cluster
 
 Use this git repo to control the cluster state (no `kubectl` or `helm` cli action needed/wanted).
-link:[Flux] will try to apply any `yaml` file in this repo to the cluster.
 
-* add any valid cluster resource yaml
-* `HelmRelease` resources are handled by link:[HelmOperator] and allow use of helm charts
+* https://docs.fluxcd.io[Flux] will try to apply any `yaml` file in this repo to the cluster
+* https://docs.fluxcd.io/projects/helm-operator[HelmOperator] allows use of helm charts
 * folders have no meaning to cluster, are used to keep things tidy for us humans
 
 === Helm Charts
 
-* add a `HelmRelease` object, see [docs]
+* add a `HelmRelease` object, see https://docs.fluxcd.io/projects/helm-operator/en/stable/references/helmrelease-custom-resource/[docs]
 * chart needs to live in public git repo or needs be published
-* see link:[this] github action if you need to publish your chart
-* Flux can link:[automatically update images] in your chart
+* see https://github.com/marketplace/actions/helm-chart-releaser[this] github action if you need to publish your chart
+* Flux can https://docs.fluxcd.io/en/1.19.0/references/helm-operator-integration/[automatically update images] in your chart
  ** checks image registry every 5 minutes
  ** `HelmRelease` needs to include `repository` and `tag` info
- ** Flux is link:[opinionated] about `image` location in chart
+ ** Flux is https://docs.fluxcd.io/en/1.19.0/references/helm-operator-integration/#automated-image-detection[opinionated] about `image` location in chart
+* Flux will update deployments if chart versions get bumped, but only if the chart source is a git repo (see https://docs.fluxcd.io/projects/helm-operator/en/stable/helmrelease-guide/chart-sources/[docs])
 
 === Authentication
 
-link:[oauth2 proxy] available to protect services without their own login.
+https://oauth2-proxy.github.io/oauth2-proxy/[oauth2 proxy] available to protect services without their own login.
 Provides access to all members of elifesciences Github organisation.
 
 Add following annotations to your service's ingress:
@@ -46,7 +46,7 @@ annotations:
 
 Infrastructure (all behind oauth2_proxy)
 
-* Prometheus/Grafana/Alertmanager via the link:[prometheus-operator chart].
+* Prometheus/Grafana/Alertmanager via the https://github.com/helm/charts/tree/master/stable/prometheus-operator[prometheus-operator chart].
 * Prometheus Blackbox for http/icmp/snmp probing
 * Kubernetes Dashboard with anonymous access but limited to read only
 
