@@ -33,6 +33,9 @@ spec:
       auth:
         annotations:
           blackbox/should_be_probed: 'true'
+      graphql:
+        annotations:
+          blackbox/should_be_probed: 'true'
 
 
     postgresql:
