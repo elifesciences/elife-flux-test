@@ -1,0 +1,24 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: sciencebeam-texture
+  namespace: prod
+
+spec:
+  releaseName: sciencebeam--prod
+  chart:
+    git: https://github.com/elifesciences/sciencebeam-texture
+    path: charts/sciencebeam-texture
+    ref: add-helm-chart
+
+  values:
+    image:
+      repository: elifesciences/sciencebeam-texture
+      tag: latest
+    ingress:
+      enabled: "true"
+      hosts:
+        - host: sciencebeam-texture--prod--test-cluster.elifesciences.org
+          paths:
+            - "/"
