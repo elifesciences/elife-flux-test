@@ -1,14 +1,13 @@
 = elife-flux-test
-:toc: macro
-
 Declares the deploys to kubernetes-aws--flux-test cluster using fluxcd
+:toc:
+
+== Observability
 
 * https://dashboard--test-cluster.elifesciences.org[Kubernetes Dashboard]
 * https://grafana--test-cluster.elifesciences.org[Grafana Dashboards]
 * https://prometheus--test-cluster.elifesciences.org[Prometheus]
 * https://alertmanager--test-cluster.elifesciences.org[Alertmanager]
-
-toc::[]
 
 == Adding/Editing the Cluster
 
