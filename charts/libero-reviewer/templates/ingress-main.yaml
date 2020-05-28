@@ -9,8 +9,11 @@ metadata:
     helm.sh/chart: {{ include "libero-reviewer.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- with .Values.ingress.annotations }}
   annotations:
+{{- with .Values.ingress.annotations }}
+{{ toYaml . | indent 4 }}
+{{- end }}
+{{- with .Values.ingress.main.annotations }}
 {{ toYaml . | indent 4 }}
 {{- end }}
 spec:

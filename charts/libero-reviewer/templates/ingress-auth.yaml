@@ -13,6 +13,9 @@ metadata:
 {{- with .Values.ingress.annotations }}
 {{ toYaml . | indent 4 }}
 {{- end }}
+{{- with .Values.ingress.auth.annotations }}
+{{ toYaml . | indent 4 }}
+{{- end }}
 spec:
   rules:
     - host: {{ .Values.ingress.host }}

@@ -73,7 +73,16 @@ postgresql:
 
 ingress:
   enabled: false
+  # applied to _all_ reviewer ingress records
   host: libero-reviewer--staging.domain.tld
-  # annotations applied to _all_ reviewer ingress records
-  # annotations:
-  #   kubernetes.io/ingress.class: nginx
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  # per ingress annotations
+  main:
+    annotations:
+  login:
+    annotations:
+  graphql:
+    annotations:
+  auth:
+    annotations:
