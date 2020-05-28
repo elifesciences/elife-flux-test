@@ -1,0 +1,188 @@
+= elife-flux-test
+:toc: macro
+
+Declares the deploys to kubernetes-aws--flux-test cluster using fluxcd
+
+* https://dashboard--test-cluster.elifesciences.org[Kubernetes Dashboard]
+* https://grafana--test-cluster.elifesciences.org[Grafana Dashboards]
+* https://prometheus--test-cluster.elifesciences.org[Prometheus]
+* https://alertmanager--test-cluster.elifesciences.org[Alertmanager]
+
+toc::[]
+
+== Adding/Editing the Cluster
+
+Use this git repo to control the cluster state (no `kubectl` or `helm` cli action needed/wanted).
+link:[Flux] will try to apply any `yaml` file in this repo to the cluster.
+
+* add any valid cluster resource yaml
+* `HelmRelease` resources are handled by link:[HelmOperator] and allow use of helm charts
+* folders have no meaning to cluster, are used to keep things tidy for us humans
+
+=== Helm Charts
+
+* add a `HelmRelease` object, see [docs]
+* chart needs to live in public git repo or needs be published
+* see link:[this] github action if you need to publish your chart
+* Flux can link:[automatically update images] in your chart
+ ** checks image registry every 5 minutes
+ ** `HelmRelease` needs to include `repository` and `tag` info
+ ** Flux is link:[opinionated] about `image` location in chart
+
+=== Authentication
+
+link:[oauth2 proxy] available to protect services without their own login.
+Provides access to all members of elifesciences Github organisation.
+
+Add following annotations to your service's ingress:
+
+[source,yaml]
+----
+annotations:
+  nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
+  nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
+----
+
+=== Monitoring/Alerting
+
+Infrastructure (all behind oauth2_proxy)
+
+* Prometheus/Grafana/Alertmanager via the link:[prometheus-operator chart].
+* Prometheus Blackbox for http/icmp/snmp probing
+* Kubernetes Dashboard with anonymous access but limited to read only
+
+==== Metrics
+
+* instrument your app and expose a metrics endpoint https://prometheus.io/docs/instrumenting/clientlibs/[(docs)]
+* define metric endpoints as https://github.com/coreos/prometheus-operator/blob/master/Documentation/user-guides/getting-started.md#related-resources[ServiceMonitor] objects
+* Prometheus will add all ServiceMonitors in cluster
+
+==== Dashboards
+
+* add a `ConfigMap` to the `adm` namespace containing the dashboard's json
+* add the `grafana_dashboard: "1` label
+* see `releases/adm/ingress-nginx-dashboard-main.yaml` for an example
+* in the future maybe switch to something like https://github.com/integr8ly/grafana-operator[grafana-operator]
+
+==== Blackbox Probes
+
+* add `blackbox/should_be_probed: 'true'` to your ingress' annotations
+* Prometheus will start probing the the host-paths found in the ingress
+* anything except HTTP-200 will trigger an alert
+
+==== Alerts
+
+* add a `PrometheusRule` object
+* give it an `app` label and add this to the `prometheusSpec.ruleSelector.matchExpression`
+* https://github.com/coreos/prometheus-operator/blob/master/Documentation/user-guides/alerting.md[operator docs] on alerting
+* alerts are sent to the #alerts-test channel in elifesciences slack
+* Alertmanager is configured with a secret
+** see `alertmanager-secret.yaml-template`
+** too apply:
++
+----
+kubectl -n adm delete secret alertmanager-prometheus-operator
+kubectl -n adm create secret generic alertmanager-prometheus-operator --from-file=alertmanager-secret.yaml-template
+----
+
+
+== Useful commands
+
+If flux is installed to a namespace `fluxctl` needs to be invoked as:
+
+----
+fluxctl --k8s-fwd-ns flux
+----
+
+*Observing state*
+
+[source,sh]
+----
+fluxctl sync  # forces flux to sync git repo
+fluxctl list-workloads --all-namespaces
+helm list --all-namespaces
+
+# List all image versions running on cluster
+kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.containers[*]}{.image}{", "}{end}{end}' |
+sort | column -t
+----
+
+*Debugging*
+
+[source,sh]
+----
+kubectl -n flux logs helm-operator-86b8f67577-wldq5 --follow
+helm -n adm history adm-prometheus-operator -o yaml
+----
+
+If `helm lint` is happy but operator is complaining:
+
+* copy `values` section from the `HelmRelease` to a `dummy.yaml`
+* run `helm dependency update charts/libero-reviewer`
+* now you can run `helm install --dry-run` or `helm template --debug`
+
+*helm-operator can't upgrade due to `failed` helm state*
+
+In this case it appears one has to manually upgrade the helm chart. See https://docs.fluxcd.io/projects/helm-operator/en/stable/faq/#a-helmrelease-is-stuck-in-a-failed-release-state-how-do-i-force-it-through[faq] and https://github.com/fluxcd/helm-operator/issues/241#issuecomment-578351380[this issue].
+
+[source,sh]
+----
+helm -n <namespace> list
+helm -n <namespace> -i <release> upgrade --reuse-values <any additional flags> <chart>
+----
+
+== Bootstrapping the cluster to use flux
+
+This only needs to be done upon creation of the cluster.
+
+This follows https://docs.fluxcd.io/en/stable/tutorials/get-started-helm/[flux get-started-helm].
+
+. Configure your `kubectl` using your aws credentials.
++
+[source,sh]
+----
+aws eks update-kubeconfig \
+   --name kubernetes-aws--flux-test \
+   --role arn:aws:iam::512686554592:role/kubernetes-aws--flux-test--AmazonEKSUserRole
+----
+
+. Install flux and helm-operator on the cluster, link to this repo +
+NOTE: make sure to use `helm3`
++
+[source,sh]
+----
+kubectl apply -f https://raw.githubusercontent.com/fluxcd/helm-operator/master/deploy/crds.yaml
+
+helm repo add fluxcd https://charts.fluxcd.io
+
+kubectl create namespace flux
+
+helm upgrade -i flux fluxcd/flux \
+  --set git.url=git@github.com:elifesciences/elife-flux-test \
+  --set syncGarbageCollection.enabled=true \
+ --set prometheus.serviceMonitor.create=true \
+ --set prometheus.serviceMonitor.namespace=adm \
+  --namespace flux
+
+helm upgrade -i helm-operator fluxcd/helm-operator \
+ --set git.ssh.secretName=flux-git-deploy \
+ --set helm.versions=v3 \
+ --set prometheus.serviceMonitor.create=true \
+ --set prometheus.serviceMonitor.namespace=adm \
+ --namespace flux
+----
+
+. Add flux to repo's deploy keys
++
+[source,sh]
+----
+fluxctl identity --k8s-fwd-ns flux
+# add this as deploy key with push rights to the github repo
+----
+
+. Make kube-proxy metrics accessible to prometheus
+By default kube-proxy metrics are only accessible on localhost. +
+See prometheus operator (readme)[https://github.com/helm/charts/tree/master/stable/prometheus-operator#kubeproxy]
+ ** edit configmap `kubectl -n kube-system edit cm kube-proxy-config`
+ ** set `metricsBindAddress: 0.0.0.0:10249`
+ ** delete all `kube-proxy` pods, they will be recreated with the new config
