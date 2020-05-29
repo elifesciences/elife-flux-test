@@ -50,3 +50,5 @@ spec:
       image:
         repository: lfoppiano/grobid
         tag: 0.5.3
+      warmup:
+        enabled: true
