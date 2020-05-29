@@ -4,6 +4,8 @@ kind: HelmRelease
 metadata:
   name: sciencebeam-texture
   namespace: prod
+  annotations:
+    fluxcd.io/automated: 'true'
 
 spec:
   releaseName: sciencebeam-texture--prod
