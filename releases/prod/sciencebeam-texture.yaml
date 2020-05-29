@@ -69,7 +69,7 @@ metadata:
   annotations:
     fluxcd.io/automated: 'true'
     filter.fluxcd.io/chart-image: semver:*
-    filter.fluxcd.io/grobid: semver:*
+    filter.fluxcd.io/grobid: semver:*-dl-glove-6B-50d
 
 spec:
   releaseName: sciencebeam-texture-sciencebeam-biorxiv--prod
