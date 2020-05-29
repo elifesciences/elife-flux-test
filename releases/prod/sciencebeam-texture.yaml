@@ -45,11 +45,11 @@ spec:
   values:
     image:
       repository: elifesciences/sciencebeam
-      tag: 0.0.5
+      tag: 0.0.6
     grobid:
       image:
         repository: lfoppiano/grobid
-        tag: 0.5.3
+        tag: 0.6.0
       warmup:
         enabled: true
     ingress:
@@ -81,11 +81,11 @@ spec:
   values:
     image:
       repository: elifesciences/sciencebeam
-      tag: 0.0.5
+      tag: 0.0.6
     grobid:
       image:
         repository: elifesciences/sciencebeam-grobid-biorxiv
-        tag: "0.0.2-dl-glove-6B-50d"
+        tag: "0.0.1"
       warmup:
         enabled: true
     ingress:
