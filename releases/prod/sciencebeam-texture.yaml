@@ -13,7 +13,7 @@ spec:
   chart:
     git: https://github.com/elifesciences/sciencebeam-texture
     path: charts/sciencebeam-texture
-    ref: master
+    ref: develop
 
   values:
     image:
