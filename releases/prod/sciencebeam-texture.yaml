@@ -46,3 +46,7 @@ spec:
     image:
       repository: elifesciences/sciencebeam
       tag: 0.0.6
+    grobid:
+      image:
+        repository: lfoppiano/grobid
+        tag: 0.5.3
