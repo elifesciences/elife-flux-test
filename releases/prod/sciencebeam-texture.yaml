@@ -89,6 +89,8 @@ spec:
         tag: "0.0.2-dl-glove-6B-50d"
       warmup:
         enabled: true
+      env:
+        GROBID__HEADER__USE_LABELED_ABSTRACT: "false"
     ingress:
       enabled: "true"
       hosts:
