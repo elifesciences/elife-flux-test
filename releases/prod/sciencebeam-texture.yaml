@@ -22,12 +22,6 @@ spec:
         - host: sciencebeam-texture--prod--test-cluster.elifesciences.org
           paths:
             - "/"
-          externalPaths:
-            - path: "/api"
-              serviceName: sciencebeam-texture-sciencebeam--prod
-              servicePort: 8075
-      annotations:
-        nginx.ingress.kubernetes.io/proxy-body-size: 120m
 ---
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
@@ -52,3 +46,11 @@ spec:
         tag: 0.5.3
       warmup:
         enabled: true
+    ingress:
+      enabled: "true"
+      hosts:
+        - host: sciencebeam-texture--prod--test-cluster.elifesciences.org
+          paths:
+            - "/api"
+      annotations:
+        nginx.ingress.kubernetes.io/proxy-body-size: 120m
