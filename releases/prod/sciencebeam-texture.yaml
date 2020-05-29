@@ -44,7 +44,7 @@ spec:
   values:
     image:
       repository: elifesciences/sciencebeam
-      tag: 0.0.6
+      tag: 0.0.5
     grobid:
       image:
         repository: lfoppiano/grobid
@@ -80,7 +80,7 @@ spec:
   values:
     image:
       repository: elifesciences/sciencebeam
-      tag: 0.0.6
+      tag: 0.0.5
     grobid:
       image:
         repository: elifesciences/sciencebeam-grobid-biorxiv
