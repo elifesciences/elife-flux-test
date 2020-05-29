@@ -6,7 +6,7 @@ metadata:
   namespace: prod
 
 spec:
-  releaseName: sciencebeam--prod
+  releaseName: sciencebeam-texture
   chart:
     git: https://github.com/elifesciences/sciencebeam-texture
     path: charts/sciencebeam-texture
