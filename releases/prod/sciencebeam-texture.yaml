@@ -17,13 +17,13 @@ spec:
   values:
     image:
       repository: elifesciences/sciencebeam_texture
-      tag: latest
+      tag: df84c85c93a9bcfa983ba93030f55a7c9c85f28f
     ingress:
       enabled: "true"
       hosts:
-        - host: sciencebeam-texture--prod--test-cluster.elifesciences.org
-          paths:
-            - "/"
+      - host: sciencebeam-texture--prod--test-cluster.elifesciences.org
+        paths:
+        - "/"
 ---
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
@@ -51,9 +51,9 @@ spec:
     ingress:
       enabled: "true"
       hosts:
-        - host: sciencebeam-texture--prod--test-cluster.elifesciences.org
-          paths:
-            - "/api"
+      - host: sciencebeam-texture--prod--test-cluster.elifesciences.org
+        paths:
+        - "/api"
       annotations:
         nginx.ingress.kubernetes.io/proxy-body-size: 120m
 ---
@@ -83,9 +83,9 @@ spec:
     ingress:
       enabled: "true"
       hosts:
-        - host: sciencebeam-texture--prod--test-cluster.elifesciences.org
-          paths:
-            - "/api_biorxiv(/|$)(.*)"
+      - host: sciencebeam-texture--prod--test-cluster.elifesciences.org
+        paths:
+        - "/api_biorxiv(/|$)(.*)"
       annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /api/$2
         nginx.ingress.kubernetes.io/proxy-body-size: 120m
