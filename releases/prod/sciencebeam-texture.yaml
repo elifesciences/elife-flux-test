@@ -34,6 +34,7 @@ metadata:
   annotations:
     fluxcd.io/automated: 'true'
     filter.fluxcd.io/chart-image: semver:*
+    filter.fluxcd.io/grobid: glob:0.5.3
 
 spec:
   releaseName: sciencebeam-texture-sciencebeam--prod
@@ -49,7 +50,7 @@ spec:
     grobid:
       image:
         repository: lfoppiano/grobid
-        tag: 0.6.0
+        tag: 0.5.3
       warmup:
         enabled: true
     ingress:
