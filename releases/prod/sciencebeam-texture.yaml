@@ -54,3 +54,36 @@ spec:
             - "/api"
       annotations:
         nginx.ingress.kubernetes.io/proxy-body-size: 120m
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: sciencebeam-texture-sciencebeam-biorxiv
+  namespace: prod
+
+spec:
+  releaseName: sciencebeam-texture-sciencebeam-biorxiv--prod
+  chart:
+    git: https://github.com/elifesciences/sciencebeam-charts
+    path: sciencebeam
+    ref: develop
+
+  values:
+    image:
+      repository: elifesciences/sciencebeam
+      tag: 0.0.6
+    grobid:
+      image:
+        repository: elifesciences/sciencebeam-grobid-biorxiv
+        tag: "0.0.3-dl-glove-6B-50d"
+      warmup:
+        enabled: true
+    ingress:
+      enabled: "true"
+      hosts:
+        - host: sciencebeam-texture--prod--test-cluster.elifesciences.org
+          paths:
+            - "/api_biorxiv(/|$)(.*)"
+      annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /api/$2
+        nginx.ingress.kubernetes.io/proxy-body-size: 120m
