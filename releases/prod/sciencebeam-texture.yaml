@@ -70,7 +70,7 @@ metadata:
   annotations:
     fluxcd.io/automated: 'true'
     filter.fluxcd.io/chart-image: semver:*
-    filter.fluxcd.io/grobid: semver:*-dl-glove-6B-50d
+    filter.fluxcd.io/grobid: glob:*-dl-glove-6B-50d
 
 spec:
   releaseName: sciencebeam-texture-sciencebeam-biorxiv--prod
@@ -86,7 +86,7 @@ spec:
     grobid:
       image:
         repository: elifesciences/sciencebeam-grobid-biorxiv
-        tag: "0.0.1"
+        tag: "0.0.2-dl-glove-6B-50d"
       warmup:
         enabled: true
     ingress:
