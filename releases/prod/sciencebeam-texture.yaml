@@ -62,6 +62,9 @@ kind: HelmRelease
 metadata:
   name: sciencebeam-texture-sciencebeam-biorxiv
   namespace: prod
+  annotations:
+    fluxcd.io/automated: 'true'
+    filter.fluxcd.io/grobid: semver:*
 
 spec:
   releaseName: sciencebeam-texture-sciencebeam-biorxiv--prod
