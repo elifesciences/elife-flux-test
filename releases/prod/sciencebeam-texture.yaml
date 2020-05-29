@@ -14,7 +14,7 @@ spec:
 
   values:
     image:
-      repository: elifesciences/sciencebeam-texture
+      repository: elifesciences/sciencebeam_texture
       tag: latest
     ingress:
       enabled: "true"
