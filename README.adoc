@@ -81,7 +81,9 @@ Infrastructure (all behind oauth2_proxy)
 +
 ----
 kubectl -n adm delete secret alertmanager-prometheus-operator
-kubectl -n adm create secret generic alertmanager-prometheus-operator --from-file=alertmanager-secret.yaml-template
+cp alertmanager-secret.yaml-template alertmanager.yaml
+kubectl -n adm create secret generic alertmanager-prometheus-operator --from-file=alertmanager.yaml
+rm alertmanager.yaml
 ----
 
 
