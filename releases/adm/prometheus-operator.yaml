@@ -47,6 +47,13 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
       prometheusSpec:
+        resources:
+          limits:
+            cpu: 250m
+            memory: 2000Mi
+          requests:
+            cpu: 50m
+            memory: 1300Mi
         serviceMonitorSelectorNilUsesHelmValues: false
         ruleSelector:
           matchExpressions:
