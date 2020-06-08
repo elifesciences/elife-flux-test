@@ -47,6 +47,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
       prometheusSpec:
+        replicas: 2
         resources:
           limits:
             cpu: 250m
@@ -88,6 +89,14 @@ spec:
     alertmanager:
       alertmanagerSpec:
         configSecret: alertmanager-prometheus-operator
+        replicas: 2
+        resources:
+          limits:
+            cpu: 10m
+            memory: 200Mi
+          requests:
+            cpu: 10m
+            memory: 20Mi
       ingress:
         enabled: "true"
         hosts:
