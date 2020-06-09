@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: elifesciences/sciencebeam_texture
-      tag: 2d51fd0c9e7a29c86f61048157fa41b8897ebf39
+      tag: 2e675ed48b3ece8bd5aee232c71abd65496e68a3
     ingress:
       enabled: "true"
       hosts:
