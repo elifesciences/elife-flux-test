@@ -4,8 +4,6 @@ kind: HelmRelease
 metadata:
   name: external-dns
   namespace: adm
-  annotations:
-    fluxcd.io/automated: "true"
 
 spec:
   chart:
@@ -15,6 +13,9 @@ spec:
 
   values:
     replicas: 1
+    image:
+      repository: bitnami/external-dns
+      tag: 0.7.2-debian-10-r6
     metrics:
       enabled: "true"
       serviceMonitor:
