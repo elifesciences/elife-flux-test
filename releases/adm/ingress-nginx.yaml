@@ -15,6 +15,9 @@ spec:
 
   values:
     controller:
+      image:
+        repository: quay.io/kubernetes-ingress-controller/nginx-ingress-controller
+        tag: 0.32.0
       config:
         real-ip-header: "proxy_protocol"
         use-forwarded-headers: "true"
