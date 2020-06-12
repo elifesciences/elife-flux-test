@@ -6,12 +6,6 @@ metadata:
   namespace: adm
   annotations:
     fluxcd.io/automated: "true"
-  forceUpgrade: "true"
-  rollback:
-    enable: "true"
-    retry: "true"
-    maxRetries: 1
-    force: "true"
 
 spec:
   chart:
