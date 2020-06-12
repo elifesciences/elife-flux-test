@@ -70,6 +70,12 @@ postgresql:
   postgresqlUsername: "postgres"
   # a secret also used by the reviewer components
   existingSecret: "libero-reviewer--postgresql"
+  resources:
+    limit:
+      memory: 256Mi
+    requests:
+      memory: 256Mi
+      cpu: 250m
 
 ingress:
   enabled: false
