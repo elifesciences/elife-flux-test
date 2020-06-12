@@ -12,7 +12,6 @@ metadata:
 
 spec:
   releaseName: libero-reviewer--stg
-  forceUpgrade: true
   chart:
     git: https://github.com/elifesciences/elife-flux-test
     path: charts/libero-reviewer
