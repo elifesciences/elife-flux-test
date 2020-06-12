@@ -19,6 +19,7 @@ spec:
       config:
         real-ip-header: "proxy_protocol"
         use-forwarded-headers: "true"
+        worker-processes: 1
       service:
         targetPorts:
           http: http
