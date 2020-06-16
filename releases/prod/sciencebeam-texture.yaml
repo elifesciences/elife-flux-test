@@ -25,6 +25,9 @@ spec:
       - host: sciencebeam-texture.elifesciences.org
         paths:
         - "/"
+    resources:
+      requests:
+        memory: 128Mi
 ---
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
@@ -53,6 +56,9 @@ spec:
         tag: 0.5.3
       warmup:
         enabled: true
+      resources:
+        requests:
+          memory: 3Gi
     ingress:
       enabled: "true"
       hosts:
@@ -61,6 +67,9 @@ spec:
         - "/api"
       annotations:
         nginx.ingress.kubernetes.io/proxy-body-size: 120m
+    resources:
+      requests:
+        memory: 128Mi
 ---
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
@@ -91,6 +100,9 @@ spec:
         enabled: true
       env:
         GROBID__HEADER__USE_LABELED_ABSTRACT: "false"
+      resources:
+        requests:
+          memory: 3Gi
     ingress:
       enabled: "true"
       hosts:
@@ -100,3 +112,7 @@ spec:
       annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /api/$2
         nginx.ingress.kubernetes.io/proxy-body-size: 120m
+      resources:
+        requests:
+          memory: 128Mi
+    
