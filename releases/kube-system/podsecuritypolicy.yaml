@@ -36,28 +36,6 @@ spec:
     - 'downwardAPI'
     # Assume that persistentVolumes set up by the cluster admin are safe to use.
     - 'persistentVolumeClaim'
-    # Allow all other non-hostpath volume types.
-    - 'awsElasticBlockStore'
-    - 'azureDisk'
-    - 'azureFile'
-    - 'cephFS'
-    - 'cinder'
-    - 'csi'
-    - 'fc'
-    - 'flexVolume'
-    - 'flocker'
-    - 'gcePersistentDisk'
-    - 'gitRepo'
-    - 'glusterfs'
-    - 'iscsi'
-    - 'nfs'
-    - 'photonPersistentDisk'
-    - 'portworxVolume'
-    - 'quobyte'
-    - 'rbd'
-    - 'scaleIO'
-    - 'storageos'
-    - 'vsphereVolume'
   hostNetwork: false
   hostIPC: false
   hostPID: false
