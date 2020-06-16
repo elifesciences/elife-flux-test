@@ -124,7 +124,9 @@ If `helm lint` is happy but operator is complaining:
 
 *helm-operator can't upgrade due to `failed` helm state*
 
-In this case it appears one has to manually upgrade the helm chart. See https://docs.fluxcd.io/projects/helm-operator/en/stable/faq/#a-helmrelease-is-stuck-in-a-failed-release-state-how-do-i-force-it-through[faq] and https://github.com/fluxcd/helm-operator/issues/241#issuecomment-578351380[this issue].
+Try running a `helm rollback` to get out of the failed state and then let `helm-operator` do its thing.
+
+Another approach is to manually upgrade the helm chart. See https://docs.fluxcd.io/projects/helm-operator/en/stable/faq/#a-helmrelease-is-stuck-in-a-failed-release-state-how-do-i-force-it-through[faq] and https://github.com/fluxcd/helm-operator/issues/241#issuecomment-578351380[this issue].
 
 [source,sh]
 ----
