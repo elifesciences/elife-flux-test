@@ -1,0 +1,41 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: newrelic
+  namespace: adm
+  annotations:
+    fluxcd.io/automated: "true"
+
+spec:
+  chart:
+    repository: https://helm-charts.newrelic.com
+    name: newrelic/nri-bundle
+    version: 0.4.0
+  values:
+    global:
+      cluster: kubernetes-aws--flux-test
+      namespace: adm
+      customSecretName: newrelic-license
+      customSecretLicenseKey: nonprod
+
+    infrastructure:
+      enabled: true
+
+    prometheus:
+      enabled: true
+
+    webhook:
+      enabled: true
+
+    ksm:
+      enabled: true
+
+    kubeEvents:
+      enabled: true
+
+    logging:
+      enabled: true
+
+    newrelic-infrastructure:
+      privileged: false
