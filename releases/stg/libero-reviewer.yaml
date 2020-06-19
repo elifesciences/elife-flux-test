@@ -42,7 +42,7 @@ spec:
     submission:
       image:
         repository: liberoadmin/reviewer-submission
-        tag: master-8e4645ed-20200616.1045
+        tag: master-cab20035-20200618.0926
       sciencebeam:
         convertUrl: "http://sciencebeam--stg:8075/api/convert"
       s3:
@@ -52,7 +52,7 @@ spec:
     client:
       image:
         repository: liberoadmin/reviewer-client
-        tag: master-b1533cca-20200616.0752
+        tag: master-de0065bb-20200618.1623
 
     continuumAdaptor:
       image:
