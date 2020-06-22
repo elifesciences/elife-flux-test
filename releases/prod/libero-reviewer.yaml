@@ -64,5 +64,5 @@ spec:
       continuumJwtSecret: "libero-reviewer--prod-continuum-journal-jwt"
 
     browsertests:
-      runPostRelease: true
+      runPostRelease: false
       testFixture: Minimal
