@@ -62,3 +62,7 @@ spec:
       loginUrl: "https://continuumtest--cdn-journal.elifesciences.org/submit"
       elifeApiSecret: "libero-reviewer--prod-elife-api"
       continuumJwtSecret: "libero-reviewer--prod-continuum-journal-jwt"
+
+    browsertests:
+      runPostInstall: true
+      testFixture: all
