@@ -6,9 +6,9 @@ metadata:
   namespace: prod
   annotations:
     fluxcd.io/automated: "true"
-    filter.fluxcd.io/submission: semver:*
-    filter.fluxcd.io/client: semver:*
-    filter.fluxcd.io/continuumAdaptor: semver:*
+    filter.fluxcd.io/submission: glob:master-*-*
+    filter.fluxcd.io/client: glob:master-*-*
+    filter.fluxcd.io/continuumAdaptor: glob:master-*-*
 
 spec:
   releaseName: libero-reviewer--prod
@@ -34,7 +34,6 @@ spec:
         annotations:
           blackbox/should_be_probed: 'true'
 
-
     postgresql:
       existingSecret: libero-reviewer--prod-postgresql
 
@@ -43,7 +42,7 @@ spec:
     submission:
       image:
         repository: liberoadmin/reviewer-submission
-        tag: 0.0.6
+        tag: master-cab20035-20200618.0926
       sciencebeam:
         convertUrl: "http://sciencebeam--prod:8075/api/convert"
       s3:
@@ -53,12 +52,12 @@ spec:
     client:
       image:
         repository: liberoadmin/reviewer-client
-        tag: 0.0.5
+        tag: master-62451861-20200622.0837
 
     continuumAdaptor:
       image:
         repository: liberoadmin/continuum-adaptor
-        tag: 0.0.6
+        tag: master-c32cf929-20200527.1606
       continuumApiUrl: "http://continuumtest--gateway.elife.internal"
       loginUrl: "https://continuumtest--cdn-journal.elifesciences.org/submit"
       elifeApiSecret: "libero-reviewer--prod-elife-api"
