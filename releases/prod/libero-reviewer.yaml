@@ -65,4 +65,4 @@ spec:
 
     browsertests:
       runPostRelease: true
-      testFixture: all
+      testFixture: Minimal
