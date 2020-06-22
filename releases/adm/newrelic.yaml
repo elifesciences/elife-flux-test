@@ -17,7 +17,7 @@ spec:
       cluster: kubernetes-aws--flux-test
       namespace: adm
       customSecretName: newrelic-license
-      customSecretLicenseKey: nonprod
+      customSecretLicenseKey: prod
 
     infrastructure:
       enabled: true
