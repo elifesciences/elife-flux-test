@@ -15,3 +15,16 @@ spec:
     prometheus:
       install: true
     meshProvider: nginx
+
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: flagger-loadtester
+  namespace: adm
+
+spec:
+  chart:
+    repository: https://flagger.app
+    name: loadtester
+    version: 0.17.0
