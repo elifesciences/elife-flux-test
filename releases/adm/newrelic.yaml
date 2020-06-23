@@ -23,7 +23,7 @@ spec:
       enabled: true
 
     prometheus:
-      enabled: true
+      enabled: false
 
     webhook:
       enabled: true
