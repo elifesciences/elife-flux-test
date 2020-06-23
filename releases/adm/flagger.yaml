@@ -1,0 +1,17 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: flagger 
+  namespace: adm
+
+spec:
+  chart:
+    repository: https://flagger.app
+    name: flagger
+    version: 1.0.0
+
+  values:
+    prometheus:
+      install: true
+    meshProvider: nginx
