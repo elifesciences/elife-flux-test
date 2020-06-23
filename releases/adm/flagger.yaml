@@ -32,6 +32,7 @@ spec:
   values:
     rbac:
       create: true
+      scope: #default to namespace rbac
       rules:
         - apiGroups: [""]
           resources: ["secrets"]
