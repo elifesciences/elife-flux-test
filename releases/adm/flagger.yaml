@@ -28,3 +28,28 @@ spec:
     repository: https://flagger.app
     name: loadtester
     version: 0.17.0
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: helm-smoke-tester
+rules:
+  - apiGroups: ["batch"]
+    resources: ["jobs", "jobs/log"]
+    verbs: ["create", "list", "delete", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: helm-smoke-tester--flagger
+  namespace: prod
+subjects:
+  - kind: User
+    name: system:serviceaccount:linkerd:default
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: helm-smoke-tester
+  apiGroup: rbac.authorization.k8s.io
