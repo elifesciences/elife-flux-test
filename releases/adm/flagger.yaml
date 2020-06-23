@@ -35,6 +35,9 @@ kind: ClusterRole
 metadata:
   name: helm-smoke-tester
 rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "watch", "list", "update"]
   - apiGroups: ["batch"]
     resources: ["jobs", "jobs/log"]
     verbs: ["create", "list", "delete", "watch"]
