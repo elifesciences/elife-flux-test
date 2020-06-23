@@ -15,7 +15,6 @@ spec:
     prometheus:
       install: true
     meshProvider: nginx
-    serviceAccountName: flagger
 
 ---
 apiVersion: helm.fluxcd.io/v1
@@ -23,6 +22,8 @@ kind: HelmRelease
 metadata:
   name: flagger-loadtester
   namespace: adm
+  values:
+    serviceAccountName: flagger-loadtester
 
 spec:
   chart:
@@ -34,7 +35,7 @@ spec:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-name: flagger
+name: flagger-loadtester
 namespace: adm
 
 ---
@@ -58,7 +59,7 @@ metadata:
   namespace: prod
 subjects:
   - kind: User
-    name: system:serviceaccount:flagger
+    name: system:serviceaccount:flagger-loadtester
     apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole
