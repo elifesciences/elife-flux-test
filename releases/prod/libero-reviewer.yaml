@@ -16,6 +16,9 @@ spec:
     git: https://github.com/libero/reviewer
     path: charts/libero-reviewer
     ref: chart-dev
+  wait: "true"
+  rollback:
+    enable: true
 
   values:
     replicaCount: 1
@@ -64,5 +67,5 @@ spec:
       continuumJwtSecret: "libero-reviewer--prod-continuum-journal-jwt"
 
     browsertests:
-      runPostRelease: false
-      testFixture: Minimal
+      runPostRelease: true
+      testFixture: all
