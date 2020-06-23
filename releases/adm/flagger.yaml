@@ -22,14 +22,15 @@ kind: HelmRelease
 metadata:
   name: flagger-loadtester
   namespace: adm
-  values:
-    serviceAccountName: flagger-loadtester
 
 spec:
   chart:
     repository: https://flagger.app
     name: loadtester
     version: 0.17.0
+
+  values:
+    serviceAccountName: flagger-loadtester
 
 ---
 apiVersion: v1
