@@ -6,16 +6,16 @@ metadata:
   namespace: prod
   annotations:
     fluxcd.io/automated: "true"
-    filter.fluxcd.io/submission: semver:*
-    filter.fluxcd.io/client: semver:*
-    filter.fluxcd.io/continuumAdaptor: semver:*
+    filter.fluxcd.io/submission: glob:master-*-*
+    filter.fluxcd.io/client: glob:master-*-*
+    filter.fluxcd.io/continuumAdaptor: glob:master-*-*
 
 spec:
   releaseName: libero-reviewer--prod
   chart:
     git: https://github.com/libero/reviewer
     path: charts/libero-reviewer
-    ref: master
+    ref: chart-dev
 
   values:
     replicaCount: 1
@@ -34,7 +34,6 @@ spec:
         annotations:
           blackbox/should_be_probed: 'true'
 
-
     postgresql:
       existingSecret: libero-reviewer--prod-postgresql
 
@@ -43,7 +42,7 @@ spec:
     submission:
       image:
         repository: liberoadmin/reviewer-submission
-        tag: 0.0.6
+        tag: master-d9dab39c-20200623.1337
       sciencebeam:
         convertUrl: "http://sciencebeam--prod:8075/api/convert"
       s3:
@@ -53,13 +52,84 @@ spec:
     client:
       image:
         repository: liberoadmin/reviewer-client
-        tag: 0.0.5
+        tag: master-7ca685f5
 
     continuumAdaptor:
       image:
         repository: liberoadmin/continuum-adaptor
-        tag: 0.0.6
+        tag: master-c32cf929-20200527.1606
       continuumApiUrl: "http://continuumtest--gateway.elife.internal"
       loginUrl: "https://continuumtest--cdn-journal.elifesciences.org/submit"
       elifeApiSecret: "libero-reviewer--prod-elife-api"
       continuumJwtSecret: "libero-reviewer--prod-continuum-journal-jwt"
+
+    browsertests:
+      runPostRelease: false
+      testFixture: Minimal
+---
+apiVersion: flagger.app/v1beta1
+kind: Canary
+metadata:
+  name: reviewer-client
+  namespace: prod
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: libero-reviewer--prod-client
+  ingressRef:
+    apiVersion: networking.k8s.io/v1beta1
+    kind: Ingress
+    name: libero-reviewer--prod
+  progressDeadlineSeconds: 900
+  service:
+    port: 80
+    targetPort: 80
+  analysis:
+    interval: 1m
+    threshold: 10
+    maxWeight: 50
+    stepWeight: 5
+    metrics:
+    - name: request-success-rate
+      # minimum req success rate (non 5xx responses)
+      # percentage (0-100)
+      thresholdRange:
+        min: 99
+      interval: 1m
+    # testing (optional)
+    webhooks:
+    - name: acceptance-test
+      type: pre-rollout
+      url: http://flagger-loadtester.adm/
+      timeout: 600s
+      metadata:
+        type: helmv3
+        cmd: "test -n stg libero-reviewer--stg"
+    - name: smoke-test
+      type: pre-rollout
+      url: http://flagger-loadtester.adm/
+      timeout: 600s
+      metadata:
+        type: helmv3
+        cmd: "test -n prod libero-reviewer--prod"
+    - name: stg-equals-prod-images
+      type: pre-rollout
+      url: http://flagger-loadtester.adm/
+      timeout: 600s
+      metadata:
+        type: bash
+        cmd: >
+          "diff <(helmv3 -n stg  get values libero-reviewer--stg  | grep 'tag: ' |
+          sort)"
+          "     <(helmv3 -n prod get values libero-reviewer--prod | grep 'tag: ' |
+          sort)"
+    - name: stg-equals-prod-chart
+      type: pre-rollout
+      url: http://flagger-loadtester.adm/
+      timeout: 600s
+      metadata:
+        type: bash
+        cmd: >
+          "diff <(helmv3 -n stg  list | grep reviewer | cut -f 6)"
+          "     <(helmv3 -n prod list | grep reviewer | cut -f 6)"

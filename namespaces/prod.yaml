@@ -12,9 +12,7 @@ metadata:
   namespace: prod
 spec:
   limits:
-  - default:
-      memory: 100Mi
-    defaultRequest:
+  - defaultRequest:
       memory: 50Mi
       cpu: 50m
     type: Container
