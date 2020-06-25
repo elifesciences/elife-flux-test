@@ -2,7 +2,7 @@
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
-  name: flagger 
+  name: flagger
   namespace: adm
 
 spec:
@@ -37,7 +37,7 @@ spec:
         - apiGroups: [""]
           resources: ["secrets"]
           verbs: ["get", "watch", "list", "update"]
-        # choose the permission based on helm test type (Pod or Job) 
+        # choose the permission based on helm test type (Pod or Job)
         - apiGroups: [""]
           resources: ["pods", "pods/log"]
           verbs: ["create", "list", "delete", "watch"]
