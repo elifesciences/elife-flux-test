@@ -19,6 +19,13 @@ spec:
         kubeApiserver: false  # too memory intensive
     kubeControllerManager:
       enabled: false  # lives on EKS
+    prometheusOperator:
+      resources:
+        limits:
+          memory: 100Mi
+        requests:
+          memory: 100Mi
+
     grafana:
       ingress:
         enabled: "true"
