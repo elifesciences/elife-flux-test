@@ -52,7 +52,7 @@ spec:
     client:
       image:
         repository: liberoadmin/reviewer-client
-        tag: master-7ca685f5
+        tag: master-7ca685f5-20200625.1114
 
     continuumAdaptor:
       image:
@@ -66,7 +66,6 @@ spec:
     browsertests:
       runPostRelease: false
       testFixture: Minimal
-
 ---
 apiVersion: flagger.app/v1beta1
 kind: Canary
@@ -100,35 +99,37 @@ spec:
       interval: 1m
     # testing (optional)
     webhooks:
-      - name: acceptance-test
-        type: pre-rollout
-        url: http://flagger-loadtester.test/
-        timeout: 600s
-        metadata:
-          type: helmv3
-          cmd: "test -n stg libero-reviewer--stg"
-      - name: smoke-test
-        type: pre-rollout
-        url: http://flagger-loadtester.test/
-        timeout: 600s
-        metadata:
-          type: helmv3
-          cmd: "test -n prod libero-reviewer--prod"
-      - name: stg-equals-prod-images
-        type: pre-rollout
-        url: http://flagger-loadtester.test/
-        timeout: 600s
-        metadata:
-          type: bash
-          cmd: >
-            "diff <(helmv3 -n stg  get values libero-reviewer--stg  | grep 'tag: ' | sort)"
-            "     <(helmv3 -n prod get values libero-reviewer--prod | grep 'tag: ' | sort)"
-      - name: stg-equals-prod-chart
-        type: pre-rollout
-        url: http://flagger-loadtester.test/
-        timeout: 600s
-        metadata:
-          type: bash
-          cmd: >
-            "diff <(helmv3 -n stg  list | grep reviewer | cut -f 6)"
-            "     <(helmv3 -n prod list | grep reviewer | cut -f 6)"
+    - name: acceptance-test
+      type: pre-rollout
+      url: http://flagger-loadtester.test/
+      timeout: 600s
+      metadata:
+        type: helmv3
+        cmd: "test -n stg libero-reviewer--stg"
+    - name: smoke-test
+      type: pre-rollout
+      url: http://flagger-loadtester.test/
+      timeout: 600s
+      metadata:
+        type: helmv3
+        cmd: "test -n prod libero-reviewer--prod"
+    - name: stg-equals-prod-images
+      type: pre-rollout
+      url: http://flagger-loadtester.test/
+      timeout: 600s
+      metadata:
+        type: bash
+        cmd: >
+          "diff <(helmv3 -n stg  get values libero-reviewer--stg  | grep 'tag: ' |
+          sort)"
+          "     <(helmv3 -n prod get values libero-reviewer--prod | grep 'tag: ' |
+          sort)"
+    - name: stg-equals-prod-chart
+      type: pre-rollout
+      url: http://flagger-loadtester.test/
+      timeout: 600s
+      metadata:
+        type: bash
+        cmd: >
+          "diff <(helmv3 -n stg  list | grep reviewer | cut -f 6)"
+          "     <(helmv3 -n prod list | grep reviewer | cut -f 6)"
