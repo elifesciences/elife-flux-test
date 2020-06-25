@@ -112,6 +112,6 @@ spec:
       annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /api/$2
         nginx.ingress.kubernetes.io/proxy-body-size: 120m
-      resources:
-        requests:
-          memory: 128Mi
+    resources:
+      requests:
+        memory: 128Mi
