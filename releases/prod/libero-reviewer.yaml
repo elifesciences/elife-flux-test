@@ -81,7 +81,7 @@ spec:
   ingressRef:
     apiVersion: networking.k8s.io/v1beta1
     kind: Ingress
-    name: libero-reviewer
+    name: libero-reviewer--prod
   progressDeadlineSeconds: 900
   service:
     port: 9898
