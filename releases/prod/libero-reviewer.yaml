@@ -52,7 +52,7 @@ spec:
     client:
       image:
         repository: liberoadmin/reviewer-client
-        tag: master-7ca685f5-20200625.1114
+        tag: master-7ca685f5
 
     continuumAdaptor:
       image:
@@ -101,21 +101,21 @@ spec:
     webhooks:
     - name: acceptance-test
       type: pre-rollout
-      url: http://flagger-loadtester.adm/
+      url: http://adm-flagger-loadtester/
       timeout: 600s
       metadata:
         type: helmv3
         cmd: "test -n stg libero-reviewer--stg"
     - name: smoke-test
       type: pre-rollout
-      url: http://flagger-loadtester.adm/
+      url: http://adm-flagger-loadtester/
       timeout: 600s
       metadata:
         type: helmv3
         cmd: "test -n prod libero-reviewer--prod"
     - name: stg-equals-prod-images
       type: pre-rollout
-      url: http://flagger-loadtester.adm/
+      url: http://adm-flagger-loadtester/
       timeout: 600s
       metadata:
         type: bash
@@ -126,7 +126,7 @@ spec:
           sort)"
     - name: stg-equals-prod-chart
       type: pre-rollout
-      url: http://flagger-loadtester.adm/
+      url: http://adm-flagger-loadtester/
       timeout: 600s
       metadata:
         type: bash
