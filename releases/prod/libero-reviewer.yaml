@@ -66,6 +66,7 @@ spec:
     browsertests:
       runPostRelease: false
       testFixture: Minimal
+
 ---
 apiVersion: flagger.app/v1beta1
 kind: Canary
@@ -99,20 +100,6 @@ spec:
       interval: 1m
     # testing (optional)
     webhooks:
-    - name: acceptance-test
-      type: pre-rollout
-      url: http://adm-flagger-loadtester/
-      timeout: 600s
-      metadata:
-        type: helmv3
-        cmd: "test -n stg libero-reviewer--stg"
-    - name: smoke-test
-      type: pre-rollout
-      url: http://adm-flagger-loadtester/
-      timeout: 600s
-      metadata:
-        type: helmv3
-        cmd: "test -n prod libero-reviewer--prod"
     - name: stg-equals-prod-images
       type: pre-rollout
       url: http://adm-flagger-loadtester/
@@ -124,6 +111,20 @@ spec:
           sort)"
           "     <(helmv3 -n prod get values libero-reviewer--prod | grep 'tag: ' |
           sort)"
+    - name: smoke-test
+      type: pre-rollout
+      url: http://adm-flagger-loadtester/
+      timeout: 600s
+      metadata:
+        type: helmv3
+        cmd: "test -n prod libero-reviewer--prod"
+    - name: acceptance-test
+      type: pre-rollout
+      url: http://adm-flagger-loadtester/
+      timeout: 600s
+      metadata:
+        type: helmv3
+        cmd: "test -n stg libero-reviewer--stg"
     - name: stg-equals-prod-chart
       type: pre-rollout
       url: http://adm-flagger-loadtester/
