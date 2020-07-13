@@ -22,9 +22,9 @@ spec:
     prometheusOperator:
       resources:
         limits:
-          memory: 100Mi
+          memory: 150Mi
         requests:
-          memory: 100Mi
+          memory: 150Mi
 
     grafana:
       ingress:
