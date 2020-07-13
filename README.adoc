@@ -170,6 +170,10 @@ helm upgrade -i flux fluxcd/flux \
 helm upgrade -i helm-operator fluxcd/helm-operator \
  --set git.ssh.secretName=flux-git-deploy \
  --set helm.versions=v3 \
+ --set statusUpdateInterval="90s" \
+ --set resources.limits.memory=1Gi \
+ --set resources.requests.memory=500Mi \
+ --set resources.requests.cpu=400m \
  --set prometheus.serviceMonitor.create=true \
  --set prometheus.serviceMonitor.namespace=adm \
  --namespace flux
@@ -204,7 +208,7 @@ podsecuritypolicy:authenticated                        3m59s
 
 . Make kube-proxy metrics accessible to prometheus
 +
-By default kube-proxy metrics are only accessible on localhost. 
+By default kube-proxy metrics are only accessible on localhost.
 See prometheus operator https://github.com/helm/charts/tree/master/stable/prometheus-operator#kubeproxy[readme]
 
  ** edit configmap `kubectl -n kube-system edit cm kube-proxy-config`
