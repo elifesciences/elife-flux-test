@@ -9247,12 +9247,20 @@ data:
     "schemaVersion": 25,
     "style": "dark",
     "tags": [
-      "kubernetes",
-      "k8s",
-      "namespace"
+      "k8s"
     ],
     "templating": {
       "list": [
+        {
+          "hide": 0,
+          "label": "datasource",
+          "name": "DS_PROMETHEUS",
+          "options": [],
+          "query": "prometheus",
+          "refresh": 1,
+          "regex": "",
+          "type": "datasource"
+        },
         {
           "allValue": "",
           "current": {},
@@ -9413,7 +9421,7 @@ data:
       ]
     },
     "timezone": "",
-    "title": "debug K8s by dguyhasnoname",
+    "title": "Cluster Overview",
     "uid": "N9uZBy8Wz",
     "version": 46
     }
