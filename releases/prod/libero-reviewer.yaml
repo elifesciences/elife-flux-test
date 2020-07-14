@@ -30,9 +30,6 @@ spec:
       login:
         annotations:
           blackbox/should_be_probed: 'true'
-      auth:
-        annotations:
-          blackbox/should_be_probed: 'true'
 
     postgresql:
       existingSecret: libero-reviewer--prod-postgresql
