@@ -24,9 +24,6 @@ spec:
       host: libero-reviewer--staging.elifesciences.org
       annotations:
         kubernetes.io/ingress.class: nginx
-      main:
-        annotations:
-          blackbox/should_be_probed: 'true'
       login:
         annotations:
           blackbox/should_be_probed: 'true'
