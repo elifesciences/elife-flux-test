@@ -53,7 +53,9 @@ roleRef:
   kind: ClusterRole
   name: podsecuritypolicy:privileged
 subjects:
-  - kind: Group
-    apiGroup: rbac.authorization.k8s.io
-    name: system:authenticated
+  - kind: ServiceAccount
+    name: aws-node
+    namespace: kube-system
+  - kind: ServiceAccount
+    name: kube-proxy
     namespace: kube-system
