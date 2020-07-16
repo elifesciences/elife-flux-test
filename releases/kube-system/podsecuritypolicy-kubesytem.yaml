@@ -54,8 +54,5 @@ roleRef:
   name: podsecuritypolicy:privileged
 subjects:
   - kind: ServiceAccount
-    name: aws-node
-    namespace: kube-system
-  - kind: ServiceAccount
-    name: kube-proxy
+    name: daemon-set-controller
     namespace: kube-system
