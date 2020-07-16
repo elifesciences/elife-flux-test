@@ -8,6 +8,11 @@ spec:
   privileged: true
   volumes:
     - 'hostPath'
+    - 'configMap'
+    - 'emptyDir'
+    - 'projected'
+    - 'secret'
+    - 'downwardAPI'
   hostNetwork: true
   hostPorts:
   - min: 0
