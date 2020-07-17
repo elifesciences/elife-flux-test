@@ -15,7 +15,7 @@ __Subscribe to the Amazon Linux AMI [Security Bulletin](https://alas.aws.amazon.
 
 To manually drain and kill the nodes:
 ```
-kubectl get nodes       # 
+kubectl get nodes       #
 kubectl cordon my-node  # no new Pods will be scheduled here
 kubectl drain my-node   # existing Pods will be evicted and sent to another node
 aws ec2 terminate-instances --instance-ids=...  # terminate a node, a new one will be created
@@ -27,9 +27,10 @@ Copied from [builder docs](https://github.com/elifesciences/builder/blob/master/
 ### k8s version upgrade
 
 1. check [aws docs]( https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html ) for availability and notes
-1. ensure deployed chart are compatible with any changes to the k8s api (run on test-cluster to make sure)
+1. use [pluto](https://github.com/FairwindsOps/pluto) to check for api deprecations
 1. bump k8s version (one minor at a time) in [elife.yaml](https://github.com/elifesciences/builder/blob/master/projects/elife.yaml)
 1. apply using `builder/bldr`
+1. drain and terminate node by node as described above to upgrade the workers
 
 ## Resources
 
