@@ -12,8 +12,7 @@ spec:
     version: 1.0.0
 
   values:
-    prometheus:
-      install: true
+    metricsServer: http://adm-prometheus-operator-prometheus:9090
     meshProvider: nginx
 
 ---
