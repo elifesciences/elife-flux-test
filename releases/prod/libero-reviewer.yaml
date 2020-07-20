@@ -15,7 +15,7 @@ spec:
   chart:
     git: https://github.com/libero/reviewer
     path: charts/libero-reviewer
-    ref: chart-dev
+    ref: master
 
   values:
     replicaCount: 1
