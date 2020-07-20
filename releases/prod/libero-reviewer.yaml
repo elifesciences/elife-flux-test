@@ -101,8 +101,8 @@ spec:
       metadata:
         type: bash
         cmd: >
-          "diff <(helmv3 -n stg  list | grep reviewer | cut -f 6)"
-          "     <(helmv3 -n prod list | grep reviewer | cut -f 6)"
+          "diff <(helmv3 -n stg  list | grep reviewer | cut -f 6 | sed 's/[[:alpha:].-]//g')"
+          "     <(helmv3 -n prod list | grep reviewer | cut -f 6 | sed 's/[[:alpha:].-]//g')"
     - name: stg-equals-prod-images
       type: pre-rollout
       url: http://adm-flagger-loadtester/
