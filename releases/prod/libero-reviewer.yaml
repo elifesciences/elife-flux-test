@@ -126,10 +126,3 @@ spec:
       metadata:
         type: cmd
         cmd: "hey -z 1m -q 10 -c 2 http://libero-reviewer--prod-client-canary.prod"
-    - name: smoke-test
-      type: rollout
-      url: http://adm-flagger-loadtester/
-      timeout: 300s
-      metadata:
-        type: helmv3
-        cmd: "test -n prod libero-reviewer--prod"
