@@ -84,6 +84,7 @@ spec:
   analysis:
     interval: 30s
     threshold: 3
+    iterations: 10
     metrics:
     - name: request-success-rate
       thresholdRange:
