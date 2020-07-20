@@ -118,7 +118,7 @@ spec:
       metadata:
         type: helmv3
         cmd: "test -n prod libero-reviewer--prod"
-    - name: acceptance-test
+    - name: acceptance-test-of-stg
       type: pre-rollout
       url: http://adm-flagger-loadtester/
       timeout: 600s
