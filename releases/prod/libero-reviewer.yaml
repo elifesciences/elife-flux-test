@@ -82,7 +82,7 @@ spec:
     targetPort: 80
   analysis:
     interval: 1m
-    threshold: 10
+    threshold: 3
     maxWeight: 50
     stepWeight: 5
     metrics:
@@ -97,7 +97,7 @@ spec:
     - name: stg-equals-prod-images
       type: pre-rollout
       url: http://adm-flagger-loadtester/
-      timeout: 600s
+      timeout: 30s
       metadata:
         type: bash
         cmd: >
@@ -107,14 +107,14 @@ spec:
     - name: stg-equals-prod-chart
       type: pre-rollout
       url: http://adm-flagger-loadtester/
-      timeout: 600s
+      timeout: 30s
       metadata:
         type: bash
         cmd: "diff <(helmv3 -n stg  list | grep reviewer | cut -f 6 | tr -cd '[:alnum:]._-') <(helmv3 -n prod list | grep reviewer | cut -f 6 | tr -cd '[:alnum:]._-')"
     - name: smoke-test
       type: pre-rollout
       url: http://adm-flagger-loadtester/
-      timeout: 600s
+      timeout: 300s
       metadata:
         type: helmv3
         cmd: "test -n prod libero-reviewer--prod"
