@@ -125,3 +125,9 @@ spec:
       metadata:
         type: helmv3
         cmd: "test -n stg libero-reviewer--stg"
+    - name: load-test-landingpage
+      url: http://adm-flagger-loadtester/
+      timeout: 5s
+      metadata:
+        type: cmd
+        cmd: "hey -z 1m -q 10 -c 2 http://https://reviewer--test-cluster.elifesciences.org"
