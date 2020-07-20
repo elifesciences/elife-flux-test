@@ -94,15 +94,6 @@ spec:
       interval: 1m
     # testing (optional)
     webhooks:
-    - name: stg-equals-prod-chart
-      type: pre-rollout
-      url: http://adm-flagger-loadtester/
-      timeout: 600s
-      metadata:
-        type: bash
-        cmd: >
-          "diff <(helmv3 -n stg  list | grep reviewer | cut -f 6 | sed 's/[[:alpha:].-]//g')"
-          "     <(helmv3 -n prod list | grep reviewer | cut -f 6 | sed 's/[[:alpha:].-]//g')"
     - name: stg-equals-prod-images
       type: pre-rollout
       url: http://adm-flagger-loadtester/
@@ -112,6 +103,15 @@ spec:
         cmd: >
           "diff <(helmv3 -n stg  get values libero-reviewer--stg  | grep 'tag: ' | sort)"
           "     <(helmv3 -n prod get values libero-reviewer--prod | grep 'tag: ' | sort)"
+    - name: stg-equals-prod-chart
+      type: pre-rollout
+      url: http://adm-flagger-loadtester/
+      timeout: 600s
+      metadata:
+        type: bash
+        cmd: >
+          "diff <(helmv3 -n stg  list | grep reviewer | cut -f 6 | sed 's/[[:alpha:].-]//g')"
+          "     <(helmv3 -n prod list | grep reviewer | cut -f 6 | sed 's/[[:alpha:].-]//g')"
     - name: smoke-test
       type: pre-rollout
       url: http://adm-flagger-loadtester/
