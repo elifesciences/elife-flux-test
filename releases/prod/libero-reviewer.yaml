@@ -110,7 +110,7 @@ spec:
       timeout: 600s
       metadata:
         type: bash
-        cmd: "diff <(helmv3 -n stg  list | grep reviewer | cut -f 6 | sed 's/[[:alpha:].-]//g') <(helmv3 -n prod list | grep reviewer | cut -f 6 | sed 's/[[:alpha:].-]//g')"
+        cmd: "diff <(helmv3 -n stg  list | grep reviewer | cut -f 6 | tr -cd '[:alnum:]._-') <(helmv3 -n prod list | grep reviewer | cut -f 6 | tr -cd '[:alnum:]._-')"
     - name: smoke-test
       type: pre-rollout
       url: http://adm-flagger-loadtester/
