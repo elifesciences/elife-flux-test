@@ -61,4 +61,4 @@ spec:
       continuumJwtSecret: "libero-reviewer--stg-continuum-journal-jwt"
 
     browsertests:
-      testFixture: all
+      testFixture: Minimal
