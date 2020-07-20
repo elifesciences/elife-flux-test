@@ -42,6 +42,9 @@ spec:
       s3:
         secret: libero-reviewer--prod-s3
         bucket: "staging-libero-reviewer"
+      meca:
+        sftpSecret: libero-reviewer--stg-ejp-sftp
+        sftpPath: "/"
 
     client:
       image:
