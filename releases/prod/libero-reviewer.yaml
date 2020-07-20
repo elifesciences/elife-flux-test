@@ -100,7 +100,10 @@ spec:
       timeout: 600s
       metadata:
         type: bash
-        cmd: "diff <(helmv3 -n stg  get values libero-reviewer--stg  | grep 'tag: ' | sort) <(helmv3 -n prod get values libero-reviewer--prod | grep 'tag: ' | sort)"
+        cmd: >
+          diff
+          <(helmv3 -n stg  get values libero-reviewer--stg  | grep 'tag: ' | sort)
+          <(helmv3 -n prod get values libero-reviewer--prod | grep 'tag: ' | sort)
     - name: stg-equals-prod-chart
       type: pre-rollout
       url: http://adm-flagger-loadtester/
