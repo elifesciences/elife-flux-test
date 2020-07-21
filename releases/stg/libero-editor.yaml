@@ -29,7 +29,7 @@ spec:
     client:
       image:
         repository: liberoadmin/editor-client
-        tag: master-bbf40a3f-20200721.1050
+        tag: master-ffdf907b-20200721.1623
 
     articleStore:
       image:
