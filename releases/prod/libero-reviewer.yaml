@@ -88,6 +88,14 @@ spec:
     interval: 30s
     threshold: 5
     iterations: 10
+    metrics:
+    - name: request-success-rate--custom
+      templateRef:
+        name: request-success-rate--custom-namespace
+        namespace: adm
+      thresholdRange:
+        min: 99
+      interval: 30s
     webhooks:
     - name: stg-equals-prod-images
       type: pre-rollout
