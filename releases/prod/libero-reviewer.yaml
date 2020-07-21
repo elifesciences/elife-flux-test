@@ -85,9 +85,10 @@ spec:
     port: 80
     targetPort: 80
   analysis:
-    interval: 30s
-    threshold: 5
-    iterations: 10
+    interval: 20s
+    threshold: 2
+    maxWeight: 100
+    stepWeight: 10
     metrics:
     - name: request-success-rate
       templateRef:
@@ -128,4 +129,10 @@ spec:
       url: http://adm-flagger-loadtester/
       metadata:
         type: cmd
-        cmd: "hey -z 1m -q 10 -c 2 http://reviewer--test-cluster.elifesciences.org"
+        cmd: "hey -z 10s -q 10 -c 2 http://reviewer--test-cluster.elifesciences.org"
+    - name: smoke-test-canary
+      url: http://adm-flagger-loadtester/
+      timeout: 300s
+      metadata:
+        type: helmv3
+        cmd: "test -n prod libero-reviewer--prod"
