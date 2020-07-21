@@ -96,16 +96,6 @@ spec:
       thresholdRange:
         min: 99
       interval: 30s
-    - name: request-success-rate
-      interval: 1m
-      thresholdRange:
-        min: 99
-    - name: request-duration
-      interval: 1m
-      # maximum req duration P99
-      # milliseconds
-      thresholdRange:
-        max: 500
     webhooks:
     - name: stg-equals-prod-images
       type: pre-rollout
