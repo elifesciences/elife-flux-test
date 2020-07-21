@@ -60,7 +60,7 @@ spec:
         rate(
           nginx_ingress_controller_requests{
             namespace="adm",
-            ingress="{{ ingress }}",
+            ingress="libero-reviewer--prod",
             status!~"5.*"
           }[{{ interval }}]
         )
@@ -70,7 +70,7 @@ spec:
         rate(
           nginx_ingress_controller_requests{
             namespace="adm",
-            ingress="{{ ingress }}"
+            ingress="libero-reviewer--prod"
           }[{{ interval }}]
         )
       )
