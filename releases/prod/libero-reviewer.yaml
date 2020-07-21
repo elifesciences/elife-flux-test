@@ -90,7 +90,7 @@ spec:
     maxWeight: 100
     stepWeight: 10
     metrics:
-    - name: request-success-rate
+    - name: request-success-rate--central-ing-controller
       templateRef:
         name: request-success-rate--central-ing-controller
         namespace: adm
