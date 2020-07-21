@@ -85,7 +85,7 @@ spec:
     port: 80
     targetPort: 80
   analysis:
-    interval: 30s
+    interval: 300s
     threshold: 3
     iterations: 10
     metrics:
