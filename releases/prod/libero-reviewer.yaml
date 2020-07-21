@@ -87,8 +87,9 @@ spec:
   analysis:
     interval: 20s
     threshold: 2
-    maxWeight: 100
-    stepWeight: 10
+    maxWeight: 75
+    stepWeight: 25
+
     metrics:
     - name: request-success-rate--central-ing-controller
       templateRef:
@@ -97,6 +98,7 @@ spec:
       thresholdRange:
         min: 99
       interval: 1m
+
     webhooks:
     - name: stg-equals-prod-images
       type: pre-rollout
@@ -125,6 +127,7 @@ spec:
       metadata:
         type: helmv3
         cmd: "test -n stg libero-reviewer--stg"
+
     - name: load-test-landingpage
       url: http://adm-flagger-loadtester/
       metadata:
