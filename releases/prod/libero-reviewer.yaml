@@ -95,7 +95,7 @@ spec:
         namespace: adm
       thresholdRange:
         min: 99
-      interval: 30s
+      interval: 1m
     webhooks:
     - name: stg-equals-prod-images
       type: pre-rollout
