@@ -75,7 +75,7 @@ spec:
   targetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: libero-reviewer--prod--client
+    name: libero-reviewer--prod-client
   ingressRef:
     apiVersion: networking.k8s.io/v1beta1
     kind: Ingress
