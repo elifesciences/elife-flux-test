@@ -36,7 +36,7 @@ spec:
     submission:
       image:
         repository: liberoadmin/reviewer-submission
-        tag: master-5c5015be-20200716.1043
+        tag: master-4feaa866-20200722.0824
       sciencebeam:
         convertUrl: "http://sciencebeam--prod:8075/api/convert"
       s3:
@@ -64,7 +64,6 @@ spec:
       runPostRelease: false
       testFixture: Minimal
       baseurl: libero-reviewer--prod-client-canary.prod
-
 ---
 apiVersion: flagger.app/v1beta1
 kind: Canary
