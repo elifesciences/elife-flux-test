@@ -36,7 +36,7 @@ spec:
     submission:
       image:
         repository: liberoadmin/reviewer-submission
-        tag: master-4feaa866-20200722.0824
+        tag: master-64cc6284-20200722.1458
       sciencebeam:
         convertUrl: "http://sciencebeam--stg:8075/api/convert"
       s3:
