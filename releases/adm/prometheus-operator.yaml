@@ -63,33 +63,7 @@ spec:
         serviceMonitorSelectorNilUsesHelmValues: false
         ruleSelector:
           matchExpressions:
-            - {key: app, operator: In, values: [prometheus-operator, flux, blackbox]}
-        additionalScrapeConfigs:
-          - job_name: 'kubernetes-ingresses'
-            metrics_path: /probe
-            params:
-              module: [http_2xx]
-            kubernetes_sd_configs:
-            - role: ingress
-            relabel_configs:
-            # Relabel to probe only some ingresses that have "blackbox/should_be_probed = true" annotation
-            - source_labels: [__meta_kubernetes_ingress_annotation_blackbox_should_be_probed]
-              action: keep
-              regex: true
-            - source_labels: [__meta_kubernetes_ingress_scheme,__address__,__meta_kubernetes_ingress_path]
-              regex: (.+);(.+);(.+)
-              replacement: ${1}://${2}${3}
-              target_label: __param_target
-            - target_label: __address__
-              replacement: adm-blackbox-exporter-prometheus-blackbox-exporter:9115
-            - source_labels: [__param_target]
-              target_label: instance
-            - action: labelmap
-              regex: __meta_kubernetes_ingress_label_(.+)
-            - source_labels: [__meta_kubernetes_namespace]
-              target_label: kubernetes_namespace
-            - source_labels: [__meta_kubernetes_ingress_name]
-              target_label: kubernetes_name
+            - {key: app, operator: In, values: [prometheus-operator, flux]}
 
     alertmanager:
       podDisruptionBudget:
