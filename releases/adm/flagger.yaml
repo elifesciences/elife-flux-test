@@ -75,3 +75,16 @@ spec:
         )
       )
       * 100
+
+---
+apiVersion: flagger.app/v1beta1
+kind: AlertProvider
+metadata:
+  name: reviewer-slack
+  namespace: adm
+spec:
+  type: slack
+  channel: libero-reviewer-tech
+  username: flagger
+  secretRef:
+    name: slack-reviewer-url

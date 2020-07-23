@@ -89,6 +89,13 @@ spec:
     maxWeight: 75
     stepWeight: 25
 
+    alerts:
+      - name: "libero-reviewer-tech Slack"
+        severity: info
+        providerRef:
+          name: reviewer-slack
+          namespace: adm
+
     metrics:
     - name: request-success-rate--central-ing-controller
       templateRef:
