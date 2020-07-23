@@ -46,7 +46,7 @@ spec:
     client:
       image:
         repository: liberoadmin/reviewer-client
-        tag: master-5c5e2985-20200723.0828
+        tag: master-250f901b-20200723.1330
 
     continuumAdaptor:
       image:
@@ -87,11 +87,11 @@ spec:
     stepWeight: 25
 
     alerts:
-      - name: "libero-reviewer-tech Slack"
-        severity: info
-        providerRef:
-          name: reviewer-slack
-          namespace: adm
+    - name: "libero-reviewer-tech Slack"
+      severity: info
+      providerRef:
+        name: reviewer-slack
+        namespace: adm
 
     metrics:
     - name: request-success-rate--central-ing-controller
