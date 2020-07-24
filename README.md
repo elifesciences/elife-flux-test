@@ -125,6 +125,7 @@ Infrastructure (all behind oauth2\_proxy)
 
     -   too apply:
 
+            # Make sure to insert the webhook urls before applying
             kubectl -n adm delete secret alertmanager-prometheus-operator
             cp alertmanager-secret.yaml-template alertmanager.yaml
             kubectl -n adm create secret generic alertmanager-prometheus-operator --from-file=alertmanager.yaml
