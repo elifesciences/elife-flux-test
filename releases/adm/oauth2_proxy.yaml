@@ -22,3 +22,4 @@ spec:
       enabled: "true"
       hosts:
         - auth--test-cluster.elifesciences.org
+    replicaCount: 2
