@@ -30,7 +30,7 @@ Copied from [builder docs](https://github.com/elifesciences/builder/blob/master/
 1. use [pluto](https://github.com/FairwindsOps/pluto) to check for api deprecations
 1. bump k8s version (one minor at a time) in [elife.yaml](https://github.com/elifesciences/builder/blob/master/projects/elife.yaml)
 1. apply using `builder/bldr`
-1. If `flux` fails to access the api, try restarting it with `kubectl rollout restart`
+1. If `flux` fails to access the api, try restarting it with `kubectl -n flux rollout restart deployment flux`
 1. upgrade `kube-proxy` (see [aws docs](https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html))
 1. drain and terminate node by node as described above to upgrade the workers
 
