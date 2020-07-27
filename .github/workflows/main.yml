@@ -29,4 +29,3 @@ jobs:
         uses: stefanprodan/hrval-action@master
         with:
           helmRelease: releases/adm/
-          helmVersion: v3
