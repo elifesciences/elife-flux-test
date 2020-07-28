@@ -42,6 +42,11 @@ spec:
       meca:
         sftpSecret: libero-reviewer--stg-ejp-sftp
         sftpPath: "/"
+      mail:
+        sesSecret: "libero-reviewer--stg-ses"
+        sesRegion: "us-east-1"
+        sendMail: true
+        sender: "staging-noreply@elifesciences.org"
 
     client:
       image:
