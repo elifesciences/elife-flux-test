@@ -81,7 +81,7 @@ spec:
     port: 80
     targetPort: 80
   analysis:
-    interval: 20s
+    interval: 60s
     threshold: 2
     maxWeight: 75
     stepWeight: 25
