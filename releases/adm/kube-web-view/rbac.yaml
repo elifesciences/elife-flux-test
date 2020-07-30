@@ -15,6 +15,7 @@ rules:
   - ""
   resources:
   - bindings
+  - canaries
   - configmaps
   - endpoints
   - events
