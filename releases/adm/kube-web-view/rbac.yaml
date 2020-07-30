@@ -14,45 +14,26 @@ rules:
 - apiGroups:
   - ""
   resources:
+  - bindings
   - configmaps
   - endpoints
-  - persistentvolumeclaims
-  - pods
-  - replicationcontrollers
-  - replicationcontrollers/scale
-  - serviceaccounts
-  - services
-  - nodes
-  - persistentvolumeclaims
-  - persistentvolumes
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - ""
-  resources:
-  - bindings
   - events
   - limitranges
   - namespaces/status
+  - nodes
+  - pods
   - pods/log
   - pods/status
-  - replicationcontrollers/status
+  - persistentvolumeclaims
+  - persistentvolumes
   - resourcequotas
   - resourcequotas/status
-  verbs:
-  - get
-  - list
-  - watch
-- apiGroups:
-  - ""
-  resources:
-  - namespaces
-  verbs:
-  - get
-  - list
-  - watch
+  - replicationcontrollers
+  - replicationcontrollers/status
+  - replicationcontrollers/scale
+  - serviceaccounts
+  - services
+  verbs: [list, get]
 - apiGroups:
   - apps
   resources:
@@ -62,27 +43,18 @@ rules:
   - replicasets
   - replicasets/scale
   - statefulsets
-  verbs:
-  - get
-  - list
-  - watch
+  verbs: [list, get]
 - apiGroups:
   - autoscaling
   resources:
   - horizontalpodautoscalers
-  verbs:
-  - get
-  - list
-  - watch
+  verbs: [list, get]
 - apiGroups:
   - batch
   resources:
   - cronjobs
   - jobs
-  verbs:
-  - get
-  - list
-  - watch
+  verbs: [list, get]
 - apiGroups:
   - extensions
   resources:
@@ -94,35 +66,23 @@ rules:
   - replicasets
   - replicasets/scale
   - replicationcontrollers/scale
-  verbs:
-  - get
-  - list
-  - watch
+  verbs: [list, get]
 - apiGroups:
   - policy
   resources:
   - poddisruptionbudgets
-  verbs:
-  - get
-  - list
-  - watch
+  verbs: [list, get]
 - apiGroups:
   - networking.k8s.io
   resources:
   - networkpolicies
-  verbs:
-  - get
-  - list
-  - watch
+  verbs: [list, get]
 - apiGroups:
   - storage.k8s.io
   resources:
   - storageclasses
   - volumeattachments
-  verbs:
-  - get
-  - list
-  - watch
+  verbs: [list, get]
 - apiGroups:
   - rbac.authorization.k8s.io
   resources:
@@ -130,10 +90,7 @@ rules:
   - clusterroles
   - roles
   - rolebindings
-  verbs:
-  - get
-  - list
-  - watch
+  verbs: [list, get]
 - nonResourceURLs:
   - '*'
   verbs: [list, get]
