@@ -1,9 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: kube-web-view
+  namespace: adm
   labels:
     application: kube-web-view
-  name: kube-web-view
 spec:
   replicas: 1
   selector:
