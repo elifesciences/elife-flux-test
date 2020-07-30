@@ -32,4 +32,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: kube-web-view
-  namespace: default
+  namespace: adm
