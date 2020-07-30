@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: kube-web-view
+  labels:
+    application: kube-web-view
+  annotations:
+spec:
+  rules:
+    - host: dashboard--test-cluster.elifesciences.org
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: kube-web-view
+              servicePort: http
