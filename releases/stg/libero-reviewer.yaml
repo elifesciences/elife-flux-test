@@ -42,6 +42,9 @@ spec:
       meca:
         sftpSecret: libero-reviewer--stg-ejp-sftp
         sftpPath: "/"
+        emailPrefix: "[reviewer-staging] "
+        emailRecipient: "xpub-tech-alerts@elifesciences.org"
+        apiSecret: "libero-reviewer--stg-meca-api"
       mail:
         sesSecret: "libero-reviewer--stg-ses"
         sesRegion: "us-east-1"
