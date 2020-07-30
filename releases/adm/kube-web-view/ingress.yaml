@@ -16,4 +16,4 @@ spec:
           - path: /
             backend:
               serviceName: kube-web-view
-              servicePort: http
+              servicePort: 80
