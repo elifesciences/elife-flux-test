@@ -72,7 +72,7 @@ Infrastructure (all behind oauth2\_proxy)
 
 -   Prometheus Blackbox for http/icmp/snmp probing
 
--   Kubernetes Dashboard with anonymous access but limited to read only
+-   [kube-web-view](https://codeberg.org/hjacobs/kube-web-view/src/branch/master/deploy/rbac.yaml) with anonymous access but limited to read only
 
 ### Metrics
 
