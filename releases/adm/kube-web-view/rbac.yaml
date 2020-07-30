@@ -20,6 +20,7 @@ rules:
   - endpoints
   - events
   - limitranges
+  - namespaces
   - namespaces/status
   - nodes
   - pods
