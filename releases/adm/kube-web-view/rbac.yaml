@@ -15,7 +15,6 @@ rules:
   - ""
   resources:
   - bindings
-  - canaries
   - configmaps
   - endpoints
   - events
@@ -92,6 +91,11 @@ rules:
   - clusterroles
   - roles
   - rolebindings
+  verbs: [list, get]
+- apiGroups:
+  - flagger.app
+  resources:
+  - canaries
   verbs: [list, get]
 - nonResourceURLs:
   - '*'
