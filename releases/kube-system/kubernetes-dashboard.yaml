@@ -6,6 +6,7 @@ metadata:
   namespace: kube-system
   annotations:
     fluxcd.io/automated: "true"
+    filter.fluxcd.io/kubernetes-dashboard: semver:*
 
 spec:
   chart:
@@ -13,6 +14,9 @@ spec:
     path: stable/kubernetes-dashboard
     ref: master
   values:
+    image:
+      repository: kubernetesui/dashboard
+      tag: v2.0.3
     enableInsecureLogin: true
     ingress:
       enabled: "true"
