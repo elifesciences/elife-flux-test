@@ -26,6 +26,11 @@ spec:
         # uncomment the following line to unhide secret data
         # see also https://kube-web-view.readthedocs.io/en/latest/security.html
         # - "--show-secrets"
+        env:
+        - name: OAUTH2_AUTHORIZE_URL
+          value: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
+        - name: OAUTH2_ACCESS_TOKEN_URL
+          value: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
         ports:
         - containerPort: 8080
         readinessProbe:
