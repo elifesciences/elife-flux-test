@@ -1,0 +1,12 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: descheduler
+  namespace: adm
+
+spec:
+  chart:
+    repository: https://kubernetes-sigs.github.io
+    name: descheduler
+    version: 0.18.0
