@@ -7,6 +7,6 @@ metadata:
 
 spec:
   chart:
-    repository: https://kubernetes-sigs.github.io
-    name: descheduler
+    repository: https://kubernetes-sigs.github.io/descheduler
+    name: descheduler-helm-chart
     version: 0.18.0
