@@ -3,7 +3,7 @@ apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
   name: descheduler
-  namespace: adm
+  namespace: kube-system
 
 spec:
   chart:
