@@ -61,7 +61,7 @@ spec:
         repository: liberoadmin/continuum-adaptor
         tag: master-ab04d32e-20200804.0951
       continuumApiUrl: "http://continuumtest--gateway.elife.internal"
-      loginUrl: "https://continuumtest--cdn-journal.elifesciences.org/submit"
+      continuumLoginUrl: "https://continuumtest--cdn-journal.elifesciences.org/submit"
       elifeApiSecret: "libero-reviewer--prod-elife-api"
       continuumJwtSecret: "libero-reviewer--prod-continuum-journal-jwt"
 
