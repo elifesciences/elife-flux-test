@@ -45,6 +45,11 @@ spec:
         emailPrefix: "[reviewer-production] "
         emailRecipient: "xpub-tech-alerts@elifesciences.org"
         apiSecret: "libero-reviewer--prod-meca-api"
+      mail:
+        sesSecret: "libero-reviewer--prod-ses"
+        sesRegion: "us-east-1"
+        sendMail: true
+        sender: "prod-rc-noreply@elifesciences.org"
 
     client:
       image:
