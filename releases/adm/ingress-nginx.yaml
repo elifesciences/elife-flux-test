@@ -17,7 +17,6 @@ spec:
         repository: eu.gcr.io/k8s-artifacts-prod/ingress-nginx/controller
         tag: 0.34.0
       config:
-        real-ip-header: "proxy_protocol"
         use-forwarded-headers: "true"
       service:
         targetPorts:
