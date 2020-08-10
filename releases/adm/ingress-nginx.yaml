@@ -24,9 +24,8 @@ spec:
       service:
         targetPorts:
           http: http
-          https: http
+          https: https
         annotations:
-          service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:iam::512686554592:server-certificate/cloudfront/wildcard.elifesciences.org/2019.wildcard.elifesciences.org"
           service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "tcp"
           service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
           service.beta.kubernetes.io/aws-load-balancer-type: nlb
