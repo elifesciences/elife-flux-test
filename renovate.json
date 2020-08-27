@@ -24,6 +24,7 @@
           "prometheus-operator",
           "oauth2-proxy"
         ],
+        "automerge": true,
         "registryUrls": ["https://kubernetes-charts.storage.googleapis.com/"]
       },
       {
@@ -32,6 +33,7 @@
         "packageNames": [
           "ingress-nginx"
         ],
+        "automerge": false,
         "registryUrls": ["https://kubernetes.github.io/ingress-nginx"]
       },
       {
@@ -41,6 +43,7 @@
           "flagger",
           "loadtester"
         ],
+        "automerge": true,
         "registryUrls": ["https://flagger.app"]
       },
       {
@@ -49,6 +52,7 @@
         "packageNames": [
           "descheduler-helm-chart"
         ],
+        "automerge": true,
         "registryUrls": ["https://kubernetes-sigs.github.io/descheduler"]
       },
       {
@@ -57,6 +61,7 @@
         "packageNames": [
           "external-dns"
         ],
+        "automerge": false,
         "registryUrls": ["https://charts.bitnami.com/bitnami"]
       }
     ]
