@@ -1,0 +1,59 @@
+{
+    "extends": ["config:base"],
+    "kubernetes": {
+      "fileMatch": ["\\.yaml$"]
+    },
+    "regexManagers": [
+      {
+        "fileMatch": ["\\.yaml$"],
+        "matchStrings": [
+          "chart:\n *repository: .*?\n *name: (?<depName>.*?)\n *version: (?<currentValue>.*)\n"
+        ],
+        "datasourceTemplate": "helm"
+      }
+    ],
+    "packageRules": [
+      {
+        "datasources": ["helm"],
+        "managers": ["regex"],
+        "packageNames": [
+          "prometheus-operator",
+          "oauth2-proxy"
+        ],
+        "registryUrls": ["https://kubernetes-charts.storage.googleapis.com/"]
+      },
+      {
+        "datasources": ["helm"],
+        "managers": ["regex"],
+        "packageNames": [
+          "ingress-nginx"
+        ],
+        "registryUrls": ["https://kubernetes.github.io/ingress-nginx"]
+      },
+      {
+        "datasources": ["helm"],
+        "managers": ["regex"],
+        "packageNames": [
+          "flagger",
+          "loadtester"
+        ],
+        "registryUrls": ["https://flagger.app"]
+      },
+      {
+        "datasources": ["helm"],
+        "managers": ["regex"],
+        "packageNames": [
+          "descheduler-helm-chart"
+        ],
+        "registryUrls": ["https://kubernetes-sigs.github.io/descheduler"]
+      },
+      {
+        "datasources": ["helm"],
+        "managers": ["regex"],
+        "packageNames": [
+          "external-dns"
+        ],
+        "registryUrls": ["https://charts.bitnami.com/bitnami"]
+      }
+    ]
+  }
