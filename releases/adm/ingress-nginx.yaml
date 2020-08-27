@@ -7,15 +7,12 @@ metadata:
 
 spec:
   chart:
-    git: https://github.com/kubernetes/ingress-nginx
-    path: charts/ingress-nginx
-    ref: master
+    repository: https://kubernetes.github.io/ingress-nginx
+    name: ingress-nginx
+    version: 0.34.1
 
   values:
     controller:
-      image:
-        repository: eu.gcr.io/k8s-artifacts-prod/ingress-nginx/controller
-        tag: 0.34.0
       config:
         use-forwarded-headers: "true"
         use-http2: "true"
