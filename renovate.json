@@ -15,7 +15,9 @@
         "datasourceTemplate": "helm"
       }
     ],
-    "assignees": "erkannt",
+    "assignees": [
+        "erkannt"
+    ],
     "packageRules": [
       {
         "datasources": ["helm"],
