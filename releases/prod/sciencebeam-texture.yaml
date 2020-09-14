@@ -68,6 +68,9 @@ spec:
       - host: sciencebeam-texture.elifesciences.org
         paths:
         - "/api"
+      - host: sciencebeam.org
+        paths:
+        - "/api"
       annotations:
         nginx.ingress.kubernetes.io/proxy-body-size: 120m
     resources:
@@ -110,6 +113,9 @@ spec:
       enabled: "true"
       hosts:
       - host: sciencebeam-texture.elifesciences.org
+        paths:
+        - "/api_biorxiv(/|$)(.*)"
+      - host: sciencebeam.org
         paths:
         - "/api_biorxiv(/|$)(.*)"
       annotations:
