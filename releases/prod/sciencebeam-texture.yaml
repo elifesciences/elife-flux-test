@@ -25,6 +25,9 @@ spec:
       - host: sciencebeam-texture.elifesciences.org
         paths:
         - "/"
+      - host: sciencebeam.org
+        paths:
+        - "/"
     resources:
       requests:
         memory: 128Mi
