@@ -22,6 +22,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: letsencrypt-staging
+  namespace: adm
 spec:
   acme:
     # The ACME server URL
@@ -42,6 +43,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: letsencrypt-prod
+  namespace: adm
 spec:
   acme:
     # The ACME server URL
