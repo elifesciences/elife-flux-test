@@ -31,9 +31,9 @@ spec:
         paths:
         - "/"
       tls:
+      - secretName: sciencebeam-letsencrypt-cert
         hosts:
         - sciencebeam.org
-          secretName: sciencebeam-letsencrypt-cert
 
     resources:
       requests:
