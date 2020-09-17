@@ -33,7 +33,7 @@ spec:
       tls:
         hosts:
         - sciencebeam.org
-        secretName: sciencebeam-letsencrypt-cert
+          secretName: sciencebeam-letsencrypt-cert
 
     resources:
       requests:
