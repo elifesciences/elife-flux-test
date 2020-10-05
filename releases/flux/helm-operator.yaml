@@ -1,0 +1,23 @@
+
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: helm-operator
+  namespace: flux
+
+spec:
+  chart:
+    repository: https://charts.fluxcd.io
+    name: helm-operator
+    version: 1.1.0
+
+  values:
+    git:
+      url: git@github.com:elifesciences/elife-flux-cluster
+    syncGarbageCollection:
+      enabled: true
+    prometheus:
+      serviceMonitor:
+        create: true
+        namespace: adm
