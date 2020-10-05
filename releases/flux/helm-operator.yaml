@@ -7,6 +7,7 @@ metadata:
   namespace: flux
 
 spec:
+  releaseName: helm-operator
   chart:
     repository: https://charts.fluxcd.io
     name: helm-operator
@@ -14,9 +15,17 @@ spec:
 
   values:
     git:
-      url: git@github.com:elifesciences/elife-flux-cluster
-    syncGarbageCollection:
-      enabled: true
+      ssh:
+        secretName: flux-git-deploy
+    helm:
+      version: 3
+    statusUpdateInterval: "90s"
+    resources:
+      limits:
+        memory: 1G
+      requests:
+        memory: 500Mi
+        cpu: 400m
     prometheus:
       serviceMonitor:
         create: true
