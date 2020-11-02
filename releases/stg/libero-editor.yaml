@@ -34,4 +34,4 @@ spec:
     articleStore:
       image:
         repository: liberoadmin/editor-article-store
-        tag: master-f96a55c6-20201029.0855
+        tag: master-880f56b1-20201102.1203
