@@ -42,6 +42,8 @@ spec:
 
     aws:
       region: 'us-east-1'
-      secret: 'libero-editor--stg-aws-secret'
+      secret:
+        key: 'someKey'
+        secret: 'someSecret'
       sqsUrl: 'someSqsUrl'
       bucket: 'prod-elife-editor'
