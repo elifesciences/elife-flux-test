@@ -108,7 +108,7 @@ spec:
     grobid:
       image:
         repository: elifesciences/sciencebeam-grobid-biorxiv
-        tag: "0.0.4-dl-glove-6B-50d"
+        tag: "0.0.5-dl-glove-6B-50d"
       warmup:
         enabled: true
       env:
