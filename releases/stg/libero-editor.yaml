@@ -35,3 +35,13 @@ spec:
       image:
         repository: liberoadmin/editor-article-store
         tag: master-880f56b1-20201102.1203
+
+    database:
+      secret: 'libero-editor--stg-database-secret'
+      name: 'editor'
+
+    aws:
+      region: 'us-east-1'
+      secret: 'libero-editor--stg-aws-secret'
+      sqsUrl: 'someSqsUrl'
+      bucket: 'prod-elife-editor'
