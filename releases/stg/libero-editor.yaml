@@ -37,13 +37,11 @@ spec:
         tag: master-880f56b1-20201102.1203
 
     database:
-      secret: 'libero-editor--stg-database-secret'
+      secret: libero-editor--stg-database-secret
       name: 'editor'
 
     aws:
       region: 'us-east-1'
-      secret:
-        key: 'someKey'
-        secret: 'someSecret'
+      secret: libero-editor--prod-aws-secret
       sqsUrl: 'someSqsUrl'
       bucket: 'prod-elife-editor'
