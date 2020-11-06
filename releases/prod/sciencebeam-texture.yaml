@@ -46,10 +46,8 @@ metadata:
   namespace: prod
   annotations:
     fluxcd.io/automated: 'true'
-    # filter.fluxcd.io/chart-image: semver:*
-    # filter.fluxcd.io/grobid: glob:0.5.3
     filter.fluxcd.io/chart-image: semver:*
-    filter.fluxcd.io/grobid: glob:*-dl-no-word-embeddings
+    filter.fluxcd.io/grobid: glob:0.6.1
 
 spec:
   releaseName: sciencebeam-texture-sciencebeam--prod
@@ -64,10 +62,8 @@ spec:
       tag: 0.0.8
     grobid:
       image:
-        # repository: lfoppiano/grobid
-        # tag: "0.5.3"
-        repository: elifesciences/sciencebeam-grobid-biorxiv
-        tag: "0.0.6-dl-no-word-embeddings"
+        repository: lfoppiano/grobid
+        tag: "0.6.1"
       warmup:
         enabled: true
       resources:
