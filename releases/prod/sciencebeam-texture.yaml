@@ -64,7 +64,9 @@ spec:
       tag: 0.0.8
     grobid:
       image:
-        repository: lfoppiano/grobid
+        # repository: lfoppiano/grobid
+        # tag: "0.5.3"
+        repository: elifesciences/sciencebeam-grobid-biorxiv
         tag: "0.0.6-dl-no-word-embeddings"
       warmup:
         enabled: true
