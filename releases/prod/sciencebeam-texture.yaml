@@ -92,7 +92,7 @@ metadata:
   annotations:
     fluxcd.io/automated: 'true'
     filter.fluxcd.io/chart-image: semver:*
-    filter.fluxcd.io/grobid: glob:*-dl-glove-6B-50d
+    filter.fluxcd.io/grobid: glob:*-dl-no-word-embeddings-wapiti-citation
 
 spec:
   releaseName: sciencebeam-texture-sciencebeam-biorxiv--prod
@@ -108,7 +108,7 @@ spec:
     grobid:
       image:
         repository: elifesciences/sciencebeam-grobid-biorxiv
-        tag: "0.0.5-dl-glove-6B-50d"
+        tag: "0.0.5-dl-no-word-embeddings-wapiti-citation"
       warmup:
         enabled: true
       env:
