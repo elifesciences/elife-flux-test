@@ -108,7 +108,7 @@ spec:
     grobid:
       image:
         repository: elifesciences/sciencebeam-grobid-biorxiv
-        tag: "0.0.6-dl-no-word-embeddings-wapiti-citation"
+        tag: "0.0.7-dl-no-word-embeddings-wapiti-citation"
       warmup:
         enabled: true
       env:
