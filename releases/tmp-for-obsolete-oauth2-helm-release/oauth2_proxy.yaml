@@ -7,9 +7,9 @@ metadata:
 
 spec:
   chart:
-    repository: https://charts.helm.sh/stable
-    name: oauth2-proxy
-    version: 3.2.5
+    git: git@github.com:erkannt/manifests.git
+    ref: update-chart
+    path: charts/oauth2-proxy
 
   values:
     config:
