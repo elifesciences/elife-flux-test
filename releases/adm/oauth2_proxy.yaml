@@ -7,9 +7,9 @@ metadata:
 
 spec:
   chart:
-    git: git@github.com:erkannt/manifests.git
-    ref: update-chart
-    path: charts/oauth2-proxy
+    repo: https://erkannt.github.io/manifests
+    name: oauth2-proxy
+    version: 3.2.7
 
   values:
     config:
