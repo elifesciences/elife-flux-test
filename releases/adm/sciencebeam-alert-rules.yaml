@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: sciencebeam.rules
+  namespace: adm
+  labels:
+    app: sciencebeam
+spec:
+  groups:
+  - name: sciencebeam
+    rules:
+    - alert: ScienceBeamServerError
+      expr: "rate(nginx_ingress_controller_requests{exported_service=~"sciencebeam.*", status=~"5.*"}[10m]) > 0"
