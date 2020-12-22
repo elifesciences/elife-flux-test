@@ -10,4 +10,4 @@ spec:
   - name: sciencebeam
     rules:
     - alert: ScienceBeamServerError
-      expr: "rate(nginx_ingress_controller_requests{exported_service=~"sciencebeam.*", status=~"5.*"}[10m]) > 0"
+      expr: 'rate(nginx_ingress_controller_requests{exported_service=~"sciencebeam.*", status=~"5.*"}[10m]) > 0'
