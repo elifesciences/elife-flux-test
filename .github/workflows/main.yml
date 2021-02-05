@@ -14,19 +14,19 @@ jobs:
           submodules: "true"
 
       - name: Validate Helm Releases -- prod
-        uses: erkannt/hrval-action@master
+        uses: stefanprodan/hrval-action@master
         with:
           helmRelease: releases/prod/
           helmVersion: v3
 
       - name: Validate Helm Releases -- stg
-        uses: erkannt/hrval-action@master
+        uses: stefanprodan/hrval-action@master
         with:
           helmRelease: releases/stg/
           helmVersion: v3
 
       - name: Validate Helm Releases -- adm
-        uses: erkannt/hrval-action@master
+        uses: stefanprodan/hrval-action@master
         with:
           helmRelease: releases/adm/
           helmVersion: v3
