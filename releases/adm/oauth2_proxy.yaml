@@ -7,9 +7,9 @@ metadata:
 
 spec:
   chart:
-    repository: https://erkannt.github.io/manifests
+    repository:  https://oauth2-proxy.github.io/manifests
     name: oauth2-proxy
-    version: 3.2.8
+    version: 3.2.6
 
   values:
     config:
