@@ -6,7 +6,7 @@ metadata:
   namespace: prod
 
 spec:
-  releaseName: data-hub--prod
+  releaseName: data-hub--flux
   chart:
     repository: https://airflow-helm.github.io/charts
     name: airflow
