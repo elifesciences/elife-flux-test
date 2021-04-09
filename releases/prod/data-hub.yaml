@@ -29,3 +29,9 @@ spec:
       extraEnv:
         - name: GMAIL_DATA_CONFIG_FILE_PATH
           value: /dag_config_files/gmail-data-pipeline.config.yaml
+      extraConfigmapMounts:
+        - name: gmail-data-pipeline_config
+          mountPath: /dag_config_files/
+          configMap: data-hub-configs
+          readOnly: true
+
