@@ -33,3 +33,8 @@ spec:
           value: flux_cluster_sandbox
         - name: GMAIL_DATA_CONFIG_FILE_PATH
           value: /dag_config_files/gmail-data-pipeline.config.yaml
+      extraConfigmapMounts:
+        - name: gmail-data-pipeline-config
+          mountPath: /dag_config_files/
+          configMap: data-hub-configs
+          readOnly: true
