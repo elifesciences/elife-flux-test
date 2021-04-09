@@ -34,4 +34,11 @@ spec:
           value: flux_cluster_sandbox
         - name: GMAIL_DATA_CONFIG_FILE_PATH
           value: /dag_config_files/gmail-data-pipeline.config.yaml
-
+    web:
+      webserverConfig:
+        stringOverride: |-
+          from airflow import configuration as conf
+          from flask_appbuilder.security.manager import AUTH_DB
+          SQLALCHEMY_DATABASE_URI = conf.get('core', 'SQL_ALCHEMY_CONN')
+          AUTH_TYPE = AUTH_DB
+          AUTH_ROLE_PUBLIC = 'Admin'
