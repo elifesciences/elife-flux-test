@@ -26,3 +26,6 @@ spec:
       image:
         repository: elifesciences/data-hub-with-dags
         tag: 0.0.63
+      extraEnv:
+        - name: GMAIL_DATA_CONFIG_FILE_PATH
+          value: /dag_config_files/gmail-data-pipeline.config.yaml
