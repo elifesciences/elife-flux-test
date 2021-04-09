@@ -23,3 +23,6 @@ spec:
     airflow:
       config:
         AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "True"
+      image:
+        repository: elifesciences/data-hub-with-dags
+        tag: 0.0.63
