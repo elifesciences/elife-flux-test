@@ -10,7 +10,7 @@ spec:
   chart:
     repository: https://airflow-helm.github.io/charts
     name: airflow
-    version: 7.15.0
+    version: 8.0.5
 
   values:
     ingress:
@@ -21,6 +21,8 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
     airflow:
+      legacyCommands:
+        enabled: true
       config:
         AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "True"
       image:
@@ -31,9 +33,4 @@ spec:
           value: flux_cluster_sandbox
         - name: GMAIL_DATA_CONFIG_FILE_PATH
           value: /dag_config_files/gmail-data-pipeline.config.yaml
-      extraConfigmapMounts:
-        - name: gmail-data-pipeline-config
-          mountPath: /dag_config_files/
-          configMap: data-hub-configs
-          readOnly: true
 
