@@ -27,6 +27,8 @@ spec:
         repository: elifesciences/data-hub-with-dags
         tag: 0.0.63
       extraEnv:
+        - name: DEPLOYMENT_ENV
+          value: flux_cluster_sandbox
         - name: GMAIL_DATA_CONFIG_FILE_PATH
           value: /dag_config_files/gmail-data-pipeline.config.yaml
       extraConfigmapMounts:
