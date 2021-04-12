@@ -35,6 +35,8 @@ spec:
           value: /dag_config_files/gmail-data-pipeline.config.yaml
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /dag_secret_files/credentials.json
+        - name: GMAIL_DATA_USER_ID
+          value: production@elifesciences.org
     workers:
       extraVolumeMounts:
       - name: data-hub-config-volume
