@@ -33,6 +33,8 @@ spec:
           value: flux_cluster_sandbox
         - name: GMAIL_DATA_CONFIG_FILE_PATH
           value: /dag_config_files/gmail-data-pipeline.config.yaml
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /dag_secret_files/credentials.json
     workers:
       extraVolumeMounts:
       - name: data-hub-config-volume
