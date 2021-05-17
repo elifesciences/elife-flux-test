@@ -60,6 +60,9 @@ spec:
     image:
       repository: elifesciences/sciencebeam
       tag: 0.0.12
+    env:
+      SCIENCEBEAM__XSLT_TEMPLATE_PARAMETERS__ACKNOWLEDGEMENT_TARGET: "body"
+      SCIENCEBEAM__XSLT_TEMPLATE_PARAMETERS__ANNEX_TARGET: "body"
     grobid:
       image:
         repository: lfoppiano/grobid
@@ -107,6 +110,9 @@ spec:
     image:
       repository: elifesciences/sciencebeam
       tag: 0.0.12
+    env:
+      SCIENCEBEAM__XSLT_TEMPLATE_PARAMETERS__ACKNOWLEDGEMENT_TARGET: "body"
+      SCIENCEBEAM__XSLT_TEMPLATE_PARAMETERS__ANNEX_TARGET: "body"
     grobid:
       image:
         repository: elifesciences/sciencebeam-grobid-biorxiv
