@@ -13,7 +13,7 @@ spec:
   chart:
     git: https://github.com/elifesciences/basex-validator-formula
     path: helm/basex-validator
-    ref: wip/migrate-to-new-cluster
+    ref: master
 
   values:
     ingress:
