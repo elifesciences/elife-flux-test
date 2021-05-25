@@ -6,7 +6,7 @@ metadata:
   namespace: prod
   annotations:
     fluxcd.io/automated: 'true'
-    filter.fluxcd.io/basexValidator: semver:*
+    filter.fluxcd.io/basexValidator: glob:master-*-*
 
 spec:
   releaseName: basex-validator--prod
@@ -23,4 +23,4 @@ spec:
       replicaCount: 1
       image:
         repository: elifesciences/basex-validator
-        tag: 0.0.1
+        tag: master-8115871a-20210521.1421
