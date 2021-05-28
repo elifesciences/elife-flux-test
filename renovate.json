@@ -76,7 +76,8 @@
         "datasources": ["helm"],
         "managers": ["regex"],
         "packageNames": [
-          "external-dns"
+          "external-dns",
+          "sealed-secrets"
         ],
         "automerge": false,
         "registryUrls": ["https://charts.bitnami.com/bitnami"]
