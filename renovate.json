@@ -76,8 +76,16 @@
         "datasources": ["helm"],
         "managers": ["regex"],
         "packageNames": [
-          "external-dns",
           "sealed-secrets"
+        ],
+        "automerge": false,
+        "registryUrls": ["https://bitnami-labs.github.io/sealed-secrets"]
+      },
+      {
+        "datasources": ["helm"],
+        "managers": ["regex"],
+        "packageNames": [
+          "external-dns",
         ],
         "automerge": false,
         "registryUrls": ["https://charts.bitnami.com/bitnami"]
