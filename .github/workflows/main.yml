@@ -24,6 +24,7 @@ jobs:
         with:
           helmRelease: releases/stg/
           helmVersion: v3
+        continue-on-error: true
 
       - name: Validate Helm Releases -- adm
         uses: stefanprodan/hrval-action@master
