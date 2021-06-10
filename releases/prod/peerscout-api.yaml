@@ -3,7 +3,7 @@ apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
   name: data-science-dags_peerscout-api
-  namespace: prod
+  namespace: hazal-test
   annotations:
     fluxcd.io/automated: 'true'
     filter.fluxcd.io/chart-image: semver:~4.0
@@ -24,10 +24,6 @@ spec:
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt-prod"
       hosts:
-      - host: data-science-dags_peerscout-api--prod.elifesciences.org
+      - host: 0.0.0.0
         paths:
         - "/"
-
-    resources:
-      requests:
-        memory: 128Mi
