@@ -9,7 +9,7 @@ spec:
   chart:
     repository: https://flagger.app
     name: flagger
-    version: 1.7.0
+    version: 1.11.0
 
   values:
     metricsServer: http://adm-prometheus-operator-prometheus:9090
@@ -26,7 +26,7 @@ spec:
   chart:
     repository: https://flagger.app
     name: loadtester
-    version: 0.18.0
+    version: 0.19.0
 
   values:
     rbac:

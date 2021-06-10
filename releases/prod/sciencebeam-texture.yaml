@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: elifesciences/sciencebeam_texture
-      tag: 0.0.11
+      tag: 0.0.12
     ingress:
       enabled: "true"
       annotations:
@@ -47,7 +47,7 @@ metadata:
   annotations:
     fluxcd.io/automated: 'true'
     filter.fluxcd.io/chart-image: semver:*
-    filter.fluxcd.io/grobid: glob:0.6.1
+    filter.fluxcd.io/grobid: glob:0.6.2
 
 spec:
   releaseName: sciencebeam-texture-sciencebeam--prod
@@ -59,11 +59,14 @@ spec:
   values:
     image:
       repository: elifesciences/sciencebeam
-      tag: 0.0.10
+      tag: 0.0.12
+    env:
+      SCIENCEBEAM__XSLT_TEMPLATE_PARAMETERS__ACKNOWLEDGEMENT_TARGET: "body"
+      SCIENCEBEAM__XSLT_TEMPLATE_PARAMETERS__ANNEX_TARGET: "body"
     grobid:
       image:
         repository: lfoppiano/grobid
-        tag: "0.6.1"
+        tag: "0.6.2"
       warmup:
         enabled: true
       resources:
@@ -106,11 +109,14 @@ spec:
   values:
     image:
       repository: elifesciences/sciencebeam
-      tag: 0.0.10
+      tag: 0.0.12
+    env:
+      SCIENCEBEAM__XSLT_TEMPLATE_PARAMETERS__ACKNOWLEDGEMENT_TARGET: "body"
+      SCIENCEBEAM__XSLT_TEMPLATE_PARAMETERS__ANNEX_TARGET: "body"
     grobid:
       image:
         repository: elifesciences/sciencebeam-grobid-biorxiv
-        tag: "0.0.7-dl-no-word-embeddings-wapiti-citation"
+        tag: "0.0.8-dl-no-word-embeddings-wapiti-citation"
       warmup:
         enabled: true
       env:
