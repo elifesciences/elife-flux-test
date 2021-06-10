@@ -1,0 +1,8 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: peerscout-api
+  namespace: prod
+  labels:
+    application: peerscout-api-app
