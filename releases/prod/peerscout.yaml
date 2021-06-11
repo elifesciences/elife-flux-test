@@ -19,22 +19,3 @@ spec:
     image:
       repository: elifesciences/data-science-dags_peerscout-api_unstable
       tag: latest
-    ingress:
-      enabled: "true"
-      annotations:
-        cert-manager.io/cluster-issuer: "letsencrypt-prod"
-      hosts:
-      - host: peerscout.elifesciences.org
-        paths:
-        - "/"
-      - host: peerscout.org
-        paths:
-        - "/"
-      tls:
-      - secretName: peerscout-letsencrypt-cert
-        hosts:
-        - peerscout.org
-
-    resources:
-      requests:
-        memory: 128Mi
