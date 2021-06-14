@@ -25,7 +25,7 @@ spec:
       - host: peerscout.elifesciences.org
         http:
           paths:
-          - path: "/"
+          - path: []
     resources:
       requests:
         memory: 128Mi
