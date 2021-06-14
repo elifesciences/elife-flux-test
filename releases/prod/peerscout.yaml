@@ -21,10 +21,11 @@ spec:
       tag: 9869694e08348584d2548ccc25e49b1a4473d441
     ingress:
       enabled: "true"
-      hosts:
+      rules:
       - host: peerscout.elifesciences.org
-      paths:
-        - path: "/"
+        http:
+          paths:
+          - path: "/"
     resources:
       requests:
         memory: 128Mi
