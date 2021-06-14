@@ -23,9 +23,8 @@ spec:
       enabled: "true"
       rules:
       - host: peerscout.elifesciences.org
-        http:
-          paths:
-          - path: "/"
+        paths:
+        - "/"
 
     resources:
       requests:
