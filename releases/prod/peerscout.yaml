@@ -22,7 +22,7 @@ spec:
     ingress:
       enabled: "true"
       hosts:
-      - host: peerscout-api.elifesciences.org
+      - host: peerscout.elifesciences.org
     resources:
       requests:
         memory: 128Mi
