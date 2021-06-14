@@ -23,6 +23,7 @@ spec:
       enabled: "true"
       hosts:
         - host: peerscout-api.elifesciences.org
+
     resources:
       requests:
         memory: 128Mi
