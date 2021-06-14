@@ -11,7 +11,7 @@ metadata:
 spec:
   releaseName: peerscout--prod
   chart:
-    git: git@github.com:elifesciences/data-science-dags
+    git: https://github.com/elifesciences/data-science-dags
     path: charts/peerscout
     ref: develop
 
