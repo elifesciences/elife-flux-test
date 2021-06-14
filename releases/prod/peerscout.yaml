@@ -13,7 +13,7 @@ spec:
   chart:
     git: git@github.com:elifesciences/data-science-dags
     path: charts/peerscout
-    ref: master
+    # ref: master
 
   values:
     image:
