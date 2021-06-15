@@ -19,10 +19,12 @@ spec:
     image:
       repository: elifesciences/data-science-dags_peerscout-api_unstable
       tag: 9869694e08348584d2548ccc25e49b1a4473d441
-    # ingress:
-    #   enabled: "true"
-    #   hosts:
-    #   - host: peerscout.elifesciences.org
+    ingress:
+      enabled: "true"
+      hosts:
+      - host: peerscout.elifesciences.org
+        paths:
+        - "/"
 
     resources:
       requests:
