@@ -2,14 +2,14 @@
 apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
-  name: peerscout
-  namespace: prod
+  name: peerscout--test
+  namespace: peerscout
   annotations:
     fluxcd.io/automated: 'true'
     filter.fluxcd.io/chart-image: glob:*
 
 spec:
-  releaseName: peerscout--prod
+  releaseName: peerscout--test
   chart:
     git: https://github.com/elifesciences/data-science-dags
     path: charts/peerscout
@@ -22,7 +22,7 @@ spec:
     ingress:
       enabled: "true"
       hosts:
-      - host: peerscout.elifesciences.org
+      - host: peerscout--test.elifesciences.org
         paths:
         - "/"
 
