@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: elifesciences/data-science-dags_peerscout-api_unstable
-      tag: 0087cccd78417f040e62fc7a8f2fd1e9dc6b0840
+      tag: 361f94ee990efd23513b7c8651473e7ae065421d
     ingress:
       enabled: "true"
       hosts:
