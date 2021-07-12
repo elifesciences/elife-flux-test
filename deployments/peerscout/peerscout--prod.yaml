@@ -1,0 +1,35 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: peerscout--prod
+  namespace: peerscout
+  annotations:
+    fluxcd.io/automated: 'true'
+    filter.fluxcd.io/chart-image: glob:*
+
+spec:
+  releaseName: peerscout--prod
+  chart:
+    git: https://github.com/elifesciences/data-science-dags
+    path: charts/peerscout
+    ref: v0.0.1
+
+  values:
+    image:
+      repository: elifesciences/data-science-dags_peerscout-api
+      tag: "0.0.1"
+    ingress:
+      enabled: "true"
+      hosts:
+      - host: peerscout.elifesciences.org
+        paths:
+        - "/"
+      annotations:
+        nginx.ingress.kubernetes.io/auth-type: basic
+        nginx.ingress.kubernetes.io/auth-secret: peerscout--test-basic-auth
+        nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required - peerscout'
+
+    resources:
+      requests:
+        memory: 128Mi
