@@ -4,9 +4,9 @@ kind: HelmRelease
 metadata:
   name: peerscout--test
   namespace: peerscout
-  annotations:
-    fluxcd.io/automated: 'true'
-    filter.fluxcd.io/chart-image: glob:*
+  # annotations:
+  #   fluxcd.io/automated: 'true'
+  #   filter.fluxcd.io/chart-image: glob:*
 
 spec:
   releaseName: peerscout--test
@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: elifesciences/data-science-dags_peerscout-api_unstable
-      tag: 8241bcfe375ea29373aa415334c72c98178bca85
+      tag: bb0b55dded338f5bc40c6b7d49d7be2f58c07c49
     env:
       name: DATA_SCIENCE_STATE_PATH
       value: s3://staging-elife-data-pipeline/airflow-config/data-science/state
