@@ -22,6 +22,14 @@ spec:
     env:
       name: DATA_SCIENCE_STATE_PATH
       value: s3://staging-elife-data-pipeline/airflow-config/data-science/state
+    volumeMounts:
+      - name: aws-credentials-sealed-secret-volume
+        mountPath: /root/.aws
+        readOnly: true
+    volumes:
+      - name: aws-credentials-sealed-secret-volume
+        secret:
+          secretName: aws-credentials
     ingress:
       enabled: "true"
       hosts:
