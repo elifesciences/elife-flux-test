@@ -19,6 +19,9 @@ spec:
     image:
       repository: elifesciences/data-science-dags_peerscout-api
       tag: "0.0.1"
+    env:
+      name: DATA_SCIENCE_STATE_PATH
+      value: s3://prod-elife-data-pipeline/airflow-config/data-science/state
     ingress:
       enabled: "true"
       hosts:
