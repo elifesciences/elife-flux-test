@@ -29,7 +29,7 @@
       "datasources": ["helm"],
       "managers": ["regex"],
       "packageNames": ["flagger", "loadtester"],
-      "automerge": true,
+      "automerge": false,
       "registryUrls": ["https://flagger.app"]
     },
     {
