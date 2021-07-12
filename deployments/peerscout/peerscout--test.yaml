@@ -4,24 +4,23 @@ kind: HelmRelease
 metadata:
   name: peerscout--test
   namespace: peerscout
-  # annotations:
-  #   fluxcd.io/automated: 'true'
-  #   filter.fluxcd.io/chart-image: glob:*
+  annotations:
+    fluxcd.io/automated: 'true'
+    filter.fluxcd.io/chart-image: glob:*
 
 spec:
   releaseName: peerscout--test
   chart:
     git: https://github.com/elifesciences/data-science-dags
     path: charts/peerscout
-    ref: bb0b55dded338f5bc40c6b7d49d7be2f58c07c49
+    ref: develop
 
   values:
     image:
       repository: elifesciences/data-science-dags_peerscout-api_unstable
       tag: bb0b55dded338f5bc40c6b7d49d7be2f58c07c49
     env:
-      name: DATA_SCIENCE_STATE_PATH
-      value: s3://staging-elife-data-pipeline/airflow-config/data-science/state
+      DATA_SCIENCE_STATE_PATH: s3://staging-elife-data-pipeline/airflow-config/data-science/state
     volumeMounts:
     - name: aws-credentials-sealed-secret-volume
       mountPath: /root/.aws
