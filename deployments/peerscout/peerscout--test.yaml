@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: elifesciences/data-science-dags_peerscout-api_unstable
-      tag: 8241bcfe375ea29373aa415334c72c98178bca85
+      tag: 2b5715fc62f77aff4f147480cbf82c17c4aeab26
     env:
       DATA_SCIENCE_STATE_PATH: s3://staging-elife-data-pipeline/airflow-config/data-science/state
     volumeMounts:
