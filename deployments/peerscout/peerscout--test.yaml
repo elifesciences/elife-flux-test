@@ -19,6 +19,8 @@ spec:
     image:
       repository: elifesciences/data-science-dags_peerscout-api_unstable
       tag: 0e71ed6f13f7103b52a98eb9e05a0ac4dfd3d539
+    env:
+      DATA_SCIENCE_STATE_PATH: s3://staging-elife-data-pipeline/airflow-config/data-science/state
     volumes:
     - name: aws-credentials-sealed-secret-volume
       secret:
