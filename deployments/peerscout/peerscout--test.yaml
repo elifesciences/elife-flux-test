@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: elifesciences/data-science-dags_peerscout-api_unstable
-      tag: f074931688b27cd3fdd22297b78482a690a55746
+      tag: 2b5715fc62f77aff4f147480cbf82c17c4aeab26
     volumes:
     - name: aws-credentials-sealed-secret-volume
       secret:
