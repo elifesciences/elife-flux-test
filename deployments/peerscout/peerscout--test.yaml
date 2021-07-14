@@ -4,9 +4,9 @@ kind: HelmRelease
 metadata:
   name: peerscout--test
   namespace: peerscout
-  annotations:
-    fluxcd.io/automated: 'true'
-    filter.fluxcd.io/chart-image: glob:*
+  # annotations:
+  #   fluxcd.io/automated: 'true'
+  #   filter.fluxcd.io/chart-image: glob:*
 
 spec:
   releaseName: peerscout--test
@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: elifesciences/data-science-dags_peerscout-api_unstable
-      tag: f074931688b27cd3fdd22297b78482a690a55746
+      tag: 0e71ed6f13f7103b52a98eb9e05a0ac4dfd3d539
     volumes:
     - name: aws-credentials-sealed-secret-volume
       secret:
