@@ -21,10 +21,10 @@ spec:
       tag: f64319938e19b9428f7fadbe6fcac87ce7c2ea3e
     env:
       DATA_SCIENCE_STATE_PATH: s3://staging-elife-data-pipeline/airflow-config/data-science/state
-    volumeMounts:
-    - name: aws-credentials-sealed-secret-volume
-      mountPath: /root/.aws
-      readOnly: true
+    # volumeMounts:
+    # - name: aws-credentials-sealed-secret-volume
+    #   mountPath: /root/.aws
+    #   readOnly: true
     volumes:
     - name: aws-credentials-sealed-secret-volume
       secret:
