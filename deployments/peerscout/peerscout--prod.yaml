@@ -18,18 +18,18 @@ spec:
   values:
     image:
       repository: elifesciences/data-science-dags_peerscout-api
-      tag: 0.0.2
+      tag: "0.0.2"
     env:
       name: DATA_SCIENCE_STATE_PATH
       value: s3://prod-elife-data-pipeline/airflow-config/data-science/state
     volumeMounts:
-      - name: aws-credentials-sealed-secret-volume
-        mountPath: /root/.aws
-        readOnly: true
+    - name: aws-credentials-sealed-secret-volume
+      mountPath: /root/.aws
+      readOnly: true
     volumes:
-      - name: aws-credentials-sealed-secret-volume
-        secret:
-          secretName: aws-credentials
+    - name: aws-credentials-sealed-secret-volume
+      secret:
+        secretName: aws-credentials
     ingress:
       enabled: "true"
       hosts:
