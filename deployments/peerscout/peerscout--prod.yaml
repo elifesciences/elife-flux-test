@@ -20,8 +20,7 @@ spec:
       repository: elifesciences/data-science-dags_peerscout-api
       tag: "0.0.2"
     env:
-      name: DATA_SCIENCE_STATE_PATH
-      value: s3://prod-elife-data-pipeline/airflow-config/data-science/state
+      DATA_SCIENCE_STATE_PATH: s3://prod-elife-data-pipeline/airflow-config/data-science/state
     volumeMounts:
     - name: aws-credentials-sealed-secret-volume
       mountPath: /root/.aws
