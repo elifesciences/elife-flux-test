@@ -21,14 +21,21 @@ spec:
       tag: 283d1cca07ff43922053118c4d12289ae2e7b3f5
     env:
       DATA_SCIENCE_STATE_PATH: s3://staging-elife-data-pipeline/airflow-config/data-science/state
+      GOOGLE_APPLICATION_CREDENTIALS: /root/credentials.json
     volumeMounts:
     - name: aws-credentials-sealed-secret-volume
       mountPath: /root/.aws
+      readOnly: true
+    - name: gcp-credentials-sealed-secret-volume
+      mountPath: /root/.gcp
       readOnly: true
     volumes:
     - name: aws-credentials-sealed-secret-volume
       secret:
         secretName: aws-credentials
+    - name: gcp-credentials-sealed-secret-volume
+      secret:
+        secretName: gcp-credentials
     ingress:
       enabled: "true"
       hosts:
