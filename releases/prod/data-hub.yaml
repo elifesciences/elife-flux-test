@@ -27,7 +27,7 @@ spec:
         AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "True"
       image:
         repository: elifesciences/data-hub-with-dags
-        tag: 0.0.70
+        tag: 0.0.63
       extraEnv:
         - name: DEPLOYMENT_ENV
           value: flux_cluster_sandbox
@@ -39,8 +39,8 @@ spec:
           value: production@elifesciences.org
         - name: IS_END2END_TEST
           value: False
-        # - name: GMAIL_DATA_PIPELINE_SCHEDULE_INTERVAL
-        #   value: "0 7 * * 1-5"
+        - name: GMAIL_DATA_PIPELINE_SCHEDULE_INTERVAL
+          value: "0 7 * * 1-5"
     workers:
       extraVolumeMounts:
       - name: data-hub-config-volume
