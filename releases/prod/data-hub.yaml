@@ -37,10 +37,10 @@ spec:
           value: /dag_secret_files/credentials.json
         - name: GMAIL_DATA_USER_ID
           value: production@elifesciences.org
-        # - name: IS_END2END_TEST
-        #   value: False
+        - name: IS_END2END_TEST
+          value: "False"
         - name: GMAIL_DATA_PIPELINE_SCHEDULE_INTERVAL
-          value: 0 7 * * 1-5
+          value: "0 7 * * 1-5"
     workers:
       extraVolumeMounts:
       - name: data-hub-config-volume
