@@ -6,6 +6,7 @@ metadata:
   namespace: prod
   annotations:
     fluxcd.io/automated: 'true'
+    filter.fluxcd.io/chart-image: semver:*
 
 spec:
   releaseName: data-hub--flux
