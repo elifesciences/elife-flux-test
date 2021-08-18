@@ -12,7 +12,7 @@ spec:
   releaseName: data-hub--flux
   chart:
     repository: https://airflow-helm.github.io/charts
-    name: airflow
+    name: charts/airflow
     version: 8.4.1
 
   values:
