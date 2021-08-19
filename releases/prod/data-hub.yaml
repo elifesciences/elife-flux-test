@@ -40,6 +40,8 @@ spec:
           value: /dag_secret_files/credentials.json
         - name: GMAIL_DATA_USER_ID
           value: production@elifesciences.org
+        - name: IS_END2END_TEST
+          value: "False"
     workers:
       extraVolumeMounts:
       - name: data-hub-config-volume
