@@ -30,7 +30,7 @@ spec:
         AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "True"
       image:
         repository: elifesciences/data-hub-with-dags
-        tag: 0.0.69
+        tag: 0.0.70
       extraEnv:
         - name: DEPLOYMENT_ENV
           value: flux_cluster_sandbox
