@@ -56,6 +56,9 @@ spec:
       - name: gcloud-secret-volume
         mountPath: /dag_secret_files/
         readOnly: true
+      - name: aws-secret-volume
+        mountPath: /dag_secret_files/
+        readOnly: true
       extraVolumes:
       - name: data-hub-config-volume
         configMap:
@@ -63,4 +66,6 @@ spec:
       - name: gcloud-secret-volume
         secret:
           secretName: gcloud
-
+      - name: aws-secret-volume
+        secret:
+          secretName: aws
