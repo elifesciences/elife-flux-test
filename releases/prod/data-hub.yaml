@@ -68,4 +68,4 @@ spec:
           secretName: gcloud
       - name: aws-secret-volume
         secret:
-          secretName: aws
+          secretName: credentials
