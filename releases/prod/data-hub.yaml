@@ -38,6 +38,8 @@ spec:
           value: /dag_config_files/gmail-data-pipeline.config.yaml
         - name: CROSSREF_CONFIG_FILE_PATH
           value: /dag_config_files/crossref-event-data-pipeline.config.yaml
+        - name: SPREADSHEET_CONFIG_FILE_PATH
+          value: /dag_config_files/spreadsheet-data-pipeline.config.yaml
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /dag_secret_files/credentials.json
         - name: GMAIL_DATA_USER_ID
@@ -47,6 +49,8 @@ spec:
         - name: GMAIL_DATA_PIPELINE_SCHEDULE_INTERVAL
           value: "0 7 * * 1-5"
         - name: CROSS_REF_IMPORT_SCHEDULE_INTERVAL
+          value: "@daily"
+        - name: GOOGLE_SPREADSHEET_SCHEDULE_INTERVAL
           value: "@daily"
     workers:
       extraVolumeMounts:
