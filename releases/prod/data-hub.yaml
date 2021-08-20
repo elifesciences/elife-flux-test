@@ -32,8 +32,7 @@ spec:
         repository: elifesciences/data-hub-with-dags
         tag: 0.0.70
       extraEnv:
-        - name: DEPLOYMENT_ENV
-          value: flux
+        # config file paths:
         - name: GMAIL_DATA_CONFIG_FILE_PATH
           value: /dag_config_files/gmail-data-pipeline.config.yaml
         - name: CROSSREF_CONFIG_FILE_PATH
@@ -42,12 +41,8 @@ spec:
           value: /dag_config_files/spreadsheet-data-pipeline.config.yaml
         - name: WEB_API_CONFIG_FILE_PATH
           value: /dag_config_files/web-api-data-pipeline.config.yaml
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /dag_secret_files/credentials.json
-        - name: GMAIL_DATA_USER_ID
-          value: production@elifesciences.org
-        - name: IS_END2END_TEST
-          value: "False"
+        
+        # scheduler interval
         - name: GMAIL_DATA_PIPELINE_SCHEDULE_INTERVAL
           value: "0 7 * * 1-5"
         - name: CROSS_REF_IMPORT_SCHEDULE_INTERVAL
@@ -56,16 +51,27 @@ spec:
           value: "@daily"
         - name: WEB_API_SCHEDULE_INTERVAL
           value: "@daily"
+
+        # general:
+        - name: DEPLOYMENT_ENV
+          value: flux
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /dag_secret_files/gcloud/credentials.json
+        - name: GMAIL_DATA_USER_ID
+          value: production@elifesciences.org
+        - name: IS_END2END_TEST
+          value: "False"
+
     workers:
       extraVolumeMounts:
       - name: data-hub-config-volume
         mountPath: /dag_config_files/
         readOnly: true
       - name: gcloud-secret-volume
-        mountPath: /dag_secret_files/
+        mountPath: /dag_secret_files/gcloud/
         readOnly: true
       - name: aws-secret-volume
-        mountPath: /dag_secret_files/
+        mountPath: /dag_secret_files/aws/
         readOnly: true
       extraVolumes:
       - name: data-hub-config-volume
