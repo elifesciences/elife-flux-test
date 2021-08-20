@@ -21,6 +21,7 @@ data:
       historyCheckColumn: 'historyId'
     gmailHistoryData:
       tempTable: 'temp_gmail_history_details'
+
   crossref-event-data-pipeline.config.yaml: |-
     projectName: 'elife-data-pipeline'
     dataset: '{ENV}'
@@ -36,5 +37,48 @@ data:
       - '10.7554'
     CrossrefEventBaseUrl: 'https://api.eventdata.crossref.org/v1/events?rows=100&mailto=h.ciplak@elifesciences.org'
     importedTimestampField: 'data_hub_imported_timestamp'
+
+  spreadsheet-data-pipeline.config.yaml: |-
+    gcpProjectName: 'elife-data-pipeline'
+    importedTimestampFieldName: "imported_timestamp"
+    spreadsheets:
+        # this is the public editor profile
+      - spreadsheetId: "1VnpuiY3o4iCEIEWjCKfXFFyowxTfTxzno2VU5UnRINE"
+        sheets:
+          - sheetName: 'BREs'
+            sheetRange: ''
+            headerLineIndex: 0
+            dataValuesStartLineIndex: 1
+            datasetName: "{ENV}"
+            tableName: 'public_editor_profile'
+            tableWriteAppend: True
+            fixedSheetRecordMetadata:
+              - metadataSchemaFieldName: 'editor_role'
+                fixedSheetValue: "bre"
+
+          - sheetName: 'Senior Editors'
+            sheetRange: ''
+            headerLineIndex: 0
+            dataValuesStartLineIndex: 1
+            datasetName: "{ENV}"
+            tableName: 'public_editor_profile'
+            tableWriteAppend: True
+            fixedSheetRecordMetadata:
+              - metadataSchemaFieldName: 'editor_role'
+                fixedSheetValue: "senior editor"
+    
+      - spreadsheetId: '1nQcLBO_yIumkXousRg_-l9Kx1HmiG7NcvDg1vkrdK-0'
+        sheets:
+          - sheetName: 'BRE distribution_current'
+            sheetRange: ''
+            headerLineIndex: 0
+            dataValuesStartLineIndex: 1
+            datasetName: "{ENV}"
+            tableName: 'BRE_Distribution'
+            tableWriteAppend: True
+            #inSheetRecordMetadata:
+            #  - metadataSchemaFieldName: 'metadata_example'
+            #    metadataLineIndex: 1
+
 
 
