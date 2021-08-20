@@ -33,7 +33,7 @@ spec:
         tag: 0.0.70
       extraEnv:
         - name: DEPLOYMENT_ENV
-          value: flux_cluster_sandbox
+          value: staging
         - name: GMAIL_DATA_CONFIG_FILE_PATH
           value: /dag_config_files/gmail-data-pipeline.config.yaml
         - name: CROSSREF_CONFIG_FILE_PATH
