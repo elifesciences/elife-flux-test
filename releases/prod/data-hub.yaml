@@ -73,6 +73,10 @@ spec:
       - name: aws-secret-volume
         mountPath: /dag_secret_files/aws/
         readOnly: true
+      - name: gmail-secret-volume
+        mountPath: /dag_secret_files/gmail/
+        readOnly: true
+
       extraVolumes:
       - name: data-hub-config-volume
         configMap:
@@ -83,3 +87,6 @@ spec:
       - name: aws-secret-volume
         secret:
           secretName: credentials
+      - name: gmail-secret-volume
+        secret:
+          secretName: gmail-credentials
