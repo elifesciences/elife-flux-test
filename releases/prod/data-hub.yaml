@@ -58,7 +58,7 @@ spec:
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /dag_secret_files/gcloud/credentials.json
         - name: GMAIL_ACCOUNT_SECRET_FILE
-          value: /dag_secret_files/gmail/credentials.json
+          value: /dag_secret_files/gmail/gmail_credentials.json
         - name: IS_GMAIL_END2END_TEST
           value: "False"
 
