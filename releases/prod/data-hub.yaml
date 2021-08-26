@@ -92,6 +92,15 @@ spec:
       - name: gmail-secret-volume
         mountPath: /dag_secret_files/gmail/
         readOnly: true
+      - name: toggl-secret-volume
+        mountPath: /home/airflow/toggl
+        readOnly: true
+      - name: civi-secret-volume
+        mountPath: /home/airflow/civi_key
+        readOnly: true
+      - name: civi-secret-volume
+        mountPath: /home/airflow/civi_key
+        readOnly: true
 
       extraVolumes:
       - name: data-hub-config-volume
@@ -106,3 +115,12 @@ spec:
       - name: gmail-secret-volume
         secret:
           secretName: gmail-credentials
+      - name: toggl-secret-volume
+        secret:
+          secretName: toggl
+      - name: twitter-secret-volume
+        secret:
+          secretName: twitter
+      - name: civi-secret-volume
+        secret:
+          secretName: civi-key
