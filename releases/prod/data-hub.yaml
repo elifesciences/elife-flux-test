@@ -43,6 +43,10 @@ spec:
           value: /dag_config_files/web-api-data-pipeline.config.yaml
         - name: S3_CSV_CONFIG_FILE_PATH
           value: /dag_config_files/s3-csv-data-pipeline.config.yaml
+        - name: WEB_API_CONFIG_FILE_PATH
+          value: /dag_config_files/web-api-data-pipeline.config.yaml
+        - name: MONITORING_CONFIG_FILE_PATH
+          value: monitoring.config.yaml
         
         # scheduler interval
         - name: GMAIL_DATA_PIPELINE_SCHEDULE_INTERVAL
@@ -55,6 +59,10 @@ spec:
           value: "@daily"
         - name: S3_CSV_SCHEDULE_INTERVAL
           value: "@hourly"
+        - name: WEB_API_SCHEDULE_INTERVAL
+          value: "@daily"
+        - name: MONITOR_DATA_HUB_PIPELINE_HEALTH_SCHEDULE_INTERVAL
+          value: "@daily"
 
         # general:
         - name: DEPLOYMENT_ENV
@@ -67,6 +75,8 @@ spec:
           value: "False"
         - name: INITIAL_S3_FILE_LAST_MODIFIED_DATE
           value: "2020-02-14 13:00:00"
+        - name: DATA_HUB_MONITORING_SLACK_WEBHOOK_URL
+          value: https://hc-ping.com/dbc47ad7-9d1b-4e2d-be31-5380764c1b02
 
     workers:
       extraVolumeMounts:
