@@ -51,6 +51,8 @@ spec:
           value: "@daily"
         - name: WEB_API_SCHEDULE_INTERVAL
           value: "@daily"
+        - name: S3_CSV_SCHEDULE_INTERVAL
+          value: "@hourly"
 
         # general:
         - name: DEPLOYMENT_ENV
@@ -61,6 +63,8 @@ spec:
           value: /dag_secret_files/gmail/gmail_credentials.json
         - name: IS_GMAIL_END2END_TEST
           value: "False"
+        - name: INITIAL_S3_FILE_LAST_MODIFIED_DATE
+          value: "2020-02-14 13:00:00"
 
     workers:
       extraVolumeMounts:
