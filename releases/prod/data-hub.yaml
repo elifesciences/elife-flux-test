@@ -41,6 +41,8 @@ spec:
           value: /dag_config_files/spreadsheet-data-pipeline.config.yaml
         - name: WEB_API_CONFIG_FILE_PATH
           value: /dag_config_files/web-api-data-pipeline.config.yaml
+        - name: S3_CSV_CONFIG_FILE_PATH
+          value: /dag_config_files/s3-csv-data-pipeline.config.yaml
         
         # scheduler interval
         - name: GMAIL_DATA_PIPELINE_SCHEDULE_INTERVAL
@@ -75,7 +77,7 @@ spec:
         mountPath: /dag_secret_files/gcloud/
         readOnly: true
       - name: aws-secret-volume
-        mountPath: /home/airflow/.aws/
+        mountPath: /home/airflow/.aws
         readOnly: true
       - name: gmail-secret-volume
         mountPath: /dag_secret_files/gmail/
