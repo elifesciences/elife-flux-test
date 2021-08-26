@@ -57,9 +57,9 @@ spec:
           value: flux
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /dag_secret_files/gcloud/credentials.json
-        - name: GMAIL_DATA_USER_ID
-          value: production@elifesciences.org
-        - name: IS_END2END_TEST
+        - name: GMAIL_ACCOUNT_SECRET_FILE
+          value: /dag_secret_files/gmail/credentials.json
+        - name: IS_GMAIL_END2END_TEST
           value: "False"
 
     workers:
