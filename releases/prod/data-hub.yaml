@@ -71,7 +71,7 @@ spec:
         mountPath: /dag_secret_files/gcloud/
         readOnly: true
       - name: aws-secret-volume
-        mountPath: /dag_secret_files/aws/
+        mountPath: /home/airflow/.aws/
         readOnly: true
       - name: gmail-secret-volume
         mountPath: /dag_secret_files/gmail/
