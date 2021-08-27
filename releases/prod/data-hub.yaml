@@ -98,9 +98,6 @@ spec:
       - name: civi-secret-volume
         mountPath: /home/airflow/civi_key
         readOnly: true
-      - name: civi-secret-volume
-        mountPath: /home/airflow/civi_key
-        readOnly: true
 
       extraVolumes:
       - name: data-hub-config-volume
