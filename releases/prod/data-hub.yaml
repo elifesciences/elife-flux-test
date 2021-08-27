@@ -46,7 +46,7 @@ spec:
         - name: WEB_API_CONFIG_FILE_PATH
           value: /dag_config_files/web-api-data-pipeline.config.yaml
         - name: MONITORING_CONFIG_FILE_PATH
-          value: monitoring.config.yaml
+          value: /dag_config_files/monitoring.config.yaml
         
         # scheduler interval
         - name: GMAIL_DATA_PIPELINE_SCHEDULE_INTERVAL
