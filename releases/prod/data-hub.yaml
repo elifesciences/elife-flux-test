@@ -33,7 +33,6 @@ spec:
         repository: elifesciences/data-hub-with-dags
         tag: 0.0.73
       extraEnv:
-
         # config file paths:
         - name: GMAIL_DATA_CONFIG_FILE_PATH
           value: /dag_config_files/gmail-data-pipeline.config.yaml
@@ -114,8 +113,8 @@ spec:
       - name: civi-secret-volume
         mountPath: /home/airflow/civi_key
         readOnly: true
-      - name: slack-url-volume
-        mountPath: /dag_secret_files/slack_url/
+      - name: monitoring-urls-volume
+        mountPath: /dag_secret_files/monitoring_urls/
         readOnly: true
 
       extraVolumes:
