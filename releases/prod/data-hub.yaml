@@ -79,17 +79,20 @@ spec:
           value: "False"
         - name: INITIAL_S3_FILE_LAST_MODIFIED_DATE
           value: "2020-02-14 13:00:00"
-        - name: HEALTH_CHECK_URL
-          value: https://hc-ping.com/dbc47ad7-9d1b-4e2d-be31-5380764c1b02
         - name: MATERIALIZE_BIGQUERY_VIEWS_GCP_PROJECT
           value: "elife-data-pipeline"
         - name: MATERIALIZE_BIGQUERY_VIEWS_DATASET
           value: "flux"
+        - name: HEALTH_CHECK_URL
+          valueFrom:
+            secretKeyRef:
+              name: monitoring-urls
+              key: health_check_url
         - name: DATA_HUB_MONITORING_SLACK_WEBHOOK_URL
           valueFrom:
             secretKeyRef:
-              name: slack-webhook-url
-              key: url
+              name: monitoring-urls
+              key: slack_webhhok_url
 
     workers:
       extraVolumeMounts:
@@ -137,6 +140,6 @@ spec:
       - name: civi-secret-volume
         secret:
           secretName: civi-key
-      - name: slack-url-volume
+      - name: monitoring-urls-volume
         secret:
-          secretName: slack-webhook-url
+          secretName: monitoring-urls
