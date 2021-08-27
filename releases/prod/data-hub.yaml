@@ -28,6 +28,7 @@ spec:
         enabled: true
       config:
         AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "True"
+        # AIRFLOW__CORE__REMOTE_BASE_LOG_FOLDER: "s3://flux-elife-data-pipeline/airflow-logs"
       image:
         repository: elifesciences/data-hub-with-dags
         tag: 0.0.73
@@ -43,10 +44,10 @@ spec:
           value: /dag_config_files/web-api-data-pipeline.config.yaml
         - name: S3_CSV_CONFIG_FILE_PATH
           value: /dag_config_files/s3-csv-data-pipeline.config.yaml
-        - name: WEB_API_CONFIG_FILE_PATH
-          value: /dag_config_files/web-api-data-pipeline.config.yaml
         - name: MONITORING_CONFIG_FILE_PATH
           value: /dag_config_files/monitoring.config.yaml
+        - name: MATERIALIZE_BIGQUERY_VIEWS_CONFIG_PATH
+          value: "s3://flux-elife-data-pipeline/airflow-config/bigquery-views"
         
         # scheduler interval
         - name: GMAIL_DATA_PIPELINE_SCHEDULE_INTERVAL
@@ -63,6 +64,8 @@ spec:
           value: "@daily"
         - name: MONITOR_DATA_HUB_PIPELINE_HEALTH_SCHEDULE_INTERVAL
           value: "@daily"
+        - name: MATERIALIZE_BIGQUERY_VIEWS_SCHEDULE_INTERVAL
+          value: "@hourly"
 
         # general:
         - name: DEPLOYMENT_ENV
@@ -75,8 +78,14 @@ spec:
           value: "False"
         - name: INITIAL_S3_FILE_LAST_MODIFIED_DATE
           value: "2020-02-14 13:00:00"
-        - name: DATA_HUB_MONITORING_SLACK_WEBHOOK_URL
+        - name: HEALTH_CHECK_URL
           value: https://hc-ping.com/dbc47ad7-9d1b-4e2d-be31-5380764c1b02
+        - name: DATA_HUB_MONITORING_SLACK_WEBHOOK_URL
+          value: "https://hooks.slack.com/services/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"
+        - name: MATERIALIZE_BIGQUERY_VIEWS_GCP_PROJECT
+          value: "elife-data-pipeline"
+        - name: MATERIALIZE_BIGQUERY_VIEWS_DATASET
+          value: "flux"
 
     workers:
       extraVolumeMounts:
