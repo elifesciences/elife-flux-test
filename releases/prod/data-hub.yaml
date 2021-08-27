@@ -80,12 +80,15 @@ spec:
           value: "2020-02-14 13:00:00"
         - name: HEALTH_CHECK_URL
           value: https://hc-ping.com/dbc47ad7-9d1b-4e2d-be31-5380764c1b02
-        - name: DATA_HUB_MONITORING_SLACK_WEBHOOK_URL
-          value: "https://hooks.slack.com/services/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"
         - name: MATERIALIZE_BIGQUERY_VIEWS_GCP_PROJECT
           value: "elife-data-pipeline"
         - name: MATERIALIZE_BIGQUERY_VIEWS_DATASET
           value: "flux"
+        - name: DATA_HUB_MONITORING_SLACK_WEBHOOK_URL
+          valueFrom:
+            secretKeyRef:
+              name: slack-webhook-url
+              key: url
 
     workers:
       extraVolumeMounts:
@@ -106,6 +109,9 @@ spec:
         readOnly: true
       - name: civi-secret-volume
         mountPath: /home/airflow/civi_key
+        readOnly: true
+      - name: slack-url-volume
+        mountPath: /dag_secret_files/slack_url/
         readOnly: true
 
       extraVolumes:
@@ -130,3 +136,6 @@ spec:
       - name: civi-secret-volume
         secret:
           secretName: civi-key
+      - name: slack-url-volume
+        secret:
+          secretName: slack-webhook-url
