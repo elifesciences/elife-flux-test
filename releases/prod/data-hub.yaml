@@ -66,6 +66,8 @@ spec:
           value: "@daily"
         - name: MATERIALIZE_BIGQUERY_VIEWS_SCHEDULE_INTERVAL
           value: "@hourly"
+        - name: SCHEDULE_INTERVAL
+          value: "@weekly"
 
         # general:
         - name: DEPLOYMENT_ENV
