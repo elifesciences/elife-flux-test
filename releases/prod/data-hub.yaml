@@ -74,6 +74,8 @@ spec:
           value: "@hourly"
         - name: SCHEDULE_INTERVAL
           value: "@weekly"
+        - name: DATA_SCIENCE_FORECAST_SCHEDULE_INTERVAL
+          value: "@hourly"
 
         # general:
         - name: DEPLOYMENT_ENV
@@ -150,3 +152,7 @@ spec:
       - name: monitoring-urls-volume
         secret:
           secretName: monitoring-urls
+
+      # resources:
+      #   requests:
+      #     ephemeral-storage: "10Gi"
