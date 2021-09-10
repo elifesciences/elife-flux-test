@@ -28,7 +28,7 @@ spec:
         enabled: true
       config:
         AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "True"
-        # AIRFLOW__CORE__REMOTE_BASE_LOG_FOLDER: "s3://flux-elife-data-pipeline/airflow-logs"
+        AIRFLOW__CORE__REMOTE_BASE_LOG_FOLDER: "s3://flux-elife-data-pipeline/airflow-logs"
       image:
         repository: elifesciences/data-hub-with-dags
         tag: 0.0.73
@@ -74,10 +74,10 @@ spec:
           value: "@hourly"
         - name: SCHEDULE_INTERVAL
           value: "@weekly"
-        # - name: DATA_SCIENCE_FORECAST_SCHEDULE_INTERVAL
-        #   value: "@hourly"
-        # - name: DATA_SCIENCE_PEERSCOUT_EDITOR_PUBMED_SCHEDULE_INTERVAL
-        #   value: "@hourly"
+        - name: DATA_SCIENCE_FORECAST_SCHEDULE_INTERVAL
+          value: "@hourly"
+        - name: DATA_SCIENCE_PEERSCOUT_EDITOR_PUBMED_SCHEDULE_INTERVAL
+          value: "@hourly"
 
         # general:
         - name: DEPLOYMENT_ENV
