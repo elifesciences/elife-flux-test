@@ -60,8 +60,8 @@ spec:
           value: /home/airflow/civi_key/civi_site_key.txt
         - name:  EJP_XML_CONFIG_FILE_PATH
           value: /dag_config_files/ejp-xml-data-pipeline.config.yaml
-        # - name: EXTRACT_KEYWORDS_FILE_PATH
-        #   value: /dag_config_files/keyword-extraction-data-pipeline.config.yaml
+        - name: EXTRACT_KEYWORDS_FILE_PATH
+          value: /dag_config_files/keyword-extraction-data-pipeline.config.yaml
         
         # scheduler interval
         - name: GMAIL_DATA_PIPELINE_SCHEDULE_INTERVAL
@@ -88,8 +88,8 @@ spec:
           value: "@hourly"
         - name: EJP_XML_SCHEDULE_INTERVAL
           value: "*/20 * * * *"
-        # - name: EXTRACT_KEYWORDS_SCHEDULE_INTERVAL
-        #   value: "@hourly"
+        - name: EXTRACT_KEYWORDS_SCHEDULE_INTERVAL
+          value: "@hourly"
 
         # general:
         - name: DEPLOYMENT_ENV
