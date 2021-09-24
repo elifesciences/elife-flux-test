@@ -47,7 +47,7 @@ metadata:
   annotations:
     fluxcd.io/automated: 'true'
     filter.fluxcd.io/chart-image: semver:*
-    filter.fluxcd.io/grobid: glob:0.6.2
+    filter.fluxcd.io/grobid: glob:*
 
 spec:
   releaseName: sciencebeam-texture-sciencebeam--prod
@@ -65,8 +65,14 @@ spec:
       SCIENCEBEAM__XSLT_TEMPLATE_PARAMETERS__ANNEX_TARGET: "body"
     grobid:
       image:
-        repository: lfoppiano/grobid
-        tag: "0.6.2"
+        repository: elifesciences/grobid_unstable
+        tag: "72fcce29839111c955ae5d6438fba62436bccbc8"
+      env:
+        GROBID__FEATURES__REMOVE_LINE_NUMBERS: "false"
+        GROBID__3RDPARTY__PDF2XML__MEMORY__TIMEOUT__SEC: "300"
+        GROBID__PDF__BLOCKS__MAX: "1000000"
+        GROBID__PDF__TOKENS__MAX: "10000000"
+        GROBID__HEADER__USE_LABELED_ABSTRACT: "false"
       warmup:
         enabled: true
       resources:
