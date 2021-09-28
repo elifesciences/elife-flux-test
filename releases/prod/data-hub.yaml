@@ -35,7 +35,7 @@ spec:
         # DAG_APP_CONFIGURATION: /home/airflow/app-config
       image:
         repository: elifesciences/data-hub-with-dags
-        tag: 0.0.75
+        tag: 0.0.76
       extraEnv:
         # config file paths:
         - name: GMAIL_DATA_CONFIG_FILE_PATH
