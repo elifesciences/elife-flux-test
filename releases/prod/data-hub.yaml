@@ -71,25 +71,25 @@ spec:
         - name: GOOGLE_SPREADSHEET_SCHEDULE_INTERVAL
           value: "@daily"
         - name: WEB_API_SCHEDULE_INTERVAL
-          value: "@daily"
+          value: "25 2 * * *"
         - name: S3_CSV_SCHEDULE_INTERVAL
           value: "@hourly"
-        - name: WEB_API_SCHEDULE_INTERVAL
-          value: "@daily"
         - name: MONITOR_DATA_HUB_PIPELINE_HEALTH_SCHEDULE_INTERVAL
-          value: "@daily"
+          value: "50 8-18/3 * * *"
         - name: MATERIALIZE_BIGQUERY_VIEWS_SCHEDULE_INTERVAL
           value: "@hourly"
         - name: SCHEDULE_INTERVAL
           value: "@weekly"
         - name: DATA_SCIENCE_FORECAST_SCHEDULE_INTERVAL
           value: "@hourly"
+        - name: DATA_SCIENCE_PEERSCOUT_RECOMMEND_SCHEDULE_INTERVAL
+          value: "40 */3 * * *"
         - name: DATA_SCIENCE_PEERSCOUT_EDITOR_PUBMED_SCHEDULE_INTERVAL
-          value: "@hourly"
+          value: "15 */3 * * *"
         - name: EJP_XML_SCHEDULE_INTERVAL
           value: "*/20 * * * *"
         - name: EXTRACT_KEYWORDS_SCHEDULE_INTERVAL
-          value: "@hourly"
+          value: "10 */2 * * *"
 
         # general:
         - name: DEPLOYMENT_ENV
