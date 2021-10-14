@@ -31,7 +31,7 @@ spec:
         DAG_APP_CONFIGURATION: /home/airflow/app-config
       image:
         repository: elifesciences/data-hub-with-dags
-        tag: latest
+        tag: v0.0.78
       extraEnv:
         - name: AIRFLOW__CORE__REMOTE_LOGGING
           value: "True"
