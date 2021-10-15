@@ -94,8 +94,6 @@ spec:
         # general:
         - name: DEPLOYMENT_ENV
           value: prod
-        - name: SPACY_LANGUAGE_MODEL_NAME
-          value: "en_core_web_lg"
         - name: AIRFLOW_APPLICATIONS_DIRECTORY_PATH
           value: /opt/airflow/auxiliary_data_pipeline_files
         - name: GOOGLE_APPLICATION_CREDENTIALS
