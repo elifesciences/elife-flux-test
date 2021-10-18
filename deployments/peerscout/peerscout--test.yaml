@@ -18,11 +18,12 @@ spec:
   values:
     image:
       repository: elifesciences/data-science-dags_peerscout-api_unstable
-      tag: 2325721764e4b954a81ebed92fa7147866efa97b
+      tag: 037e305f28735d262c225f7c947efdef1db36f6d
     env:
       DATA_SCIENCE_STATE_PATH: s3://staging-elife-data-pipeline/airflow-config/data-science/state
       GOOGLE_APPLICATION_CREDENTIALS: /root/.gcp/credentials.json
       DEPLOYMENT_ENV: staging
+      SPACY_LANGUAGE_MODEL_NAME: "en_core_web_lg"
     volumeMounts:
     - name: aws-credentials-sealed-secret-volume
       mountPath: /root/.aws
