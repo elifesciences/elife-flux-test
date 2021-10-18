@@ -33,10 +33,6 @@ spec:
         repository: elifesciences/data-hub-with-dags
         tag: 0.0.79
       extraEnv:
-        # - name: AIRFLOW__CORE__REMOTE_LOGGING
-        #   value: "True"
-        # - name: AIRFLOW__CORE__REMOTE_BASE_LOG_FOLDER
-        #   value: "s3://prod-elife-data-pipeline/airflow-logs"
         # config file paths:
         - name: GMAIL_DATA_CONFIG_FILE_PATH
           value: /dag_config_files/gmail-data-pipeline.config.yaml
@@ -170,7 +166,3 @@ spec:
       - name: monitoring-urls-volume
         secret:
           secretName: monitoring-urls
-
-      # resources:
-      #   requests:
-      #     ephemeral-storage: "10Gi"
