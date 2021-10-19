@@ -424,7 +424,7 @@ data:
         headerLineIndex: 0
         dataValuesStartLineIndex: 1
         datasetName: "{ENV}"
-        tableName: prod_task_adept_timer_report_range
+        tableName: prod_task_adept_carina_eol_kriya
         tableWriteAppend: True
         stateFile:
           bucketName: "{ENV}-elife-data-pipeline"
@@ -513,7 +513,6 @@ data:
         stateFile:
           bucketName: "{ENV}-elife-data-pipeline"
           objectName: "airflow-config/s3-csv/{ENV}-state/prod_kriya_wip_stage_history_001.json"
-
 
   crossref-event-data-pipeline.config.yaml: |-
     projectName: 'elife-data-pipeline'
