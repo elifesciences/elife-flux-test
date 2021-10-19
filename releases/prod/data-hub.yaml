@@ -28,6 +28,7 @@ spec:
         enabled: true
       config:
         AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "True"
+        AIRFLOW__CORE__DAG_CONCURRENCY: 100
       image:
         repository: elifesciences/data-hub-with-dags
         tag: 0.0.79
