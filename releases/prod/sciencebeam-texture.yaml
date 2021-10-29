@@ -74,7 +74,7 @@ spec:
         GROBID__PDF__TOKENS__MAX: "10000000"
         GROBID__HEADER__USE_LABELED_ABSTRACT: "false"
       warmup:
-        enabled: true
+        enabled: false
         image:
           repository: pstauffer/curl
           tag: v1.0.3
