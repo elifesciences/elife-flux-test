@@ -75,6 +75,9 @@ spec:
         GROBID__HEADER__USE_LABELED_ABSTRACT: "false"
       warmup:
         enabled: true
+        image:
+          repository: pstauffer/curl
+          tag: v1.0.3
       resources:
         requests:
           memory: 3Gi
