@@ -65,30 +65,38 @@ spec:
           value: /dag_config_files/keyword-extraction-data-pipeline.config.yaml
         
         # scheduler interval
+          # At 07:00 on every day-of-week from Monday through Friday :
         - name: GMAIL_DATA_PIPELINE_SCHEDULE_INTERVAL
           value: "0 7 * * 1-5"
         - name: CROSS_REF_IMPORT_SCHEDULE_INTERVAL
           value: "@daily"
         - name: GOOGLE_SPREADSHEET_SCHEDULE_INTERVAL
           value: "@daily"
+          # At 02:25 :
         - name: WEB_API_SCHEDULE_INTERVAL
           value: "25 2 * * *"
-        # - name: S3_CSV_SCHEDULE_INTERVAL
-        #   value: "@hourly"
-        # - name: MONITOR_DATA_HUB_PIPELINE_HEALTH_SCHEDULE_INTERVAL
-        #   value: "50 8-18/3 * * *"
-        # - name: MATERIALIZE_BIGQUERY_VIEWS_SCHEDULE_INTERVAL
-        #   value: "@hourly"
+          # At minute 10 past every 2nd hour :
+        - name: S3_CSV_SCHEDULE_INTERVAL
+          value: "10 */2 * * *"
+          # At minute 50 past every 3rd hour from 8 through 18 :
+        - name: MONITOR_DATA_HUB_PIPELINE_HEALTH_SCHEDULE_INTERVAL
+          value: "50 8-18/3 * * *"
+        - name: MATERIALIZE_BIGQUERY_VIEWS_SCHEDULE_INTERVAL
+          value: "@hourly"
         - name: SCHEDULE_INTERVAL
           value: "@weekly"
         - name: DATA_SCIENCE_FORECAST_SCHEDULE_INTERVAL
           value: "@hourly"
-        # - name: DATA_SCIENCE_PEERSCOUT_RECOMMEND_SCHEDULE_INTERVAL
-        #   value: "40 */3 * * *"
+          # At minute 40 past every 3rd hour :
+        - name: DATA_SCIENCE_PEERSCOUT_RECOMMEND_SCHEDULE_INTERVAL
+          value: "40 */3 * * *" 
+          # At minute 15 past every 3rd hour :
         - name: DATA_SCIENCE_PEERSCOUT_EDITOR_PUBMED_SCHEDULE_INTERVAL
           value: "15 */3 * * *"
+          # At every 20th minute :
         - name: EJP_XML_SCHEDULE_INTERVAL
           value: "*/20 * * * *"
+          # At minute 10 past every 2nd hour :
         - name: EXTRACT_KEYWORDS_SCHEDULE_INTERVAL
           value: "10 */2 * * *"
 
