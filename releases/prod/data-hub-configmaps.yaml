@@ -477,18 +477,18 @@ data:
         stateFile:
           bucketName: "{ENV}-elife-data-pipeline"
           objectName: "airflow-config/s3-csv/{ENV}-state/prod_kriya_published_stage_history_001.json"
-      - bucketName: prod-elife-kriya
-        objectKeyPattern:
-          - Published_Stage_Summary_*
-        dataPipelineId: prod_kriya_published_stage_summary_001
-        headerLineIndex: 0
-        dataValuesStartLineIndex: 1
-        datasetName: "{ENV}"
-        tableName: prod_kriya_published_stage_summary
-        tableWriteAppend: True
-        stateFile:
-          bucketName: "{ENV}-elife-data-pipeline"
-          objectName: "airflow-config/s3-csv/{ENV}-state/prod_kriya_published_stage_summary_001.json"
+      # - bucketName: prod-elife-kriya
+      #   objectKeyPattern:
+      #     - Published_Stage_Summary_*
+      #   dataPipelineId: prod_kriya_published_stage_summary_001
+      #   headerLineIndex: 0
+      #   dataValuesStartLineIndex: 1
+      #   datasetName: "{ENV}"
+      #   tableName: prod_kriya_published_stage_summary
+      #   tableWriteAppend: True
+      #   stateFile:
+      #     bucketName: "{ENV}-elife-data-pipeline"
+      #     objectName: "airflow-config/s3-csv/{ENV}-state/prod_kriya_published_stage_summary_001.json"
       - bucketName: prod-elife-kriya
         objectKeyPattern:
           - WIP_Stage_Summary_*
