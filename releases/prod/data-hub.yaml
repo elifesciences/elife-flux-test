@@ -90,9 +90,8 @@ spec:
           # At minute 40 past every 3rd hour :
         - name: DATA_SCIENCE_PEERSCOUT_RECOMMEND_SCHEDULE_INTERVAL
           value: "40 */3 * * *" 
-          # At minute 15 past every 3rd hour :
         - name: DATA_SCIENCE_PEERSCOUT_EDITOR_PUBMED_SCHEDULE_INTERVAL
-          value: "15 */3 * * *"
+          value: "@hourly"
           # At every 20th minute :
         - name: EJP_XML_SCHEDULE_INTERVAL
           value: "*/20 * * * *"
