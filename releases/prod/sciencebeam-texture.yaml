@@ -118,7 +118,7 @@ spec:
   values:
     image:
       repository: elifesciences/sciencebeam-parser_unstable
-      tag: "526bd3e4a1852ba997b429df2cc50f2116832bdb-cv"
+      tag: "e9a9cf54fbc8f0b043dcf2f530e348afba78d4bd"
     env:
       SCIENCEBEAM_PARSER__XSLT__TEI_TO_JATS__PARAMETERS__ACKNOWLEDGEMENT_TARGET: "body"
       SCIENCEBEAM_PARSER__XSLT__TEI_TO_JATS__PARAMETERS__ANNEX_TARGET: "body"
