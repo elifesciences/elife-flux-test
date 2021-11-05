@@ -124,8 +124,8 @@ spec:
       SCIENCEBEAM__XSLT_TEMPLATE_PARAMETERS__ANNEX_TARGET: "body"
     grobid:
       image:
-        repository: elifesciences/sciencebeam-grobid-biorxiv
-        tag: "0.0.8-dl-no-word-embeddings-wapiti-citation"
+        repository: elifesciences/sciencebeam-parser_unstable
+        tag: "526bd3e4a1852ba997b429df2cc50f2116832bdb"
       warmup:
         enabled: false
         image:
