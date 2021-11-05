@@ -133,6 +133,7 @@ spec:
           tag: v1.0.3
       env:
         GROBID__HEADER__USE_LABELED_ABSTRACT: "false"
+        SCIENCEBEAM_PARSER__PRELOAD_ON_STARTUP: "true"
       resources:
         requests:
           memory: 3Gi
