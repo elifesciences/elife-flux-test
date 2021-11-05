@@ -125,7 +125,7 @@ spec:
     grobid:
       image:
         repository: elifesciences/sciencebeam-parser_unstable
-        tag: "526bd3e4a1852ba997b429df2cc50f2116832bdb"
+        tag: "526bd3e4a1852ba997b429df2cc50f2116832bdb-cv"
       warmup:
         enabled: false
         image:
