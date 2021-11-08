@@ -112,32 +112,17 @@ spec:
   releaseName: sciencebeam-texture-sciencebeam-biorxiv--prod
   chart:
     git: https://github.com/elifesciences/sciencebeam-charts
-    path: sciencebeam
-    ref: develop
+    path: sciencebeam-parser
+    ref: sciencebeam-parser-chart
 
   values:
     image:
-      repository: elifesciences/sciencebeam
-      tag: 0.0.12
+      repository: elifesciences/sciencebeam-parser_unstable
+      tag: "e9a9cf54fbc8f0b043dcf2f530e348afba78d4bd"
     env:
-      SCIENCEBEAM__XSLT_TEMPLATE_PARAMETERS__ACKNOWLEDGEMENT_TARGET: "body"
-      SCIENCEBEAM__XSLT_TEMPLATE_PARAMETERS__ANNEX_TARGET: "body"
-    grobid:
-      image:
-        repository: elifesciences/sciencebeam-grobid-biorxiv
-        tag: "0.0.8-dl-no-word-embeddings-wapiti-citation"
-      warmup:
-        enabled: false
-        image:
-          repository: pstauffer/curl
-          tag: v1.0.3
-      env:
-        GROBID__HEADER__USE_LABELED_ABSTRACT: "false"
-      resources:
-        requests:
-          memory: 3Gi
-        limits:
-          memory: 8Gi
+      SCIENCEBEAM_PARSER__XSLT__TEI_TO_JATS__PARAMETERS__ACKNOWLEDGEMENT_TARGET: "body"
+      SCIENCEBEAM_PARSER__XSLT__TEI_TO_JATS__PARAMETERS__ANNEX_TARGET: "body"
+      SCIENCEBEAM_PARSER__PRELOAD_ON_STARTUP: "true"
     ingress:
       enabled: "true"
       hosts:
@@ -150,6 +135,11 @@ spec:
       annotations:
         nginx.ingress.kubernetes.io/rewrite-target: /api/$2
         nginx.ingress.kubernetes.io/proxy-body-size: 120m
+        nginx.ingress.kubernetes.io/proxy-connect-timeout: "180"
+        nginx.ingress.kubernetes.io/proxy-read-timeout: "180"
+        nginx.ingress.kubernetes.io/proxy-send-timeout: "180"
     resources:
       requests:
-        memory: 128Mi
+        memory: 3Gi
+      limits:
+        memory: 8Gi
