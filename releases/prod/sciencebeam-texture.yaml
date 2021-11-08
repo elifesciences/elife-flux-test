@@ -113,7 +113,7 @@ spec:
   chart:
     git: https://github.com/elifesciences/sciencebeam-charts
     path: sciencebeam-parser
-    ref: sciencebeam-parser-chart
+    ref: develop
 
   values:
     image:
