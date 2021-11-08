@@ -59,7 +59,7 @@ spec:
   values:
     image:
       repository: elifesciences/sciencebeam-pipelines
-      tag: 0.1.1
+      tag: 0.1.2
     env:
       SCIENCEBEAM__XSLT_TEMPLATE_PARAMETERS__ACKNOWLEDGEMENT_TARGET: "body"
       SCIENCEBEAM__XSLT_TEMPLATE_PARAMETERS__ANNEX_TARGET: "body"
