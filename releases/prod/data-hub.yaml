@@ -38,6 +38,8 @@ spec:
         repository: elifesciences/data-hub-with-dags
         tag: 0.0.82
       extraEnv:
+        - name: AIRFLOW__CELERY__WORKER_CONCURRENCY
+          value: "32"
         # config file paths:
         - name: GMAIL_DATA_CONFIG_FILE_PATH
           value: /dag_config_files/gmail-data-pipeline.config.yaml
