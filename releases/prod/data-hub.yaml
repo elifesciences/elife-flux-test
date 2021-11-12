@@ -139,6 +139,11 @@ spec:
               key: slack_webhhok_url
 
     workers:
+      resources:
+        requests:
+          memory: "6Gi"
+          cpu: "800m"
+          ephemeral-storage: "10Gi"
       extraVolumeMounts:
       - name: data-hub-config-volume
         mountPath: /dag_config_files/
