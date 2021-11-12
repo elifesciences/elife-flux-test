@@ -35,13 +35,13 @@ spec:
       config:
         AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "True"
         AIRFLOW__CORE__DAG_CONCURRENCY: "128"
-        AIRFLOW__CORE__MAX_ACTIVE_RUNS_PER_DAG: "32"
+        AIRFLOW__CORE__MAX_ACTIVE_RUNS_PER_DAG: "50"
         AIRFLOW__CORE__REMOTE_LOGGING: "True"
         AIRFLOW__CORE__REMOTE_BASE_LOG_FOLDER: "s3://prod-elife-data-pipeline/airflow-logs"
         AIRFLOW__CORE__REMOTE_LOG_CONN_ID: "aws_default"
         AIRFLOW__KUBERNETES_ENVIRONMENT_VARIABLES__AIRFLOW__CORE__REMOTE_LOGGING: "True"
         AIRFLOW__KUBERNETES_ENVIRONMENT_VARIABLES__AIRFLOW__CORE__REMOTE_BASE_LOG_FOLDER: "s3://prod-elife-data-pipeline/airflow-logs"
-        AIRFLOW__CELERY__WORKER_CONCURRENCY: "32"
+        AIRFLOW__CELERY__WORKER_CONCURRENCY: "50"
         AIRFLOW__CELERY__FLOWER_URL_PREFIX: "/flower"
       image:
         repository: elifesciences/data-hub-with-dags
