@@ -13,12 +13,12 @@ spec:
   chart:
     git: https://github.com/elifesciences/data-science-dags
     path: charts/peerscout
-    ref: v0.0.5
+    ref: v0.0.6
 
   values:
     image:
       repository: elifesciences/data-science-dags_peerscout-api
-      tag: "0.0.5"
+      tag: "0.0.6"
     env:
       DATA_SCIENCE_STATE_PATH: s3://prod-elife-data-pipeline/airflow-config/data-science/state
       GOOGLE_APPLICATION_CREDENTIALS: /root/.gcp/credentials.json
