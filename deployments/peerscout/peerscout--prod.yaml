@@ -13,12 +13,12 @@ spec:
   chart:
     git: https://github.com/elifesciences/data-science-dags
     path: charts/peerscout
-    ref: v0.0.6
+    ref: v0.0.7
 
   values:
     image:
       repository: elifesciences/data-science-dags_peerscout-api
-      tag: "0.0.6"
+      tag: "0.0.7"
     env:
       DATA_SCIENCE_STATE_PATH: s3://prod-elife-data-pipeline/airflow-config/data-science/state
       GOOGLE_APPLICATION_CREDENTIALS: /root/.gcp/credentials.json
@@ -52,3 +52,19 @@ spec:
     resources:
       requests:
         memory: 2Gi
+
+    livenessProbe:
+      httpGet:
+        path: /api/status
+        port: http
+      initialDelaySeconds: 5
+      timeoutSeconds: 30
+      periodSeconds: 30
+
+    readinessProbe:
+      httpGet:
+        path: /api/status
+        port: http
+      initialDelaySeconds: 5
+      timeoutSeconds: 30
+      periodSeconds: 10
