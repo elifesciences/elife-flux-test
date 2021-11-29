@@ -52,3 +52,5 @@ spec:
     resources:
       requests:
         memory: 512Mi
+    
+    livenessProbe: {}
