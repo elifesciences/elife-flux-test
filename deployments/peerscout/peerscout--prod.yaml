@@ -51,4 +51,4 @@ spec:
 
     resources:
       requests:
-        memory: 1Gi
+        memory: 2Gi
