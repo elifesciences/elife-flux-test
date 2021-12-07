@@ -72,6 +72,8 @@ spec:
           value: /dag_config_files/ejp-xml-data-pipeline.config.yaml
         - name: EXTRACT_KEYWORDS_FILE_PATH
           value: /dag_config_files/keyword-extraction-data-pipeline.config.yaml
+        - name: SURVEYMONKEY_DATA_CONFIG_FILE_PATH
+          value: /dag_config_files/surveymonkey-data-pipeline.config.yaml
         
         # scheduler interval
           # At 07:00 on every day-of-week from Monday through Friday :
@@ -119,6 +121,8 @@ spec:
           value: /dag_secret_files/gcloud/credentials.json
         - name: GMAIL_ACCOUNT_SECRET_FILE
           value: /dag_secret_files/gmail/gmail_credentials.json
+        - name: SURVEYMONKEY_SECRET_FILE
+          value: /dag_secret_files/surveymonkey/surveymonkey_credentials.json
         - name: IS_GMAIL_END2END_TEST
           value: "False"
         - name: INITIAL_S3_FILE_LAST_MODIFIED_DATE
@@ -168,6 +172,9 @@ spec:
       - name: monitoring-urls-volume
         mountPath: /dag_secret_files/monitoring_urls/
         readOnly: true
+      - name: surveymonkey-secret-volume
+        mountPath: /dag_secret_files/surveymonkey/
+        readOnly: true
 
       extraVolumes:
       - name: data-hub-config-volume
@@ -194,3 +201,6 @@ spec:
       - name: monitoring-urls-volume
         secret:
           secretName: monitoring-urls
+      - name: surveymonkey-secret-volume
+        secret:
+          secretName: surveymonkey-credentials

@@ -48,6 +48,17 @@ data:
       bucket: '{ENV}-elife-data-pipeline'
       objectPrefix: 'airflow-config/ejp-xml/temp-ejp-xml_files'
 
+  surveymonkey-data-pipeline.config.yaml: |-
+    projectName: 'elife-data-pipeline'
+    datasetName: '{ENV}'
+    surveyMonkeySurveyList:
+      table: 'surveymonkey_survey_list'
+      survey_id_column_name: 'id'
+    surveyMonkeySurveyQuestions:
+      table: 'surveymonkey_survey_questions'
+    surveyMonkeySurveyAnswers:
+      table: 'surveymonkey_survey_answers'
+
   keyword-extraction-data-pipeline.config.yaml: |-
     gcpProjectName: 'elife-data-pipeline' #mandatory
     importedTimestampFieldName: 'data_hub_imported_timestamp' #mandatory
