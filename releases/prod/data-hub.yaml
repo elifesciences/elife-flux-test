@@ -45,7 +45,7 @@ spec:
         AIRFLOW__CELERY__FLOWER_URL_PREFIX: "/flower"
       image:
         repository: elifesciences/data-hub-with-dags
-        tag: 0.0.84
+        tag: 0.0.85
       extraEnv:
         # config file paths:
         - name: GMAIL_DATA_CONFIG_FILE_PATH
