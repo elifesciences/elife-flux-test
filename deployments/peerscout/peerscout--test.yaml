@@ -18,7 +18,7 @@ spec:
   values:
     image:
       repository: elifesciences/data-science-dags_peerscout-api_unstable
-      tag: e746b239845a90cd2c8de9813baad9dfa9171c49
+      tag: ea048f11e81349c6eb76a043bacfcfc4dad1aa7a
     env:
       DATA_SCIENCE_STATE_PATH: s3://staging-elife-data-pipeline/airflow-config/data-science/state
       GOOGLE_APPLICATION_CREDENTIALS: /root/.gcp/credentials.json
@@ -52,7 +52,7 @@ spec:
     resources:
       requests:
         memory: 1.8Gi
-    
+
     livenessProbe:
       httpGet:
         path: /api/status
