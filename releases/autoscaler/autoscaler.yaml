@@ -1,0 +1,19 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: autoscaler
+  namespace: autoscaler
+
+spec:
+  releaseName: cluster-autoscaler
+  chart:
+    repository: https://kubernetes.github.io/autoscaler
+    name: cluster-autoscaler
+    version: 9.15.0
+
+  values:
+    autoDiscovery:
+      clusterName: flux-test
+      tags:
+      - kubernetes.io/cluster/kubernetes-aws--flux-test
+    awsRegion: us-east-1
