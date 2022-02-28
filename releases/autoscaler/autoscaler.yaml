@@ -13,7 +13,7 @@ spec:
 
   values:
     autoDiscovery:
-      clusterName: flux-test
+      clusterName: kubernetes-aws--flux-test
       tags:
       - kubernetes.io/cluster/kubernetes-aws--flux-test
     awsRegion: us-east-1
