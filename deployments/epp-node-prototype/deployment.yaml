@@ -22,8 +22,9 @@ spec:
       - name: epp-node
         image: slunaaeterna/enhanced-preprint:latest@sha256:33fdf6923aa05e455cc7050ce63bb1869c62e57d3b655d6852bc393889ade323
         resources:
+          requests:
+            cpu: "200m"
           limits:
             memory: "512Mi"
-            cpu: "500m"
         ports:
           - containerPort: 3000
