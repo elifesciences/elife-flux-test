@@ -20,7 +20,7 @@ spec:
         kubernetes.io/arch: amd64
       containers:
       - name: epp-node
-        image: scottaubrey/epp-node:latest@sha256:20e22ba50698e1a47b0744ffa2045e16f06eb2351ed740032c9a2a6afb44b0b6
+        image: slunaaeterna/enhanced-preprint:latest@sha256:33fdf6923aa05e455cc7050ce63bb1869c62e57d3b655d6852bc393889ade323
         resources:
           limits:
             memory: "512Mi"
