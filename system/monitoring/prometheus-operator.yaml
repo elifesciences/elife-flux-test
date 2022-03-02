@@ -45,6 +45,11 @@ spec:
         GF_AUTH_ANONYMOUS_ORG_ROLE: "Viewer"
       rbac:
         pspUseAppArmor: false
+        pspEnabled: true
+
+    prometheus-node-exporter:
+      rbac:
+        pspEnabled: true
 
     prometheus:
       ingress:
