@@ -12,6 +12,10 @@ spec:
     version: 33.1.0
 
   values:
+    global:
+      rbac:
+        create: true
+        pspEnabled: true
     defaultRules:
       rules:
         kubeScheduler: false  # lives on EKS
