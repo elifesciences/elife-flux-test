@@ -3,7 +3,7 @@ apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
   name: ingress-nginx
-  namespace: adm
+  namespace: infra
 
 spec:
   chart:
@@ -17,7 +17,7 @@ spec:
         use-forwarded-headers: "true"
         use-http2: "true"
       extraArgs:
-        default-ssl-certificate: adm/tls-elife-wildcard-2022
+        default-ssl-certificate: infra/tls-elife-wildcard-2022
       service:
         annotations:
           service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "tcp"
