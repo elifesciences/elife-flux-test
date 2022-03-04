@@ -3,7 +3,7 @@ apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
   name: flagger
-  namespace: adm
+  namespace: infra
 
 spec:
   chart:
@@ -12,7 +12,7 @@ spec:
     version: 1.10.0
 
   values:
-    metricsServer: http://adm-prometheus-operator-prometheus:9090
+    metricsServer: http://infra-prometheus-operator-prometheus:9090
     meshProvider: nginx
 
 ---
@@ -20,7 +20,7 @@ apiVersion: helm.fluxcd.io/v1
 kind: HelmRelease
 metadata:
   name: flagger-loadtester
-  namespace: adm
+  namespace: infra
 
 spec:
   chart:
@@ -49,17 +49,17 @@ apiVersion: flagger.app/v1beta1
 kind: MetricTemplate
 metadata:
   name: request-success-rate--central-ing-controller
-  namespace: adm
+  namespace: infra
   description: "Needed if ingress controller resides different namespace"
 spec:
   provider:
     type: prometheus
-    address: http://adm-prometheus-operator-prometheus:9090
+    address: http://infra-prometheus-operator-prometheus:9090
   query: >
     sum(
         rate(
           nginx_ingress_controller_requests{
-            namespace="adm",
+            namespace="infra",
             ingress="{{ ingress }}",
             status!~"5.*"
           }[{{ interval }}]
@@ -69,7 +69,7 @@ spec:
       sum(
         rate(
           nginx_ingress_controller_requests{
-            namespace="adm",
+            namespace="infra",
             ingress="{{ ingress }}"
           }[{{ interval }}]
         )
@@ -81,7 +81,7 @@ apiVersion: flagger.app/v1beta1
 kind: AlertProvider
 metadata:
   name: reviewer-slack
-  namespace: adm
+  namespace: infra
 spec:
   type: slack
   channel: libero-reviewer-tech
