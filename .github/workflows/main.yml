@@ -14,15 +14,22 @@ jobs:
           submodules: "true"
 
       - name: Validate Helm Releases -- prod
-        uses: stefanprodan/hrval-action@master
+        uses: scottaubrey/hrval-action@master
         with:
           helmRelease: releases/prod/
           helmVersion: v3
           kubernetesVersion: 1.19.0
 
       - name: Validate Helm Releases -- adm
-        uses: stefanprodan/hrval-action@master
+        uses: scottaubrey/hrval-action@master
         with:
           helmRelease: releases/adm/
+          helmVersion: v3
+          kubernetesVersion: 1.19.0
+
+      - name: Validate Helm Releases -- system
+        uses: scottaubrey/hrval-action@master
+        with:
+          helmRelease: system/
           helmVersion: v3
           kubernetesVersion: 1.19.0
