@@ -20,7 +20,7 @@ spec:
         kubernetes.io/arch: amd64
       containers:
       - name: epp-node
-        image: lunaaeterna/enhanced-preprint:latest@sha256:8afdebbf787e0a72b7adc246ee67b19b1d8fbad5cbec229c17c4c183f8dbbf27
+        image: lunaaeterna/enhanced-preprint:latest@sha256:3b7c63257d4eba29d35d948dee62354ce6c79485f27806ac8a3217404d8b3c2d
         resources:
           requests:
             cpu: "200m"
