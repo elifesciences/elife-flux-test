@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   name: sciencebeam.rules
-  namespace: adm
+  namespace: prod
   labels:
     app: sciencebeam
 spec:
