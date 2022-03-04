@@ -20,13 +20,6 @@ jobs:
           helmVersion: v3
           kubernetesVersion: 1.19.0
 
-      - name: Validate Helm Releases -- adm
-        uses: scottaubrey/hrval-action@master
-        with:
-          helmRelease: releases/adm/
-          helmVersion: v3
-          kubernetesVersion: 1.19.0
-
       - name: Validate Helm Releases -- system
         uses: scottaubrey/hrval-action@master
         with:
