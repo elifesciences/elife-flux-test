@@ -12,7 +12,7 @@ spec:
     version: 1.10.0
 
   values:
-    metricsServer: http://infra-prometheus-operator-prometheus:9090
+    metricsServer: http://monitoring-prometheus-stac-prometheus.monitoring:9090
     meshProvider: nginx
 
 ---
@@ -45,16 +45,16 @@ spec:
           verbs: ["create", "list", "delete", "watch"]
 
 ---
+# Needed due to ingress controller residing in different namespace than canaries
 apiVersion: flagger.app/v1beta1
 kind: MetricTemplate
 metadata:
   name: request-success-rate--central-ing-controller
   namespace: infra
-  description: "Needed if ingress controller resides different namespace"
 spec:
   provider:
     type: prometheus
-    address: http://infra-prometheus-operator-prometheus:9090
+    address: http://monitoring-prometheus-stac-prometheus.monitoring:9090
   query: >
     sum(
         rate(
