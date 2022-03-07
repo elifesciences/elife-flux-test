@@ -13,16 +13,16 @@ jobs:
         with:
           submodules: "true"
 
-      - name: Validate Helm Releases -- deployments
+      - name: Validate Helm Releases -- System
         uses: scottaubrey/hrval-action@master
         with:
-          helmRelease: deployments/
+          helmRelease: system
           helmVersion: v3
           kubernetesVersion: 1.19.0
 
-      - name: Validate Helm Releases -- system
+      - name: Validate Helm Releases -- Deployments
         uses: scottaubrey/hrval-action@master
         with:
-          helmRelease: system/
+          helmRelease: deployments
           helmVersion: v3
           kubernetesVersion: 1.19.0
