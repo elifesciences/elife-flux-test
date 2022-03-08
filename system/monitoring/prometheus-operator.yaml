@@ -77,8 +77,7 @@ spec:
       podDisruptionBudget:
         enabled: true
       alertmanagerSpec:
-        configMaps:
-        - alertmanager-config
+        configSecret: alertmanager-prometheus-operator
         secrets:
         - alertmanager-slack-receiver-api-url
         - alertmanager-healthchecks-receiver-url
