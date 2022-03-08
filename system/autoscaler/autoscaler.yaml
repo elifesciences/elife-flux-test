@@ -9,7 +9,7 @@ spec:
   chart:
     repository: https://kubernetes.github.io/autoscaler
     name: cluster-autoscaler
-    version: 9.15.0
+    version: 9.16.1
 
   values:
     autoDiscovery:
