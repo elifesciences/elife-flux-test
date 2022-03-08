@@ -35,7 +35,7 @@
     {
       "datasources": ["helm"],
       "managers": ["regex"],
-      "packageNames": ["descheduler-helm-chart"],
+      "packageNames": ["descheduler"],
       "automerge": true,
       "registryUrls": ["https://kubernetes-sigs.github.io/descheduler"]
     },
@@ -66,6 +66,13 @@
       "packageNames": ["external-dns"],
       "automerge": false,
       "registryUrls": ["https://charts.bitnami.com/bitnami"]
+    },
+    {
+      "datasources": ["helm"],
+      "managers": ["regex"],
+      "packageNames": ["cluster-autoscaler"],
+      "automerge": false,
+      "registryUrls": ["https://kubernetes.github.io/autoscaler"]
     }
   ]
 }
