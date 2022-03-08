@@ -42,5 +42,5 @@ data:
       - url: '{{ template healthchecks.receiver.url }}'
         send_resolved: false
     templates:
-    - '/etc/alertmanager/secrets/alertmanager-healthchecks-receiver-url.yaml'
-    - '/etc/alertmanager/secrets/alertmanager-slack-receiver-api-url.yaml'
+    - '/etc/alertmanager/secrets/alertmanager-healthchecks-receiver-url/alertmanager-healthchecks-receiver-url.yaml'
+    - '/etc/alertmanager/secrets/alertmanager-slack-receiver-api-url/alertmanager-slack-receiver-api-url.yaml'
