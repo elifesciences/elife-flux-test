@@ -78,6 +78,9 @@ spec:
         enabled: true
       alertmanagerSpec:
         configSecret: alertmanager-prometheus-operator
+        secrets:
+        - alertmanager-slack-receiver-api_url
+        - alertmanager-healthchecks-receiver-url
         replicas: 1
         resources:
           limits:
