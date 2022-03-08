@@ -4,7 +4,7 @@ metadata:
   name: alertmanager-config
   namespace: monitoring
 data:
-  config: |
+  alertmanager.yaml: |
     global:
       resolve_timeout: 5m
 
@@ -42,5 +42,5 @@ data:
       - url: '{{ template healthchecks.receiver.url }}'
         send_resolved: false
     templates:
-    - '/etc/alertmanager/secrets/alertmanager-healthchecks-receiver-url/alertmanager-healthchecks-receiver-url.yaml'
-    - '/etc/alertmanager/secrets/alertmanager-slack-receiver-api-url/alertmanager-slack-receiver-api-url.yaml'
+    - '/etc/alertmanager/secrets/alertmanager-healthchecks-receiver-url/healthchecks-receiver-url.yaml'
+    - '/etc/alertmanager/secrets/alertmanager-slack-receiver-api-url/slack-receiver-api-url.yaml'
