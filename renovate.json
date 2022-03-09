@@ -9,7 +9,11 @@
       "datasourceTemplate": "helm"
     }
   ],
-  "assignees": ["erkannt"],
+  "assignees": [
+    "erkannt",
+    "NuclearRedeye",
+    "scottaubrey"
+  ],
   "packageRules": [
     {
       "datasources": ["helm"],
