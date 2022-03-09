@@ -40,7 +40,7 @@
       "datasources": ["helm"],
       "managers": ["regex"],
       "packageNames": ["descheduler"],
-      "automerge": true,
+      "automerge": false,
       "registryUrls": ["https://kubernetes-sigs.github.io/descheduler"]
     },
     {
