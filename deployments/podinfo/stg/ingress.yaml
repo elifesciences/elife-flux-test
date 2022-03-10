@@ -17,6 +17,6 @@ spec:
             path: "/"
             backend:
               service:
-                name: podinfo
+                name: podinfo--stg
                 port:
                   number: 80
