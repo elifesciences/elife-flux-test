@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: podinfo--stg
-  namespace: test
+  namespace: podinfo
   labels:
     app: podinfo--stg
   annotations:
