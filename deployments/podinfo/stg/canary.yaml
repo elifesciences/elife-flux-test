@@ -41,7 +41,7 @@ spec:
         timeout: 30s
         metadata:
           type: bash
-          cmd: "curl -sd 'test' http://podinfo--stg-canary/token | grep token"
+          cmd: "curl -sd 'test' http://podinfo--stg-canary.podinfo/token | grep token"
       - name: load-test
         url: http://infra-flagger-loadtester/
         timeout: 5s
