@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: test-container--stg
+  name: test-container--stg
+  namespace: test-container
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: test-container--stg
+  template:
+    metadata:
+      labels:
+        app: test-container--stg
+    spec:
+      containers:
+      - name: test-container
+        image: sverrirab/kube-test-container:v1.0
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 1700m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 10Mi
+        ports:
+        - containerPort: 8000
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 1
+          periodSeconds: 1
