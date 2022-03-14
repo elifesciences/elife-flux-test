@@ -86,10 +86,8 @@
       "registryUrls": ["https://oauth2-proxy.github.io/manifests"]
     },
     {
-      "datasources": ["docker"],
-      "managers": ["regex"],
-      "packageNames": ["hjacobs/kube-web-view"],
-      "versioning": "semver",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["hjacobs/kube-web-view"],
       "automerge": false
     }
   ]
