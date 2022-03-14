@@ -9,6 +9,9 @@
       "datasourceTemplate": "helm"
     }
   ],
+  "kubernetes": {
+    "fileMatch": ["\\.yaml$"]
+  },
   "assignees": [
     "erkannt",
     "NuclearRedeye",
