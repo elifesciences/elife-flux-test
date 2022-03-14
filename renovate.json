@@ -10,7 +10,9 @@
     }
   ],
   "kubernetes": {
-    "fileMatch": ["\\.yaml$"]
+    "fileMatch": [
+      "^system/monitoring/kube-web-view/deployment\\.yaml$"
+    ]
   },
   "assignees": [
     "erkannt",
