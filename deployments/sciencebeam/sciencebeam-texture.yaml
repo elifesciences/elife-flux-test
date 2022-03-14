@@ -54,7 +54,7 @@ spec:
   chart:
     git: https://github.com/elifesciences/sciencebeam-charts
     path: sciencebeam-pipelines
-    ref: add-sciencebeam-pipelines-chart
+    ref: develop
 
   values:
     image:
