@@ -87,8 +87,8 @@
     },
     {
       "datasources": ["docker"],
-      "managers": ["regex"],
       "packageNames": ["hjacobs/kube-web-view"],
+      "versioning": "semver",
       "automerge": false
     }
   ]
