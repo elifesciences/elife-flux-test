@@ -12,6 +12,8 @@ spec:
     version: 9.16.1
 
   values:
+    image:
+      tag: 1.20.2
     autoDiscovery:
       clusterName: kubernetes-aws--flux-test
       tags:
