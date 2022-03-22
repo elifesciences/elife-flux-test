@@ -36,19 +36,19 @@ jobs:
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n flux-system deployments
       - name: Verify old helm reconciliation
         run: |
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n autoscaler    autoscaler
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         cert-manager
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         external-dns
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         flagger
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         flagger-loadtester
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         ingress-nginx
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         oauth2-proxy
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         sealed-secrets
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n kube-system   descheduler
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n monitoring    prometheus-stack
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n prod          sciencebeam-texture
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n prod          sciencebeam-texture-sciencebeam
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n prod          sciencebeam-texture-sciencebeam-biorxiv
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n autoscaler    cluster-autoscaler
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         infra-cert-manager
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         infra-external-dns
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         infra-flagger
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         infra-flagger-loadtester
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         infra-ingress-nginx
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         infra-oauth2-proxy
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         infra-sealed-secrets
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n kube-system   kube-system-descheduler
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n monitoring    monitoring-prometheus-stack
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n prod          sciencebeam-texture--prod
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n prod          sciencebeam-texture-sciencebeam--prod
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n prod          sciencebeam-texture-sciencebeam-biorxiv--prod
 
       - name: Verify helm reconciliation
         run: |
