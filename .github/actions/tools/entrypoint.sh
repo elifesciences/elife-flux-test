@@ -27,4 +27,4 @@ cp ./kubeval $GITHUB_WORKSPACE/bin
 chmod +x $GITHUB_WORKSPACE/bin/kubeval
 
 echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
-# echo "$RUNNER_WORKSPACE/$(basename $GITHUB_REPOSITORY)/bin" >> $GITHUB_PATH
+echo "$RUNNER_WORKSPACE/$(basename $GITHUB_REPOSITORY)/bin" >> $GITHUB_PATH
