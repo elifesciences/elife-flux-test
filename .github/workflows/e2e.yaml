@@ -25,7 +25,7 @@ jobs:
       - name: Install helm-operator
         run: |
           kubectl create ns flux
-          helm upgrade -n flux -i --repo https://charts.fluxcd.io helm-operator helm-operator --set helm.versions=v3
+          helm upgrade -n flux -i --repo https://charts.fluxcd.io helm-operator helm-operator --set helm.versions=v3 --set chartsSyncInterval=1m
       - name: Setup cluster reconciliation
         run: |
           flux create source git flux-system \
