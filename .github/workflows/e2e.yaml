@@ -22,6 +22,8 @@ jobs:
           version: "v0.11.1"
       - name: Install Flux in Kubernetes Kind
         run: flux install
+      - name: Install helm-operator
+        run: helm upgrade -n flux -i --repo https://charts.fluxcd.io helm-operator helm-operator --set helm.versions=v3
       - name: Setup cluster reconciliation
         run: |
           flux create source git flux-system \
