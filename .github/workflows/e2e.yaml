@@ -1,0 +1,69 @@
+name: e2e
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ '*' ]
+    tags-ignore: [ '*' ]
+
+jobs:
+  kubernetes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup tools
+        uses: ./.github/actions/tools
+      - name: Setup Flux
+        uses: fluxcd/flux2/action@main
+      - name: Setup Kubernetes
+        uses: engineerd/setup-kind@v0.5.0
+        with:
+          version: "v0.11.1"
+      - name: Install Flux in Kubernetes Kind
+        run: flux install
+      - name: Install helm-operator
+        run: |
+          kubectl create ns flux
+          helm upgrade -n flux -i --repo https://charts.fluxcd.io helm-operator helm-operator --set helm.versions=v3
+      - name: Setup cluster reconciliation
+        run: |
+          flux create source git flux-system \
+          --url=${{ github.event.repository.html_url }} \
+          --branch=${GITHUB_REF#refs/heads/}
+          flux create kustomization flux-system \
+          --source=flux-system \
+          --path=./clusters/flux-test
+      - name: Verify cluster reconciliation
+        run: |
+          kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n flux-system system
+          kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n flux-system deployments
+      - name: Verify old helm reconciliation
+        run: |
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n autoscaler    autoscaler
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         cert-manager
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         external-dns
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         flagger
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         flagger-loadtester
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         ingress-nginx
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         oauth2-proxy
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n infra         sealed-secrets
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n kube-system   descheduler
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n monitoring    prometheus-stack
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n prod          sciencebeam-texture
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n prod          sciencebeam-texture-sciencebeam
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n prod          sciencebeam-texture-sciencebeam-biorxiv
+
+      - name: Verify helm reconciliation
+        run: |
+          # kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n autoscaler    autoscaler
+      - name: Debug failure
+        if: failure()
+        run: |
+          kubectl -n flux-system get all
+          kubectl -n flux-system logs deploy/source-controller
+          kubectl -n flux-system logs deploy/kustomize-controller
+          kubectl -n flux-system logs deploy/helm-controller
+          kubectl get helmreleases.helm.fluxcd.io --all-namespaces
+          kubectl get helmreleases.helm.toolkit.fluxcd.io --all-namespaces
+          flux get all --all-namespaces
