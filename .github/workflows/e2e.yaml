@@ -38,6 +38,7 @@ jobs:
         run: |
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n flux-system system
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n flux-system deployments
+          kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n flux-system cert-issuers
       - name: Verify old helm reconciliation
         run: |
           kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n autoscaler    autoscaler
@@ -64,6 +65,7 @@ jobs:
           kubectl -n flux-system logs deploy/source-controller
           kubectl -n flux-system logs deploy/kustomize-controller
           kubectl -n flux-system logs deploy/helm-controller
+          kubectl -n flux logs deploy/helm-operator
           kubectl get helmreleases.helm.fluxcd.io --all-namespaces
           kubectl get helmreleases.helm.toolkit.fluxcd.io --all-namespaces
           flux get all --all-namespaces
