@@ -39,7 +39,7 @@ jobs:
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system deployments
       - name: Verify helm reconciliation
         run: |
-          # kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n autoscaler    autoscaler
+          kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n autoscaler    autoscaler
           # kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n infra         cert-manager
           # kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n infra         external-dns
           # kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n infra         flagger
