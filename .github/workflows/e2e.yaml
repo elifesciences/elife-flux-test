@@ -36,7 +36,7 @@ jobs:
           --path=./clusters/flux-test
       - name: Verify cluster reconciliation
         run: |
-          kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n flux-system monitoring
+          kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n flux-system crds
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n flux-system system
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n flux-system deployments
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n flux-system cert-issuers
