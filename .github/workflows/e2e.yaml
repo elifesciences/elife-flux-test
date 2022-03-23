@@ -34,11 +34,12 @@ jobs:
           flux create kustomization flux-system \
           --source=flux-system \
           --path=./clusters/flux-test
+          flux suspend kustomization deployments # disable reconciling all the apps for now
       - name: Verify cluster reconciliation
         run: |
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n flux-system crds
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n flux-system system
-          kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n flux-system deployments
+          # kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n flux-system deployments
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n flux-system cert-issuers
       - name: Verify old helm reconciliation
         run: |
@@ -51,10 +52,10 @@ jobs:
           kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n infra         oauth2-proxy
           kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n infra         sealed-secrets
           kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n kube-system   descheduler
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n prod          sciencebeam-texture
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n prod          sciencebeam-texture-sciencebeam
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n prod          sciencebeam-texture-sciencebeam-biorxiv
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=10m -n monitoring    prometheus-stack
+          # kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n prod          sciencebeam-texture
+          # kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n prod          sciencebeam-texture-sciencebeam
+          # kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n prod          sciencebeam-texture-sciencebeam-biorxiv
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=20m -n monitoring    prometheus-stack
 
       - name: Verify helm reconciliation
         run: |
