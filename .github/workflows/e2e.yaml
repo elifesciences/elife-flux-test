@@ -52,9 +52,6 @@ jobs:
           kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n infra         oauth2-proxy
           kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n infra         sealed-secrets
           kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n kube-system   descheduler
-          # kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n prod          sciencebeam-texture
-          # kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n prod          sciencebeam-texture-sciencebeam
-          # kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n prod          sciencebeam-texture-sciencebeam-biorxiv
           kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=20m -n monitoring    prometheus-stack
 
       - name: Verify helm reconciliation
