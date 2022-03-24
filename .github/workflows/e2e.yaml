@@ -24,10 +24,6 @@ jobs:
           version: "v0.11.1"
       - name: Install Flux v2
         run: flux install
-      - name: Install helm-operator
-        run: |
-          kubectl create ns flux
-          helm upgrade -n flux -i --repo https://charts.fluxcd.io helm-operator helm-operator --set helm.versions=v3 --set chartsSyncInterval=1m
       - name: Setup flux reconciliation
         run: |
           flux create source git flux-system \
@@ -37,9 +33,15 @@ jobs:
           --source=flux-system \
           --path=./clusters/flux-test
           flux suspend kustomization deployments # disable reconciling all the apps for now
-      - name: Verify cluster reconciliation
+      - name: Verify CRD reconciliation
         run: |
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system crds
+      - name: Install helm-operator
+        run: |
+          kubectl create ns flux
+          helm upgrade -n flux -i --repo https://charts.fluxcd.io helm-operator helm-operator --set helm.versions=v3 --set chartsSyncInterval=1m
+      - name: Verify cluster reconciliation
+        run: |
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system system
           # kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system deployments
       - name: Verify old helm reconciliation
