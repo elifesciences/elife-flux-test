@@ -32,7 +32,6 @@ jobs:
           flux create kustomization flux-system \
           --source=flux-system \
           --path=./clusters/flux-test
-          flux suspend kustomization deployments # disable reconciling all the apps for now
       - name: Verify CRD reconciliation
         run: |
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system crds
@@ -43,7 +42,7 @@ jobs:
       - name: Verify cluster reconciliation
         run: |
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system system
-          # kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system deployments
+          kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system deployments
       - name: Verify old helm reconciliation
         run: |
           kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n autoscaler    autoscaler
@@ -60,6 +59,9 @@ jobs:
       - name: Verify helm reconciliation
         run: |
           # kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n autoscaler    autoscaler
+      - name: Verify other resources
+        run: |
+          kubectl wait deployment --for=condition=Available --timeout=5m -n podinfo    podinfo--stg
       - name: Debug failure
         if: failure()
         run: |
