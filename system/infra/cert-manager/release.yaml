@@ -12,7 +12,7 @@ spec:
     version: v1.7.1
 
   values:
-    installCRDs: true
+    installCRDs: false
     prometheus:
       servicemonitor:
         enabled: true
