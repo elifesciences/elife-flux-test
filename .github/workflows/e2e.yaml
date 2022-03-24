@@ -67,6 +67,7 @@ jobs:
           kubectl get helmreleases.helm.fluxcd.io --all-namespaces
           kubectl get helmreleases.helm.toolkit.fluxcd.io --all-namespaces
           helm list -A
+          helm status -n monitoring monitoring-prometheus-stack
           kubectl -n flux-system get all
           kubectl -n flux-system logs deploy/source-controller
           kubectl -n flux-system logs deploy/kustomize-controller
