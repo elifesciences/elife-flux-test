@@ -24,10 +24,6 @@ jobs:
           version: "v0.11.1"
       - name: Install Flux v2
         run: flux install
-      - name: Install helm-operator
-        run: |
-          kubectl create ns flux
-          helm upgrade -n flux -i --repo https://charts.fluxcd.io helm-operator helm-operator --set helm.versions=v3 --set chartsSyncInterval=1m
       - name: Setup flux reconciliation
         run: |
           flux create source git flux-system \
@@ -37,9 +33,15 @@ jobs:
           --source=flux-system \
           --path=./clusters/flux-test
           flux suspend kustomization deployments # disable reconciling all the apps for now
-      - name: Verify cluster reconciliation
+      - name: Verify CRD reconciliation
         run: |
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system crds
+      - name: Install helm-operator
+        run: |
+          kubectl create ns flux
+          helm upgrade -n flux -i --repo https://charts.fluxcd.io helm-operator helm-operator --set helm.versions=v3 --set chartsSyncInterval=1m --set createCRD=false
+      - name: Verify cluster reconciliation
+        run: |
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system system
           # kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system deployments
       - name: Verify old helm reconciliation
@@ -53,7 +55,7 @@ jobs:
           kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n infra         oauth2-proxy
           kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n infra         sealed-secrets
           kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n kube-system   descheduler
-          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=20m -n monitoring    prometheus-stack
+          kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=5m -n monitoring    prometheus-stack
 
       - name: Verify helm reconciliation
         run: |
@@ -61,11 +63,13 @@ jobs:
       - name: Debug failure
         if: failure()
         run: |
+          flux get all --all-namespaces
+          kubectl get helmreleases.helm.fluxcd.io --all-namespaces
+          kubectl get helmreleases.helm.toolkit.fluxcd.io --all-namespaces
+          helm list -A
+          helm status -n monitoring monitoring-prometheus-stack
           kubectl -n flux-system get all
           kubectl -n flux-system logs deploy/source-controller
           kubectl -n flux-system logs deploy/kustomize-controller
           kubectl -n flux-system logs deploy/helm-controller
           kubectl -n flux logs deploy/helm-operator
-          kubectl get helmreleases.helm.fluxcd.io --all-namespaces
-          kubectl get helmreleases.helm.toolkit.fluxcd.io --all-namespaces
-          flux get all --all-namespaces
