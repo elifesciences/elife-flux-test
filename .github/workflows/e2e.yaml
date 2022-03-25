@@ -23,7 +23,7 @@ jobs:
         with:
           version: "v0.11.1"
       - name: Install Flux v2
-        run: flux install
+        run: flux install --components-extra=image-reflector-controller,image-automation-controller
       - name: Setup flux reconciliation
         run: |
           flux create source git flux-system \
