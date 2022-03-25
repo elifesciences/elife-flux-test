@@ -32,17 +32,15 @@ jobs:
           flux create kustomization flux-system \
           --source=flux-system \
           --path=./clusters/flux-test
-      - name: Verify CRD reconciliation
+      - name: Verify cluster reconciliation
         run: |
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system crds
+          kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system system
+          kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system deployments
       - name: Install helm-operator
         run: |
           kubectl create ns flux
           helm upgrade -n flux -i --repo https://charts.fluxcd.io helm-operator helm-operator --set helm.versions=v3 --set chartsSyncInterval=1m --set createCRD=false
-      - name: Verify cluster reconciliation
-        run: |
-          kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system system
-          kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system deployments
       - name: Verify old helm reconciliation
         run: |
           kubectl wait helmreleases.helm.fluxcd.io --for=condition=deployed --timeout=2m -n autoscaler    autoscaler
