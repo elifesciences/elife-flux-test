@@ -39,7 +39,6 @@ jobs:
           kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system deployments
       - name: Install helm-operator
         run: |
-          kubectl create ns flux
           helm upgrade -n flux -i --repo https://charts.fluxcd.io helm-operator helm-operator --set helm.versions=v3 --set chartsSyncInterval=1m --set createCRD=false
       - name: Verify old helm reconciliation
         run: |
