@@ -28,8 +28,8 @@ For each migrated release, we also need `helm-operator` to not be paying attenti
 kubectl -n flux scale deployment helm-operator --replicas=0 # stop helm-operator
 # Merge in the changed `HelmRelease` into the main repo
 flux reconcile source git flux-system
-flux tree kustomization infrastructure # confirm flux has loaded the new helm release
-helm list -A # confirm release  is still deployed (you should see a new revision)
+flux tree kustomization flux-system # confirm flux has loaded the new helm release
+helm list -A # confirm release is still deployed (you should see the revision incremented as helm-controller did an upgrade)
 kubectl -n flux scale deployment helm-operator --replicas=1 # start helm-operator again
 ```
 
