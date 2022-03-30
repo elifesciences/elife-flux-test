@@ -4,7 +4,7 @@ metadata:
   name: epp-node-prototype
   namespace: epp
 spec:
-  interval: 5m
+  interval: 20m
   sourceRef:
     kind: GitRepository
     name: flux-system
