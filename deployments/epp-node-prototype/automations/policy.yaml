@@ -4,7 +4,7 @@ metadata:
   name: epp-node-prototype
   namespace: epp
 spec:
-  imageRepositorySpec:
+  imageRepositoryRef:
     name: epp-node-prototype
     namespace: epp
   filterTags:
