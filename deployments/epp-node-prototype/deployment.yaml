@@ -20,11 +20,11 @@ spec:
         kubernetes.io/arch: amd64
       containers:
       - name: epp-node
-        image: lunaaeterna/enhanced-preprint:master-34f73906-20220324.1144 # {"$imagepolicy": "epp:epp-node-prototype"}
+        image: docker.io/lunaaeterna/enhanced-preprint:master-51906284-20220329.1527 # {"$imagepolicy": "epp:epp-node-prototype"}
         resources:
           requests:
             cpu: "200m"
           limits:
             memory: "1Gi"
         ports:
-          - containerPort: 3000
+        - containerPort: 3000
