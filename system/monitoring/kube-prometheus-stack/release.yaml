@@ -7,7 +7,7 @@ metadata:
 
 spec:
   interval: 5m
-  releaseName: infra-prometheus-stack
+  releaseName: monitoring-prometheus-stack
   chart:
     spec:
       chart: kube-prometheus-stack
