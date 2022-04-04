@@ -16,6 +16,14 @@ spec:
         kind: HelmRepository
         name: ingress-nginx
       interval: 1m
+  # This helm chart is particularly prone to issues in a new installed cluster waiting to finish patching the admission webhook
+  # Set the number of install retry attempts to 5
+  install:
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
 
   values:
     controller:
