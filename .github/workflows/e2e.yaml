@@ -22,6 +22,11 @@ jobs:
         uses: engineerd/setup-kind@v0.5.0
         with:
           version: "v0.11.1"
+      # This step exists because the sealed secrets will fail to decode, so some service fail to deploy without *a* secret, even if it is just nonsense
+      - name: Pre-requisite setup for services (unsealable secrets)
+        run: |
+          kubectl create ns infra
+          kubectl create secret -n infra  generic oauth2-github --from-literal=client-id=client-id --from-literal=client-secret=client-secret --from-literal=cookie-secret=cookie-secret-16
       - name: Install Flux v2
         run: flux install --components-extra=image-reflector-controller,image-automation-controller
       - name: Setup flux reconciliation
@@ -45,7 +50,7 @@ jobs:
           kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n infra         flagger
           kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n infra         flagger-loadtester
           kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n infra         ingress-nginx
-          # kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n infra         oauth2-proxy
+          kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n infra         oauth2-proxy
           # kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n infra         sealed-secrets
           # kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=2m -n kube-system   descheduler
           # kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n monitoring    prometheus-stack
