@@ -16,6 +16,11 @@ spec:
         kind: HelmRepository
         name: prometheus-stack
       interval: 1m
+  dependsOn:
+  - name: ingress-nginx
+    namespace: infra
+  - name: sealed-secrets
+    namespace: infra
 
   values:
     global:

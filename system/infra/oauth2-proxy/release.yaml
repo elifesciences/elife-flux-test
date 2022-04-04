@@ -8,6 +8,9 @@ metadata:
 spec:
   interval: 5m
   releaseName: infra-oauth2-proxy
+  dependsOn:
+  - name: ingress-nginx
+  - name: sealed-secrets
   chart:
     spec:
       chart: oauth2-proxy

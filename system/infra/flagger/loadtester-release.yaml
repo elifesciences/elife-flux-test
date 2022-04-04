@@ -8,6 +8,8 @@ metadata:
 spec:
   interval: 5m
   releaseName: infra-flagger-loadtester
+  dependsOn:
+  - name: ingress-nginx
   chart:
     spec:
       chart: loadtester
