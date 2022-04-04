@@ -4,6 +4,7 @@
     {
       "fileMatch": ["\\.yaml$"],
       "matchStrings": [
+        "chart:\n *repository: .*?\n *name: (?<depName>.*?)\n *version: (?<currentValue>.*)\n",
         "spec:\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n"
       ],
       "datasourceTemplate": "helm"
