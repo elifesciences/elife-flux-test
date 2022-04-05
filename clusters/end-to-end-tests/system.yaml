@@ -1,0 +1,45 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: system
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./system
+  prune: true
+  dependsOn:
+    - name: crds
+  patches:
+  # in a small cluster like kind or minikube the load balancer won't get an external IP.
+  # Therefore, we need to disable waiting
+  - patch: |-
+      apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      metadata:
+        name: ingress-nginx
+        namespace: infra
+      spec:
+        install:
+          disableWait: true
+    target:
+      kind: HelmRelease
+      name: ingress-nginx
+  # This patch is to cover the install process for prometheus, as it seems to try to create an ingress too quickly
+  # when the nginx-admission webhook isn't ready
+  - patch: |-
+      apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      metadata:
+        name: prometheus-stack
+        namespace: monitoring
+      spec:
+        install:
+          remediation:
+            retries: 5
+    target:
+      kind: HelmRelease
+      name: prometheus-stack
