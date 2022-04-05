@@ -2,15 +2,17 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
 kind: Kustomization
 metadata:
-  name: flux-system
+  name: system
   namespace: flux-system
 spec:
-  interval: 10m0s
-  path: ./clusters/flux-test
-  prune: true
+  interval: 1m0s
   sourceRef:
     kind: GitRepository
     name: flux-system
+  path: ./system
+  prune: true
+  dependsOn:
+    - name: crds
   patchesStrategicMerge:
   # in a small cluster like kind or minikube the load balancer won't get an external IP.
   # Therefore, we need to disable waiting
