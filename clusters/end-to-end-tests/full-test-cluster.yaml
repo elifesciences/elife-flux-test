@@ -14,11 +14,11 @@ spec:
   patchesStrategicMerge:
   # in a small cluster like kind or minikube the load balancer won't get an external IP.
   # Therefore, we need to disable waiting
-  - kind: HelmRelease
-    metadata:
-      name: ingress-nginx
-      namespace: infra
+  # - kind: HelmRelease
+  #   metadata:
+  #     name: ingress-nginx
+  #     namespace: infra
 
-    spec:
-      install:
-        disableWait: true
+  #   spec:
+  #     install:
+  #       disableWait: true
