@@ -1,5 +1,7 @@
 # Upgrading from Fluxv1 to Fluxv1
 
+This document is only relevant during the migration, but is left here for posterity.
+
 ## High-level overview
 
 1. Uninstall `flux` v1 (but leave `helm-operator`) and install `flux` v2
@@ -16,7 +18,7 @@ kubectl -n flux scale deployment helm-operator --replicas=0 # stop helm-operator
 helm uninstall -n flux flux
 kubectl delete helmreleases.helm.fluxcd.io -n flux flux # delete flux helmrelease
 # merge in the change in the repo that removes flux `helmrelease`, sets up the new kustomization obejects
-flux bootstrap github --owner=scottaubrey  --personal --repository=test-fluxv1-to-fluxv2-migration --path=clusters/flux-test --components-extra=image-reflector-controller,image-automation-controller --read-write-key --branch main
+flux bootstrap github --owner=elifesciences --personal --repository=elife-flux-test --path=clusters/flux-test --components-extra=image-reflector-controller,image-automation-controller --read-write-key --branch master
 kubectl -n flux scale deployment helm-operator --replicas=1 # start helm-operator again
 ```
 
