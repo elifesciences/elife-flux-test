@@ -15,7 +15,7 @@ spec:
         name: Fluxbot
         email: flux@elifesciences.org
       messageTemplate: |
-        Automation release: {{ .AutomationObject }}
+        release({{ .AutomationObject }}): Automatic release
 
         Files:
         {{ range $filename, $_ := .Updated.Files -}}
