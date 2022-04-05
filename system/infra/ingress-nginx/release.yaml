@@ -16,8 +16,8 @@ spec:
         kind: HelmRepository
         name: ingress-nginx
       interval: 1m
-  install:
-    disableWait: true
+  # install:
+  #   disableWait: true
   values:
     controller:
       config:
