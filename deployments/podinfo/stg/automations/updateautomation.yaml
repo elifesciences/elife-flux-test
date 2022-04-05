@@ -15,7 +15,22 @@ spec:
         name: Fluxbot
         email: flux@elifesciences.org
       messageTemplate: |
-        Automated image update by Flux
+        Automation release: {{ .AutomationObject }}
+
+        Files:
+        {{ range $filename, $_ := .Updated.Files -}}
+        - {{ $filename }}
+        {{ end -}}
+
+        Objects:
+        {{ range $resource, $_ := .Updated.Objects -}}
+        - {{ $resource.Kind }} {{ $resource.Name }}
+        {{ end -}}
+
+        Images:
+        {{ range .Updated.Images -}}
+        - {{.}}
+        {{ end -}}
   update:
     strategy: Setters
     path: ./deployments/podinfo/stg
