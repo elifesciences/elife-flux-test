@@ -13,7 +13,7 @@ spec:
   prune: true
   dependsOn:
     - name: crds
-  patchesStrategicMerge:
+  patches:
   # in a small cluster like kind or minikube the load balancer won't get an external IP.
   # Therefore, we need to disable waiting
   - patch: |-
