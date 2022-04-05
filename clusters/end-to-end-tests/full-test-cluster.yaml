@@ -11,9 +11,9 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  patchesStrategicMerge:
-  # in a small cluster like kind or minikube the load balancer won't get an external IP.
-  # Therefore, we need to disable waiting
+  # patchesStrategicMerge:
+  # # in a small cluster like kind or minikube the load balancer won't get an external IP.
+  # # Therefore, we need to disable waiting
   # - kind: HelmRelease
   #   metadata:
   #     name: ingress-nginx
