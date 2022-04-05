@@ -14,8 +14,7 @@ spec:
   patchesStrategicMerge:
   # in a small cluster like kind or minikube the load balancer won't get an external IP.
   # Therefore, we need to disable waiting
-  - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-    kind: HelmRelease
+  - kind: HelmRelease
     metadata:
       name: ingress-nginx
       namespace: infra
