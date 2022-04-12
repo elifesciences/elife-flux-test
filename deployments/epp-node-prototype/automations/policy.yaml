@@ -11,5 +11,5 @@ spec:
     pattern: '^master-[a-fA-F0-9]+-(?P<ts>.*)'
     extract: '$ts'
   policy:
-     numerical:
+    numerical:
       order: asc
