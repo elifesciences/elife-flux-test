@@ -84,12 +84,10 @@ spec:
           requests:
             memory: 1300Mi
         serviceMonitorSelectorNilUsesHelmValues: false
+        podMonitorSelectorNilUsesHelmValues: false
         ruleSelector:
           matchExpressions:
             - {key: app, operator: In, values: [kube-prometheus-stack, flux, sciencebeam]}
-
-        podMonitorNamespaceSelector:
-          any: true
 
     alertmanager:
       podDisruptionBudget:
