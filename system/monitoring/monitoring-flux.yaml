@@ -12,5 +12,3 @@ spec:
     namespace: flux-system
   path: ./kustomizations/monitoring/flux
   prune: true
-  dependsOn:
-  - name: system
