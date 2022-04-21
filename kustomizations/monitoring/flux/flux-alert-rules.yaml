@@ -1,7 +1,7 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: GitOpsToolkit
+  name: gitopstoolkit
   namespace: monitoring
   labels:
     app: flux
