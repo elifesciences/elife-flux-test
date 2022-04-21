@@ -60,14 +60,30 @@ jobs:
       - name: Verify deployment manifests
         run: |
           kubectl wait deployment --for=condition=Available --timeout=5m -n podinfo    podinfo--stg
-      - name: Debug failure
+      - name: Debug failure summaries
         if: failure()
         run: |
           flux get all --all-namespaces
-          kubectl get helmreleases.helm.toolkit.fluxcd.io --all-namespaces
           helm list -A
           kubectl -n flux-system get all
+          kubectl get helmreleases.helm.toolkit.fluxcd.io --all-namespaces
+      - name: Debug pods
+        if: failure()
+        run: |
           kubectl describe pods --all-namespaces
+      - name: Debug describe helm releases
+        if: failure()
+        run: |
+          kubectl describe helmreleases.helm.toolkit.fluxcd.io --all-namespaces
+      - name: Debug Log (source-controller)
+        if: failure()
+        run: |
           kubectl -n flux-system logs deploy/source-controller
+      - name: Debug Log (kustomize-controller)
+        if: failure()
+        run: |
           kubectl -n flux-system logs deploy/kustomize-controller
+      - name: Debug Log (helm-controller)
+        if: failure()
+        run: |
           kubectl -n flux-system logs deploy/helm-controller
