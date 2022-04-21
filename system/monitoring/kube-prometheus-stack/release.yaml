@@ -88,6 +88,8 @@ spec:
           matchExpressions:
             - {key: app, operator: In, values: [kube-prometheus-stack, flux, sciencebeam]}
 
+        podMonitorNamespaceSelector: any
+
     alertmanager:
       podDisruptionBudget:
         enabled: true
