@@ -67,7 +67,7 @@ jobs:
           helm list -A
           kubectl -n flux-system get all
           kubectl get helmreleases.helm.toolkit.fluxcd.io --all-namespaces
-      - name: Debug pods
+      - name: Debug describe pods
         if: failure()
         run: |
           kubectl describe pods --all-namespaces
@@ -75,15 +75,15 @@ jobs:
         if: failure()
         run: |
           kubectl describe helmreleases.helm.toolkit.fluxcd.io --all-namespaces
-      - name: Debug Log (source-controller)
+      - name: Debug source-controller logs
         if: failure()
         run: |
           kubectl -n flux-system logs deploy/source-controller
-      - name: Debug Log (kustomize-controller)
+      - name: Debug kustomize-controller logs
         if: failure()
         run: |
           kubectl -n flux-system logs deploy/kustomize-controller
-      - name: Debug Log (helm-controller)
+      - name: Debug helm-controller logs
         if: failure()
         run: |
           kubectl -n flux-system logs deploy/helm-controller
