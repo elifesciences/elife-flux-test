@@ -1,8 +1,8 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: flux.rules
-  namespace: flux-system
+  name: GitOpsToolkit
+  namespace: monitoring
   labels:
     app: flux
 spec:
