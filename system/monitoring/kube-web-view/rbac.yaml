@@ -9,7 +9,6 @@ kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: kube-web-view
-  namespace: monitoring
 rules:
 - apiGroups:
   - ""
@@ -72,11 +71,13 @@ rules:
   - policy
   resources:
   - poddisruptionbudgets
+  - podsecuritypolicies
   verbs: [list, get]
 - apiGroups:
   - networking.k8s.io
   resources:
   - networkpolicies
+  - ingresses
   verbs: [list, get]
 - apiGroups:
   - storage.k8s.io
@@ -96,16 +97,41 @@ rules:
   - flagger.app
   resources:
   - canaries
+  - metrictemplates
+  - alertproviders
+  verbs: [list, get]
+- apiGroups:
+  - bitnami.com
+  resources:
+  - sealedsecrets
+  verbs: [list, get]
+- apiGroups:
+  - helm.fluxcd.io
+  resources:
+  - helmreleases
+  verbs: [list, get]
+- apiGroups:
+  - monitoring.coreos.com
+  resources:
+  - prometheusrules
+  - servicemonitors
+  verbs: [list, get]
+- apiGroups:
+  - cert-manager.io
+  resources:
+  - issuers
+  - clusterissuers
+  - certificates
   verbs: [list, get]
 - nonResourceURLs:
   - '*'
   verbs: [list, get]
+
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: kube-web-view
-  namespace: monitoring
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

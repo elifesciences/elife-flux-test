@@ -1,3 +1,4 @@
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -10,13 +11,13 @@ metadata:
     nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
 spec:
   rules:
-    - host: dashboard--test-cluster.elifesciences.org
-      http:
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: kube-web-view
-                port:
-                  number: 80
+  - host: dashboard--test-cluster.elifesciences.org
+    http:
+      paths:
+      - path: /
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: kube-web-view
+            port:
+              number: 80
