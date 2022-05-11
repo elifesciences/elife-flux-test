@@ -21,72 +21,58 @@
   ],
   "packageRules": [
     {
-      "datasources": ["helm"],
-      "managers": ["regex"],
-      "packageNames": ["kube-prometheus-stack"],
+      "matchDatasources": ["helm"],
+      "matchManagers": ["regex"],
+      "matchPackageNames": ["kube-prometheus-stack"],
       "automerge": false,
       "registryUrls": ["https://prometheus-community.github.io/helm-charts"]
     },
     {
-      "datasources": ["helm"],
-      "managers": ["regex"],
-      "packageNames": ["ingress-nginx"],
+      "matchDatasources": ["helm"],
+      "matchManagers": ["regex"],
+      "matchPackageNames": ["ingress-nginx"],
       "automerge": false,
       "registryUrls": ["https://kubernetes.github.io/ingress-nginx"]
     },
     {
-      "datasources": ["helm"],
-      "managers": ["regex"],
-      "packageNames": ["flagger", "loadtester"],
+      "matchDatasources": ["helm"],
+      "matchManagers": ["regex"],
+      "matchPackageNames": ["flagger", "loadtester"],
       "automerge": false,
       "registryUrls": ["https://flagger.app"]
     },
     {
-      "datasources": ["helm"],
-      "managers": ["regex"],
-      "packageNames": ["descheduler"],
+      "matchDatasources": ["helm"],
+      "matchManagers": ["regex"],
+      "matchPackageNames": ["descheduler"],
       "automerge": false,
       "registryUrls": ["https://kubernetes-sigs.github.io/descheduler"]
     },
     {
-      "datasources": ["helm"],
-      "managers": ["regex"],
-      "packageNames": ["cert-manager"],
+      "matchDatasources": ["helm"],
+      "matchManagers": ["regex"],
+      "matchPackageNames": ["cert-manager"],
       "automerge": false,
       "registryUrls": ["https://charts.jetstack.io"]
     },
     {
-      "datasources": ["helm"],
-      "managers": ["regex"],
-      "packageNames": ["flux", "helm-operator"],
-      "automerge": true,
-      "registryUrls": ["https://charts.fluxcd.io"]
-    },
-    {
-      "datasources": ["helm"],
-      "managers": ["regex"],
-      "packageNames": ["sealed-secrets"],
+      "matchDatasources": ["helm"],
+      "matchManagers": ["regex"],
+      "matchPackageNames": ["sealed-secrets"],
       "automerge": false,
       "registryUrls": ["https://bitnami-labs.github.io/sealed-secrets"]
     },
     {
-      "datasources": ["helm"],
-      "managers": ["regex"],
-      "packageNames": ["external-dns"],
+      "matchDatasources": ["helm"],
+      "matchManagers": ["regex"],
+      "matchPackageNames": ["external-dns"],
       "automerge": false,
       "registryUrls": ["https://charts.bitnami.com/bitnami"]
     },
     {
-      "datasources": ["helm"],
-      "managers": ["regex"],
-      "packageNames": ["cluster-autoscaler"],
-      "automerge": false,
-      "registryUrls": ["https://kubernetes.github.io/autoscaler"]
-    },
-    {
-      "datasources": ["helm"],
-      "managers": ["regex"],
-      "packageNames": ["oauth2-proxy"],
+      "matchDatasources": ["helm"],
+      "matchManagers": ["regex"],
+      "matchPackageNames": ["oauth2-proxy"],
       "automerge": false,
       "registryUrls": ["https://oauth2-proxy.github.io/manifests"]
     },
@@ -94,6 +80,13 @@
       "matchDatasources": ["docker"],
       "matchPackageNames": ["hjacobs/kube-web-view"],
       "automerge": false
+    },
+    {
+      "matchDatasources": ["helm"],
+      "matchManagers": ["regex"],
+      "matchPackageNames": ["cluster-autoscaler"],
+      "automerge": false,
+      "registryUrls": ["https://kubernetes.github.io/autoscaler"]
     }
   ]
 }
