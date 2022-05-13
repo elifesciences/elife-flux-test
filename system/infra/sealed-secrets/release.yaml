@@ -23,3 +23,7 @@ spec:
 
   values:
     namespace: infra
+    resources:
+      requests:
+        cpu: 10m
+        mem: 20Mi

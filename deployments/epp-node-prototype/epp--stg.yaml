@@ -1,0 +1,29 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: epp--stg
+  namespace: epp--stg
+spec:
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  path: ./kustomizations/apps/epp
+  prune: true
+  patches:
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: epp-node
+      spec:
+        template:
+          spec:
+            containers:
+            - name: epp-node
+              image: ghcr.io/elifesciences/enhanced-preprints:yeah
+    target:
+      kind: Deployment
+      name: epp-node

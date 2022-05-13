@@ -22,3 +22,7 @@ spec:
       tags:
       - kubernetes.io/cluster/kubernetes-aws--flux-test
     awsRegion: us-east-1
+    resources:
+      requests:
+        cpu: 10m
+        mem: 50Mi

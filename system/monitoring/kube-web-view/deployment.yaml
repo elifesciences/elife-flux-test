@@ -40,7 +40,7 @@ spec:
             memory: 100Mi
           requests:
             cpu: 5m
-            memory: 100Mi
+            memory: 50Mi
         securityContext:
           readOnlyRootFilesystem: true
           runAsNonRoot: true

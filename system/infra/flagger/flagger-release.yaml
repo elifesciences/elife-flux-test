@@ -27,3 +27,9 @@ spec:
   values:
     metricsServer: http://monitoring-prometheus-stac-prometheus.monitoring:9090
     meshProvider: nginx
+    resources:
+      limits:
+        memory: 100Mi
+      requests:
+        memory: 32Mi
+        cpu: 10m

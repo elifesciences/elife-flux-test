@@ -23,7 +23,7 @@ spec:
         image: ghcr.io/elifesciences/enhanced-preprints:master-c7f5112f-20220512.0815 # {"$imagepolicy": "epp:epp-node-prototype"}
         resources:
           requests:
-            cpu: "200m"
+            cpu: "20m"
           limits:
             memory: "1Gi"
         ports:

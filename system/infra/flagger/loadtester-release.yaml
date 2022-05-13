@@ -35,3 +35,7 @@ spec:
         - apiGroups: ["batch"]
           resources: ["jobs", "jobs/log"]
           verbs: ["create", "list", "delete", "watch"]
+    resources:
+      requests:
+        cpu: 10m
+        memory: 64Mi

@@ -25,3 +25,7 @@ spec:
     prometheus:
       servicemonitor:
         enabled: true
+    resources:
+      requests:
+        cpu: 10m
+        mem: 100Mi
