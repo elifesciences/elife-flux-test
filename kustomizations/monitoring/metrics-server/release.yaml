@@ -16,6 +16,7 @@ spec:
         kind: HelmRepository
         name: metrics-server
       interval: 1m
+  timeout: 2m
   install:
     remediation:
       retries: 5
