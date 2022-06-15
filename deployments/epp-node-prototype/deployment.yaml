@@ -31,6 +31,9 @@ spec:
         volumeMounts:
         - name: articles-data
           mountPath: /opt/articles-data
+        env:
+        - name: EPP_ARTICLE_DIR_PATH
+          value: /opt/articles-data/enhanced-preprints-data/data/10.1101/
       initContainers:
       - name: git-sync
         image: k8s.gcr.io/git-sync/git-sync:v3.5.0
