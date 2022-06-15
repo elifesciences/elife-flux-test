@@ -30,7 +30,7 @@ spec:
         - containerPort: 3000
         volumeMounts:
         - name: articles-data
-          mountPath: /opt/epp/articles
+          mountPath: /opt/articles-data
       initContainers:
       - name: git-sync
         image: k8s.gcr.io/git-sync/git-sync:v3.5.0
