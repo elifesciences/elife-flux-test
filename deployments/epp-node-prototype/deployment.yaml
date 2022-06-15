@@ -33,7 +33,7 @@ spec:
           mountPath: /opt/epp/articles
       initContainers:
       - name: git-sync
-        image: https://k8s.gcr.io/git-sync/git-sync
+        image: k8s.gcr.io/git-sync/git-sync:v3.5.0
         resources:
           requests:
             cpu: "20m"
