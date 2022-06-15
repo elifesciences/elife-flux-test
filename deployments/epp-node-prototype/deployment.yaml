@@ -28,6 +28,9 @@ spec:
             memory: "1Gi"
         ports:
         - containerPort: 3000
+        volumeMounts:
+        - name: articles-data
+          mountPath: /opt/epp/articles
       initContainers:
       - name: git-sync
         image: https://k8s.gcr.io/git-sync/git-sync
@@ -51,5 +54,5 @@ spec:
         - name: articles-data
           mountPath: /articles
       volumes:
-      - name: dags-data
+      - name: articles-data
         emptyDir: {}
