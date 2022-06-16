@@ -22,3 +22,6 @@ spec:
 
   values:
     enableSearch: true
+    couchdbConfig:
+      couchdb:
+        uuid: A25D0AD8-DF22-4D46-B55C-6BEA723D6318
