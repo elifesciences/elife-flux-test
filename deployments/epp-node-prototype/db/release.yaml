@@ -25,3 +25,13 @@ spec:
     couchdbConfig:
       couchdb:
         uuid: A25D0AD8-DF22-4D46-B55C-6BEA723D6318
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: "app"
+                  operator: In
+                  values:
+                  - couchdb
+            topologyKey: "kubernetes.io/hostname"
