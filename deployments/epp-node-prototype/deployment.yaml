@@ -55,9 +55,9 @@ spec:
         - name: GIT_SYNC_WEBHOOK_URL
           value: http://localhost:3000/import
         - name: GIT_SYNC_WEBHOOK_TIMEOUT
-          value: "5"
+          value: "5s"
         - name: GIT_SYNC_WEBHOOK_BACKOFF
-          value: "5"
+          value: "5s"
         volumeMounts:
         - name: articles-data
           mountPath: /articles
