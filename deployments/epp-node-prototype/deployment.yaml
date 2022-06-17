@@ -26,12 +26,14 @@ spec:
             cpu: "200m"
           limits:
             memory: "1Gi"
+        env:
+        - name: IMPORT_DIR_PATH
+          value: /opt/articles-data/enhanced-preprints-data/data/10.1101/
         ports:
         - containerPort: 3000
         volumeMounts:
         - name: articles-data
           mountPath: /opt/articles-data
-      initContainers:
       - name: git-sync
         image: k8s.gcr.io/git-sync/git-sync:v3.5.0
         resources:
@@ -50,6 +52,12 @@ spec:
           value: master
         - name: GIT_SYNC_DEPTH
           value: "0"
+        - name: GIT_SYNC_WEBHOOK_URL
+          value: http://localhost:3000/import
+        - name: GIT_SYNC_WEBHOOK_TIMEOUT
+          value: "5"
+        - name: GIT_SYNC_WEBHOOK_BACKOFF
+          value: "5"
         volumeMounts:
         - name: articles-data
           mountPath: /articles
