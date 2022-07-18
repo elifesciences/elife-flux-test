@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: epp-node-couchdb
+  namespace: epp
+  labels:
+    app: epp-node-couchdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: epp-node-couchdb
+  template:
+    metadata:
+      namespace: epp
+      labels:
+        app: epp-node-couchdb
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      containers:
+      - name: epp-node
+        image: ghcr.io/elifesciences/enhanced-preprints:master-a2885ef9-20220712.1302
+        resources:
+          requests:
+            cpu: "200m"
+          limits:
+            memory: "1Gi"
+        env:
+        - name: IMPORT_DIR_PATH
+          value: /opt/articles-data/enhanced-preprints-data/data/10.1101/
+        - name: REPO_TYPE
+          value: CouchDB
+        - name: REPO_CONNECTION
+          value: http://epp-db-svc-couchdb:5984/
+        - name: REPO_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: epp-db-couchdb
+              key: adminUsername
+        - name: REPO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: epp-db-couchdb
+              key: adminPassword
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+        - name: articles-data
+          mountPath: /opt/articles-data
+      - name: git-sync
+        image: k8s.gcr.io/git-sync/git-sync:v3.5.0
+        resources:
+          requests:
+            cpu: "20m"
+          limits:
+            memory: "100Mi"
+        env:
+        - name: GIT_SYNC_ROOT
+          value: "/articles"
+        - name: GIT_SYNC_REPO
+          value: https://github.com/elifesciences/enhanced-preprints-data
+        - name: GIT_SYNC_BRANCH
+          value: master
+        - name: GIT_SYNC_DEPTH
+          value: "0"
+        - name: GIT_SYNC_WEBHOOK_URL
+          value: http://localhost:3000/import
+        - name: GIT_SYNC_WEBHOOK_TIMEOUT
+          value: "5s"
+        - name: GIT_SYNC_WEBHOOK_BACKOFF
+          value: "5s"
+        volumeMounts:
+        - name: articles-data
+          mountPath: /articles
+      volumes:
+      - name: articles-data
+        emptyDir: {}
