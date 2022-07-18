@@ -33,6 +33,7 @@ spec:
       github-org: elifesciences
       whitelist-domain: .elifesciences.org
       cookie-domain: .elifesciences.org
+      scope: "user:email"
     ingress:
       enabled: "true"
       hosts:
