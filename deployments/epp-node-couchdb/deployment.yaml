@@ -48,31 +48,6 @@ spec:
         volumeMounts:
         - name: articles-data
           mountPath: /opt/articles-data
-      - name: git-sync
-        image: k8s.gcr.io/git-sync/git-sync:v3.5.0
-        resources:
-          requests:
-            cpu: "20m"
-          limits:
-            memory: "100Mi"
-        env:
-        - name: GIT_SYNC_ROOT
-          value: "/articles"
-        - name: GIT_SYNC_REPO
-          value: https://github.com/elifesciences/enhanced-preprints-data
-        - name: GIT_SYNC_BRANCH
-          value: master
-        - name: GIT_SYNC_DEPTH
-          value: "0"
-        - name: GIT_SYNC_WEBHOOK_URL
-          value: http://localhost:3000/import
-        - name: GIT_SYNC_WEBHOOK_TIMEOUT
-          value: "5s"
-        - name: GIT_SYNC_WEBHOOK_BACKOFF
-          value: "5s"
-        volumeMounts:
-        - name: articles-data
-          mountPath: /articles
       volumes:
       - name: articles-data
         emptyDir: {}
