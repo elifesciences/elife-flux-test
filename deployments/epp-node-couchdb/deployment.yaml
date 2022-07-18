@@ -29,6 +29,20 @@ spec:
         env:
         - name: IMPORT_DIR_PATH
           value: /opt/articles-data/enhanced-preprints-data/data/10.1101/
+        - name: REPO_TYPE
+          value: CouchDB
+        - name: REPO_CONNECTION
+          value: http://epp-db-svc-couchdb:5984/
+        - name: REPO_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: epp-db-couchdb
+              key: adminUsername
+        - name: REPO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: epp-db-couchdb
+              key: adminPassword
         ports:
         - containerPort: 3000
         volumeMounts:
