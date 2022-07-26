@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: epp-image-server
+  namespace: epp
+spec:
+  rules:
+  - host: epp-node-prototype.elifesciences.org
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/iiif"
+        backend:
+          service:
+            name: epp-image-server
+            port:
+              number: 8182
