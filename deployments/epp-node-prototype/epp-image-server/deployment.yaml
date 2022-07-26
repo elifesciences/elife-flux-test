@@ -18,6 +18,6 @@ spec:
     spec:
       containers:
       - name: epp-image-server
-        image: ghcr.io/elifesciences/epp-image-server:master-a365485d-20220725.1917 # {"$imagepolicy": "epp:epp-image-server"}
+        image: ghcr.io/elifesciences/epp-image-server:master-e0f44fe1-20220726.1613 # {"$imagepolicy": "epp:epp-image-server"}
         ports:
         - containerPort: 8182
