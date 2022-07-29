@@ -61,7 +61,7 @@ spec:
       rbac:
         pspUseAppArmor: false
         pspEnabled: true
-      additionalDatasources:
+      additionalDataSources:
       - name: Loki
         type: loki
         access: proxy
