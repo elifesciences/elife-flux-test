@@ -61,6 +61,13 @@ spec:
       rbac:
         pspUseAppArmor: false
         pspEnabled: true
+      additionalDatasources:
+      - name: Loki
+        type: loki
+        access: proxy
+        url: http://loki-stack.logging.svc.cluster.local:3100
+        jsonData:
+          maxLines: 1000
 
     prometheus-node-exporter:
       rbac:
