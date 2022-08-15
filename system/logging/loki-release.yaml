@@ -21,3 +21,7 @@ spec:
       retries: 5
 
   values:
+    loki:
+      config:
+        compactor:
+          retention_enabled: true
