@@ -20,7 +20,7 @@ spec:
         kubernetes.io/arch: amd64
       containers:
       - name: epp-node-imageserver
-        image: ghcr.io/elifesciences/enhanced-preprints:master-85feeb09-20220815.1828
+        image: ghcr.io/elifesciences/enhanced-preprints:master-e40ec33b-20220816.1358
         resources:
           requests:
             cpu: "200m"
