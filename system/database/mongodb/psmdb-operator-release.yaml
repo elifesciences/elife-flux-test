@@ -21,5 +21,4 @@ spec:
       retries: 5
 
   values:
-    env:
-      watchNamespace: ""
+    watchNamespace: ""
