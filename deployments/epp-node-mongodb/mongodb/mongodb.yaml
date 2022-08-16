@@ -1,0 +1,50 @@
+---
+apiVersion: psmdb.percona.com/v1-12-0
+kind: PerconaServerMongoDB
+metadata:
+  name: epp-mongodb
+  finalizers:
+    - delete-psmdb-pods-in-order
+spec:
+  image: "percona/percona-server-mongodb:5.0.7-6"
+  allowUnsafeConfigurations: false
+  updateStrategy: SmartUpdate
+  multiCluster:
+    enabled: false
+  upgradeOptions:
+    apply: 5.0-recommended
+    schedule: 0 2 * * *
+    setFCV: false
+  pmm:
+    enabled: false
+  sharding:
+    enabled: false
+  backup:
+    enabled: false
+
+  # main cluster config
+  secrets:
+    users: epp-mongodb-passwords
+  replsets:
+  - name: rs0
+    size: 3
+    affinity:
+      antiAffinityTopologyKey: kubernetes.io/hostname
+    podDisruptionBudget:
+      maxUnavailable: 1
+    expose:
+      enabled: false
+      exposeType: ClusterIP
+    nonvoting:
+      enabled: false
+    arbiter:
+      enabled: false
+    resources:
+      limits:
+        cpu: 300m
+        memory: 0.5G
+      requests:
+        cpu: 300m
+        memory: 0.5G
+    volumeSpec:
+      emptyDir: {}
