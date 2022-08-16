@@ -3,7 +3,7 @@ apiVersion: psmdb.percona.com/v1-12-0
 kind: PerconaServerMongoDB
 metadata:
   name: epp-mongodb
-  namespace: db-operator-system
+  namespace: epp
   finalizers:
     - delete-psmdb-pods-in-order
 spec:
