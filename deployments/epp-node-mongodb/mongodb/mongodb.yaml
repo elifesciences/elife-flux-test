@@ -38,8 +38,10 @@ spec:
       exposeType: ClusterIP
     nonvoting:
       enabled: false
+      size: 1
     arbiter:
       enabled: false
+      size: 1
     resources:
       limits:
         cpu: 300m
