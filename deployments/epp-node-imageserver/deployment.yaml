@@ -30,7 +30,7 @@ spec:
         - name: IMPORT_DIR_PATH
           value: /opt/articles-data/enhanced-preprints-data/data/10.1101/
         - name: IIIF_SERVER
-          value: https://epp-node-prototype.elifesciences.org/iiif
+          value: https://epp-node-prototype.elifesciences.org
         ports:
         - containerPort: 3000
         volumeMounts:
