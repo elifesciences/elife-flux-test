@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: psmdb-operator
-  namespace: db-operator-system
+  namespace: epp
 
 spec:
   interval: 1m
@@ -15,9 +15,11 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: percona
+        namespace: db-operator-system
       interval: 1m
   install:
     remediation:
       retries: 5
 
   values:
+    watchNamespace: epp
