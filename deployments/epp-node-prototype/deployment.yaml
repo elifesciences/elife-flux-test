@@ -20,7 +20,7 @@ spec:
         kubernetes.io/arch: amd64
       containers:
       - name: epp-node
-        image: ghcr.io/elifesciences/enhanced-preprints:master-c9fffe4b-20220817.1019 # {"$imagepolicy": "epp:epp-node-prototype"}
+        image: ghcr.io/elifesciences/enhanced-preprints:master-bc2e1e8d-20220817.2006 # {"$imagepolicy": "epp:epp-node-prototype"}
         resources:
           requests:
             cpu: "200m"
