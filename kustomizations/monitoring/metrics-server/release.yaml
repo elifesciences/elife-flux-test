@@ -22,8 +22,5 @@ spec:
       retries: 5
 
   values:
-    defaultArgs:
-    - --cert-dir=/tmp
-    - --kubelet-preferred-address-types=InternalIP
-    - --kubelet-use-node-status-port
-    - --metric-resolution=15s
+    args:
+      - --kubelet-insecure-tls
