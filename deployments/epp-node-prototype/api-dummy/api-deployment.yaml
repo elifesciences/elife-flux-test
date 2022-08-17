@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-dummy
+  namespace: epp
+  labels:
+    app: api-dummy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-dummy
+  template:
+    metadata:
+      namespace: journal
+      labels:
+        app: api-dummy
+    spec:
+      containers:
+      - name: api-dummy
+        image: elifesciences/api-dummy:af3d353b2b46adc4cab0ca2780fa53811a1afa9b@sha256:78a8ad1c55a354ccebfef73fd3f0e5b89083b2376c0032169c62fede147b1127
+        ports:
+        - containerPort: 8080
