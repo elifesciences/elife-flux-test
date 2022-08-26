@@ -2,6 +2,7 @@
 set -e
 
 ENV_DEST_DIR='deployments/epp/previews'
+ENV_NAME_PREFIX='epp-preview'
 REPO='elifesciences/enhanced-preprints-server'
 KUSTOMIZATION_TEMPLATE='kustomizations/apps/epp/preview_template.yaml'
 
@@ -14,7 +15,9 @@ for pr in $(gh pr list --repo $REPO --label preview --json number,potentialMerge
 
     export pr_id="$(echo $pr | jq .number)"
     export pr_commit="$(echo $pr | jq -r .potentialMergeCommit.oid)"
+
     export image_tag="preview-${pr_commit:0:8}"
+    export deployment_name="$ENV_NAME_PREFIX-${pr_id}"
 
     echo "Creating env for PR $pr_id"
 
