@@ -32,12 +32,8 @@ spec:
     target:
       kind: Deployment
   - patch: |-
-      apiVersion: apps/v1
-      kind: Ingress
-      metadata:
-        name: not-used
-      spec:
-        rules:
-        - host: epp-preview-309.elifesciences.org
+      - op: replace
+        path: /spec/rules/0/host
+        value: epp-preview-309.elifesciences.org
     target:
       kind: Ingress
