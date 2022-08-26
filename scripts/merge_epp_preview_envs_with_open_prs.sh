@@ -18,10 +18,27 @@ for pr in $(gh pr list --repo $REPO --label preview --json number,potentialMerge
 
     export image_tag="preview-${pr_commit:0:8}"
     export deployment_name="$ENV_NAME_PREFIX-${pr_id}"
+    export deployment_hostname="$deployment_name.elifesciences.org"
 
     echo "Creating env for PR $pr_id"
 
     envsubst < $KUSTOMIZATION_TEMPLATE > ${ENV_DEST_DIR}/${pr_id}.yaml
+
+    pr_comment="Preview instance will be available at https://${deployment_hostname}/"
+    echo -n "check if we need to append preview environment to PR body $pr_id..."
+    pr_body=$(gh -R $REPO pr view 309 --json body | jq -r .body);
+    if echo $pr_body | grep "$pr_comment" > /dev/null; then
+        echo "already exists, skipping."
+    else
+        echo "Adding to end of PR body..."
+        gh pr edit $pr_id --repo "$REPO" --body-file - << GHBODY
+$pr_body
+
+---
+Preview instance will be available at https://${deployment_hostname}/
+GHBODY
+    echo "Done"
+    fi
 done
 
 # now commit
