@@ -28,6 +28,7 @@ spec:
             containers:
             - name: epp-node
               image: ghcr.io/elifesciences/enhanced-preprints:${image_tag}
+              imagePullPolicy: Always
     target:
       kind: Deployment
   - patch: |-
