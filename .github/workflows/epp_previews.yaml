@@ -15,7 +15,13 @@ jobs:
         run: ./scripts/merge_epp_preview_envs_with_open_prs.sh
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit environments
+        run: |
+          git config --global user.name 'Your Name'
+          git config --global user.email 'your-username@users.noreply.github.com'
+          git commit -am "Automated report"
+          git push
       - name: debug
         run: ls -l deployments/epp/previews
       - name: debug2
-        run: cat -l deployments/epp/previews/*.yaml
+        run: cat deployments/epp/previews/*.yaml
