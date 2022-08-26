@@ -2,7 +2,7 @@ name: epp-previews
 
 on:
   schedule:
-    - cron: '* * * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 
