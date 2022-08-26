@@ -12,4 +12,4 @@ jobs:
       # - name: Setup additional tools
       #   uses: ./.github/actions/tools
       - name: Run script to generate and commit preview environments
-        run: ./script/merge_epp_preview_envs_with_open_prs.sh
+        run: ./scripts/merge_epp_preview_envs_with_open_prs.sh
