@@ -24,15 +24,16 @@ for pr in $(gh pr list --repo $REPO --label preview --json number,potentialMerge
 
     envsubst < $KUSTOMIZATION_TEMPLATE > ${ENV_DEST_DIR}/${pr_id}.yaml
 
-    pr_comment="Preview instance will be available at https://${deployment_hostname}/"
-    echo -n "check if we need to add comment about preview environment $pr_id..."
-    if gh -R $REPO pr view 309 --json comments | grep "$pr_comment" > /dev/null; then
-        echo "already exists, skipping."
-    else
-        echo "Adding comment..."
-        gh pr comment $pr_id --repo "$REPO" --body "$pr_comment"
-    echo "Done"
-    fi
+    # commenting across repos doesn't work without more permissions
+    # pr_comment="Preview instance will be available at https://${deployment_hostname}/"
+    # echo -n "check if we need to add comment about preview environment $pr_id..."
+    # if gh -R $REPO pr view 309 --json comments | grep "$pr_comment" > /dev/null; then
+    #     echo "already exists, skipping."
+    # else
+    #     echo "Adding comment..."
+    #     gh pr comment $pr_id --repo "$REPO" --body "$pr_comment"
+    # echo "Done"
+    # fi
 done
 
 # now commit
