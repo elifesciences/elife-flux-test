@@ -16,7 +16,7 @@ for pr in $(gh pr list --repo $REPO --label preview --json number,potentialMerge
     export pr_commit="$(echo $pr | jq -r .potentialMergeCommit.oid)"
     export image_tag="preview-${pr_commit:0:8}"
 
-    echo "create env for $(echo $pr | jq .number)"
+    echo "Creating env for PR $pr_id"
 
     envsubst < $KUSTOMIZATION_TEMPLATE > ${ENV_DEST_DIR}/${pr_id}.yaml
 done
