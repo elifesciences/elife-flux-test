@@ -24,4 +24,3 @@ done
 # now commit
 # Done in script, so that if there is an error, the whole script exits (set -e), and nothing is committed.
 git add $ENV_DEST_DIR
-#git commit
