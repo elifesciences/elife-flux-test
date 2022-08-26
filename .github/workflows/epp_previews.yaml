@@ -17,3 +17,5 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: debug
         run: ls -l deployments/epp/previews
+      - name: debug2
+        run: cat -l deployments/epp/previews/*.yaml
