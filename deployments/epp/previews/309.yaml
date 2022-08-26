@@ -30,3 +30,13 @@ spec:
               image: ghcr.io/elifesciences/enhanced-preprints:preview-aca25deb
     target:
       kind: Deployment
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Ingress
+      metadata:
+        name: not-used
+      spec:
+        rules:
+        - host: epp-preview-309.elifesciences.org
+    target:
+      kind: Ingress
