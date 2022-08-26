@@ -30,3 +30,13 @@ spec:
               image: ghcr.io/elifesciences/enhanced-preprints:${image_tag}
     target:
       kind: Deployment
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Ingress
+      metadata:
+        name: not-used
+      spec:
+        rules:
+        - host: epp-preview-${pr_id}.elifesciences.org
+    target:
+      kind: Ingress
