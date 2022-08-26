@@ -25,18 +25,12 @@ for pr in $(gh pr list --repo $REPO --label preview --json number,potentialMerge
     envsubst < $KUSTOMIZATION_TEMPLATE > ${ENV_DEST_DIR}/${pr_id}.yaml
 
     pr_comment="Preview instance will be available at https://${deployment_hostname}/"
-    echo -n "check if we need to append preview environment to PR body $pr_id..."
-    pr_body=$(gh -R $REPO pr view 309 --json body | jq -r .body);
-    if echo $pr_body | grep "$pr_comment" > /dev/null; then
+    echo -n "check if we need to add comment about preview environment $pr_id..."
+    if gh -R $REPO pr view 309 --json comments | grep "$pr_comment" > /dev/null; then
         echo "already exists, skipping."
     else
-        echo "Adding to end of PR body..."
-        gh pr edit $pr_id --repo "$REPO" --body-file - << GHBODY
-$pr_body
-
----
-Preview instance will be available at https://${deployment_hostname}/
-GHBODY
+        echo "Adding comment..."
+        gh pr comment $pr_id --repo "$REPO" --body "$pr_comment"
     echo "Done"
     fi
 done
