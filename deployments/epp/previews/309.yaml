@@ -28,6 +28,7 @@ spec:
             containers:
             - name: epp-node
               image: ghcr.io/elifesciences/enhanced-preprints:preview-aca25deb
+              imagePullPolicy: Always
     target:
       kind: Deployment
   - patch: |-
