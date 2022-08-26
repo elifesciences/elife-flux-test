@@ -13,3 +13,7 @@ jobs:
       #   uses: ./.github/actions/tools
       - name: Run script to generate and commit preview environments
         run: ./scripts/merge_epp_preview_envs_with_open_prs.sh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: debug
+        run: ls -l deployments/epp/previews
