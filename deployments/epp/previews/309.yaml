@@ -27,7 +27,7 @@ spec:
           spec:
             containers:
             - name: epp-node
-              image: ghcr.io/elifesciences/enhanced-preprints:preview-97c984c7
+              image: ghcr.io/elifesciences/enhanced-preprints:preview-da0a2123
               imagePullPolicy: Always
     target:
       kind: Deployment
