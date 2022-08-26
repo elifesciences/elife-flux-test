@@ -1,0 +1,15 @@
+name: epp-previews
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-preview-environments:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      # - name: Setup additional tools
+      #   uses: ./.github/actions/tools
+      - name: Run script to generate and commit preview environments
+        run: ./script/merge_epp_preview_envs_with_open_prs.sh
