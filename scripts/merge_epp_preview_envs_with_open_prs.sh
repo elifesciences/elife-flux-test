@@ -6,7 +6,7 @@ REPO='elifesciences/enhanced-preprints-server'
 KUSTOMIZATION_TEMPLATE='kustomizations/apps/epp/preview_template.yaml'
 
 # First, remove all envs. They will be recreated, and there's no race issues because they will be in a single commit, which is atomic
-rm $ENV_DEST_DIR/*.yaml
+rm $ENV_DEST_DIR/*.yaml || true
 
 # now create all envs related to current open and labelled PRs
 for pr in $(gh pr list --repo $REPO --label preview --json number,potentialMergeCommit,mergeable | jq -c '.[]'); do
