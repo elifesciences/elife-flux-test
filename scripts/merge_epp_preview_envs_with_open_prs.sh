@@ -3,6 +3,7 @@ set -e
 
 ENV_DEST_DIR='deployments/epp/previews'
 ENV_NAME_PREFIX='epp-preview'
+HOSTNAME_SUFFIX='epp'
 REPO='elifesciences/enhanced-preprints-server'
 ORG='elifesciences'
 KUSTOMIZATION_TEMPLATE='kustomizations/apps/epp/preview_template.yaml'
@@ -20,7 +21,7 @@ for pr in $(gh pr list --repo $REPO --label preview --json number,potentialMerge
 
     export image_tag="preview-${pr_commit:0:8}"
     export deployment_name="$ENV_NAME_PREFIX-${pr_id}"
-    export deployment_hostname="$deployment_name.elifesciences.org"
+    export deployment_hostname="pr-${pr_id}--${HOSTNAME_SUFFIX}.elifesciences.org"
 
     if curl -qfL "https://api.github.com/orgs/${ORG}/members/${author}"; then
         echo "Creating env for PR $pr_id"

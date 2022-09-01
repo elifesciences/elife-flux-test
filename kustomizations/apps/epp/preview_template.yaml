@@ -34,6 +34,6 @@ spec:
   - patch: |-
       - op: replace
         path: /spec/rules/0/host
-        value: ${deployment_name}.elifesciences.org
+        value: ${deployment_hostname}
     target:
       kind: Ingress
