@@ -1,15 +1,5 @@
 {
   "extends": ["config:base", ":prHourlyLimitNone"],
-  "regexManagers": [
-    {
-      "fileMatch": ["\\.yaml$"],
-      "matchStrings": [
-        "chart:\n *repository: .*?\n *name: (?<depName>.*?)\n *version: (?<currentValue>.*)\n",
-        "spec:\n *chart: (?<depName>.*?)\n *version: (?<currentValue>.*)\n"
-      ],
-      "datasourceTemplate": "helm"
-    }
-  ],
   "kubernetes": {
     "fileMatch": [
       "^system/monitoring/kube-web-view/deployment\\.yaml$"
