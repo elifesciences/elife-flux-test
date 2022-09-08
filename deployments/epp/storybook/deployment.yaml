@@ -17,7 +17,7 @@ spec:
         app: epp-storybook
     spec:
       containers:
-      - name: epp-node
+      - name: epp-storybook
         image: ghcr.io/elifesciences/enhanced-preprints-storybook:master-e0eaa54a-20220907.1446 # {"$imagepolicy": "epp:epp-storybook"}
         ports:
         - containerPort: 6006
