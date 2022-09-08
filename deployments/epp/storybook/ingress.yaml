@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: epp-storybook
+  namespace: epp
+spec:
+  rules:
+  - host: epp-node-prototype.elifesciences.org
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/storybook/"
+        backend:
+          service:
+            name: epp-storybook-http
+            port:
+              number: 6006
