@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: epp-storybook
+  namespace: epp
+  labels:
+    app: epp-storybook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: epp-storybook
+  template:
+    metadata:
+      namespace: epp
+      labels:
+        app: epp-storybook
+    spec:
+      containers:
+      - name: epp-node
+        image: ghcr.io/elifesciences/enhanced-preprints-storybook:master-e0eaa54a-20220907.1446 # {"$imagepolicy": "epp:epp-storybook"}
+        ports:
+        - containerPort: 6006
