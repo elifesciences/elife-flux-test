@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: epp-client
+  namespace: epp
+  labels:
+    app: epp-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: epp-client
+  template:
+    metadata:
+      namespace: epp
+      labels:
+        app: epp-client
+    spec:
+      containers:
+      - name: epp-client
+        image: ghcr.io/elifesciences/enhanced-preprints-client:master-e0eaa54a-20220907.1452 # {"$imagepolicy": "epp:epp-client"}
+        ports:
+        - containerPort: 3000
