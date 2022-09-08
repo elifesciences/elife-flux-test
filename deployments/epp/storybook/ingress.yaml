@@ -5,11 +5,11 @@ metadata:
   namespace: epp
 spec:
   rules:
-  - host: epp-node-prototype.elifesciences.org
+  - host: epp-storybook.elifesciences.org
     http:
       paths:
       - pathType: Prefix
-        path: "/storybook/"
+        path: "/"
         backend:
           service:
             name: epp-storybook-http
