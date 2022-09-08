@@ -3,15 +3,13 @@ kind: Ingress
 metadata:
   name: epp-client
   namespace: epp
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
-  - host: epp-node-prototype.elifesciences.org
+  - host: epp-client.elifesciences.org
     http:
       paths:
       - pathType: Prefix
-        path: /client-preview(/|$)(.*)
+        path: /
         backend:
           service:
             name: epp-client
