@@ -10,5 +10,13 @@
   ],
   "flux": {
     "fileMatch": ["deployments/.+\\.yaml$", "system/.+\\.yaml$", "clusters/.+\\.yaml$", "kustomizations/.+\\.yaml$"]
-  }
+  },
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true,
+      "assignAutomerge": true,
+      "automergeSchedule": ["after 7am and before 8am every weekday"]
+    }
+  ]
 }
