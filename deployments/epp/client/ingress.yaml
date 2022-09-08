@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: epp-client
+  namespace: epp
+spec:
+  rules:
+  - host: epp-node-prototype.elifesciences.org
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/client-preview"
+        backend:
+          service:
+            name: epp-client
+            port:
+              number: 6006
