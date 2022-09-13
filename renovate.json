@@ -18,6 +18,10 @@
       "automerge": true,
       "assignAutomerge": true,
       "automergeSchedule": ["after 7am and before 8am every weekday"]
+    },
+    {
+      "matchPackageNames": ["fluxcd/flux2"],
+      "automerge": false
     }
   ]
 }
