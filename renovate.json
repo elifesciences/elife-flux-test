@@ -1,5 +1,6 @@
 {
   "extends": ["config:base", ":prHourlyLimitNone"],
+  "timezone": "Europe/London",
   "kubernetes": {
     "fileMatch": [
       "^system/monitoring/kube-web-view/deployment\\.yaml$"
