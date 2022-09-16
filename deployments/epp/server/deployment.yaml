@@ -33,7 +33,7 @@ spec:
           mongo "mongodb://$MONGODB_EPP_USER:$MONGODB_EPP_PASSWORD@mongodb-rs0/epp?replicaSet=rs0&ssl=false" --authenticationDatabase admin --eval "db.getCollectionNames();" || mongo "mongodb://$MONGODB_USER_ADMIN_USER:$MONGODB_USER_ADMIN_PASSWORD@mongodb-rs0/admin?replicaSet=rs0&ssl=false" --eval "db.createUser({user: '$MONGODB_EPP_USER', pwd: '$MONGODB_EPP_PASSWORD', roles: [{ db: 'epp', role: 'readWrite' }], mechanisms: ['SCRAM-SHA-1']})"
       containers:
       - name: epp-node
-        image: ghcr.io/elifesciences/enhanced-preprints:master-f7ed54bb-20220916.0403 # {"$imagepolicy": "epp:epp-node-prototype"}
+        image: ghcr.io/elifesciences/enhanced-preprints:master-05124849-20220916.1706 # {"$imagepolicy": "epp:epp-node-prototype"}
         resources:
           requests:
             cpu: "200m"
