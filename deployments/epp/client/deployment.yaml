@@ -20,4 +20,4 @@ spec:
       - name: epp-client
         image: ghcr.io/elifesciences/enhanced-preprints-client:master-e9920c2c-20220926.1337 # {"$imagepolicy": "epp:epp-client"}
         ports:
-        - containerPort: 80
+        - containerPort: 3000
