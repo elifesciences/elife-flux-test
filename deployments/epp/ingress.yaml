@@ -14,7 +14,7 @@ spec:
           service:
             name: epp-client
             port:
-              number: 80
+              number: 3000
       - pathType: Prefix
         path: "/api"
         backend:
