@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: epp-client
-        image: ghcr.io/elifesciences/enhanced-preprints-client:master-8e2f2bbc-20220930.0743 # {"$imagepolicy": "epp:epp-client"}
+        image: ghcr.io/elifesciences/enhanced-preprints-client:master-7607b5cc-20220930.1031 # {"$imagepolicy": "epp:epp-client"}
         ports:
         - containerPort: 3000
         env:
