@@ -18,11 +18,11 @@ spec:
     spec:
       containers:
       - name: epp-client
-        image: ghcr.io/elifesciences/enhanced-preprints-client:master-7607b5cc-20220930.1031 # {"$imagepolicy": "epp:epp-client"}
+        image: ghcr.io/elifesciences/enhanced-preprints-client:master-7013d0d7-20221004.1136 # {"$imagepolicy": "epp:epp-client"}
         command:
-          - "sh"
-          - "-c"
-          - "yarn build && yarn start"
+        - "sh"
+        - "-c"
+        - "yarn build && yarn start"
         ports:
         - containerPort: 3000
         env:
