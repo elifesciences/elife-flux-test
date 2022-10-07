@@ -30,3 +30,10 @@ spec:
           value: http://epp-node-http:3000
         - name: NEXT_PUBLIC_IMAGE_SERVER
           value: /iiif
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          failureThreshold: 10
