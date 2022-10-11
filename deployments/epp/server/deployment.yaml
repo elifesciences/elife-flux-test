@@ -90,7 +90,7 @@ spec:
         - name: GIT_SYNC_WEBHOOK_TIMEOUT
           value: "60s"
         - name: GIT_SYNC_WEBHOOK_BACKOFF
-          value: "10s"
+          value: "60s"
         volumeMounts:
         - name: articles-data
           mountPath: /articles
