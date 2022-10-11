@@ -88,7 +88,7 @@ spec:
         - name: GIT_SYNC_WEBHOOK_URL
           value: http://localhost:3000/import
         - name: GIT_SYNC_WEBHOOK_TIMEOUT
-          value: "10s"
+          value: "60s"
         - name: GIT_SYNC_WEBHOOK_BACKOFF
           value: "10s"
         volumeMounts:
