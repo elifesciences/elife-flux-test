@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: epp-client
-        image: ghcr.io/elifesciences/enhanced-preprints-client:master-e66892e6-20221013.0932 # {"$imagepolicy": "epp:epp-client"}
+        image: ghcr.io/elifesciences/enhanced-preprints-client:master-766ef894-20221013.0941 # {"$imagepolicy": "epp:epp-client"}
         command:
         - "sh"
         - "-c"
