@@ -18,9 +18,9 @@ spec:
     spec:
       containers:
       - name: api-dummy
-        image: elifesciences/api-dummy:20b14b46beeae0b30c063752c18590c6a4b2e3f2@sha256:c7f4d7bd2c79428b482739e6eb889480079ef77b552db3a2ba75ecbed5b36766
+        image: elifesciences/api-dummy:3d3fbab19db13d8b90deffe83a10cc99deccdc01@sha256:25e1551a155a78a962ddef0096da1cfac9b6624e2f3819e9a4ba881f997c9635
         ports:
         - containerPort: 8080
         env:
         - name: DATA_FOLDER
-          value: /dev/null
+          value: rp
