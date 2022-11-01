@@ -68,6 +68,11 @@ spec:
         url: http://loki-stack.logging.svc.cluster.local:3100
         jsonData:
           maxLines: 1000
+      grafana.ini:
+        auth.anonymous:
+          enabled: true
+          org_name: Main Org.
+          org_role: Admin
 
     prometheus-node-exporter:
       rbac:
