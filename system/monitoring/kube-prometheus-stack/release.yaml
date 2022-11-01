@@ -57,7 +57,7 @@ spec:
       env:
         GF_AUTH_ANONYMOUS_ENABLED: "true"
         GF_AUTH_ANONYMOUS_ORG_NAME: "Main Org."
-        GF_AUTH_ANONYMOUS_ORG_ROLE: "Viewer"
+        GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
       rbac:
         pspUseAppArmor: false
         pspEnabled: true
@@ -68,11 +68,6 @@ spec:
         url: http://loki-stack.logging.svc.cluster.local:3100
         jsonData:
           maxLines: 1000
-      grafana.ini:
-        auth.anonymous:
-          enabled: true
-          org_name: Main Org.
-          org_role: Admin
 
     prometheus-node-exporter:
       rbac:
