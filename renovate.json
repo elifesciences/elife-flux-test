@@ -3,7 +3,8 @@
   "timezone": "Europe/London",
   "kubernetes": {
     "fileMatch": [
-      "^system/monitoring/kube-web-view/deployment\\.yaml$"
+      "^system/monitoring/kube-web-view/deployment\\.yaml$",
+      "kustomizations/.+\\.yaml$"
     ]
   },
   "assignees": [
