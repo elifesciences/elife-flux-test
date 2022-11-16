@@ -36,6 +36,8 @@ spec:
         kubeSchedulerAlerting: false    # lives on EKS
         kubeSchedulerRecording: false   # lives on EKS
         kubeApiserver: false  # too memory intensive
+      disabled:
+        KubeCPUOvercommit: true
     kubeControllerManager:
       enabled: false  # lives on EKS
     prometheusOperator:
