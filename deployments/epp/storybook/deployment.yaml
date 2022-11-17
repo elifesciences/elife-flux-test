@@ -18,6 +18,6 @@ spec:
     spec:
       containers:
       - name: epp-storybook
-        image: ghcr.io/elifesciences/enhanced-preprints-storybook:master-88f55ee5-20221115.1015 # {"$imagepolicy": "epp:epp-storybook"}
+        image: ghcr.io/elifesciences/enhanced-preprints-storybook:master-5a2032db-20221117.0952 # {"$imagepolicy": "epp:epp-storybook"}
         ports:
         - containerPort: 6006
