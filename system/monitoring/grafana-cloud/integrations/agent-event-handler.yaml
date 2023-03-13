@@ -1,4 +1,16 @@
 ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: agent-eventhandler
+  namespace: monitoring
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
 apiVersion: monitoring.grafana.com/v1alpha1
 kind: Integration
 metadata:
@@ -18,3 +30,5 @@ spec:
     name: agent-eventhandler
   volumes:
   - name: agent-eventhandler
+    persistentVolumeClaim:
+      claimName: agent-eventhandler
