@@ -11,7 +11,7 @@ spec:
     basicAuth:
       username:
         name: grafana-cloud-elife-flux-test-credentials
-        key: username
+        key: metrics_username
       password:
         name: grafana-cloud-elife-flux-test-credentials
         key: password

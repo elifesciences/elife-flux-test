@@ -1,0 +1,24 @@
+apiVersion: monitoring.grafana.com/v1alpha1
+kind: LogsInstance
+metadata:
+  name: primary
+  namespace: monitoring
+  labels:
+    agent: grafana-agent-logs
+spec:
+  clients:
+  - url: your_remote_logs_URL
+    basicAuth:
+      username:
+        name: grafana-cloud-elife-flux-test-credentials
+        key: logs_username
+      password:
+        name: grafana-cloud-elife-flux-test-credentials
+        key: password
+
+  # Supply an empty namespace selector to look in all namespaces. Remove
+  # this to only look in the same namespace as the LogsInstance CR
+  podLogsNamespaceSelector: {}
+  podLogsSelector:
+    matchLabels:
+      instance: primary
