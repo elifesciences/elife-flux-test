@@ -1,0 +1,20 @@
+---
+apiVersion: monitoring.grafana.com/v1alpha1
+kind: Integration
+metadata:
+  labels:
+    agent: grafana-agent
+  name: agent-eventhandler
+  namespace: monitoring
+spec:
+  config:
+    cache_path: /etc/eventhandler/eventhandler.cache
+    logs_instance: monitoring/grafana-agent-logs
+  name: eventhandler
+  type:
+    unique: true
+  volumeMounts:
+  - mountPath: /etc/eventhandler
+    name: agent-eventhandler
+  volumes:
+  - name: agent-eventhandler
