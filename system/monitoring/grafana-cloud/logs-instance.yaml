@@ -10,10 +10,10 @@ spec:
   - url: https://logs-prod-017.grafana.net/loki/api/v1/push
     basicAuth:
       username:
-        name: grafana-cloud-elife-flux-test-credentials
-        key: logs_username
+        name: grafana-cloud-elife-flux-test-credentials-logs
+        key: username
       password:
-        name: grafana-cloud-elife-flux-test-credentials
+        name: grafana-cloud-elife-flux-test-credentials-logs
         key: password
 
   # Supply an empty namespace selector to look in all namespaces. Remove
