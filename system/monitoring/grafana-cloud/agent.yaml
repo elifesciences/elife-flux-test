@@ -10,6 +10,8 @@ spec:
   image: grafana/agent:v0.32.1
   logLevel: info
   serviceAccountName: grafana-agent
+  disableReporting: true
+  disableSupportBundle: true
   metrics:
     instanceSelector:
       matchLabels:
