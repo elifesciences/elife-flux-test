@@ -1,15 +1,11 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  creationTimestamp: "2020-04-16T15:47:00Z"
-  generation: 8
   labels:
     eks.amazonaws.com/component: kube-proxy
     k8s-app: kube-proxy
   name: kube-proxy
   namespace: kube-system
-  resourceVersion: "484054107"
-  uid: 82b38525-7ff9-11ea-b9ba-1283ad288647
 spec:
   revisionHistoryLimit: 10
   selector:
