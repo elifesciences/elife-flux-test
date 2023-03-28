@@ -6,6 +6,7 @@ metadata:
   namespace: kube-system
 
 spec:
+  interval: 5m
   chart:
     spec:
       chart:  aws-ebs-csi-driver
