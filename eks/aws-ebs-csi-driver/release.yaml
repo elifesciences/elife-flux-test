@@ -19,4 +19,4 @@ spec:
     controller:
       serviceAccount:
         annotations:
-          eks.amazonaws.com/role-arn: kubernetes-aws--flux-test--aws-ebs-csi-driver
+          eks.amazonaws.com/role-arn: arn:aws:iam::512686554592:role/kubernetes-aws--flux-test--aws-ebs-csi-driver
