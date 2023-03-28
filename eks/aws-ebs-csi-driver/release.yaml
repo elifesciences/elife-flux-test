@@ -14,3 +14,7 @@ spec:
         kind: HelmRepository
         name: aws-ebs-csi-driver
       interval: 1m
+  values:
+    serviceAccount:
+      annotations:
+        eks.amazonaws.com/role-arn: kubernetes-aws--flux-test--aws-ebs-csi-driver
