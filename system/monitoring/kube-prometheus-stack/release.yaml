@@ -30,7 +30,6 @@ spec:
     global:
       rbac:
         create: true
-        pspEnabled: true
     defaultRules:
       rules:
         kubeSchedulerAlerting: false    # lives on EKS
@@ -61,9 +60,6 @@ spec:
         GF_AUTH_ANONYMOUS_ENABLED: "true"
         GF_AUTH_ANONYMOUS_ORG_NAME: "Main Org."
         GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
-      rbac:
-        pspUseAppArmor: false
-        pspEnabled: true
       additionalDataSources:
       - name: Loki
         type: loki
@@ -73,8 +69,6 @@ spec:
           maxLines: 1000
 
     prometheus-node-exporter:
-      rbac:
-        pspEnabled: true
 
     prometheus:
       ingress:
