@@ -19,3 +19,4 @@ spec:
   values:
     image:
       repository: registry.k8s.io/descheduler/descheduler
+      tag: v0.25.1
