@@ -23,6 +23,10 @@
     {
       "matchPackageNames": ["fluxcd/flux2"],
       "automerge": false
+    },
+    {
+      "matchPackageNames": ["descheduler"],
+      "enable": false
     }
   ]
 }
