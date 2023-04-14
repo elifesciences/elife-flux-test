@@ -14,10 +14,7 @@ test: validate
 
 # targets for interacting with flux in the cluster
 reconcile:
-	flux reconcile source git flux-system
-reconcile-deployments: reconcile
-	flux reconcile kustomization deployments
-
+	flux reconcile source git flux-system && flux reconcile kustomization flux-system &&  flux reconcile kustomization crds && flux reconcile kustomization eks && flux reconcile kustomization system && flux reconcile kustomization deployments
 
 # targets to show logs for main cluster components
 logs-flux:
@@ -25,12 +22,6 @@ logs-flux:
 
 logs-nginx:
 	kubectl logs -f -n infra deployment/infra-ingress-nginx-controller
-
-logs-flagger:
-	kubectl logs -f -n infra deployment/infra-flagger
-
-logs-flagger-loadtester:
-	kubectl logs -f -n infra deployment/infra-flagger-loadtester
 
 logs-certmanager:
 	kubectl logs -f -n infra deployment/infra-cert-manager
