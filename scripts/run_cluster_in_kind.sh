@@ -27,7 +27,7 @@ kubectl apply -f scripts/kwok/1_large_simulated_node.yaml
 
 
 # Install cluster stuff and wait
-flux create source git flux-system --url=https://github.com/elifesciences/elife-flux-test --branch=master
+flux create source git flux-system --url=https://github.com/elifesciences/elife-flux-test --branch="$branch"
 flux create kustomization flux-system --source=flux-system --path=./clusters/end-to-end-tests
 kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=1m -n flux-system flux-system
 
