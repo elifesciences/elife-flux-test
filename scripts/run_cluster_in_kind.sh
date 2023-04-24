@@ -37,18 +37,18 @@ kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --
 kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system deployments
 
 # Test all system resources have "deployed"
-kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n autoscaler         cluster-autoscaler
-kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n infra             sealed-secrets
-kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n infra              ingress-nginx
-kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n infra              cert-manager
-kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n infra              external-dns
-kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n infra              oauth2-proxy
-kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n kube-system        descheduler
-kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n monitoring         prometheus-stack
-kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n monitoring         metrics-server
-kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n logging            loki-stack
-kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n crossplane-system  crossplane
-kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n db-operator-system psmdb-operator
+kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n autoscaler         cluster-autoscaler
+kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n infra             sealed-secrets
+kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n infra              ingress-nginx
+kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n infra              cert-manager
+kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n infra              external-dns
+kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n infra              oauth2-proxy
+kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n kube-system        descheduler
+kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n monitoring         metrics-server
+kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n logging            loki-stack
+kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n crossplane-system  crossplane
+kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n db-operator-system psmdb-operator
+kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n monitoring         prometheus-stack
 
 kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n monitoring monitoring-flux
 
