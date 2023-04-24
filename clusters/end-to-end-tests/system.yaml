@@ -50,6 +50,8 @@ spec:
             operator: "Equal"
             value: "true"
             effect: "NoSchedule"
+          nodeSelector:
+            kubernetes.io/hostname=elife-flux-test-control-plane
     target:
       kind: HelmRelease
       name: metrics-server
