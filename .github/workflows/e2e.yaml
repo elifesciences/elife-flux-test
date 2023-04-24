@@ -29,11 +29,6 @@ jobs:
         with:
           version: "v0.18.0"
           skipClusterCreation: true
-      # # This step exists because the sealed secrets will fail to decode, so some service fail to deploy without *a* secret, even if it is just nonsense
-      # - name: Pre-requisite setup for services (unsealable secrets)
-      #   run: |
-      #     kubectl create ns infra
-      #     kubectl create secret -n infra  generic oauth2-github --from-literal=client-id=client-id --from-literal=client-secret=client-secret --from-literal=cookie-secret=cookie-secret-16
       - name: Create a test cluster, deploy this branch, and then test resources come up
         run: ./scripts/run_cluster_in_kind.sh ${GITHUB_REF#refs/heads/}
       - name: Debug failure summaries
