@@ -12,7 +12,7 @@ kind create cluster --name "elife-flux-test" --image=kindest/node:v1.25.8
 
 # install kwok into cluster
 kubectl kustomize scripts/kwok/deploy_config | kubectl apply -f -
-kubectl wait deployment -n kube-system kwok-controller --timeout=30s --for condition=Available=True
+kubectl wait deployment -n kube-system kwok-controller --timeout=60s --for condition=Available=True
 
 # Install Flux with toleration to run controllers on the real node
 kubectl create ns flux
