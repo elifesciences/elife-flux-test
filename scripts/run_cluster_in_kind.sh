@@ -8,7 +8,7 @@ branch=${1:-master}
 echo "Building KinD cluster using '$branch' branch"
 
 kind delete cluster --name "elife-flux-test"
-kind create cluster --name "elife-flux-test" --image=kindest/node:v1.25.8 --wait 30s
+kind create cluster --name "elife-flux-test" --image=kindest/node:v1.25.8
 
 # install kwok into cluster
 kubectl kustomize scripts/kwok/deploy_config | kubectl apply -f -
