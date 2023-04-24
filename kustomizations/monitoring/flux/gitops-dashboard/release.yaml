@@ -13,6 +13,7 @@ spec:
         kind: HelmRepository
         name: gitops-dashboard
   interval: 1h0m0s
+  timeout: 5m
   values:
     ingress:
       enabled: true
