@@ -5,8 +5,7 @@ set -e
 # if a param is specified, update the flux-system source branch to that
 branch=${1:-master}
 
-echo "running cluster on '$branch' branch"
-exit 0
+echo "Building KinD cluster using '$branch' branch"
 
 kind delete cluster --name "elife-flux-test"
 kind create cluster --name "elife-flux-test" --image=kindest/node:v1.25.8 --wait 30s
@@ -30,10 +29,14 @@ kubectl apply -f scripts/kwok/1_large_simulated_node.yaml
 # Install cluster stuff and wait
 flux create source git flux-system --url=https://github.com/elifesciences/elife-flux-test --branch=master
 flux create kustomization flux-system --source=flux-system --path=./clusters/end-to-end-tests
+kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=1m -n flux-system flux-system
+
+# Test all kustomizations have reconciled
 kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system crds
 kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system system
 kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n flux-system deployments
 
+# Test all system resources have "deployed"
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n autoscaler         cluster-autoscaler
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n infra             sealed-secrets
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n infra              ingress-nginx
@@ -41,8 +44,13 @@ kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n infra              external-dns
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n infra              oauth2-proxy
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n kube-system        descheduler
+kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n monitoring         prometheus-stack
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n monitoring         metrics-server
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n logging            loki-stack
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n crossplane-system  crossplane
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n db-operator-system psmdb-operator
-kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=10m -n monitoring         prometheus-stack
+
+kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n monitoring monitoring-flux
+
+# Test all deployments
+kubectl wait deployment --for=condition=Available --timeout=5m -n podinfo    podinfo--stg
