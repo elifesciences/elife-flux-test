@@ -26,6 +26,12 @@ spec:
       spec:
         install:
           disableWait: true
+        values:
+          tolerations:
+          - key: "realnode"
+            operator: "Equal"
+            value: "true"
+            effect: "NoSchedule"
     target:
       kind: HelmRelease
       name: ingress-nginx
@@ -39,6 +45,11 @@ spec:
         values:
           args:
             - --kubelet-insecure-tls
+          tolerations:
+          - key: "realnode"
+            operator: "Equal"
+            value: "true"
+            effect: "NoSchedule"
     target:
       kind: HelmRelease
       name: metrics-server
