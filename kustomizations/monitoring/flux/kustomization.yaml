@@ -4,7 +4,6 @@ namespace: monitoring
 resources:
 - podmonitor.yaml
 - flux-alert-rules.yaml
-- gitops-dashboard
 configMapGenerator:
 - name: flux-grafana-dashboards
   files:
