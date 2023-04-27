@@ -49,6 +49,7 @@ kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n crossplane-system  crossplane
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n db-operator-system psmdb-operator
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n monitoring         prometheus-stack
+kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n monitoring         gitops-dashboard
 
 kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=5m -n monitoring monitoring-flux
 
