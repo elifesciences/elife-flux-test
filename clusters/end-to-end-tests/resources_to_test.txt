@@ -15,7 +15,7 @@ helmrelease ready monitoring metrics-server
 helmrelease ready logging loki-stack
 helmrelease ready db-operator-system psmdb-operator
 helmrelease ready monitoring prometheus-stack
-helmrelease ready monitoring gitops-dashboard
+helmrelease ready flux-system gitops-dashboard
 
 kustomizations.kustomize.toolkit.fluxcd.io ready monitoring monitoring-flux
 
