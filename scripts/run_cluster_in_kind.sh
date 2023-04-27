@@ -46,7 +46,6 @@ kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n kube-system        descheduler
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n monitoring         metrics-server
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n logging            loki-stack
-kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n crossplane-system  crossplane
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n db-operator-system psmdb-operator
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n monitoring         prometheus-stack
 kubectl wait helmreleases.helm.toolkit.fluxcd.io --for=condition=ready --timeout=3m -n monitoring         gitops-dashboard
