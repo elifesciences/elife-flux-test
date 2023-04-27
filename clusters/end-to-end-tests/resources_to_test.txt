@@ -1,0 +1,23 @@
+# Test all kustomizations have reconciled
+kustomizations.kustomize.toolkit.fluxcd.io ready flux-system crds
+kustomizations.kustomize.toolkit.fluxcd.io ready flux-system system
+kustomizations.kustomize.toolkit.fluxcd.io ready flux-system deployments
+
+# Test all system resources have "deployed"
+helmrelease ready autoscaler cluster-autoscaler
+helmrelease ready infra sealed-secrets
+helmrelease ready infra ingress-nginx
+helmrelease ready infra cert-manager
+helmrelease ready infra external-dns
+helmrelease ready infra oauth2-proxy
+helmrelease ready kube-system descheduler
+helmrelease ready monitoring metrics-server
+helmrelease ready logging loki-stack
+helmrelease ready db-operator-system psmdb-operator
+helmrelease ready monitoring prometheus-stack
+helmrelease ready monitoring gitops-dashboard
+
+kustomizations.kustomize.toolkit.fluxcd.io ready monitoring monitoring-flux
+
+# Test all deployments
+deployment Available podinfo podinfo--stg
