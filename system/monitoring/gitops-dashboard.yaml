@@ -11,5 +11,4 @@ spec:
     name: flux-system
     namespace: flux-system
   path: ./kustomizations/monitoring/gitops-dashboard
-  targetNamespace: flux-system
   prune: true
