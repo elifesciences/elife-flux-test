@@ -28,4 +28,4 @@ spec:
             nginx.ingress.kubernetes.io/auth-signin: "https://oauth-proxy.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
         spec:
           rules:
-            - host: podinfo--stg.elifesciences.org
+            - host: podinfo--staging.elifesciences.org
