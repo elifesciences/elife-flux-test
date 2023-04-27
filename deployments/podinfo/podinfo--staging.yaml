@@ -29,3 +29,12 @@ spec:
         spec:
           rules:
             - host: podinfo--staging.elifesciences.org
+              http:
+                paths:
+                  - pathType: Prefix
+                    path: "/"
+                    backend:
+                      service:
+                        name: podinfo
+                        port:
+                          number: 9898
