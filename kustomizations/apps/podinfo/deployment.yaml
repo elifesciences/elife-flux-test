@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: podinfo--stg
+  name: podinfo
   labels:
-    app: podinfo--stg
+    app: podinfo
   namespace: podinfo
 spec:
   minReadySeconds: 5
@@ -15,18 +15,18 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: podinfo--stg
+      app: podinfo
   template:
     metadata:
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "9797"
       labels:
-        app: podinfo--stg
+        app: podinfo
     spec:
       containers:
       - name: podinfod
-        image: docker.io/stefanprodan/podinfo:6.3.5 # {"$imagepolicy": "podinfo:podinfo--stg"}
+        image: docker.io/stefanprodan/podinfo:6.3.5
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

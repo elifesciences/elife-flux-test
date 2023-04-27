@@ -20,4 +20,4 @@ helmrelease ready flux-system gitops-dashboard
 kustomizations.kustomize.toolkit.fluxcd.io ready monitoring monitoring-flux
 
 # Test all deployments
-deployment Available podinfo podinfo--stg
+deployment Available podinfo--staging podinfo
