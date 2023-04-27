@@ -12,6 +12,7 @@ spec:
     namespace: flux-system
   path: ./kustomizations/apps/podinfo
   prune: true
+  targetNamespace: podinfo--staging
   patches:
     - target:
         kind: Ingress
