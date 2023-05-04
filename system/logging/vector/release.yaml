@@ -78,8 +78,10 @@ spec:
           inputs: [filter_nginx_podinfo]
           encoding:
             codec: json
-        # bigquery_gcp:
-        #   type: gcp_cloud_storage
-        #   inputs:
-        #     - filter_nginx_podinfo
-        #   bucket: elife-cluster-logs
+        bigquery_gcp:
+          type: gcp_cloud_storage
+          inputs:
+            - filter_nginx_podinfo
+          bucket: elife-cluster-logs
+          credentials_path: /etc/gcp-data-hub-project-log-shipping/credentials.json
+          key_prefix: flux-test/podinfo/
