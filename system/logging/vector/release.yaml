@@ -65,6 +65,6 @@ spec:
           address: 0.0.0.0:9090
         stdout:
           type: console
-          inputs: [filter_nginx_podinfo]
+          inputs: [nginx_json_parse, filter_nginx_podinfo]
           encoding:
             codec: json
