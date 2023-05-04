@@ -57,8 +57,8 @@ spec:
           type: filter
           inputs:
             - nginx_json_parse
-          condition: |
-            .json.referer == "podinfo--staging.elifesciences.org"
+          # condition: |
+          #   .json.referer == "podinfo--staging.elifesciences.org"
       sinks:
         prom_exporter:
           type: prometheus_exporter
