@@ -85,4 +85,5 @@ spec:
           bucket: elife-cluster-logs
           credentials_path: /etc/gcp-data-hub-project-log-shipping/credentials.json
           key_prefix: flux-test/podinfo/
-          encoding: json
+          encoding:
+            codec: json
