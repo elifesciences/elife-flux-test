@@ -51,7 +51,7 @@ spec:
           type: filter
           inputs:
             - nginx_logs
-          condition: message.referer == "podinfo--staging.elifesciences.org"
+          condition: .message.referer == "podinfo--staging.elifesciences.org"
       sinks:
         prom_exporter:
           type: prometheus_exporter
