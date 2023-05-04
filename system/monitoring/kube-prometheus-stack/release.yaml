@@ -59,12 +59,9 @@ spec:
       grafana.ini:
         users:
           viewers_can_edit: true
-        auth:
-          disable_login_form: true
-          disable_signout_menu: true
         auth.anonymous:
           enabled: true
-          org_role: Admin
+          org_role: Editor
       additionalDataSources:
       - name: Loki
         type: loki
