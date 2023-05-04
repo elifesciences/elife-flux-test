@@ -24,6 +24,14 @@ spec:
     role: Agent
     podMonitor:
       enabled: true
+    extraVolumes:
+    - name: gcp-data-hub-project-log-shipping
+      secret:
+        secretName: gcp-data-hub-project-log-shipping
+    extraVolumeMounts:
+    - name: gcp-data-hub-project-log-shipping
+      mountPath: /etc/gcp-data-hub-project-log-shipping
+      readOnly: true
     customConfig:
       data_dir: /vector-data-dir
       api:
@@ -70,3 +78,8 @@ spec:
           inputs: [filter_nginx_podinfo]
           encoding:
             codec: json
+        # bigquery_gcp:
+        #   type: gcp_cloud_storage
+        #   inputs:
+        #     - filter_nginx_podinfo
+        #   bucket: elife-cluster-logs
