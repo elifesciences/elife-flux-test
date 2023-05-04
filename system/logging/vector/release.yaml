@@ -57,7 +57,7 @@ spec:
           inputs:
             - nginx_json_parse
           condition: |
-            starts_with(.json.requestUrl, "podinfo--staging.elifesciences.org")
+            starts_with(string!(.json.requestUrl), "podinfo--staging.elifesciences.org")
       sinks:
         prom_exporter:
           type: prometheus_exporter
