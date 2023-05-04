@@ -57,7 +57,7 @@ spec:
           inputs:
             - nginx_json_parse
           condition: |
-            .json.referer == "podinfo--staging.elifesciences.org"
+            starts_with(.json.requestUrl, "podinfo--staging.elifesciences.org")
       sinks:
         prom_exporter:
           type: prometheus_exporter
@@ -65,6 +65,6 @@ spec:
           address: 0.0.0.0:9090
         stdout:
           type: console
-          inputs: [nginx_json_parse, filter_nginx_podinfo]
+          inputs: [filter_nginx_podinfo]
           encoding:
             codec: json
