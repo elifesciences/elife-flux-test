@@ -51,7 +51,7 @@ spec:
           inputs:
             - nginx_logs
           source: |
-            .json = parse_json!(string!(.message))
+            .json = parse_json!(.message)
         filter_nginx_podinfo:
           type: filter
           inputs:
