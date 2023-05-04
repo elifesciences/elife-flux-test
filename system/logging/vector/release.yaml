@@ -61,13 +61,13 @@ spec:
           inputs:
             - nginx_logs
           source: |
-            .json = parse_json(.message) ?? {}
+            . = !parse_json(.message)
         filter_nginx_podinfo:
           type: filter
           inputs:
             - nginx_json_parse
           condition: |
-            starts_with(string(.json.httpRequest.requestUrl) ?? "", "podinfo--staging.elifesciences.org")
+            starts_with(string(.httpRequest.requestUrl) ?? "", "podinfo--staging.elifesciences.org")
       sinks:
         prom_exporter:
           type: prometheus_exporter
