@@ -45,7 +45,6 @@ spec:
         nginx_logs:
           type: kubernetes_logs
           extra_label_selector: app.kubernetes.io/name==ingress-nginx
-          extra_namespace_label_selector: my_custom_label==infra
       transforms:
         nginx_json_parse:
           type: remap
