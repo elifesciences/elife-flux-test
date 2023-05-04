@@ -29,8 +29,8 @@ spec:
         address: 127.0.0.1:8686
         playground: false
       sources:
-        kubernetes_logs:
-          type: kubernetes_logs
+        # kubernetes_logs:
+        #   type: kubernetes_logs
         host_metrics:
           filesystem:
             devices:
@@ -42,6 +42,16 @@ spec:
           type: host_metrics
         internal_metrics:
           type: internal_metrics
+        nginx_logs:
+          type: kubernetes_logs
+          extra_label_selector: app.kubernetes.io/name==ingress-nginx
+          extra_namespace_label_selector: my_custom_label==infra
+      transforms:
+        filter_nginx_podinfo:
+          type: filter
+          inputs:
+            - nginx_logs
+          condition: message.referer == podinfo--staging.elifesciences.org
       sinks:
         prom_exporter:
           type: prometheus_exporter
@@ -49,6 +59,6 @@ spec:
           address: 0.0.0.0:9090
         stdout:
           type: console
-          inputs: [kubernetes_logs]
+          inputs: [filter_nginx_podinfo]
           encoding:
             codec: json
