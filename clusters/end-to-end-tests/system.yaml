@@ -86,3 +86,15 @@ spec:
     target:
       kind: HelmRelease
       name: vector
+  - target:
+      kind: HelmRelease
+      name: loki
+    patch: |
+      apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      metadata:
+        name: loki
+        namespace: logging
+      spec:
+        install:
+          disableWait: true
