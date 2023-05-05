@@ -22,10 +22,9 @@ spec:
 
   values:
     loki:
-      config:
-        compactor:
-          retention_enabled: true
       server:
         log_level: debug
+      compactor:
+          retention_enabled: true
     promtail:
       enabled: false
