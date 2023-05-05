@@ -112,4 +112,4 @@ spec:
             k8s_pod_namespace: '\{\{ kubernetes.pod_namespace \}\}'
             k8s_pod_name: '\{\{ kubernetes.pod_name \}\}'
             k8s_pod_uid: '\{\{ kubernetes.pod_uid \}\}'
-            '"pod_labels_*"': '\{\{ kubernetes.pod_labels \}\}'
+            'pod_labels_*': '\{\{ kubernetes.pod_labels \}\}'
