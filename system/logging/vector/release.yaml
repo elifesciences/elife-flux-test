@@ -41,6 +41,8 @@ spec:
       sources:
         logs:
           type: kubernetes_logs
+        internal_logs:
+          type: internal_logs
         host_metrics:
           filesystem:
             devices:
@@ -85,7 +87,7 @@ spec:
           address: 0.0.0.0:9090
         stdout:
           type: console
-          inputs: [json_logs]
+          inputs: [json_logs, internal_logs]
           encoding:
             codec: json
         bigquery_gcp:
@@ -103,7 +105,6 @@ spec:
           inputs:
           - json_logs
           endpoint: http://loki-stack:3100
-          path: /loki/api/v1/push
           encoding:
             codec: json
           labels:
