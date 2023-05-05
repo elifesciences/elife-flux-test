@@ -25,3 +25,5 @@ spec:
       config:
         compactor:
           retention_enabled: true
+    promtail:
+      enabled: false
