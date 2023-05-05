@@ -34,7 +34,7 @@ spec:
       readOnly: true
     env:
       - name: VECTOR_LOG
-        value: debug
+        value: trace
     customConfig:
       data_dir: /vector-data-dir
       api:
@@ -44,8 +44,8 @@ spec:
       sources:
         logs:
           type: kubernetes_logs
-        internal_logs:
-          type: internal_logs
+        # internal_logs:
+        #   type: internal_logs
         host_metrics:
           filesystem:
             devices:
