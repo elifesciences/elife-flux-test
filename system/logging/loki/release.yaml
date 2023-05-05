@@ -25,5 +25,7 @@ spec:
       config:
         compactor:
           retention_enabled: true
+      server:
+        log_level: debug
     promtail:
       enabled: false
