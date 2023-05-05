@@ -103,6 +103,7 @@ spec:
           inputs:
           - json_logs
           endpoint: http://loki-stack:3100
+          path: /loki/api/v1/push
           encoding:
             codec: json
           labels:
