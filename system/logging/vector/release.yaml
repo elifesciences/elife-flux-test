@@ -110,7 +110,7 @@ spec:
           endpoint: http://loki-stack:3100
           out_of_order_action: accept
           encoding:
-            codec: native_json
+            codec: text
           labels:
             file: '\{\{ file \}\}'
             stream: '\{\{ stream \}\}'
