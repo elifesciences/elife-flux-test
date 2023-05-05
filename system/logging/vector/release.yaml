@@ -73,7 +73,7 @@ spec:
           address: 0.0.0.0:9090
         stdout:
           type: console
-          inputs: [filter_nginx_podinfo]
+          inputs: [nginx_json_parse]
           encoding:
             codec: json
         bigquery_gcp:
