@@ -32,6 +32,8 @@ spec:
     - name: gcp-data-hub-project-log-shipping
       mountPath: /etc/gcp-data-hub-project-log-shipping
       readOnly: true
+    env:
+      VECTOR_LOG: debug
     customConfig:
       data_dir: /vector-data-dir
       api:
