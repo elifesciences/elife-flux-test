@@ -21,7 +21,14 @@ spec:
       retries: 5
   timeout: 5m
   values:
+    singleBinary:
+      replicas: 1
+
     loki:
+      commonConfig:
+        replication_factor: 1
+      storage:
+        type: 'filesystem'
       server:
         log_level: debug
       compactor:
