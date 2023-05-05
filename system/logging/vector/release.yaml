@@ -34,7 +34,7 @@ spec:
       readOnly: true
     env:
       - name: VECTOR_LOG
-        value: trace
+        value: debug
     customConfig:
       data_dir: /vector-data-dir
       api:
@@ -108,8 +108,7 @@ spec:
           inputs:
           - json_logs
           endpoint: http://loki-stack:3100
-          encoding:
-            codec: json
+          out_of_order_action: accept
           labels:
             file: '\{\{ file \}\}'
             stream: '\{\{ stream \}\}'
