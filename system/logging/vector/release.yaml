@@ -33,7 +33,8 @@ spec:
       mountPath: /etc/gcp-data-hub-project-log-shipping
       readOnly: true
     env:
-      VECTOR_LOG: debug
+      - name: VECTOR_LOG
+        value: debug
     customConfig:
       data_dir: /vector-data-dir
       api:
