@@ -103,7 +103,8 @@ spec:
           inputs:
           - json_logs
           endpoint: http://loki-stack:3100
-          encoding.codec: json
+          encoding:
+            codec: json
           labels:
             file: '\{\{ file \}\}'
             stream: '\{\{ stream \}\}'
