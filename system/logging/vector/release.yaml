@@ -34,7 +34,7 @@ spec:
       readOnly: true
     env:
       - name: VECTOR_LOG
-        value: trace
+        value: debug
     customConfig:
       data_dir: /vector-data-dir
       api:
