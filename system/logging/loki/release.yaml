@@ -44,4 +44,4 @@ spec:
       selfMonitoring:
         enabled: false
         grafanaAgent:
-          enabled: false
+          installOperator: false
