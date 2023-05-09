@@ -34,8 +34,8 @@ spec:
         log_level: debug
       compactor:
         retention_enabled: true
-      monitoring:
-        lokiCanary:
-          enabled: false
-        selfMonitoring:
-          enabled: false
+    monitoring:
+      lokiCanary:
+        enabled: false
+      selfMonitoring:
+        enabled: false
