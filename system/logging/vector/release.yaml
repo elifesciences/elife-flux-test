@@ -112,7 +112,7 @@ spec:
             codec: json
           labels:
             host: "${HOSTNAME}"
-            file: '\{\{ file \}\}'
+            file: '{{ file }}'
             # stream: '\{\{ stream \}\}'
             # source_type: '\{\{ source_type \}\}'
             # k8s_pod_namespace: '\{\{ kubernetes.pod_namespace \}\}'
