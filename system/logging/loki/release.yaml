@@ -34,6 +34,8 @@ spec:
         log_level: debug
       compactor:
         retention_enabled: true
+    test:
+      enabled: false
     monitoring:
       grafanaAgent:
         enabled: false
