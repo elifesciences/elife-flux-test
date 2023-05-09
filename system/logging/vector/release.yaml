@@ -34,7 +34,7 @@ spec:
       readOnly: true
     env:
       - name: VECTOR_LOG
-        value: debug
+        value: info
     customConfig:
       data_dir: /vector-data-dir
       api:
@@ -44,8 +44,6 @@ spec:
       sources:
         logs:
           type: kubernetes_logs
-        # internal_logs:
-        #   type: internal_logs
         host_metrics:
           filesystem:
             devices:
@@ -88,11 +86,6 @@ spec:
           type: prometheus_exporter
           inputs: [host_metrics, internal_metrics]
           address: 0.0.0.0:9090
-        # stdout:
-        #   type: console
-        #   inputs: [json_logs]
-        #   encoding:
-        #     codec: json
         bigquery_gcp:
           type: gcp_cloud_storage
           inputs:
