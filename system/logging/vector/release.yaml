@@ -110,8 +110,7 @@ spec:
           endpoint: http://loki-gateway/
           out_of_order_action: accept
           encoding:
-            codec: text
-          tenant_id: "1"
+            codec: json
           labels:
             file: '\{\{ file \}\}'
             stream: '\{\{ stream \}\}'
