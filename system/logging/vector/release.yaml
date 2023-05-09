@@ -77,6 +77,8 @@ spec:
             json, err = parse_json(.message)
             if err == null {
               abort
+            } else {
+              . = parse_json!(.message)
             }
         filter_nginx_podinfo:
           type: filter
