@@ -35,6 +35,8 @@ spec:
       compactor:
         retention_enabled: true
     monitoring:
+      grafanaAgent:
+        enabled: false
       lokiCanary:
         enabled: false
       selfMonitoring:
