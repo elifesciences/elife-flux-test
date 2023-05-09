@@ -111,6 +111,7 @@ spec:
           out_of_order_action: accept
           encoding:
             codec: text
+          tenant_id: 1
           labels:
             file: '\{\{ file \}\}'
             stream: '\{\{ stream \}\}'
