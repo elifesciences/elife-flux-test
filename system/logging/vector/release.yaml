@@ -111,10 +111,11 @@ spec:
           encoding:
             codec: json
           labels:
-            file: '\{\{ file \}\}'
-            stream: '\{\{ stream \}\}'
-            source_type: '\{\{ source_type \}\}'
-            k8s_pod_namespace: '\{\{ kubernetes.pod_namespace \}\}'
-            k8s_pod_name: '\{\{ kubernetes.pod_name \}\}'
-            k8s_pod_uid: '\{\{ kubernetes.pod_uid \}\}'
-            'pod_labels_*': '\{\{ kubernetes.pod_labels \}\}'
+            host: "${HOSTNAME}"
+            # file: '\{\{ file \}\}'
+            # stream: '\{\{ stream \}\}'
+            # source_type: '\{\{ source_type \}\}'
+            # k8s_pod_namespace: '\{\{ kubernetes.pod_namespace \}\}'
+            # k8s_pod_name: '\{\{ kubernetes.pod_name \}\}'
+            # k8s_pod_uid: '\{\{ kubernetes.pod_uid \}\}'
+            # 'pod_labels_*': '\{\{ kubernetes.pod_labels \}\}'
