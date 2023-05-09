@@ -108,7 +108,6 @@ spec:
           inputs:
           - json_logs
           endpoint: http://loki-gateway/
-          out_of_order_action: accept
           encoding:
             codec: json
           labels:
