@@ -74,7 +74,10 @@ spec:
           inputs:
             - nginx_logs
           source: |
-            . = parse_json!(.message)
+            json, err = parse_json(.message)
+            if err == null {
+              abort
+            }
         filter_nginx_podinfo:
           type: filter
           inputs:
