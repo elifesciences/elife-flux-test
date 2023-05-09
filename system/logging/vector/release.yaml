@@ -107,7 +107,7 @@ spec:
           type: loki
           inputs:
           - json_logs
-          endpoint: http://loki:3001/
+          endpoint: http://loki-gateway/
           out_of_order_action: accept
           encoding:
             codec: text
