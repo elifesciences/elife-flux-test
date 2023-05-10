@@ -31,7 +31,7 @@ spec:
       storage:
         type: 'filesystem'
       server:
-        log_level: debug
+        log_level: info
       compactor:
         retention_enabled: true
     test:
