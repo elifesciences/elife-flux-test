@@ -14,7 +14,7 @@ test: validate
 
 # targets for interacting with flux in the cluster
 reconcile:
-	flux reconcile source git flux-system && flux reconcile kustomization flux-system &&  flux reconcile kustomization crds && flux reconcile kustomization eks && flux reconcile kustomization system && flux reconcile kustomization deployments
+	flux reconcile source git flux-system && flux reconcile kustomization flux-system &&  flux reconcile kustomization crds && flux reconcile kustomization system && flux reconcile kustomization deployments
 
 # targets to show logs for main cluster components
 logs-flux:
