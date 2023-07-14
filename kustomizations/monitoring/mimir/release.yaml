@@ -13,7 +13,7 @@ spec:
       version: 5.0.0
       sourceRef:
         kind: HelmRepository
-        name: grafana
+        name: grafana-mimir
       interval: 1m
   timeout: 5m
   install:
