@@ -61,6 +61,7 @@ spec:
 
 
     overrides_exporter:
+      replicas: 1
 
     querier:
       replicas: 1
