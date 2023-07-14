@@ -22,3 +22,60 @@ spec:
   update:
     remediation:
       retries: 5
+  values:
+    # non-enterprise version deployed
+    enterprise:
+      enabled: false
+
+    # disable alertmanager - migrate to grafana alerts
+    alertmanager:
+      enabled: false
+    # Store will be S3
+    minio:
+      enabled: false
+
+    # Disable cache components for now
+    chunks-cache:
+      enabled: false
+
+    index-cache:
+      enabled: false
+
+    metadata-cache:
+      enabled: false
+
+    results-cache:
+      enabled: false
+
+
+    compactor:
+      replicas: 1
+      persistentVolume:
+        enabled: false
+
+    distributor:
+
+    ingester:
+      replicas: 1
+      persistentVolume:
+        enabled: false
+
+
+    overrides_exporter:
+
+    querier:
+      replicas: 1
+
+    query_frontend:
+      replicas: 1
+
+    ruler:
+      replicas: 1
+
+    store_gateway:
+      persistentVolume:
+        enabled: false
+      replicas: 1
+
+    gateway:
+      replicas: 1
