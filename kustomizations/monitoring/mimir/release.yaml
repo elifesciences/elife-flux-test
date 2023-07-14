@@ -6,7 +6,6 @@ metadata:
   namespace: monitoring
 spec:
   interval: 1m
-  releaseName: mimir
   chart:
     spec:
       chart: mimir-distributed
