@@ -53,6 +53,7 @@ spec:
         enabled: false
 
     distributor:
+      replicas: 1
 
     ingester:
       replicas: 1
