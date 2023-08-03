@@ -1,0 +1,23 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: opensearch
+  namespace: db-operator-system
+
+spec:
+  interval: 1m
+  releaseName: opensearch
+  chart:
+    spec:
+      chart: opensearch
+      version: 2.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: opensearch
+      interval: 1m
+  install:
+    remediation:
+      retries: 5
+
+  values:
