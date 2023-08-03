@@ -25,5 +25,8 @@ spec:
     roles:
     - "data"
     - "cluster_manager"
+    diskSize: 30Gi
     persistence:
-      emptyDir: {}
+      pvc:
+        accessModes:
+          - ReadWriteOnce
