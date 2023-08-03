@@ -15,7 +15,6 @@ spec:
   nodePools:
   - component: masters
     replicas: 3
-    diskSize: 30Gb
     resources:
       requests:
         memory: "4Gi"
@@ -27,4 +26,4 @@ spec:
     - "data"
     - "cluster_manager"
     persistence:
-      pvc: {}
+      emptyDir: {}
