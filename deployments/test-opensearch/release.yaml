@@ -15,8 +15,16 @@ spec:
   nodePools:
   - component: masters
     replicas: 3
+    diskSize: 30Gb
+    resources:
+      requests:
+        memory: "4Gi"
+        cpu: "1000m"
+      limits:
+        memory: "4Gi"
+        cpu: "1000m"
     roles:
-      - "data"
-      - "cluster_manager"
+    - "data"
+    - "cluster_manager"
     persistence:
-        emptyDir: {}
+      pvc: {}
