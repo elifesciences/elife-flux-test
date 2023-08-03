@@ -69,3 +69,5 @@ jobs:
         run: |
           kubectl get OpenSearchCluster -A -o wide
           kubectl describe OpenSearchCluster -A
+          flux tree kustomization system
+          kubectl get deployments -n db-operator-system -o wide
