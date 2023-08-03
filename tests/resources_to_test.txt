@@ -26,4 +26,4 @@ kustomizations.kustomize.toolkit.fluxcd.io ready monitoring monitoring-flux
 
 # Test all deployments
 deployment Available podinfo--staging podinfo
-helmrelease ready test-opensearch opensearch
+OpenSearchCluster ready test-opensearch opensearch-test-cluster

@@ -1,61 +1,40 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
-kind: HelmRelease
+apiVersion: opensearch.opster.io/v1
+kind: OpenSearchCluster
 metadata:
-  name: opensearch
+  name: opensearch-test-cluster
   namespace: test-opensearch
-
 spec:
-  interval: 1m
-  releaseName: opensearch
-  chart:
-    spec:
-      chart: opensearch-cluster
-      version: 2.2.0
-      sourceRef:
-        kind: HelmRepository
-        name: opensearch
-        namespace: db-operator-system
-      interval: 1m
-  install:
-    remediation:
-      retries: 5
-
-  values:
-    opensearchCluster:
-      enabled: true
-      general:
-        httpPort: "9200"
-        version: 2.3.0
-        serviceName: "my-cluster"
-      dashboards:
-        enable: true
-        replicas: 1
-        version: 2.3.0
-        resources:
-          requests:
-            memory: "1Gi"
-            cpu: "500m"
-          limits:
-            memory: "1Gi"
-            cpu: "500m"
-      nodePools:
-        - component: masters
-          diskSize: "30Gi"
-          replicas: 3
-          roles:
-            - "master"
-            - "data"
-          resources:
-            requests:
-              memory: "2Gi"
-              cpu: "500m"
-            limits:
-              memory: "2Gi"
-              cpu: "500m"
-      security:
-        tls:
-          transport:
-            generate: true
-          http:
-            generate: true
+  security:
+    config: {}
+    tls:
+       http:
+         generate: true
+       transport:
+         generate: true
+         perNode: true
+  general:
+    httpPort: 9200
+    serviceName: opensearch-test-cluster
+    version: 2.3.0
+    pluginsList: ["repository-s3"]
+    drainDataNodes: true
+  dashboards:
+    version: 2.3.0
+    enable: false
+    replicas: 1
+  nodePools:
+    - component: masters
+      replicas: 3
+      resources:
+         requests:
+            memory: "4Gi"
+            cpu: "1000m"
+         limits:
+            memory: "4Gi"
+            cpu: "1000m"
+      roles:
+        - "data"
+        - "cluster_manager"
+      persistence:
+         emptyDir: {}
