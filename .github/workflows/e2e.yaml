@@ -67,4 +67,5 @@ jobs:
       - name: Debug thing
         if: failure()
         run: |
+          kubectl get OpenSearchCluster -A -o wide
           kubectl describe OpenSearchCluster -A
