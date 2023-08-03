@@ -64,11 +64,3 @@ jobs:
         if: failure()
         run: |
           kubectl -n flux-system logs deploy/helm-controller
-      - name: Debug thing
-        if: failure()
-        run: |
-          kubectl get OpenSearchCluster -A -o wide
-          kubectl describe OpenSearchCluster -A
-          flux tree kustomization system
-          kubectl get deployments -n db-operator-system -o wide
-          kubectl describe deployments -n db-operator-system opensearch-operator-controller-manager
