@@ -17,6 +17,7 @@ helmrelease ready logging vector
 helmrelease ready db-operator-system psmdb-operator
 helmrelease ready db-operator-system pg-operator
 helmrelease ready db-operator-system pxc-operator
+helmrelease ready db-operator-system opensearch-operator
 helmrelease ready monitoring prometheus-stack
 helmrelease ready flux-system gitops-dashboard
 helmrelease ready flux-system template-controller

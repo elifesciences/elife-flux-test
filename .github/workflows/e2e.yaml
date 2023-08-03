@@ -38,7 +38,7 @@ jobs:
         run: |
           flux get all --all-namespaces
           helm list -A
-          kubectl -n flux-system get all
+          kubectl -n flux-system get all -o wide
           kubectl get helmreleases.helm.toolkit.fluxcd.io --all-namespaces
       - name: Debug describe nodes
         if: failure()

@@ -19,5 +19,3 @@ spec:
   install:
     remediation:
       retries: 5
-
-  values:
