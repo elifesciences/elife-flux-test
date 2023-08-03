@@ -5,20 +5,9 @@ metadata:
   name: opensearch-test-cluster
   namespace: test-opensearch
 spec:
-  security:
-    config: {}
-    tls:
-       http:
-         generate: true
-       transport:
-         generate: true
-         perNode: true
   general:
-    httpPort: 9200
     serviceName: opensearch-test-cluster
     version: 2.3.0
-    pluginsList: ["repository-s3"]
-    drainDataNodes: true
   dashboards:
     version: 2.3.0
     enable: true
@@ -26,13 +15,6 @@ spec:
   nodePools:
   - component: masters
     replicas: 3
-    resources:
-        requests:
-          memory: "4Gi"
-          cpu: "1000m"
-        limits:
-          memory: "4Gi"
-          cpu: "1000m"
     roles:
       - "data"
       - "cluster_manager"
