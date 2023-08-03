@@ -98,3 +98,21 @@ spec:
       spec:
         install:
           disableWait: true
+  - target:
+      kind: HelmRelease
+      name: opensearch-operator
+    patch: |-
+      apiVersion: helm.toolkit.fluxcd.io/v2beta1
+      kind: HelmRelease
+      metadata:
+        name: opensearch-operator
+        namespace: db-operator-system
+      spec:
+        values:
+          tolerations:
+          - key: "realnode"
+            operator: "Equal"
+            value: "true"
+            effect: "NoSchedule"
+          nodeSelector:
+            kubernetes.io/hostname: elife-flux-test-control-plane
