@@ -31,6 +31,12 @@
     {
       "matchPackageNames": ["podinfo"],
       "enabled": false
+    },
+    {
+      "matchFileNames": [".tool-versions"],
+      "matchPackageNames": ["kubectl"],
+      "enabled": false
     }
+
   ]
 }
