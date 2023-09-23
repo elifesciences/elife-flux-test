@@ -14,7 +14,7 @@ spec:
   targetNamespace: podinfo--staging
   images:
   - name: docker.io/stefanprodan/podinfo
-    newTag: 6.4.1 # {"$imagepolicy": "podinfo--staging:podinfo-stable:tag"}
+    newTag: 6.5.0 # {"$imagepolicy": "podinfo--staging:podinfo-stable:tag"}
   patches:
   - target:
       kind: Ingress
