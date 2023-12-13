@@ -21,6 +21,7 @@ helmrelease ready db-operator-system opensearch-operator
 helmrelease ready monitoring prometheus-stack
 helmrelease ready flux-system gitops-dashboard
 helmrelease ready flux-system template-controller
+helmrelease ready keda keda
 
 kustomizations.kustomize.toolkit.fluxcd.io ready monitoring monitoring-flux
 
