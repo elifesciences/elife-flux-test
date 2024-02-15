@@ -19,8 +19,6 @@ spec:
       tag: v1.27.2
     autoDiscovery:
       clusterName: kubernetes-aws--flux-test
-      tags:
-      - kubernetes.io/cluster/kubernetes-aws--flux-test
     awsRegion: us-east-1
     rbac:
       serviceAccount:
