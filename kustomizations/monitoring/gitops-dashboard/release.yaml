@@ -29,3 +29,5 @@ spec:
       create: true
       createClusterRole: true
       createSecret: false
+    additionalArgs:
+    - --insecure-no-authentication-user=gitops-test-user
