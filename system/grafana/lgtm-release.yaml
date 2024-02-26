@@ -22,3 +22,20 @@ spec:
       retries: 5
 
   values:
+    grafana:
+      ingress:
+        enabled: "true"
+        hosts:
+          - grafana.test-cluster.elifesciences.org
+        annotations:
+          nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
+      grafana.ini:
+        users:
+          viewers_can_edit: true
+        auth.anonymous:
+          enabled: true
+          org_role: Editor
+      sidecar:
+        datasources:
+          searchNamespace: ALL
