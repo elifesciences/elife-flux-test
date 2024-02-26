@@ -22,20 +22,186 @@ spec:
       retries: 5
 
   values:
-    grafana:
-      ingress:
-        enabled: "true"
-        hosts:
-        - flux-test--grafana.elifesciences.org
-        annotations:
-          nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
-      grafana.ini:
-        users:
-          viewers_can_edit: true
-        auth.anonymous:
-          enabled: true
-          org_role: Editor
-      sidecar:
-        datasources:
-          searchNamespace: ALL
+    auth_enabled: false
+    alertmanager:
+      persistentVolume:
+        enabled: true
+      replicas: 2
+      resources:
+        limits:
+          cpu: 1.4
+          memory: 1.4Gi
+        requests:
+          cpu: 1.4
+          memory: 1.4Gi
+      statefulSet:
+        enabled: true
+
+    compactor:
+      persistentVolume:
+        size: 20Gi
+      resources:
+        limits:
+          cpu: 1.4
+          memory: 2.1Gi
+        requests:
+          cpu: 1.4
+          memory: 2.1Gi
+
+    distributor:
+      replicas: 2
+      resources:
+        limits:
+          cpu: 3.5
+          memory: 5.7Gi
+        requests:
+          cpu: 3.5
+          memory: 5.7Gi
+
+    ingester:
+      persistentVolume:
+        size: 50Gi
+      replicas: 3
+      resources:
+        limits:
+          cpu: 5
+          memory: 12Gi
+        requests:
+          cpu: 5
+          memory: 12Gi
+      topologySpreadConstraints: {}
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: target # support for enterprise.legacyLabels
+                    operator: In
+                    values:
+                      - ingester
+              topologyKey: 'kubernetes.io/hostname'
+
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/component
+                    operator: In
+                    values:
+                      - ingester
+              topologyKey: 'kubernetes.io/hostname'
+      zoneAwareReplication:
+        topologyKey: 'kubernetes.io/hostname'
+
+    admin-cache:
+      enabled: true
+      replicas: 2
+
+    chunks-cache:
+      enabled: true
+      replicas: 2
+
+    index-cache:
+      enabled: true
+      replicas: 3
+
+    metadata-cache:
+      enabled: true
+
+    results-cache:
+      enabled: true
+
+    minio:
+      enabled: false
+
+    overrides_exporter:
+      replicas: 1
+      resources:
+        limits:
+          cpu: 100m
+          memory: 128Mi
+        requests:
+          cpu: 100m
+          memory: 128Mi
+
+    querier:
+      replicas: 1
+      resources:
+        limits:
+          cpu: 2.8
+          memory: 5.6Gi
+        requests:
+          cpu: 2.8
+          memory: 5.6Gi
+
+    query_frontend:
+      replicas: 1
+      resources:
+        limits:
+          cpu: 2.8
+          memory: 2.8Gi
+        requests:
+          cpu: 2.8
+          memory: 2.8Gi
+
+    ruler:
+      replicas: 1
+      resources:
+        limits:
+          cpu: 1.4
+          memory: 2.8Gi
+        requests:
+          cpu: 1.4
+          memory: 2.8Gi
+
+    store_gateway:
+      persistentVolume:
+        size: 10Gi
+      replicas: 3
+      resources:
+        limits:
+          cpu: 1.4
+          memory: 2.1Gi
+        requests:
+          cpu: 1.4
+          memory: 2.1Gi
+      topologySpreadConstraints: {}
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: target # support for enterprise.legacyLabels
+                    operator: In
+                    values:
+                      - store-gateway
+              topologyKey: 'kubernetes.io/hostname'
+
+            - labelSelector:
+                matchExpressions:
+                  - key: app.kubernetes.io/component
+                    operator: In
+                    values:
+                      - store-gateway
+              topologyKey: 'kubernetes.io/hostname'
+
+      zoneAwareReplication:
+        topologyKey: 'kubernetes.io/hostname'
+
+    nginx:
+      replicas: 1
+      resources:
+        limits:
+          cpu: 1.4
+          memory: 731Mi
+        requests:
+          cpu: 1.4
+          memory: 731Mi
+
+    gateway:
+      replicas: 1
+      resources:
+        limits:
+          cpu: 1.4
+          memory: 731Mi
+        requests:
+          cpu: 1.4
+          memory: 731Mi
