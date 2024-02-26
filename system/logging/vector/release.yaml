@@ -116,3 +116,19 @@ spec:
             pod: "{{`{{ kubernetes.pod_name }}`}}"
             uid: "{{`{{ kubernetes.pod_uid }}`}}"
             'labels_*': "{{`{{ kubernetes.pod_labels }}`}}"
+        grafana_loki:
+          type: loki
+          inputs:
+          - json_logs
+          endpoint: http://loki-gateway.grafana/
+          encoding:
+            codec: json
+          labels:
+            host: "${HOSTNAME}"
+            file: "{{`{{ file }}`}}"
+            stream: "{{`{{ stream }}`}}"
+            source_type: "{{`{{ source_type }}`}}"
+            namespace: "{{`{{ kubernetes.pod_namespace }}`}}"
+            pod: "{{`{{ kubernetes.pod_name }}`}}"
+            uid: "{{`{{ kubernetes.pod_uid }}`}}"
+            'labels_*': "{{`{{ kubernetes.pod_labels }}`}}"
