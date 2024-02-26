@@ -1,0 +1,25 @@
+apiVersion: monitoring.grafana.com/v1alpha1
+kind: MetricsInstance
+metadata:
+  name: primary
+  namespace: default
+  labels:
+    agent: grafana-agent-metrics
+spec:
+  remoteWrite:
+  - url: "http://lgtm-mimir-nginx/api/v1/push"
+
+  serviceMonitorNamespaceSelector: {}
+  serviceMonitorSelector:
+    matchLabels:
+      instance: primary
+
+  podMonitorNamespaceSelector: {}
+  podMonitorSelector:
+    matchLabels:
+      instance: primary
+
+  probeNamespaceSelector: {}
+  probeSelector:
+    matchLabels:
+      instance: primary

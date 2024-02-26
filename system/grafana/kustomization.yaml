@@ -4,6 +4,8 @@ namespace: grafana
 resources:
 - namespace.yaml
 - source.yaml
-- lgtm-release.yaml
+- grafana-release.yaml
+- loki-release.yaml
+- mimir-release.yaml
 - agent-operator-release.yaml
 - agent

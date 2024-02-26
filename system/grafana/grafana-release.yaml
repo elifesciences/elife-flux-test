@@ -1,0 +1,55 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: grafana
+  namespace: grafana
+
+spec:
+  interval: 1m
+  timeout: 10m
+  releaseName: grafana
+  chart:
+    spec:
+      chart: grafana
+      version: 7.3.2
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+      interval: 1m
+  install:
+    remediation:
+      retries: 5
+
+  values:
+    ingress:
+      enabled: "true"
+      hosts:
+        - flux-test--grafana.elifesciences.org
+      annotations:
+        nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
+        nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
+    grafana.ini:
+      users:
+        viewers_can_edit: true
+      auth.anonymous:
+        enabled: true
+        org_role: Editor
+    sidecar:
+      datasources:
+        searchNamespace: ALL
+
+    datasources:
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+          - name: Loki
+            uid: loki
+            type: loki
+            url: http://loki-gateway
+            isDefault: false
+          - name: Mimir
+            uid: prom
+            type: prometheus
+            url: http://mimir-nginx/prometheus
+            isDefault: true
