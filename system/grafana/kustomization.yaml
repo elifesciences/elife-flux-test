@@ -6,3 +6,4 @@ resources:
 - source.yaml
 - lgtm-release.yaml
 - agent-operator-release.yaml
+- agent
