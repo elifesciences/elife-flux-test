@@ -22,6 +22,17 @@ spec:
       enabled: false
     vmcluster:
       enabled: true
+      spec:
+        vmselect:
+          resources:
+            requests:
+              cpu: 100m
+              memory: 500Mi
+    vmagent:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 200Mi
     grafana:
       sidecar:
         alerts:
