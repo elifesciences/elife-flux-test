@@ -102,8 +102,7 @@ spec:
           nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
     defaultRules:
       rules:
-        kubeSchedulerAlerting: false    # lives on EKS
-        kubeSchedulerRecording: false   # lives on EKS
+        kubeScheduler: false    # lives on EKS
         kubeApiserver: false  # too memory intensive
       disabled:
         KubeCPUOvercommit: true
