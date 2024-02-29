@@ -12,6 +12,11 @@ spec:
         name: victoriametrics
       version: "0.19.2"
   interval: 1h0m0s
+  valuesFrom:
+  - kind: Secret
+    name: alertmanager-slack-api-url
+    valuesKey: slack-api-url
+    targetPath: alertmanager.config.global.slack_api_url
   values:
     vmsingle:
       enabled: false
