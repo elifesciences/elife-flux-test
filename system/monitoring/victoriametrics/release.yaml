@@ -88,3 +88,15 @@ spec:
         - name: "slack-monitoring"
           slack_configs:
             - channel: "#channel"
+      ingress:
+        enabled: true
+        hosts:
+        - flux-test--alertmanager.elifesciences.org
+        tls:
+        - secretName: alertmanager-tls
+          hosts:
+          - flux-test--alertmanager.elifesciences.org
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-prod"
+          nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
