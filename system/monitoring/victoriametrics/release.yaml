@@ -62,3 +62,7 @@ spec:
         - secretName: grafana-tls
           hosts:
           - flux-test--grafana.elifesciences.org
+      # to sit alongside kube-prometheus-stack. This can be removed if that is no longer deployed
+      prometheus-node-exporter:
+        service:
+          port: 9101
