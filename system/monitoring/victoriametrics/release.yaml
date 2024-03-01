@@ -25,14 +25,16 @@ spec:
       spec:
         vmselect:
           resources:
-            limits: {}
+            limits:
+              cpu: 1000m
         vminsert:
           extraArgs:
            maxLabelsPerTimeseries: "35"
     vmagent:
       spec:
         resources:
-          limits: {}
+          limits:
+            cpu: 1000m
     vmalert:
       ingress:
         enabled: true
