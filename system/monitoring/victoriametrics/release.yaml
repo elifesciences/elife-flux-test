@@ -84,7 +84,7 @@ spec:
         port: 9101
     alertmanager:
       spec:
-        externalURL: flux-test--alertmanager.elifesciences.org
+        externalURL: https://flux-test--alertmanager.elifesciences.org
       config:
         receivers:
         - name: "slack-monitoring"
