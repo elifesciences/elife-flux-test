@@ -85,11 +85,6 @@ spec:
     alertmanager:
       spec:
         externalURL: https://flux-test--alertmanager.elifesciences.org
-      config:
-        receivers:
-        - name: "slack-monitoring"
-          slack_configs:
-            - channel: "#channel"
       ingress:
         enabled: true
         hosts:
