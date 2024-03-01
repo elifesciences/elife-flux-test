@@ -28,7 +28,7 @@ spec:
             limits: {}
         vminsert:
           extraArgs:
-           maxLabelsPerTimeseries: 35
+           maxLabelsPerTimeseries: "35"
     vmagent:
       spec:
         resources:
