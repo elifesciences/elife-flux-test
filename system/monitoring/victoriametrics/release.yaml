@@ -26,6 +26,9 @@ spec:
         vmselect:
           resources:
             limits: {}
+        vminsert:
+          extraArgs:
+           maxLabelsPerTimeseries: 35
     vmagent:
       resources:
         limits: {}
