@@ -25,14 +25,10 @@ spec:
       spec:
         vmselect:
           resources:
-            requests:
-              cpu: 100m
-              memory: 500Mi
+            limits: {}
     vmagent:
       resources:
-        requests:
-          cpu: 50m
-          memory: 200Mi
+        limits: {}
     grafana:
       sidecar:
         alerts:
