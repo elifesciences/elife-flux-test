@@ -30,8 +30,9 @@ spec:
           extraArgs:
            maxLabelsPerTimeseries: 35
     vmagent:
-      resources:
-        limits: {}
+      spec:
+        resources:
+          limits: {}
     vmalert:
       ingress:
         enabled: true
