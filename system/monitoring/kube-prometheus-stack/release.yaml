@@ -78,6 +78,8 @@ spec:
       sidecar:
         datasources:
           searchNamespace: ALL
+      podAnnotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
 
     prometheus-node-exporter:
 
