@@ -31,7 +31,11 @@ spec:
             proxy_set_header X-User  $user;
             proxy_set_header X-Email $email;
         hosts:
-        - flux-test--signoz.elifesciences.org
+        - host: flux-test--signoz.elifesciences.org
+          paths:
+          - path: /
+            pathType: ImplementationSpecific
+            port: 3301
         tls:
         - secretName: signoz-tls
           hosts:
