@@ -1,0 +1,9 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: odigos
+  namespace: signoz
+spec:
+  interval: 5m
+  url: https://keyval-dev.github.io/odigos-charts/

@@ -5,3 +5,5 @@ resources:
 - namespace.yaml
 - signoz-source.yaml
 - signoz-release.yaml
+- odigos-source.yaml
+- odigos-release.yaml
