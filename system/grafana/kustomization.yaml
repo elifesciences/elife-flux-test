@@ -5,3 +5,4 @@ resources:
 - namespace.yaml
 - source.yaml
 - grafana-release.yaml
+- grafana-agent-operator-release.yaml
