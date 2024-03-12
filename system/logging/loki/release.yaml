@@ -22,6 +22,10 @@ spec:
       retries: 5
 
   values:
+    # prepping for migration to grafana namespace
+    rbac:
+      useExistingRole: true
+
     singleBinary:
       replicas: 1
 
