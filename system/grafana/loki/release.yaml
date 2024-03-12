@@ -31,6 +31,8 @@ spec:
       compactor:
         retention_enabled: true
       storage:
+        s3:
+          region: us-east-1
         bucketNames:
           chunks: elife-flux-test-grafana-loki
           ruler: elife-flux-test-grafana-loki
