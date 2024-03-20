@@ -11,4 +11,4 @@ data:
     datasources:
       - name: loki
         type: loki
-        url: "http://loki-gateway.logging/"
+        url: "http://loki-old-gateway.logging/"

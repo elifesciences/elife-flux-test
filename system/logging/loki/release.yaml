@@ -30,6 +30,7 @@ spec:
       replicas: 1
 
     loki:
+      name: loki-old
       auth_enabled: false
       commonConfig:
         replication_factor: 1
@@ -50,17 +51,3 @@ spec:
         enabled: false
         grafanaAgent:
           installOperator: false
-
-  postRenderers:
-  - kustomize:
-      patches:
-      - target: # a patch to allow multiple cluster-wide lokis to exist
-          version: v1
-          group: rbac.authorization.k8s.io
-          name: loki-clusterrolebinding
-          kind: ClusterRoleBinding
-        patch: |
-          kind: ClusterRoleBinding
-          apiVersion: rbac.authorization.k8s.io/v1
-          metadata:
-            name: loki-clusterrolebinding-old
