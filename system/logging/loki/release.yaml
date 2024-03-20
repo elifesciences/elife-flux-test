@@ -23,7 +23,7 @@ spec:
 
   values:
     # prepping for migration to grafana namespace
-    nameOverride: loki-old
+    nameOverride: loki-logging
 
     singleBinary:
       replicas: 1
