@@ -23,11 +23,12 @@ spec:
 
   values:
     # prepping for migration to grafana namespace
+    nameOverride: loki-old
+
     singleBinary:
       replicas: 1
 
     loki:
-      name: loki-old
       auth_enabled: false
       commonConfig:
         replication_factor: 1
