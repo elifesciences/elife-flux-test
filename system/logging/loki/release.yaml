@@ -23,9 +23,6 @@ spec:
 
   values:
     # prepping for migration to grafana namespace
-    rbac:
-      useExistingRole: loki-clusterrole
-
     singleBinary:
       replicas: 1
 
