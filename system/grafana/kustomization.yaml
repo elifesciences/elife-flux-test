@@ -6,4 +6,5 @@ resources:
 - source.yaml
 - grafana
 - grafana-agent-operator
+- grafana-agent
 - loki
