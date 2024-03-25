@@ -1,0 +1,15 @@
+apiVersion: monitoring.grafana.com/v1alpha1
+kind: LogsInstance
+metadata:
+  name: primary
+  namespace: grafana
+  labels:
+    agent: grafana-agent-logs
+spec:
+  clients:
+  - url: http://loki-gateway.grafana.svc.cluster.local:3100/
+
+  podLogsNamespaceSelector: {}
+  podLogsSelector:
+    matchLabels:
+      instance: primary
