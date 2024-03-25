@@ -11,3 +11,5 @@ spec:
   namespaceSelector:
     matchNames:
     - podinfo--staging
+  selector:
+    matchLabels: {}
