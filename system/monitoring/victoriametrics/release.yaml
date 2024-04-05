@@ -14,12 +14,12 @@ spec:
   interval: 1h0m0s
   valuesFrom:
   - kind: Secret
-    name: alertmanager-slack-api-url
+    name: alerts-urls
     valuesKey: slack-api-url
     targetPath: alertmanager.config.global.slack_api_url
   - kind: Secret
-    name: alertmanager-slack-api-url
-    valuesKey: slack-api-url
+    name: alerts-urls
+    valuesKey: healthchecks-io-url
     targetPath: alertmanager.config.receivers[1].webhook_configs[0].url
   values:
     vmsingle:
@@ -188,7 +188,7 @@ spec:
             - name: dashboard
               type: button
               text: "Dashboard :grafana:"
-              url: "{{ (index .Alerts 0).Annotations.dashboard }}"
+              url: "{{ (index .Alerts 0).Annotations.dashboard_url }}"
             - name: silence
               type: button
               text: "Silence :no_bell:"
@@ -199,7 +199,7 @@ spec:
               url: "{{ .CommonAnnotations.link_url }}"
         - name: healthchecks.io
           webhook_configs:
-          - url: https://hc-ping.com/eb87679d-82da-49ff-93d7-6a32d0aefe49
+          - url: test
             send_resolved: false
         - name: Watchdog
     defaultRules:
