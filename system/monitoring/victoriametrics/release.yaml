@@ -47,11 +47,11 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
         hosts:
-        - flux-test--vmalert.elifesciences.org
+        - vmalert.${cluster_domain}
         tls:
         - secretName: vmalert-tls
           hosts:
-          - flux-test--vmalert.elifesciences.org
+          - vmalert.${cluster_domain}
     grafana:
       sidecar:
         alerts:
@@ -92,26 +92,26 @@ spec:
             proxy_set_header X-User  $user;
             proxy_set_header X-Email $email;
         hosts:
-        - flux-test--grafana.elifesciences.org
+        - grafana.${cluster_domain}
         tls:
         - secretName: grafana-tls
           hosts:
-          - flux-test--grafana.elifesciences.org
+          - grafana.${cluster_domain}
     # to sit alongside kube-prometheus-stack. This can be removed if that is no longer deployed
     prometheus-node-exporter:
       service:
         port: 9101
     alertmanager:
       spec:
-        externalURL: https://flux-test--alertmanager.elifesciences.org
+        externalURL: https://alertmanager.${cluster_domain}
       ingress:
         enabled: true
         hosts:
-        - flux-test--alertmanager.elifesciences.org
+        - alertmanager.${cluster_domain}
         tls:
         - secretName: alertmanager-tls
           hosts:
-          - flux-test--alertmanager.elifesciences.org
+          - alertmanager.${cluster_domain}
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-prod"
           nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
