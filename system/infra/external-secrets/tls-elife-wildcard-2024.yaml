@@ -11,6 +11,9 @@ spec:
   target:
     name: tls-elife-wildcard-2024
     creationPolicy: Owner
+    template:
+      type: kubernetes.io/tls
   dataFrom:
-  - extract:
+  - secretKey: tls
+    extract:
       key: clusters/shared/tls-elife-wildcard-2024
