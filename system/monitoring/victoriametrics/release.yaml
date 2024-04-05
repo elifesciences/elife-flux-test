@@ -40,6 +40,8 @@ spec:
           limits:
             cpu: 1000m
     vmalert:
+      spec:
+        url: https://vmalert.${cluster_domain}
       ingress:
         enabled: true
         annotations:
