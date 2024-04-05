@@ -14,6 +14,5 @@ spec:
     template:
       type: kubernetes.io/tls
   dataFrom:
-  - secretKey: tls
-    extract:
+  - extract:
       key: clusters/shared/tls-elife-wildcard-2024
