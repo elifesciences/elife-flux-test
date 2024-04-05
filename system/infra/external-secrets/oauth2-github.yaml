@@ -13,4 +13,4 @@ spec:
     creationPolicy: Owner
   dataFrom:
   - extract:
-      key: clusters/shared/clusters/flux-test/oauth2-proxy-github
+      key: clusters/flux-test/oauth2-proxy-github
