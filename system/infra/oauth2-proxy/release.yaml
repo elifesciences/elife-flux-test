@@ -27,7 +27,7 @@ spec:
 
   values:
     config:
-      existingSecret: oauth2-github
+      existingSecret: oauth2-proxy-github
     extraArgs:
       provider: github
       github-org: elifesciences
