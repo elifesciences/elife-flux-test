@@ -9,6 +9,6 @@ data:
   datasource.yaml: |-
     apiVersion: 1
     datasources:
-      - name: grfana-loki
+      - name: grafana-loki
         type: loki
         url: "http://loki-gateway.grafana/"
