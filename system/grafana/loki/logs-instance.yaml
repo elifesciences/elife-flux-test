@@ -7,7 +7,7 @@ metadata:
     agent: primary
 spec:
   clients:
-  - url: http://loki-gateway.grafana.svc.cluster.local/
+  - url: http://loki-gateway.grafana.svc.cluster.local/api/v1/push
 
   podLogsNamespaceSelector: {}
   podLogsSelector:
