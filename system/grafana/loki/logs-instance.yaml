@@ -4,7 +4,7 @@ metadata:
   name: primary
   namespace: grafana
   labels:
-    agent: grafana-agent-logs
+    agent: primary
 spec:
   clients:
   - url: http://loki-gateway.grafana.svc.cluster.local/

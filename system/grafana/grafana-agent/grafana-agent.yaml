@@ -23,4 +23,4 @@ spec:
   logs:
     instanceSelector:
       matchLabels:
-        agent: grafana-agent-logs
+        agent: primary
