@@ -4,6 +4,7 @@ namespace: monitoring
 resources:
 - podmonitor.yaml
 - flux-alert-rules.yaml
+- slack-notification
 configMapGenerator:
 - name: flux-grafana-dashboards
   files:
