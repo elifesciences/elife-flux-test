@@ -4,3 +4,4 @@ namespace: monitoring
 resources:
 - external-secret.yaml
 - notification-provider.yaml
+- alerts.yaml

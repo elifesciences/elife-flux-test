@@ -1,7 +1,7 @@
 apiVersion: notification.toolkit.fluxcd.io/v1beta3
 kind: Provider
 metadata:
-  name: slack-channel-alerts-test-url
+  name: slack-channel-alerts-test
 spec:
   type: slack
   channel: general
