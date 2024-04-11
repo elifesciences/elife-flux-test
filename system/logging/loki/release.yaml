@@ -53,13 +53,14 @@ spec:
     singleBinary:
       replicas: 1
 
-
     loki:
       auth_enabled: false
       ingester:
         chunk_encoding: snappy
       commonConfig:
         replication_factor: 1
+      # This means no long term persistence
+      useTestSchema: true
       storage:
         type: 'filesystem'
       compactor:
