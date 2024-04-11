@@ -9,7 +9,7 @@ spec:
     name: secret-store
     kind: ClusterSecretStore
   target:
-    name: gcp-data-hub-project-log-shipping2
+    name: gcp-data-hub-project-log-shipping
     creationPolicy: Owner
   dataFrom:
   - extract:
