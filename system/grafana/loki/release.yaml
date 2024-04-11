@@ -67,6 +67,11 @@ spec:
         chunk_encoding: snappy
       compactor:
         retention_enabled: true
+        retention_delete_delay: "10m"
+        compaction_interval: "10m"
+        delete_request_store: s3
+      limits_config:
+        retention_period: 360h
       storage:
         s3:
           region: us-east-1
