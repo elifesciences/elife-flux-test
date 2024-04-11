@@ -70,6 +70,10 @@ spec:
         delete_request_store: filesystem
       limits_config:
         retention_period: 360h
+    chunksCache:
+      allocatedMemory: 512
+    resultsCache:
+      allocatedMemory: 4096
 
     test:
       enabled: false

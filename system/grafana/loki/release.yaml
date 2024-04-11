@@ -79,6 +79,10 @@ spec:
           chunks: elife-flux-test-grafana-loki
           ruler: elife-flux-test-grafana-loki
           admin: elife-flux-test-grafana-loki
+    chunksCache:
+      allocatedMemory: 512
+    resultsCache:
+      allocatedMemory: 4096
     test:
       enabled: false
     serviceAccount:
