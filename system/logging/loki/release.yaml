@@ -65,5 +65,11 @@ spec:
         type: 'filesystem'
       compactor:
         retention_enabled: true
+        retention_delete_delay: "10m"
+        compaction_interval: "10m"
+        delete_request_store: filesystem
+      limits_config:
+        retention_period: 360h
+
     test:
       enabled: false
