@@ -22,6 +22,9 @@ helmrelease ready monitoring prometheus-stack
 helmrelease ready flux-system gitops-dashboard
 helmrelease ready flux-system template-controller
 helmrelease ready keda keda
+helmrelease ready grafana grafana
+helmrelease ready grafana grafana-agent-operator
+helmrelease ready grafana loki
 
 kustomizations.kustomize.toolkit.fluxcd.io ready monitoring monitoring-flux
 
