@@ -22,6 +22,36 @@ spec:
       retries: 5
 
   values:
+    # Choose deployment method
+    deploymentMode: SimpleScalable
+    backend:
+      replicas: 3
+    read:
+      replicas: 3
+    write:
+      replicas: 3
+    singleBinary:
+      replicas: 0
+    ingester:
+      replicas: 0
+    querier:
+      replicas: 0
+    queryFrontend:
+      replicas: 0
+    queryScheduler:
+      replicas: 0
+    distributor:
+      replicas: 0
+    compactor:
+      replicas: 0
+    indexGateway:
+      replicas: 0
+    bloomCompactor:
+      replicas: 0
+    bloomGateway:
+      replicas: 0
+
+
     loki:
       schemaConfig:
         configs:
@@ -33,10 +63,8 @@ spec:
               prefix: loki_index_
               period: 24h
       auth_enabled: false
-      commonConfig:
-        replication_factor: 1
-      server:
-        log_level: info
+      ingester:
+        chunk_encoding: snappy
       compactor:
         retention_enabled: true
       storage:
@@ -48,15 +76,6 @@ spec:
           admin: elife-flux-test-grafana-loki
     test:
       enabled: false
-    monitoring:
-      grafanaAgent:
-        enabled: false
-      lokiCanary:
-        enabled: false
-      selfMonitoring:
-        enabled: false
-        grafanaAgent:
-          installOperator: false
     serviceAccount:
       annotations:
         eks.amazonaws.com/role-arn: arn:aws:iam::512686554592:role/elife-flux-test-grafana-loki-cluster-role
