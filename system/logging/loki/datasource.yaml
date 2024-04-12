@@ -9,6 +9,6 @@ data:
   datasource.yaml: |-
     apiVersion: 1
     datasources:
-      - name: loki
+      - name: loki-old
         type: loki
         url: "http://loki-loki-logging-gateway.logging/"
