@@ -27,7 +27,16 @@ spec:
     vmcluster:
       enabled: true
       spec:
+        vmstorage:
+          storage:
+            volumeClaimTemplate:
+              spec:
+                storageClass: csi-ebs-st1
         vmselect:
+          storage:
+            volumeClaimTemplate:
+              spec:
+                storageClass: csi-ebs-st1
           resources:
             limits:
               cpu: 1000m
