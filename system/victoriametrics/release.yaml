@@ -57,6 +57,9 @@ spec:
     grafana:
       enabled: false
       forceDeployDatasource: true
+      sidecar:
+        datasources:
+          label: grafana_datasource
     # to sit alongside kube-prometheus-stack. This can be removed if that is no longer deployed
     prometheus-node-exporter:
       service:
