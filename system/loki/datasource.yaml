@@ -10,4 +10,4 @@ data:
     datasources:
       - name: loki
         type: loki
-        url: "http://loki-logging-gateway.logging/"
+        url: "http://loki-logging-gateway.loki/"
