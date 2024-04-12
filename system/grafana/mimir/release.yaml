@@ -78,27 +78,15 @@ spec:
     ingester:
       persistentVolume:
         size: 50Gi
-      replicas: 3
+      replicas: 2
       resources:
         limits:
           memory: 12Gi
         requests:
           cpu: 3.5
           memory: 8Gi
-      topologySpreadConstraints: {}
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: app.kubernetes.io/component
-                    operator: In
-                    values:
-                      - ingester
-              topologyKey: 'kubernetes.io/hostname'
-
       zoneAwareReplication:
-        topologyKey: 'kubernetes.io/hostname'
+        enabled: false
 
     admin-cache:
       enabled: true
@@ -110,7 +98,7 @@ spec:
 
     index-cache:
       enabled: true
-      replicas: 3
+      replicas: 2
 
     metadata-cache:
       enabled: true
@@ -161,27 +149,17 @@ spec:
     store_gateway:
       persistentVolume:
         size: 10Gi
-      replicas: 3
+      replicas: 2
       resources:
         limits:
           memory: 2.1Gi
         requests:
           cpu: 1
           memory: 1.5Gi
-      topologySpreadConstraints: {}
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: app.kubernetes.io/component
-                    operator: In
-                    values:
-                      - store-gateway
-              topologyKey: 'kubernetes.io/hostname'
       zoneAwareReplication:
-        topologyKey: 'kubernetes.io/hostname'
-
+          enabled: false
+    rollout_operator:
+      enabled: false
     nginx:
       replicas: 1
       resources:
