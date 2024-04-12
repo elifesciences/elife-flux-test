@@ -78,7 +78,7 @@ spec:
     ingester:
       persistentVolume:
         size: 50Gi
-      replicas: 2
+      replicas: 3
       resources:
         limits:
           memory: 12Gi
@@ -98,7 +98,7 @@ spec:
 
     index-cache:
       enabled: true
-      replicas: 2
+      replicas: 3
 
     metadata-cache:
       enabled: true
@@ -149,7 +149,7 @@ spec:
     store_gateway:
       persistentVolume:
         size: 10Gi
-      replicas: 2
+      replicas: 3
       resources:
         limits:
           memory: 2.1Gi
@@ -157,7 +157,7 @@ spec:
           cpu: 1
           memory: 1.5Gi
       zoneAwareReplication:
-          enabled: false
+        enabled: false
     rollout_operator:
       enabled: false
     nginx:
