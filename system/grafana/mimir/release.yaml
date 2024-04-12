@@ -11,7 +11,7 @@ spec:
   releaseName: mimir
   chart:
     spec:
-      chart: mimir
+      chart: mimir-distributed
       version: 5.3.0
       sourceRef:
         kind: HelmRepository
