@@ -116,3 +116,19 @@ spec:
             pod: "{{`{{ kubernetes.pod_name }}`}}"
             uid: "{{`{{ kubernetes.pod_uid }}`}}"
             'labels_*': "{{`{{ kubernetes.pod_labels }}`}}"
+        loki:
+          type: loki
+          inputs:
+          - json_logs
+          endpoint: http://loki-gateway.loki/
+          encoding:
+            codec: json
+          labels:
+            host: "${HOSTNAME_NONSENSE:-'$HOSTNAME'}"
+            file: "{{`{{ file }}`}}"
+            stream: "{{`{{ stream }}`}}"
+            source_type: "{{`{{ source_type }}`}}"
+            namespace: "{{`{{ kubernetes.pod_namespace }}`}}"
+            pod: "{{`{{ kubernetes.pod_name }}`}}"
+            uid: "{{`{{ kubernetes.pod_uid }}`}}"
+            'labels_*': "{{`{{ kubernetes.pod_labels }}`}}"
