@@ -104,7 +104,7 @@ spec:
           type: loki
           inputs:
           - json_logs
-          endpoint: http://loki-logging-gateway/
+          endpoint: http://loki-loki-logging-gateway/
           encoding:
             codec: json
           labels:
