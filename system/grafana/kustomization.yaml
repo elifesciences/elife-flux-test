@@ -8,3 +8,4 @@ resources:
 - grafana-agent-operator
 - grafana-agent
 - loki
+- mimir
