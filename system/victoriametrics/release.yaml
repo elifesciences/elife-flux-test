@@ -31,12 +31,12 @@ spec:
           storage:
             volumeClaimTemplate:
               spec:
-                storageClassName: csi-ebs-st1
+                storageClassName: csi-ebs-gp3
         vmselect:
           storage:
             volumeClaimTemplate:
               spec:
-                storageClassName: csi-ebs-st1
+                storageClassName: csi-ebs-gp3
           resources:
             limits:
               cpu: 1000m
