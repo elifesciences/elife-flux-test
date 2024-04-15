@@ -30,6 +30,11 @@ spec:
             nodeSelector:
               eks.amazonaws.com/capacityType: SPOT
               eks.amazonaws.com/nodegroup: kubernetes-aws--flux-test-epp-import-workers
+            tolerations:
+            - key: "kubernetes-aws--flux-test-epp-import-workers"
+              operator: "Equal"
+              value: "required"
+              effect: "NoSchedule"
   - target:
       kind: Ingress
       name: podinfo
