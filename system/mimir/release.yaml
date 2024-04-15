@@ -68,21 +68,26 @@ spec:
     admin-cache:
       enabled: true
       replicas: 2
+      allocatedMemory: 64
 
     chunks-cache:
       enabled: true
       replicas: 2
+      allocatedMemory: 4096
 
     index-cache:
       enabled: true
       replicas: 2
+      allocatedMemory: 1024
 
     metadata-cache:
       enabled: true
+      allocatedMemory: 512
 
     results-cache:
       enabled: true
       replicas: 2
+      allocatedMemory: 512
 
     minio:
       enabled: false
