@@ -1,0 +1,109 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: mimir
+
+spec:
+  interval: 1m
+  timeout: 10m
+  releaseName: mimir
+  chart:
+    spec:
+      chart: mimir-distributed
+      version: 5.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+      interval: 1m
+  install:
+    remediation:
+      retries: 5
+
+  values:
+    rollout_operator:
+      enabled: false
+    mimir:
+      structuredConfig:
+        common:
+          storage:
+            backend: s3
+            s3:
+              region: ${aws_region}
+
+    blocks_storage:
+      s3:
+        bucket_name: elife-${cluster_name}-grafana-mimir-blocks
+    alertmanager_storage:
+      s3:
+        bucket_name: elife-${cluster_name}-grafana-mimir-alertmanager
+    ruler_storage:
+      s3:
+        bucket_name: elife-${cluster_name}-grafana-mimir-ruler
+    serviceAccount:
+      annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::512686554592:role/elife-${cluster_name}-grafana-mimir-cluster-role
+
+    alertmanager:
+      persistentVolume:
+        enabled: false
+      replicas: 2
+      statefulSet:
+        enabled: true
+
+    compactor:
+      persistentVolume:
+        size: 10Gi
+
+    distributor:
+      replicas: 2
+
+    ingester:
+      persistentVolume:
+        size: 20Gi
+      replicas: 2
+      zoneAwareReplication:
+        enabled: false
+
+    admin-cache:
+      enabled: true
+      replicas: 2
+
+    chunks-cache:
+      enabled: true
+      replicas: 2
+
+    index-cache:
+      enabled: true
+      replicas: 2
+
+    metadata-cache:
+      enabled: true
+
+    results-cache:
+      enabled: true
+      replicas: 2
+
+    minio:
+      enabled: false
+
+    overrides_exporter:
+      replicas: 2
+
+    querier:
+      replicas: 2
+
+    query_frontend:
+      replicas: 2
+
+    ruler:
+      replicas: 2
+
+    store_gateway:
+      persistentVolume:
+        size: 10Gi
+      replicas: 2
+      zoneAwareReplication:
+        enabled: false
+    nginx:
+      replicas: 2
