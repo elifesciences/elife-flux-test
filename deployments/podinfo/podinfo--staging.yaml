@@ -20,17 +20,11 @@ spec:
       kind: Deployment
       name: podinfo
     patch: |
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: podinfo
-      spec:
-        template:
-          spec:
-            nodeSelector:
-              eks.amazonaws.com/capacityType: SPOT
-              eks.amazonaws.com/nodegroup=kubernetes-aws--flux-test-epp-import-workers
-
+      - op: add
+        path: /spec/template/spec/nodeSelector
+        value:
+          eks.amazonaws.com/capacityType: SPOT
+          eks.amazonaws.com/nodegroup=kubernetes-aws--flux-test-epp-import-workers
   - target:
       kind: Ingress
       name: podinfo
