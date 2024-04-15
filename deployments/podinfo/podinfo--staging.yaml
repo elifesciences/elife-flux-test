@@ -17,25 +17,6 @@ spec:
     newTag: 6.6.2 # {"$imagepolicy": "podinfo--staging:podinfo-stable:tag"}
   patches:
   - target:
-      kind: Deployment
-      name: podinfo
-    patch: |
-      apiVersion: apps/v1
-      kind: Deployment
-      metadata:
-        name: podinfo
-      spec:
-        template:
-          spec:
-            nodeSelector:
-              eks.amazonaws.com/capacityType: SPOT
-              eks.amazonaws.com/nodegroup: kubernetes-aws--flux-test-epp-import-workers
-            tolerations:
-            - key: "kubernetes-aws--flux-test-epp-import-workers"
-              operator: "Equal"
-              value: "required"
-              effect: "NoSchedule"
-  - target:
       kind: Ingress
       name: podinfo
     patch: |
