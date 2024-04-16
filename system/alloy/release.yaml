@@ -21,70 +21,71 @@ spec:
       retries: 5
 
   values:
-    configMap:
-      content: |-
-        logging {
-          level = "info"
-          format = "logfmt"
-        }
-
-        prometheus.remote_write "mimir" {
-          endpoint {
-            url = "http://mimir-nginx.mimir/prometheus/api/v1/write"
+    alloy:
+      configMap:
+        content: |-
+          logging {
+            level = "info"
+            format = "logfmt"
           }
-        }
 
-        prometheus.exporter.unix "localhost" {
-        }
-        prometheus.scrape "pods" {
-          targets    = prometheus.exporter.unix.localhost.targets
-          forward_to = [prometheus.remote_write.mimir.receiver]
-        }
+          prometheus.remote_write "mimir" {
+            endpoint {
+              url = "http://mimir-nginx.mimir/prometheus/api/v1/write"
+            }
+          }
 
-        discovery.kubernetes "pods" {
-          role = "pod"
-        }
-        prometheus.scrape "pods" {
-          targets    = discovery.kubernetes.pods.targets
-          forward_to = [prometheus.remote_write.mimir.receiver]
-        }
+          prometheus.exporter.unix "localhost" {
+          }
+          prometheus.scrape "pods" {
+            targets    = prometheus.exporter.unix.localhost.targets
+            forward_to = [prometheus.remote_write.mimir.receiver]
+          }
 
-        discovery.kubernetes "services" {
-          role = "service"
-        }
-        prometheus.scrape "services" {
-          targets    = discovery.kubernetes.services.targets
-          forward_to = [prometheus.remote_write.mimir.receiver]
-        }
+          discovery.kubernetes "pods" {
+            role = "pod"
+          }
+          prometheus.scrape "pods" {
+            targets    = discovery.kubernetes.pods.targets
+            forward_to = [prometheus.remote_write.mimir.receiver]
+          }
 
-        discovery.kubernetes "nodes" {
-          role = "node"
-        }
-        prometheus.scrape "nodes" {
-          targets    = discovery.kubernetes.nodes.targets
-          forward_to = [prometheus.remote_write.mimir.receiver]
-        }
+          discovery.kubernetes "services" {
+            role = "service"
+          }
+          prometheus.scrape "services" {
+            targets    = discovery.kubernetes.services.targets
+            forward_to = [prometheus.remote_write.mimir.receiver]
+          }
 
-        discovery.kubernetes "endpoints" {
-          role = "endpoint"
-        }
-        prometheus.scrape "endpoints" {
-          targets    = discovery.kubernetes.endpoints.targets
-          forward_to = [prometheus.remote_write.mimir.receiver]
-        }
+          discovery.kubernetes "nodes" {
+            role = "node"
+          }
+          prometheus.scrape "nodes" {
+            targets    = discovery.kubernetes.nodes.targets
+            forward_to = [prometheus.remote_write.mimir.receiver]
+          }
 
-        discovery.kubernetes "ingresses" {
-          role = "ingress"
-        }
-        prometheus.scrape "ingresses" {
-          targets    = discovery.kubernetes.ingresses.targets
-          forward_to = [prometheus.remote_write.mimir.receiver]
-        }
+          discovery.kubernetes "endpoints" {
+            role = "endpoint"
+          }
+          prometheus.scrape "endpoints" {
+            targets    = discovery.kubernetes.endpoints.targets
+            forward_to = [prometheus.remote_write.mimir.receiver]
+          }
 
-        discovery.kubernetes "endpointslices" {
-          role = "endpointslice"
-        }
-        prometheus.scrape "endpointslices" {
-          targets    = discovery.kubernetes.endpointslices.targets
-          forward_to = [prometheus.remote_write.mimir.receiver]
-        }
+          discovery.kubernetes "ingresses" {
+            role = "ingress"
+          }
+          prometheus.scrape "ingresses" {
+            targets    = discovery.kubernetes.ingresses.targets
+            forward_to = [prometheus.remote_write.mimir.receiver]
+          }
+
+          discovery.kubernetes "endpointslices" {
+            role = "endpointslice"
+          }
+          prometheus.scrape "endpointslices" {
+            targets    = discovery.kubernetes.endpointslices.targets
+            forward_to = [prometheus.remote_write.mimir.receiver]
+          }
