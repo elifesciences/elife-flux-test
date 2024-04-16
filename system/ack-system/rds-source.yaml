@@ -7,5 +7,3 @@ spec:
   interval: 5m
   type: oci
   url: oci://public.ecr.aws/aws-controllers-k8s/rds-chart
-  ref:
-    tag: 1.2.4
