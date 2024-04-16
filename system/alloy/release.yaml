@@ -33,3 +33,12 @@ spec:
             url = "http://mimir-nginx.mimir/prometheus"
           }
         }
+
+        discovery.kubernetes "pods" {
+          role = "pod"
+        }
+
+        prometheus.scrape "pods" {
+          targets    = discovery.kubernetes.pods.targets
+          forward_to = [prometheus.remote_write.mimir.receiver]
+        }
