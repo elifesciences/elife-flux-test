@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: ack-system
 resources:
 - namespace.yaml
-- source.yaml
+- rds-source.yaml
