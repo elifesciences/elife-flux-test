@@ -29,6 +29,7 @@ spec:
           storage:
             backend: s3
             s3:
+              endpoint: s3.${aws_region}.amazonaws.com
               region: ${aws_region}
 
     blocks_storage:
