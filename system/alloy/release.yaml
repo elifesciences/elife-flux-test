@@ -35,13 +35,6 @@ spec:
             }
           }
 
-          prometheus.exporter.unix "unix" {
-          }
-          prometheus.scrape "unix" {
-            targets    = prometheus.exporter.unix.unix.targets
-            forward_to = [prometheus.remote_write.mimir.receiver]
-          }
-
           discovery.kubernetes "pods" {
             role = "pod"
           }
