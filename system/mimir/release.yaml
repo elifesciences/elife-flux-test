@@ -33,14 +33,11 @@ spec:
               region: ${aws_region}
               bucket_name: elife-${cluster_name}-mimir
         blocks_storage:
-          s3:
-            storage_prefix: blocks
+          storage_prefix: blocks
         alertmanager_storage:
-          s3:
-            storage_prefix: alertmanager
+          storage_prefix: alertmanager
         ruler_storage:
-          s3:
-            storage_prefix: ruler
+          storage_prefix: ruler
     serviceAccount:
       annotations:
         eks.amazonaws.com/role-arn: arn:aws:iam::512686554592:role/elife-${cluster_name}-grafana-mimir-cluster-role
