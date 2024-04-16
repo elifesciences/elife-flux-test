@@ -35,10 +35,10 @@ spec:
             }
           }
 
-          prometheus.exporter.unix "localhost" {
+          prometheus.exporter.unix "unix" {
           }
-          prometheus.scrape "pods" {
-            targets    = prometheus.exporter.unix.localhost.targets
+          prometheus.scrape "unix" {
+            targets    = prometheus.exporter.unix.unix.targets
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
 
