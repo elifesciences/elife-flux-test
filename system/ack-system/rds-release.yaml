@@ -2,12 +2,12 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: ack-rds
+  name: rds
 
 spec:
   interval: 1m
   timeout: 10m
-  releaseName: ack-rds
+  releaseName: rds
   chart:
     spec:
       chart: rds-chart
