@@ -42,3 +42,12 @@ spec:
           targets    = discovery.kubernetes.pods.targets
           forward_to = [prometheus.remote_write.mimir.receiver]
         }
+
+        discovery.kubernetes "services" {
+          role = "service"
+        }
+
+        prometheus.scrape "services" {
+          targets    = discovery.kubernetes.services.targets
+          forward_to = [prometheus.remote_write.mimir.receiver]
+        }
