@@ -27,3 +27,9 @@ spec:
           level = "info"
           format = "logfmt"
         }
+
+        prometheus.remote_write "mimir" {
+          endpoint {
+            url = "http://mimir-nginx.mimir/prometheus"
+          }
+        }
