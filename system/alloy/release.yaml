@@ -35,50 +35,9 @@ spec:
             }
           }
 
-          discovery.kubernetes "pods" {
-            role = "pod"
-          }
-          prometheus.scrape "pods" {
-            targets    = discovery.kubernetes.pods.targets
-            forward_to = [prometheus.remote_write.mimir.receiver]
-          }
 
-          discovery.kubernetes "services" {
-            role = "service"
-          }
-          prometheus.scrape "services" {
-            targets    = discovery.kubernetes.services.targets
-            forward_to = [prometheus.remote_write.mimir.receiver]
-          }
-
-          discovery.kubernetes "nodes" {
-            role = "node"
-          }
-          prometheus.scrape "nodes" {
-            targets    = discovery.kubernetes.nodes.targets
-            forward_to = [prometheus.remote_write.mimir.receiver]
-          }
-
-          discovery.kubernetes "endpoints" {
-            role = "endpoint"
-          }
-          prometheus.scrape "endpoints" {
-            targets    = discovery.kubernetes.endpoints.targets
-            forward_to = [prometheus.remote_write.mimir.receiver]
-          }
-
-          discovery.kubernetes "ingresses" {
-            role = "ingress"
-          }
-          prometheus.scrape "ingresses" {
-            targets    = discovery.kubernetes.ingresses.targets
-            forward_to = [prometheus.remote_write.mimir.receiver]
-          }
-
-          discovery.kubernetes "endpointslices" {
-            role = "endpointslice"
-          }
-          prometheus.scrape "endpointslices" {
-            targets    = discovery.kubernetes.endpointslices.targets
+          prometheus.exporter.unix "node_stats" { }
+          prometheus.scrape "demo" {
+            targets    = prometheus.exporter.unix.node_stats.targets
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
