@@ -2,8 +2,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: ack-rds
+  name: ack
 spec:
   interval: 5m
   type: oci
-  url: oci://public.ecr.aws/aws-controllers-k8s/rds-chart
+  url: oci://public.ecr.aws/aws-controllers-k8s
