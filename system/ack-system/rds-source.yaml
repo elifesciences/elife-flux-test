@@ -3,7 +3,6 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: OCIRepository
 metadata:
   name: ack-rds
-  namespace: ack-system
 spec:
   interval: 5m
   url: oci://public.ecr.aws/aws-controllers-k8s/rds-chart

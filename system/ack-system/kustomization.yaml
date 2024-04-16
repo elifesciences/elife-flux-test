@@ -4,3 +4,4 @@ namespace: ack-system
 resources:
 - namespace.yaml
 - rds-source.yaml
+- rds-release.yaml
