@@ -34,10 +34,16 @@ spec:
           }
         }
 
+        prometheus.exporter.unix "localhost" {
+        }
+        prometheus.scrape "pods" {
+          targets    = prometheus.exporter.unix.localhost.targets
+          forward_to = [prometheus.remote_write.mimir.receiver]
+        }
+
         discovery.kubernetes "pods" {
           role = "pod"
         }
-
         prometheus.scrape "pods" {
           targets    = discovery.kubernetes.pods.targets
           forward_to = [prometheus.remote_write.mimir.receiver]
@@ -46,7 +52,6 @@ spec:
         discovery.kubernetes "services" {
           role = "service"
         }
-
         prometheus.scrape "services" {
           targets    = discovery.kubernetes.services.targets
           forward_to = [prometheus.remote_write.mimir.receiver]
