@@ -40,7 +40,7 @@ spec:
           storage_prefix: ruler
     serviceAccount:
       annotations:
-        eks.amazonaws.com/role-arn: arn:aws:iam::512686554592:role/elife-${cluster_name}-grafana-mimir-cluster-role
+        eks.amazonaws.com/role-arn: arn:aws:iam::512686554592:role/elife-${cluster_name}-mimir-cluster-role
 
     alertmanager:
       persistentVolume:
