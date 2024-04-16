@@ -12,7 +12,7 @@ spec:
     spec:
       chart: ack-rds
       sourceRef:
-        kind: OciRepository
+        kind: HelmRepository
         name: ack-rds
       interval: 1m
   install:
