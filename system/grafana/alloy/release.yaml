@@ -111,7 +111,7 @@ spec:
             bearer_token_file = "/var/run/secrets/kubernetes.io/serviceaccount/token"
             targets = discovery.relabel.metrics_kubelet.output
             scrape_interval = "60s"
-            forward_to = [prometheus.remote_write.default.receiver]
+            forward_to = [prometheus.remote_write.mimir.receiver]
           }
 
 
