@@ -37,7 +37,7 @@ spec:
 
 
           prometheus.exporter.unix "node_stats" { }
-          prometheus.scrape "demo" {
+          prometheus.scrape "node_stats" {
             targets    = prometheus.exporter.unix.node_stats.targets
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
