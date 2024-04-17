@@ -35,13 +35,14 @@ spec:
             }
           }
 
-
+          # node_exporter metrics
           prometheus.exporter.unix "node_stats" { }
           prometheus.scrape "node_stats" {
             targets    = prometheus.exporter.unix.node_stats.targets
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
 
+          # kube-state-metrics metrics
           discovery.kubernetes "ksm" {
             role = "pod"
             namespaces {
@@ -54,5 +55,14 @@ spec:
           }
           prometheus.scrape "ksm" {
             targets    = discovery.kubernetes.ksm.targets
+            forward_to = [prometheus.remote_write.mimir.receiver]
+          }
+
+          # node metrics
+          discovery.kubernetes "node" {
+            role = "node"
+          }
+          prometheus.scrape "node" {
+            targets    = discovery.kubernetes.node.targets
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
