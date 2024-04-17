@@ -5,7 +5,6 @@ metadata:
   labels:
     workaround-for: alloy-and-cadvisor
 spec:
-  jobLabel: k8s-app
   namespaceSelector:
     matchNames:
     - grafana
