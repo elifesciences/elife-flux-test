@@ -62,10 +62,6 @@ spec:
 
           // cadvisor metrics
           # prometheus.exporter.cadvisor "cadvisor" { }
-          # prometheus.scrape "cadvisor" {
-          #   targets    = prometheus.exporter.cadvisor.cadvisor.targets
-          #   forward_to = [prometheus.remote_write.mimir.receiver]
-          # }
           prometheus.operator.servicemonitors "cadvisor" {
             forward_to = [prometheus.remote_write.mimir.receiver]
             namespaces = ["grafana"]
@@ -76,6 +72,10 @@ spec:
                   values = ["alloy-and-cadvisor"]
                 }
               }
+          }
+          prometheus.scrape "cadvisor" {
+            targets    = prometheus.exporter.cadvisor.cadvisor.targets
+            forward_to = [prometheus.remote_write.mimir.receiver]
           }
 
           // node metrics
