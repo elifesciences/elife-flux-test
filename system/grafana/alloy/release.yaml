@@ -77,7 +77,7 @@ spec:
             }
             bearer_token_file = "/var/run/secrets/kubernetes.io/serviceaccount/token"
             targets = discovery.relabel.metrics_cadvisor.output
-            scrape_interval = "60s"
+            scrape_interval = "15s"
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
 
@@ -110,7 +110,7 @@ spec:
             }
             bearer_token_file = "/var/run/secrets/kubernetes.io/serviceaccount/token"
             targets = discovery.relabel.metrics_kubelet.output
-            scrape_interval = "60s"
+            scrape_interval = "15s"
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
 
