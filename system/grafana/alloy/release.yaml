@@ -27,7 +27,7 @@ spec:
       configMap:
         content: |-
           logging {
-            level = "debug"
+            level = "info"
             format = "logfmt"
           }
 
@@ -60,6 +60,13 @@ spec:
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
 
+          // cadvisor metrics
+          prometheus.exporter.cadvisor "cadvisor" { }
+          prometheus.scrape "cadvisor" {
+            targets    = prometheus.exporter.cadvisor.cadvisor.targets
+            forward_to = [prometheus.remote_write.mimir.receiver]
+          }
+
           // node metrics
           discovery.kubernetes "node" {
             role = "node"
@@ -68,15 +75,3 @@ spec:
             targets    = discovery.kubernetes.node.targets
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
-  postRenderers:
-  - kustomize:
-      patchesJson6902:
-      - target:
-          kind: ClusterRole
-          name: alloy
-        patch:
-        - op: "add"
-          path: "/rules/-"
-          value:
-            nonResourceURLs: ["/metrics/cadvisor"]
-            verbs: ["get"]
