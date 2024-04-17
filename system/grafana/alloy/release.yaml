@@ -66,7 +66,7 @@ spec:
           #   targets    = prometheus.exporter.cadvisor.cadvisor.targets
           #   forward_to = [prometheus.remote_write.mimir.receiver]
           # }
-          prometheus.operator.servicemonitors "prometheus" {
+          prometheus.operator.servicemonitors "cadvisor" {
             forward_to = [prometheus.remote_write.mimir.receiver]
             namespaces = ["grafana"]
             selector {
