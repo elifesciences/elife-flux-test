@@ -51,5 +51,8 @@ spec:
               role = "service"
               label = "app.kubernetes.io/component=metrics"
             }
-            kube-state-metrics
+          }
+          prometheus.scrape "ksm" {
+            targets    = discovery.kubernetes.ksm.targets
+            forward_to = [prometheus.remote_write.mimir.receiver]
           }
