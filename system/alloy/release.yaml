@@ -41,3 +41,15 @@ spec:
             targets    = prometheus.exporter.unix.node_stats.targets
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
+
+          discovery.kubernetes "ksm" {
+            role = service
+            namespaces {
+              names = ["kube-system"]
+            }
+            selectors {
+              role = "service"
+              label = "app.kubernetes.io/component=metrics"
+            }
+            kube-state-metrics
+          }
