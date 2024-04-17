@@ -102,7 +102,7 @@ spec:
           type: loki
           inputs:
           - json_logs
-          endpoint: http://loki-gateway.loki/
+          endpoint: http://loki-gateway.grafana/
           encoding:
             codec: json
           labels:
