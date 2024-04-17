@@ -27,7 +27,7 @@ spec:
       configMap:
         content: |-
           logging {
-            level = "info"
+            level = "debug"
             format = "logfmt"
           }
 
