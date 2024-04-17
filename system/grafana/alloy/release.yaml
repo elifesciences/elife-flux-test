@@ -131,3 +131,72 @@ spec:
             targets    = discovery.kubernetes.ksm.targets
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
+
+
+          loki.write "loki" {
+            endpoint {
+              url = "http://loki-gateway/loki/api/v1/push"
+            }
+          }
+
+          discovery.kubernetes "pods" {
+            role = "pod"
+          }
+
+          discovery.relabel "logs" {
+            targets = discovery.kubernetes.pods.targets
+
+            rule {
+              source_labels = ["__meta_kubernetes_namespace"]
+              target_label  = "namespace"
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_container_name"]
+              target_label  = "container"
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_name"]
+              target_label  = "pod"
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_node_name"]
+              action = "keep"
+              regex = env("HOSTNAME")
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_namespace"]
+              action = "drop"
+              regex = "grafana-agent"
+            }
+
+            rule {
+              source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
+              target_label  = "__path__"
+              separator     = "/"
+              replacement   = "/var/log/pods/*$1/*.log"
+            }
+          }
+
+          local.file_match "logs" {
+            path_targets = discovery.relabel.logs.output
+          }
+
+          loki.source.file "pods" {
+            targets    = local.file_match.logs.targets
+            forward_to = [loki.process.logs.receiver]
+          }
+
+          loki.process "logs" {
+            stage.cri {}
+            forward_to = [loki.write.loki.receiver]
+          }
+
+
+          loki.source.kubernetes_events "events" {
+            log_format = "json"
+            forward_to = [loki.write.loki.receiver]
+          }
