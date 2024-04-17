@@ -10,4 +10,4 @@ data:
     datasources:
       - name: mimir
         type: prometheus
-        url: "http://mimir-nginx.mimir/prometheus"
+        url: "http://mimir-nginx/prometheus"
