@@ -60,22 +60,18 @@ spec:
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
 
-          // cadvisor metrics
-          // prometheus.exporter.cadvisor "cadvisor" { }
-          // prometheus.scrape "cadvisor" {
-          //   targets    = prometheus.exporter.cadvisor.cadvisor.targets
-          //   forward_to = [prometheus.remote_write.mimir.receiver]
-          // }
-          prometheus.operator.servicemonitors "cadvisor" {
+          // cadvisor
+          prometheus.scrape "cadvisor" {
+            scheme = "https"
+            tls_config {
+                server_name = "kubernetes"
+                ca_file = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+                insecure_skip_verify = false
+            }
+            bearer_token_file = "/var/run/secrets/kubernetes.io/serviceaccount/token"
+            targets = discovery.relabel.metrics_cadvisor.output
+            scrape_interval = "60s"
             forward_to = [prometheus.remote_write.mimir.receiver]
-            namespaces = ["grafana"]
-            selector {
-              match_expression {
-                  key = "workaround-for"
-                  operator = "In"
-                  values = ["alloy-and-cadvisor"]
-                }
-              }
           }
 
           // node metrics
