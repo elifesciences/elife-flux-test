@@ -62,6 +62,10 @@ spec:
 
           // cadvisor metrics
           // prometheus.exporter.cadvisor "cadvisor" { }
+          // prometheus.scrape "cadvisor" {
+          //   targets    = prometheus.exporter.cadvisor.cadvisor.targets
+          //   forward_to = [prometheus.remote_write.mimir.receiver]
+          // }
           prometheus.operator.servicemonitors "cadvisor" {
             forward_to = [prometheus.remote_write.mimir.receiver]
             namespaces = ["grafana"]
@@ -74,7 +78,7 @@ spec:
               }
           }
           prometheus.scrape "cadvisor" {
-            targets    = prometheus.exporter.cadvisor.cadvisor.targets
+            targets    = prometheus.operator.servicemonitors.cadvisor.targets
             forward_to = [prometheus.remote_write.mimir.receiver]
           }
 
