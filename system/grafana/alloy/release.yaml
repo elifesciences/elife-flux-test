@@ -61,10 +61,21 @@ spec:
           }
 
           // cadvisor metrics
-          prometheus.exporter.cadvisor "cadvisor" { }
-          prometheus.scrape "cadvisor" {
-            targets    = prometheus.exporter.cadvisor.cadvisor.targets
+          # prometheus.exporter.cadvisor "cadvisor" { }
+          # prometheus.scrape "cadvisor" {
+          #   targets    = prometheus.exporter.cadvisor.cadvisor.targets
+          #   forward_to = [prometheus.remote_write.mimir.receiver]
+          # }
+          prometheus.operator.servicemonitors "prometheus" {
             forward_to = [prometheus.remote_write.mimir.receiver]
+            namespaces = ["grafana"]
+            selector {
+              match_expression {
+                  key = "workaround-for"
+                  operator = "In"
+                  values = ["alloy-and-cadvisor"]
+                }
+              }
           }
 
           // node metrics

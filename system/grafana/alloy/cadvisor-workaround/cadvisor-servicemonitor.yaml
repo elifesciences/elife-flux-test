@@ -1,0 +1,38 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: prometheus-operator-kubelet
+  labels:
+    workaround-for: alloy-and-cadvisor
+spec:
+  jobLabel: k8s-app
+  namespaceSelector:
+    matchNames:
+    - grafana
+  selector:
+    matchLabels:
+      k8s-app: kubelet
+  endpoints:
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    honorLabels: true
+    port: https-metrics
+    relabelings:
+    - sourceLabels:
+      - __metrics_path__
+      targetLabel: metrics_path
+    scheme: https
+    tlsConfig:
+      caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      insecureSkipVerify: true
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    honorLabels: true
+    path: /metrics/cadvisor
+    port: https-metrics
+    relabelings:
+    - sourceLabels:
+      - __metrics_path__
+      targetLabel: metrics_path
+    scheme: https
+    tlsConfig:
+      caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+      insecureSkipVerify: true
