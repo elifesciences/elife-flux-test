@@ -43,7 +43,7 @@ spec:
           }
 
           discovery.kubernetes "ksm" {
-            role = pod
+            role = "pod"
             namespaces {
                own_namespace = true
             }
