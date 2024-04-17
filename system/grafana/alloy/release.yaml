@@ -77,10 +77,6 @@ spec:
                 }
               }
           }
-          prometheus.scrape "cadvisor" {
-            targets    = prometheus.operator.servicemonitors.cadvisor.targets
-            forward_to = [prometheus.remote_write.mimir.receiver]
-          }
 
           // node metrics
           discovery.kubernetes "node" {
