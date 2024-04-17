@@ -48,7 +48,7 @@ spec:
               names = ["kube-system"]
             }
             selectors {
-              role = "service"
+              role = service
               label = "app.kubernetes.io/component=metrics"
             }
           }
