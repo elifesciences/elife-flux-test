@@ -156,11 +156,39 @@ spec:
           loki.process "logs" {
             // stage.json {}
             // stage.labels {}
+            // stage.output {
+            //  source = "message"
+            // }
             forward_to = [loki.write.loki.receiver]
           }
 
 
-          loki.source.kubernetes_events "events" {
+          loki.source.kubernetes_events "kubernetes_events" {
             log_format = "json"
+            forward_to = [loki.write.loki.receiver]
+          }
+          loki.process "kubernetes_events" {
+            stage.json {
+              expressions = {
+                "kind" = "",
+                "name" = "",
+                "level" = "",
+                "sourcecomponent" = "",
+                "sourcehost" = "",
+                "output" = "msg",
+              }
+            }
+            stage.labels {
+              values = {
+                "kind" = "",
+                "name" = "",
+                "level" = "",
+                "sourcecomponent" = "",
+                "sourcehost" = "",
+              }
+            }
+            stage.output {
+              source = "output"
+            }
             forward_to = [loki.write.loki.receiver]
           }
