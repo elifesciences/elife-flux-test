@@ -31,13 +31,21 @@ spec:
             format = "logfmt"
           }
 
+          // write destinations
+          //
           prometheus.remote_write "mimir" {
             endpoint {
               url = "http://mimir-nginx/api/v1/push"
             }
           }
+          loki.write "loki" {
+            endpoint {
+              url = "http://loki-gateway/loki/api/v1/push"
+            }
+          }
 
           // node_exporter metrics
+          //
           prometheus.exporter.unix "node_stats" { }
           prometheus.scrape "node_stats" {
             targets    = prometheus.exporter.unix.node_stats.targets
@@ -45,6 +53,9 @@ spec:
           }
 
           // these next examples come from https://medium.com/@stepanvrany/i-replaced-several-kubernetes-components-with-grafana-agent-flow-heres-how-74ecdc60bffe
+
+          // discover all nodes
+          //
           discovery.kubernetes "nodes" {
             role = "node"
           }
@@ -133,65 +144,16 @@ spec:
           }
 
 
-          loki.write "loki" {
-            endpoint {
-              url = "http://loki-gateway/loki/api/v1/push"
-            }
-          }
-
+          // Pod logs
+          //
           discovery.kubernetes "pods" {
             role = "pod"
           }
-
-          discovery.relabel "logs" {
-            targets = discovery.kubernetes.pods.targets
-
-            rule {
-              source_labels = ["__meta_kubernetes_namespace"]
-              target_label  = "namespace"
-            }
-
-            rule {
-              source_labels = ["__meta_kubernetes_pod_container_name"]
-              target_label  = "container"
-            }
-
-            rule {
-              source_labels = ["__meta_kubernetes_pod_name"]
-              target_label  = "pod"
-            }
-
-            rule {
-              source_labels = ["__meta_kubernetes_pod_node_name"]
-              action = "keep"
-              regex = env("HOSTNAME")
-            }
-
-            rule {
-              source_labels = ["__meta_kubernetes_namespace"]
-              action = "drop"
-              regex = "grafana-agent"
-            }
-
-            rule {
-              source_labels = ["__meta_kubernetes_pod_uid", "__meta_kubernetes_pod_container_name"]
-              target_label  = "__path__"
-              separator     = "/"
-              replacement   = "/var/log/pods/*$1/*.log"
-            }
+          loki.source.kubernetes "LABEL" {
+            targets    = discovery.kubernetes.pods.targets
+            forward_to = loki.process.logs
           }
-
-          local.file_match "logs" {
-            path_targets = discovery.relabel.logs.output
-          }
-
-          loki.source.file "pods" {
-            targets    = local.file_match.logs.targets
-            forward_to = [loki.process.logs.receiver]
-          }
-
           loki.process "logs" {
-            stage.cri {}
             stage.json {}
             stage.labels {}
             forward_to = [loki.write.loki.receiver]
