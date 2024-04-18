@@ -149,9 +149,9 @@ spec:
           discovery.kubernetes "pods" {
             role = "pod"
           }
-          loki.source.kubernetes "LABEL" {
+          loki.source.kubernetes "kubernetes" {
             targets    = discovery.kubernetes.pods.targets
-            forward_to = loki.process.logs
+            forward_to = [loki.process.logs]
           }
           loki.process "logs" {
             // stage.json {}
