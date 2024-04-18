@@ -153,8 +153,8 @@ spec:
               names = ["ack-system", "autoscaler", "db-operator-system", "external-secrets", "flux-system", "infra", "keda", "monitoring", "podinfo--staging", "spegel", "stg"]
             }
           }
-          loki.relabel "pods" {
-            targets    = [discovery.kubernetes.pods.targets]
+          discovery.relabel "pods" {
+            targets    = discovery.kubernetes.pods.targets
 
             // namespace is trivial
             rule {
@@ -187,7 +187,7 @@ spec:
           }
 
           loki.source.kubernetes "kubernetes" {
-            targets    = loki.relabel.pods.output
+            targets    = discovery.relabel.pods.targets
             forward_to = [loki.process.logs.receiver]
             clustering {
               enabled = true
