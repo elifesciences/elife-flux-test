@@ -151,7 +151,7 @@ spec:
           }
           loki.source.kubernetes "kubernetes" {
             targets    = discovery.kubernetes.pods.targets
-            forward_to = [loki.process.logs]
+            forward_to = [loki.process.logs.receiver]
           }
           loki.process "logs" {
             // stage.json {}
