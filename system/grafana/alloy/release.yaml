@@ -192,6 +192,8 @@ spec:
 
           loki.process "logs" {
             stage.cri {}
+            stage.json {}
+            stage.labels {}
             forward_to = [loki.write.loki.receiver]
           }
 
