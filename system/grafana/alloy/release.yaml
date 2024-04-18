@@ -153,8 +153,41 @@ spec:
               names = ["ack-system", "autoscaler", "db-operator-system", "external-secrets", "flux-system", "infra", "keda", "monitoring", "podinfo--staging", "spegel", "stg"]
             }
           }
-          loki.source.kubernetes "kubernetes" {
+          loki.relabel "pods" {
             targets    = discovery.kubernetes.pods.targets
+
+            // namespace is trivial
+            rule {
+              source_labels = ["__meta_kubernetes_namespace"]
+              target_label = "namespace"
+            }
+
+            // pod is the name of the pod
+            rule {
+              source_labels = ["__meta_kubernetes_pod_name"]
+              target_label = "pod"
+            }
+
+            // container is the name of the container
+            rule {
+              source_labels = ["__meta_kubernetes_pod_container_name"]
+              target_label = "container"
+            }
+
+            // app is the "app" label
+            rule {
+              source_labels = ["__meta_kubernetes_pod_label_app"]
+              target_label = "app"
+            }
+            // name is the "app.kubernetes.io/name" label
+            rule {
+              source_labels = ["__meta_kubernetes_pod_label_app_kubernetes_io_name"]
+              target_label = "name"
+            }
+          }
+
+          loki.source.kubernetes "kubernetes" {
+            targets    = loki.relabel.pods.targets
             forward_to = [loki.process.logs.receiver]
             clustering {
               enabled = true
