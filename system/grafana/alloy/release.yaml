@@ -166,7 +166,7 @@ spec:
           //
           loki.source.kubernetes_events "kubernetes_events" {
             log_format = "json"
-            forward_to = [loki.write.loki.receiver]
+            forward_to = [loki.process.kubernetes_events.receiver]
           }
           loki.process "kubernetes_events" {
             stage.json {
