@@ -148,6 +148,10 @@ spec:
           //
           discovery.kubernetes "pods" {
             role = "pod"
+            namespaces {
+              own_namespace = false
+              names = ["ack-system", "autoscaler", "db-operator-system", "external-secrets", "flux-system", "infra", "keda", "monitoring", "podinfo--staging", "spegel", "stg"]
+            }
           }
           loki.source.kubernetes "kubernetes" {
             targets    = discovery.kubernetes.pods.targets
