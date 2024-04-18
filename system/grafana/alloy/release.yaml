@@ -162,7 +162,8 @@ spec:
             forward_to = [loki.write.loki.receiver]
           }
 
-
+          // Kubernetes events
+          //
           loki.source.kubernetes_events "kubernetes_events" {
             log_format = "json"
             forward_to = [loki.write.loki.receiver]
@@ -190,5 +191,7 @@ spec:
             stage.output {
               source = "output"
             }
-            forward_to = [loki.write.loki.receiver]
+            forward_to = [loki.echo.debug.receiver, loki.write.loki.receiver]
           }
+
+          loki.echo "debug" { }
