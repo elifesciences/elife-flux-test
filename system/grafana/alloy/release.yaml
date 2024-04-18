@@ -152,6 +152,9 @@ spec:
           loki.source.kubernetes "kubernetes" {
             targets    = discovery.kubernetes.pods.targets
             forward_to = [loki.process.logs.receiver]
+            clustering {
+              enabled = true
+            }
           }
           loki.process "logs" {
             // stage.json {}
@@ -159,7 +162,7 @@ spec:
             // stage.output {
             //  source = "message"
             // }
-            forward_to = [loki.write.loki.receiver]
+            forward_to = [loki.echo.debug.receiver, loki.write.loki.receiver]
           }
 
           // Kubernetes events
@@ -191,7 +194,7 @@ spec:
             stage.output {
               source = "output"
             }
-            forward_to = [loki.echo.debug.receiver, loki.write.loki.receiver]
+            forward_to = [loki.write.loki.receiver]
           }
 
           loki.echo "debug" { }
