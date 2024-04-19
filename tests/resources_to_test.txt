@@ -1,31 +1,31 @@
 # Test all kustomizations have reconciled
-kustomizations.kustomize.toolkit.fluxcd.io ready flux-system crds
-kustomizations.kustomize.toolkit.fluxcd.io ready flux-system system
-kustomizations.kustomize.toolkit.fluxcd.io ready flux-system deployments
+2m kustomizations.kustomize.toolkit.fluxcd.io ready flux-system crds
+2m kustomizations.kustomize.toolkit.fluxcd.io ready flux-system system
+2m kustomizations.kustomize.toolkit.fluxcd.io ready flux-system deployments
 
 # Test all system resources have "deployed"
-helmrelease ready autoscaler cluster-autoscaler
-helmrelease ready infra sealed-secrets
-helmrelease ready infra ingress-nginx
-helmrelease ready infra cert-manager
-helmrelease ready infra external-dns
-helmrelease ready infra oauth2-proxy
-helmrelease ready kube-system descheduler
-helmrelease ready monitoring metrics-server
-helmrelease ready logging loki
-helmrelease ready logging vector
-helmrelease ready db-operator-system psmdb-operator
-helmrelease ready db-operator-system pg-operator
-helmrelease ready db-operator-system pxc-operator
-helmrelease ready db-operator-system opensearch-operator
-helmrelease ready flux-system gitops-dashboard
-helmrelease ready flux-system template-controller
-helmrelease ready keda keda
-helmrelease ready grafana grafana
-helmrelease ready grafana mimir
-helmrelease ready grafana loki
+2m helmrelease ready autoscaler cluster-autoscaler
+2m helmrelease ready infra sealed-secrets
+2m helmrelease ready infra ingress-nginx
+2m helmrelease ready infra cert-manager
+2m helmrelease ready infra external-dns
+2m helmrelease ready infra oauth2-proxy
+2m helmrelease ready kube-system descheduler
+2m helmrelease ready monitoring metrics-server
+2m helmrelease ready logging loki
+2m helmrelease ready logging vector
+2m helmrelease ready db-operator-system psmdb-operator
+2m helmrelease ready db-operator-system pg-operator
+2m helmrelease ready db-operator-system pxc-operator
+2m helmrelease ready db-operator-system opensearch-operator
+2m helmrelease ready flux-system gitops-dashboard
+2m helmrelease ready flux-system template-controller
+2m helmrelease ready keda keda
+2m helmrelease ready grafana grafana
+2m helmrelease ready grafana mimir
+2m helmrelease ready grafana loki
 
-kustomizations.kustomize.toolkit.fluxcd.io ready monitoring monitoring-flux
+2m kustomizations.kustomize.toolkit.fluxcd.io ready monitoring monitoring-flux
 
 # Test all deployments
-deployment Available podinfo--staging podinfo
+2m deployment Available podinfo--staging podinfo
