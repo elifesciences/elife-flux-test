@@ -124,7 +124,7 @@ spec:
         hosts:
         - host: mimir.${cluster_domain}
           paths:
-          - path: /
+          - path: /alertmanager
             pathType: Prefix
         tls:
         - secretName: mimir-tls
