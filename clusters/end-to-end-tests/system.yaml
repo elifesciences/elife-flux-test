@@ -159,3 +159,11 @@ spec:
               effect: "NoSchedule"
             nodeSelector:
               kubernetes.io/hostname: elife-flux-test-control-plane
+          certController:
+            tolerations:
+            - key: "realnode"
+              operator: "Equal"
+              value: "true"
+              effect: "NoSchedule"
+            nodeSelector:
+              kubernetes.io/hostname: elife-flux-test-control-plane
