@@ -72,3 +72,8 @@ jobs:
         if: failure()
         run: |
           kubectl -n flux-system logs deploy/helm-controller
+      - name: Debug kwok controller
+        if: failure()
+        run: |
+          kubectl -n kube-system logs deploy/kwok-controller
+          kubectl -n kube-system logs deploy/kwok-controller --previous
