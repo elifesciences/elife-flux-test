@@ -123,3 +123,21 @@ spec:
             effect: "NoSchedule"
           nodeSelector:
             kubernetes.io/hostname: elife-flux-test-control-plane
+  - target:
+      kind: HelmRelease
+      name: cert-manager
+    patch: |-
+      apiVersion: helm.toolkit.fluxcd.io/v2beta2
+      kind: HelmRelease
+      metadata:
+        name: cert-manager
+      spec:
+        values:
+          webhook:
+            tolerations:
+            - key: "realnode"
+              operator: "Equal"
+              value: "true"
+              effect: "NoSchedule"
+            nodeSelector:
+              kubernetes.io/hostname: elife-flux-test-control-plane
