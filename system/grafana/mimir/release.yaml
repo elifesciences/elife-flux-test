@@ -125,6 +125,7 @@ spec:
         - host: mimir.${cluster_domain}
           paths:
           - path: /
+            pathType: Prefix
         tls:
         - secretName: mimir-tls
           hosts:
