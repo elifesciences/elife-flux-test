@@ -15,4 +15,5 @@ spec:
         kind: HelmRepository
         name: prometheus
       interval: 1m
-  values:
+  upgrade:
+    crds: CreateReplace
