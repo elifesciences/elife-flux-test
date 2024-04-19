@@ -123,6 +123,8 @@ spec:
             proxy_set_header X-Email $email;
         hosts:
         - host: mimir.${cluster_domain}
+          paths:
+          - path: /
         tls:
         - secretName: mimir-tls
           hosts:
