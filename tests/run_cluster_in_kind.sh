@@ -27,6 +27,7 @@ flux install --components-extra="image-reflector-controller,image-automation-con
 kubectl taint node "$name-control-plane" realnode=true:NoSchedule
 # Install kwok nodes to run "workloads" on
 kubectl apply -f $tests_path/kwok/1_large_simulated_node.yaml
+kubectl apply -f $tests_path/kwok/4_smaller_simulated_nodes.yaml
 
 
 
