@@ -22,6 +22,7 @@
 2m helmrelease ready grafana grafana
 2m helmrelease ready grafana mimir
 2m helmrelease ready grafana loki
+2m helmrelease ready grafana kube-state-metrics
 
 2m kustomizations.kustomize.toolkit.fluxcd.io ready monitoring monitoring-flux
 
