@@ -18,6 +18,9 @@ spec:
       cluster_name: end-to-end-tests
       cluster_domain: end-to-end-tests.internal
 
+      # TODO: structure repo so that these aren't required
+      aws_region: no-north-1
+
   patches:
   # in a small cluster like kind or minikube the load balancer won't get an external IP.
   # Therefore, we need to disable waiting
