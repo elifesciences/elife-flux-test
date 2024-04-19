@@ -3,10 +3,10 @@ set -e
 
 tests_path="./tests"
 while IFS=$' ' read -r timeout resource state namespace name ; do
-    if [[ "${resource:0:1}" == "#" ]]; then
+    if [[ "${timeout:0:1}" == "#" ]]; then
         continue;
     fi
-    if [[ $resource == "" ]]; then
+    if [[ $timeout == "" ]]; then
         continue;
     fi
     kubectl wait "${resource}" --for=condition=${state} --timeout=${timeout} -n ${namespace} ${name}
