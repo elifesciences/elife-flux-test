@@ -20,7 +20,7 @@
 2m helmrelease ready flux-system template-controller
 2m helmrelease ready keda keda
 2m helmrelease ready grafana grafana
-9m helmrelease ready grafana mimir
+14m helmrelease ready grafana mimir
 2m helmrelease ready grafana loki
 2m helmrelease ready grafana kube-state-metrics
 
