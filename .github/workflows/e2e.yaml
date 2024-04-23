@@ -31,8 +31,6 @@ jobs:
           skipClusterCreation: true
       - name: Create a test cluster and deploy this branch
         run: ./tests/run_cluster_in_kind.sh ${GITHUB_REF#refs/heads/}
-      - name: reconcile
-        run: make reconcile
       - name: Test resources come up
         run: ./tests/run_tests.sh
       - name: Debug failure summaries
