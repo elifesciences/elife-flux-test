@@ -47,7 +47,7 @@ jobs:
           echo "kubectl get all helm releases"
           kubectl get helmreleases.helm.toolkit.fluxcd.io --all-namespaces
           echo "kubectl get all pods"
-          kubectl get pods -A
+          kubectl get pods -A -o wide
       - name: Debug describe nodes
         if: failure()
         run: |
