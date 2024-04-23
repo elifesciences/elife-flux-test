@@ -36,10 +36,16 @@ jobs:
       - name: Debug failure summaries
         if: failure()
         run: |
+          echo "echo "All Flux components""
           flux get all --all-namespaces
+          echo "Helm list"
           helm list -A
+          echo "kubectl get all in namespace flux-system"
           kubectl -n flux-system get all -o wide
+          echo "kubectl get all helm releases"
           kubectl get helmreleases.helm.toolkit.fluxcd.io --all-namespaces
+          echo "kubectl get all pods"
+          kubectl get pods -A -o wide
       - name: Debug describe nodes
         if: failure()
         run: |
@@ -64,3 +70,8 @@ jobs:
         if: failure()
         run: |
           kubectl -n flux-system logs deploy/helm-controller
+      - name: Debug kwok controller
+        if: failure()
+        run: |
+          kubectl -n kube-system logs deploy/kwok-controller
+          kubectl -n kube-system logs deploy/kwok-controller --previous

@@ -15,7 +15,12 @@ kind delete cluster --name "$name"
 kind create cluster --name "$name" --image=kindest/node:v1.25.8
 
 # install kwok into cluster
-kubectl kustomize $tests_path/kwok/deploy_config | kubectl apply -f -
+KWOK_RELEASE=v0.5.1
+kubectl apply -f "https://github.com/kubernetes-sigs/kwok/releases/download/${KWOK_RELEASE}/kwok.yaml"
+# patch kwok to run on the realnode
+kubectl patch deployment -n kube-system kwok-controller -p '{"spec":{"template":{"spec":{"tolerations":[{"key":"realnode","operator":"Equal","value":"true","effect":"NoSchedule"}]}}}}'
+kubectl apply -f "https://github.com/kubernetes-sigs/kwok/releases/download/${KWOK_RELEASE}/stage-fast.yaml"
+kubectl apply -f "https://github.com/kubernetes-sigs/kwok/releases/download/${KWOK_RELEASE}/metrics-usage.yaml"
 kubectl wait deployment -n kube-system kwok-controller --timeout=60s --for condition=Available=True
 
 # Install Flux with toleration to run controllers on the real node
@@ -27,6 +32,7 @@ flux install --components-extra="image-reflector-controller,image-automation-con
 kubectl taint node "$name-control-plane" realnode=true:NoSchedule
 # Install kwok nodes to run "workloads" on
 kubectl apply -f $tests_path/kwok/1_large_simulated_node.yaml
+kubectl apply -f $tests_path/kwok/4_smaller_simulated_nodes.yaml
 
 
 
@@ -37,3 +43,7 @@ kubectl create ns monitoring
 flux create source git flux-system --url="$repo" --branch="$branch"
 flux create kustomization flux-system --source=flux-system --path="$test_kustomization_path"
 kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=1m -n flux-system flux-system
+# Force reconcile of all kustomizations
+flux reconcile kustomization crds
+flux reconcile kustomization system
+flux reconcile kustomization deployments

@@ -18,6 +18,9 @@ spec:
       cluster_name: end-to-end-tests
       cluster_domain: end-to-end-tests.internal
 
+      # TODO: structure repo so that these aren't required
+      aws_region: no-north-1
+
   patches:
   # in a small cluster like kind or minikube the load balancer won't get an external IP.
   # Therefore, we need to disable waiting
@@ -98,7 +101,19 @@ spec:
       kind: HelmRelease
       metadata:
         name: loki
-        namespace: logging
+        namespace: grafana
+      spec:
+        install:
+          disableWait: true
+  - target:
+      kind: HelmRelease
+      name: mimir
+    patch: |
+      apiVersion: helm.toolkit.fluxcd.io/v2beta2
+      kind: HelmRelease
+      metadata:
+        name: mimir
+        namespace: grafana
       spec:
         install:
           disableWait: true
@@ -120,3 +135,47 @@ spec:
             effect: "NoSchedule"
           nodeSelector:
             kubernetes.io/hostname: elife-flux-test-control-plane
+  - target:
+      kind: HelmRelease
+      name: cert-manager
+    patch: |-
+      apiVersion: helm.toolkit.fluxcd.io/v2beta2
+      kind: HelmRelease
+      metadata:
+        name: cert-manager
+      spec:
+        values:
+          webhook:
+            tolerations:
+            - key: "realnode"
+              operator: "Equal"
+              value: "true"
+              effect: "NoSchedule"
+            nodeSelector:
+              kubernetes.io/hostname: elife-flux-test-control-plane
+  - target:
+      kind: HelmRelease
+      name: external-secrets
+    patch: |-
+      apiVersion: helm.toolkit.fluxcd.io/v2beta2
+      kind: HelmRelease
+      metadata:
+        name: external-secrets
+      spec:
+        values:
+          webhook:
+            tolerations:
+            - key: "realnode"
+              operator: "Equal"
+              value: "true"
+              effect: "NoSchedule"
+            nodeSelector:
+              kubernetes.io/hostname: elife-flux-test-control-plane
+          certController:
+            tolerations:
+            - key: "realnode"
+              operator: "Equal"
+              value: "true"
+              effect: "NoSchedule"
+            nodeSelector:
+              kubernetes.io/hostname: elife-flux-test-control-plane
