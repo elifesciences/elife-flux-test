@@ -16,7 +16,7 @@ spec:
         name: karpenter
   values:
     settings:
-      clusterName: kubernetes-aws--flux-prod
+      clusterName: kubernetes-aws--flux-test
     serviceAccount:
       annotations:
         eks.amazonaws.com/role-arn: ${aws_karpenter_service_account_role_arn}
