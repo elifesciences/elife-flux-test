@@ -101,7 +101,19 @@ spec:
       kind: HelmRelease
       metadata:
         name: loki
-        namespace: logging
+        namespace: grafana
+      spec:
+        install:
+          disableWait: true
+  - target:
+      kind: HelmRelease
+      name: mimir
+    patch: |
+      apiVersion: helm.toolkit.fluxcd.io/v2beta2
+      kind: HelmRelease
+      metadata:
+        name: mimir
+        namespace: grafana
       spec:
         install:
           disableWait: true
