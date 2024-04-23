@@ -6,7 +6,7 @@ metadata:
 
 spec:
   interval: 1m
-  timeout: 10m
+  timeout: 2m
   releaseName: mimir
   chart:
     spec:
