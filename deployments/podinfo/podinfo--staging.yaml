@@ -27,8 +27,6 @@ spec:
       spec:
         template:
           spec:
-            nodeSelector:
-              eks.amazonaws.com/capacityType: SPOT
             tolerations:
             - key: "podinfo"
               operator: "Equal"
