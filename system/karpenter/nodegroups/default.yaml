@@ -15,6 +15,7 @@ spec:
         name: general
       taints:
         - key: podinfo
+          value: "true"
           effect: NoSchedule
       requirements:
         - key: kubernetes.io/os
