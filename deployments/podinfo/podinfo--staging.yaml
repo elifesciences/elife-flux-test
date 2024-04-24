@@ -28,7 +28,7 @@ spec:
         template:
           spec:
             nodeSelector:
-              karpenter.sh/capacity-type: SPOT
+              karpenter.sh/capacity-type: spot
             tolerations:
             - key: "podinfo"
               operator: "Equal"
