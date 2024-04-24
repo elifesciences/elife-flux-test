@@ -13,8 +13,8 @@ spec:
     - tags:
         karpenter.sh/discovery: "kubernetes-aws--${cluster_name}"
   amiSelectorTerms:
-    - ami-01af8560b504eb3db # ARM64 AMI ID
-    - ami-01520c51b1b0e680b # AMD64 AMI ID
+    - id: ami-01af8560b504eb3db # ARM64 AMI ID
+    - id: ami-01520c51b1b0e680b # AMD64 AMI ID
   tags:
     Cluster: "${cluster_name}"
   blockDeviceMappings:

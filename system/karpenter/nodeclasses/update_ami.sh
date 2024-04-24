@@ -12,6 +12,6 @@ ARM_AMI_ID="$(aws ssm get-parameter --name /aws/service/eks/optimized-ami/$1/ama
 AMD_AMI_ID="$(aws ssm get-parameter --name /aws/service/eks/optimized-ami/$1/amazon-linux-2/recommended/image_id --query Parameter.Value --output text)"
 
 # use yq to update the nodeclass yaml file with the new AMIs
-yq -i e '.spec.amiSelectorTerms = ["'$ARM_AMI_ID'", "'$AMD_AMI_ID'"]' $(dirname $0)/general.yaml
-yq -i e '(.spec.amiSelectorTerms[0]) line_comment="ARM64 AMI ID"' $(dirname $0)/general.yaml
-yq -i e '(.spec.amiSelectorTerms[1]) line_comment="AMD64 AMI ID"' $(dirname $0)/general.yaml
+yq -i e '.spec.amiSelectorTerms = [{"id": "'$ARM_AMI_ID'"}, {"id": "'$AMD_AMI_ID'"}]' $(dirname $0)/general.yaml
+yq -i e '(.spec.amiSelectorTerms[0].id) line_comment="ARM64 AMI ID"' $(dirname $0)/general.yaml
+yq -i e '(.spec.amiSelectorTerms[1].id) line_comment="AMD64 AMI ID"' $(dirname $0)/general.yaml
