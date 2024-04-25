@@ -7,3 +7,4 @@ resources:
 - grafana
 - mimir
 - loki
+- k8s-monitoring

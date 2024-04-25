@@ -1,0 +1,27 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: k8s-monitoring
+  namespace: grafana
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: grafana
+      version: "7.3.7"
+      interval: 5m
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+  values:
+    cluster:
+      name: flux-test
+
+    externalServices:
+      prometheus:
+        host: mimir-nginx
+        queryEndpoint: /prometheus/api/v1/query
+        writeEndpoint: /api/v1/push
+      loki:
+        host: loki-gateway
