@@ -7,4 +7,3 @@ resources:
 - grafana
 - mimir
 - loki
-- alloy
