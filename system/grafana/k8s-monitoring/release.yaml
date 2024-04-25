@@ -25,3 +25,5 @@ spec:
         writeEndpoint: /api/v1/push
       loki:
         host: loki-gateway
+      prometheus-operator-crds:
+        enabled: false
