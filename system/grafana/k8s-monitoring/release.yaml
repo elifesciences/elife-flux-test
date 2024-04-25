@@ -20,10 +20,10 @@ spec:
 
     externalServices:
       prometheus:
-        host: mimir-nginx
+        host: http://mimir-nginx
         queryEndpoint: /prometheus/api/v1/query
         writeEndpoint: /api/v1/push
       loki:
-        host: loki-gateway
+        host: http://loki-gateway
     prometheus-operator-crds:
       enabled: false
