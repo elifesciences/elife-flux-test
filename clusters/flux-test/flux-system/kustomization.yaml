@@ -43,6 +43,9 @@ patches:
           annotations:
             cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
         spec:
+          tolerations:
+          - key: CriticalAddonsOnly
+            operator: Exists
           containers:
           - name: manager
             resources:
