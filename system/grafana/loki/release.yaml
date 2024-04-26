@@ -49,6 +49,14 @@ spec:
         effect: "NoSchedule"
       nodeSelector:
         Project: flux-test
+    gateway:
+      tolerations:
+      - key: project
+        value: "flux-test"
+        operator: "Equal"
+        effect: "NoSchedule"
+      nodeSelector:
+        Project: flux-test
     singleBinary:
       replicas: 0
     ingester:
