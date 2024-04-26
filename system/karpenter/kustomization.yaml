@@ -5,5 +5,4 @@ resources:
 - namespace.yaml
 - source.yaml
 - release.yaml
-- nodeclasses
-- nodegroups
+- nodepools
