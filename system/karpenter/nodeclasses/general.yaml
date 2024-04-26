@@ -17,6 +17,7 @@ spec:
     - id: ami-01520c51b1b0e680b # AMD64 AMI ID
   tags:
     Cluster: "${cluster_name}"
+    Project: "${cluster_name}"
   blockDeviceMappings:
     - deviceName: /dev/xvda
       ebs:
