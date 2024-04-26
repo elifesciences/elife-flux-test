@@ -27,3 +27,9 @@ spec:
         host: http://loki-gateway
     prometheus-operator-crds:
       enabled: false
+
+    # This is to allow us not to conflict with kube-prometheus-stack
+    prometheus-node-exporter:
+      service:
+        port: 9100
+        targetPort: 9100
