@@ -23,12 +23,13 @@ spec:
   values:
     podAnnotations:
       cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+    tolerations:
+    - key: CriticalAddonsOnly
+      operator: Exists
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: eks.amazonaws.com/nodegroup
-              operator: In
-              values:
-              - kubernetes-aws--${cluster_name}--worker
+            - key: karpenter.sh/nodepool
+              operator: DoesNotExist
