@@ -177,6 +177,17 @@ spec:
       nodeSelector:
         Project: flux-test
 
+    query_scheduler:
+      replicas: 2
+      tolerations:
+      - key: project
+        value: "flux-test"
+        operator: "Equal"
+        effect: "NoSchedule"
+      nodeSelector:
+        Project: flux-test
+
+
     ruler:
       replicas: 2
       tolerations:
