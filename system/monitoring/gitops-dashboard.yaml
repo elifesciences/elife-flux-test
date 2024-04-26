@@ -12,3 +12,21 @@ spec:
     namespace: flux-system
   path: ./kustomizations/monitoring/gitops-dashboard
   prune: true
+  patches:
+  - target:
+      kind: Deployment
+    patch: |
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: any
+      spec:
+        template:
+          spec:
+            tolerations:
+            - key: project
+              value: "flux-test"
+              operator: "Equal"
+              effect: "NoSchedule"
+            nodeSelector:
+              Project: flux-test
