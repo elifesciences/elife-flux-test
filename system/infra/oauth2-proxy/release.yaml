@@ -40,3 +40,10 @@ spec:
       hosts:
         - auth--test-cluster.elifesciences.org
     replicaCount: 1
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: karpenter.sh/nodepool
+              operator: DoesNotExist
