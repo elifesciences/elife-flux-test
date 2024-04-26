@@ -24,3 +24,11 @@ spec:
     serviceAccount:
       annotations:
         eks.amazonaws.com/role-arn: ${aws_external_secrets_service_account_role_arn}
+    global:
+      tolerations:
+      - key: project
+        value: "flux-test"
+        operator: "Equal"
+        effect: "NoSchedule"
+      nodeSelector:
+        Project: flux-test
