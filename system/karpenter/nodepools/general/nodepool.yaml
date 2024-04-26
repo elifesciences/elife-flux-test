@@ -7,7 +7,6 @@ spec:
     metadata:
       labels:
         Cluster: "${cluster_name}"
-        Project: "${cluster_name}"
     spec:
       nodeClassRef:
         apiVersion: karpenter.k8s.aws/v1beta1
