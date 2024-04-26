@@ -55,5 +55,10 @@ spec:
       replicaCount: 2
       watchIngressWithoutClass: true
       allowSnippetAnnotations: true
-      nodeSelector:
-        eks.amazonaws.com/nodegroup: kubernetes-aws--${cluster_name}--worker
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: karpenter.sh/nodepool
+                operator: DoesNotExist
