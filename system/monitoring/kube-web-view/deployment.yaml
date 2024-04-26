@@ -19,6 +19,13 @@ spec:
         application: kube-web-view
     spec:
       serviceAccountName: kube-web-view
+      tolerations:
+      - key: project
+        value: "flux-test"
+        operator: "Equal"
+        effect: "NoSchedule"
+      nodeSelector:
+        Project: flux-test
       containers:
       - name: kube-web-view
         # see https://codeberg.org/hjacobs/kube-web-view/releases
