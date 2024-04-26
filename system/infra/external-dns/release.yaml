@@ -38,10 +38,5 @@ spec:
     serviceAccount:
       annotations:
         eks.amazonaws.com/role-arn: arn:aws:iam::512686554592:role/kubernetes-aws--flux-test--external-dns
-    tolerations:
-    - key: project
-      value: "flux-test"
-      operator: "Equal"
-      effect: "NoSchedule"
     nodeSelector:
       Project: flux-test

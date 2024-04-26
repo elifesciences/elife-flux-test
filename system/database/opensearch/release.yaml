@@ -28,10 +28,5 @@ spec:
         requests:
           cpu: 25m
           memory: 25Mi
-    tolerations:
-    - key: project
-      value: "flux-test"
-      operator: "Equal"
-      effect: "NoSchedule"
     nodeSelector:
       Project: flux-test

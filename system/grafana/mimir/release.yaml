@@ -48,32 +48,17 @@ spec:
       replicas: 2
       statefulSet:
         enabled: true
-      tolerations:
-      - key: project
-        value: "flux-test"
-        operator: "Equal"
-        effect: "NoSchedule"
       nodeSelector:
         Project: flux-test
 
     compactor:
       persistentVolume:
         size: 10Gi
-      tolerations:
-      - key: project
-        value: "flux-test"
-        operator: "Equal"
-        effect: "NoSchedule"
       nodeSelector:
         Project: flux-test
 
     distributor:
       replicas: 2
-      tolerations:
-      - key: project
-        value: "flux-test"
-        operator: "Equal"
-        effect: "NoSchedule"
       nodeSelector:
         Project: flux-test
 
@@ -84,11 +69,6 @@ spec:
       replicas: 2
       zoneAwareReplication:
         enabled: false
-      tolerations:
-      - key: project
-        value: "flux-test"
-        operator: "Equal"
-        effect: "NoSchedule"
       nodeSelector:
         Project: flux-test
 
@@ -100,11 +80,6 @@ spec:
       enabled: true
       replicas: 2
       allocatedMemory: 4096
-      tolerations:
-      - key: project
-        value: "flux-test"
-        operator: "Equal"
-        effect: "NoSchedule"
       nodeSelector:
         Project: flux-test
 
@@ -112,22 +87,12 @@ spec:
       enabled: true
       replicas: 2
       allocatedMemory: 1024
-      tolerations:
-      - key: project
-        value: "flux-test"
-        operator: "Equal"
-        effect: "NoSchedule"
       nodeSelector:
         Project: flux-test
 
     metadata-cache:
       enabled: true
       allocatedMemory: 512
-      tolerations:
-      - key: project
-        value: "flux-test"
-        operator: "Equal"
-        effect: "NoSchedule"
       nodeSelector:
         Project: flux-test
 
@@ -135,11 +100,6 @@ spec:
       enabled: true
       replicas: 2
       allocatedMemory: 512
-      tolerations:
-      - key: project
-        value: "flux-test"
-        operator: "Equal"
-        effect: "NoSchedule"
       nodeSelector:
         Project: flux-test
 
@@ -148,53 +108,28 @@ spec:
 
     overrides_exporter:
       replicas: 2
-      tolerations:
-      - key: project
-        value: "flux-test"
-        operator: "Equal"
-        effect: "NoSchedule"
       nodeSelector:
         Project: flux-test
 
     querier:
       replicas: 2
-      tolerations:
-      - key: project
-        value: "flux-test"
-        operator: "Equal"
-        effect: "NoSchedule"
       nodeSelector:
         Project: flux-test
 
 
     query_frontend:
       replicas: 2
-      tolerations:
-      - key: project
-        value: "flux-test"
-        operator: "Equal"
-        effect: "NoSchedule"
       nodeSelector:
         Project: flux-test
 
     query_scheduler:
       replicas: 2
-      tolerations:
-      - key: project
-        value: "flux-test"
-        operator: "Equal"
-        effect: "NoSchedule"
       nodeSelector:
         Project: flux-test
 
 
     ruler:
       replicas: 2
-      tolerations:
-      - key: project
-        value: "flux-test"
-        operator: "Equal"
-        effect: "NoSchedule"
       nodeSelector:
         Project: flux-test
 
@@ -204,11 +139,6 @@ spec:
       replicas: 2
       zoneAwareReplication:
         enabled: false
-      tolerations:
-      - key: project
-        value: "flux-test"
-        operator: "Equal"
-        effect: "NoSchedule"
       nodeSelector:
         Project: flux-test
 
@@ -234,10 +164,5 @@ spec:
         - secretName: mimir-tls
           hosts:
           - mimir.${cluster_domain}
-      tolerations:
-      - key: project
-        value: "flux-test"
-        operator: "Equal"
-        effect: "NoSchedule"
       nodeSelector:
         Project: flux-test

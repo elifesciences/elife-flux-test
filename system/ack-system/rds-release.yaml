@@ -29,10 +29,5 @@ spec:
         eks.amazonaws.com/role-arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-rds-controller-cluster-role
 
     deployment:
-      tolerations:
-      - key: project
-        value: "flux-test"
-        operator: "Equal"
-        effect: "NoSchedule"
       nodeSelector:
         Project: flux-test

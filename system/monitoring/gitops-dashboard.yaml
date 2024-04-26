@@ -23,10 +23,5 @@ spec:
       spec:
         template:
           spec:
-            tolerations:
-            - key: project
-              value: "flux-test"
-              operator: "Equal"
-              effect: "NoSchedule"
             nodeSelector:
               Project: flux-test
