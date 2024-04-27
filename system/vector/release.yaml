@@ -33,6 +33,9 @@ spec:
     env:
       - name: VECTOR_LOG
         value: info
+    tolerations:
+    - key: CriticalAddonsOnly
+      operator: Exists
     customConfig:
       data_dir: /vector-data-dir
       api:
