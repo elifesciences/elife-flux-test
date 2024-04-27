@@ -46,6 +46,8 @@ patches:
           tolerations:
           - key: CriticalAddonsOnly
             operator: Exists
+          nodeSelector:
+            Project: flux-test
           containers:
           - name: manager
             resources:
