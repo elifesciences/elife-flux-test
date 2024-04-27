@@ -26,8 +26,8 @@ spec:
 
     serviceAccount:
       annotations:
-        eks.amazonaws.com/role-arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-rds-controller-cluster-role
+        eks.amazonaws.com/role-arn: ${aws_ack_rds_service_account_role_arn}
 
     deployment:
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
