@@ -33,3 +33,15 @@ spec:
       service:
         port: 9101
         targetPort: 9101
+
+    kube-state-metrics:
+      nodeSelector:
+        Project: flux-test
+    opencost:
+      opencost:
+        nodeSelector:
+          Project: flux-test
+    alloy-events:
+      controller:
+        nodeSelector:
+          Project: flux-test
