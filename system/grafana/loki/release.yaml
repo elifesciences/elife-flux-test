@@ -37,6 +37,10 @@ spec:
     gateway:
       nodeSelector:
         Project: flux-test
+    canary:
+      tolerations:
+      - key: CriticalAddonsOnly
+        operator: Exists
     singleBinary:
       replicas: 0
     ingester:
@@ -57,7 +61,6 @@ spec:
       replicas: 0
     bloomGateway:
       replicas: 0
-
 
     loki:
       schemaConfig:
