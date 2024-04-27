@@ -56,4 +56,4 @@ spec:
       watchIngressWithoutClass: true
       allowSnippetAnnotations: true
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}

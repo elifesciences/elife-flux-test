@@ -29,4 +29,4 @@ spec:
           cpu: 25m
           memory: 25Mi
     nodeSelector:
-      Project: flux-test
+      Project: ${cluster_name}

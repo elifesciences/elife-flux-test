@@ -46,7 +46,7 @@ spec:
         requests:
           memory: 150Mi
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
     grafana:
       ingress:
         enabled: "true"
@@ -82,7 +82,7 @@ spec:
       podAnnotations:
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
 
     prometheus-node-exporter:
 
@@ -109,7 +109,7 @@ spec:
           matchExpressions:
             - {key: app, operator: In, values: [kube-prometheus-stack, flux, sciencebeam]}
         nodeSelector:
-          Project: flux-test
+          Project: ${cluster_name}
 
     alertmanager:
       podDisruptionBudget:
@@ -123,7 +123,7 @@ spec:
           requests:
             memory: 20Mi
         nodeSelector:
-          Project: flux-test
+          Project: ${cluster_name}
       ingress:
         enabled: "true"
         hosts:
@@ -404,4 +404,4 @@ spec:
                       suspended: [ spec, suspend ]
                       source_name: [ spec, sourceRef, name ]
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}

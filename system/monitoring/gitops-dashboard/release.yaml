@@ -32,4 +32,4 @@ spec:
     additionalArgs:
     - --insecure-no-authentication-user=gitops-test-user
     nodeSelector:
-      Project: flux-test
+      Project: ${cluster_name}

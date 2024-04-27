@@ -24,4 +24,4 @@ spec:
     watchAllNamespaces: true
 
     nodeSelector:
-      Project: flux-test
+      Project: ${cluster_name}

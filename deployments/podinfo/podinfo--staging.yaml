@@ -46,4 +46,4 @@ spec:
         template:
           spec:
             nodeSelector:
-              Project: flux-test
+              Project: ${cluster_name}

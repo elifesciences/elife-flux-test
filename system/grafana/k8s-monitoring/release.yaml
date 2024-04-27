@@ -36,16 +36,16 @@ spec:
 
     kube-state-metrics:
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
     opencost:
       opencost:
         nodeSelector:
-          Project: flux-test
+          Project: ${cluster_name}
     alloy-events:
       controller:
         nodeSelector:
-          Project: flux-test
+          Project: ${cluster_name}
     alloy:
       controller:
         nodeSelector:
-          Project: flux-test
+          Project: ${cluster_name}

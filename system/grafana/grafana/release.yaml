@@ -94,4 +94,4 @@ spec:
           url: https://raw.githubusercontent.com/dotdc/grafana-dashboards-kubernetes/master/dashboards/k8s-views-pods.json
           token: ''
     nodeSelector:
-      Project: flux-test
+      Project: ${cluster_name}

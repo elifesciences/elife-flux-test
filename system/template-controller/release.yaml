@@ -24,4 +24,4 @@ spec:
     podAnnotations:
       cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
     nodeSelector:
-      Project: flux-test
+      Project: ${cluster_name}

@@ -39,4 +39,4 @@ spec:
       annotations:
         eks.amazonaws.com/role-arn: arn:aws:iam::512686554592:role/kubernetes-aws--flux-test--external-dns
     nodeSelector:
-      Project: flux-test
+      Project: ${cluster_name}

@@ -20,7 +20,7 @@ spec:
     spec:
       serviceAccountName: kube-web-view
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
       containers:
       - name: kube-web-view
         # see https://codeberg.org/hjacobs/kube-web-view/releases

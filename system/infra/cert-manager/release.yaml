@@ -26,10 +26,10 @@ spec:
       servicemonitor:
         enabled: true
     nodeSelector:
-      Project: flux-test
+      Project: ${cluster_name}
     cainjector:
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
     webhook:
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}

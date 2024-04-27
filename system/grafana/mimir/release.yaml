@@ -49,18 +49,18 @@ spec:
       statefulSet:
         enabled: true
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
 
     compactor:
       persistentVolume:
         size: 10Gi
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
 
     distributor:
       replicas: 2
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
 
 
     ingester:
@@ -70,7 +70,7 @@ spec:
       zoneAwareReplication:
         enabled: false
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
 
 
     admin-cache:
@@ -81,27 +81,27 @@ spec:
       replicas: 2
       allocatedMemory: 4096
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
 
     index-cache:
       enabled: true
       replicas: 2
       allocatedMemory: 1024
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
 
     metadata-cache:
       enabled: true
       allocatedMemory: 512
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
 
     results-cache:
       enabled: true
       replicas: 2
       allocatedMemory: 512
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
 
     minio:
       enabled: false
@@ -109,29 +109,29 @@ spec:
     overrides_exporter:
       replicas: 2
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
 
     querier:
       replicas: 2
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
 
 
     query_frontend:
       replicas: 2
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
 
     query_scheduler:
       replicas: 2
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
 
 
     ruler:
       replicas: 2
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
 
     store_gateway:
       persistentVolume:
@@ -140,7 +140,7 @@ spec:
       zoneAwareReplication:
         enabled: false
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}
 
     nginx:
       replicas: 2
@@ -165,4 +165,4 @@ spec:
           hosts:
           - mimir.${cluster_domain}
       nodeSelector:
-        Project: flux-test
+        Project: ${cluster_name}

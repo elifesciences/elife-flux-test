@@ -41,4 +41,4 @@ spec:
         - auth--test-cluster.elifesciences.org
     replicaCount: 1
     nodeSelector:
-      Project: flux-test
+      Project: ${cluster_name}
