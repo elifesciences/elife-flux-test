@@ -46,8 +46,6 @@ patches:
           tolerations:
           - key: CriticalAddonsOnly
             operator: Exists
-          nodeSelector:
-            Project: flux-test
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
