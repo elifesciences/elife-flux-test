@@ -48,6 +48,13 @@ patches:
             operator: Exists
           nodeSelector:
             Project: flux-test
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: karpenter.sh/nodepool
+                    operator: DoesNotExist
           containers:
           - name: manager
             resources:
