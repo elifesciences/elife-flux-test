@@ -18,7 +18,7 @@ spec:
     ingress:
       enabled: true
       hosts:
-      - host: gitops-dashboard--flux-test.elifesciences.org
+      - host: gitops-dashboard--${cluster_domain}
         paths:
         - path: /
           pathType: ImplementationSpecific
