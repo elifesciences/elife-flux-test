@@ -37,10 +37,8 @@ spec:
     gateway:
       nodeSelector:
         Project: flux-test
-    canary:
-      tolerations:
-      - key: CriticalAddonsOnly
-        operator: Exists
+    lokiCanary:
+      enabled: false
     singleBinary:
       replicas: 0
     ingester:
