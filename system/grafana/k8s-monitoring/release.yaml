@@ -45,3 +45,7 @@ spec:
       controller:
         nodeSelector:
           Project: flux-test
+    alloy:
+      controller:
+        nodeSelector:
+          Project: flux-test
