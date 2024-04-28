@@ -5,30 +5,6 @@ resources:
 - gotk-sync.yaml
 patches:
 - target:
-    version: v1
-    group: apps
-    kind: Deployment
-    namespace: flux-system
-    name: kustomize-controller
-  patch: |-
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: kustomize-controller
-      namespace: flux-system
-    spec:
-      template:
-        spec:
-          containers:
-          - name: manager
-            resources:
-              limits:
-                cpu: 1500m
-                memory: 1Gi
-              requests:
-                cpu: 500m
-                memory: 256Mi
-- target:
     kind: Deployment
     namespace: flux-system
   patch: |-
@@ -66,12 +42,12 @@ patches:
     group: apps
     kind: Deployment
     namespace: flux-system
-    name: image-reflector-controller
+    name: helm-controller
   patch: |-
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-      name: image-reflector-controller
+      name: does-not-matter
       namespace: flux-system
     spec:
       template:
@@ -89,12 +65,36 @@ patches:
     group: apps
     kind: Deployment
     namespace: flux-system
-    name: helm-controller
+    name: kustomize-controller
   patch: |-
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-      name: helm-controller
+      name: kustomize-controller
+      namespace: flux-system
+    spec:
+      template:
+        spec:
+          containers:
+          - name: manager
+            resources:
+              limits:
+                cpu: 1500m
+                memory: 1Gi
+              requests:
+                cpu: 500m
+                memory: 256Mi
+- target:
+    version: v1
+    group: apps
+    kind: Deployment
+    namespace: flux-system
+    name: image-reflector-controller
+  patch: |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: image-reflector-controller
       namespace: flux-system
     spec:
       template:
