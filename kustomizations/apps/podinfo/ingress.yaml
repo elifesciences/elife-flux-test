@@ -14,6 +14,6 @@ spec:
             path: "/"
             backend:
               service:
-                name: podinfo
+                name: podinfo-scaler
                 port:
                   number: ${keda_port:=8080}
