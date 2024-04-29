@@ -1,4 +1,5 @@
 kubectl 1.27.4
-flux2 2.2.3
-stern 1.26.0
-kubie 0.23.0
+flux2   2.2.3
+stern   1.26.0
+kubie   0.23.0
+kind    0.22.0
