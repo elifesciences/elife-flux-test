@@ -2,6 +2,7 @@ kind: HTTPScaledObject
 apiVersion: http.keda.sh/v1alpha1
 metadata:
   name: podinfo--staging
+  namespace: podinfo--staging
 spec:
   hosts:
   - podinfo--staging-scaled.elifesciences.org
