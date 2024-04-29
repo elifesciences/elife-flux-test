@@ -14,7 +14,7 @@ metadata:
     kubernetes.io/role: agent
     node-role.kubernetes.io/agent: ""
     type: kwok
-    Project: cluster-services
+    Project: end-to-end-tests
   name: kwok-node-1
 spec:
   # taints: # Avoid scheduling actual running pods to fake Node
