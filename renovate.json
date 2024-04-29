@@ -21,20 +21,20 @@
       "automergeSchedule": ["after 7am and before 8am every weekday"]
     },
     {
-      "matchPackageNames": ["fluxcd/flux2"],
+      "matchDepNames": ["fluxcd/flux2"],
       "automerge": false
     },
     {
-      "matchPackageNames": ["descheduler"],
+      "matchDepNames": ["descheduler"],
       "enabled": false
     },
     {
-      "matchPackageNames": ["podinfo"],
+      "matchDepNames": ["podinfo"],
       "enabled": false
     },
     {
       "matchFileNames": [".tool-versions"],
-      "matchPackageNames": ["kubectl"],
+      "matchDepNames": ["kubectl"],
       "enabled": false
     }
 
