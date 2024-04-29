@@ -13,8 +13,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
-      - name: Setup additional tools
-        uses: ./.github/actions/tools
+      # Seemingly something mise installs breaks post-checkout.
+      # this runs a post-task after post-mise (for caching) but before post-checkout
+      - name: Clean up Mise
+        uses: gacts/run-and-post-run@v1
+        with:
+          run: echo "Nothing"
+          post: mise implode -y
+      - name: Install tools
+        uses: jdx/mise-action@v2
       - name: Create a test cluster and deploy this branch
         run: ./tests/run_cluster_in_kind.sh ${GITHUB_REF#refs/heads/}
       - name: Test resources come up
