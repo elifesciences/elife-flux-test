@@ -11,7 +11,7 @@ spec:
   chart:
     spec:
       chart: external-dns
-      version: 7.1.2
+      version: 7.2.0
       sourceRef:
         kind: HelmRepository
         name: external-dns
@@ -37,4 +37,6 @@ spec:
         cpu: 10m
     serviceAccount:
       annotations:
-        eks.amazonaws.com/role-arn: arn:aws:iam::512686554592:role/kubernetes-aws--flux-test--external-dns
+        eks.amazonaws.com/role-arn: ${aws_external_dns_service_account_role_arn}
+    nodeSelector:
+      Project: ${cluster_name}

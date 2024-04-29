@@ -40,3 +40,5 @@ spec:
       hosts:
         - auth--test-cluster.elifesciences.org
     replicaCount: 1
+    nodeSelector:
+      Project: ${cluster_name}

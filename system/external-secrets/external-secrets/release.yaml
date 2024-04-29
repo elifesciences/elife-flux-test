@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: external-secrets
-      version: 0.9.14
+      version: 0.9.16
       sourceRef:
         kind: HelmRepository
         name: external-secrets
@@ -24,3 +24,6 @@ spec:
     serviceAccount:
       annotations:
         eks.amazonaws.com/role-arn: ${aws_external_secrets_service_account_role_arn}
+    global:
+      nodeSelector:
+        Project: ${cluster_name}

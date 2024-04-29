@@ -1,0 +1,51 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: k8s-monitoring
+  namespace: grafana
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: k8s-monitoring
+      version: "1.0.3"
+      interval: 5m
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+  values:
+    cluster:
+      name: flux-test
+
+    externalServices:
+      prometheus:
+        host: http://mimir-nginx
+        queryEndpoint: /prometheus/api/v1/query
+        writeEndpoint: /api/v1/push
+      loki:
+        host: http://loki-gateway
+    prometheus-operator-crds:
+      enabled: false
+
+    # This is to allow us not to conflict with kube-prometheus-stack
+    prometheus-node-exporter:
+      service:
+        port: 9101
+        targetPort: 9101
+
+    kube-state-metrics:
+      nodeSelector:
+        Project: ${cluster_name}
+    opencost:
+      opencost:
+        nodeSelector:
+          Project: ${cluster_name}
+    alloy-events:
+      controller:
+        nodeSelector:
+          Project: ${cluster_name}
+    alloy:
+      controller:
+        nodeSelector:
+          Project: ${cluster_name}

@@ -17,3 +17,5 @@ spec:
   values:
     crds:
       install: false
+    nodeSelector:
+      Project: ${cluster_name}

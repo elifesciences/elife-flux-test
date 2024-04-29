@@ -48,13 +48,20 @@ spec:
       replicas: 2
       statefulSet:
         enabled: true
+      nodeSelector:
+        Project: ${cluster_name}
 
     compactor:
       persistentVolume:
         size: 10Gi
+      nodeSelector:
+        Project: ${cluster_name}
 
     distributor:
       replicas: 2
+      nodeSelector:
+        Project: ${cluster_name}
+
 
     ingester:
       persistentVolume:
@@ -62,45 +69,69 @@ spec:
       replicas: 2
       zoneAwareReplication:
         enabled: false
+      nodeSelector:
+        Project: ${cluster_name}
+
 
     admin-cache:
-      enabled: true
-      replicas: 2
-      allocatedMemory: 64
+      enabled: false
 
     chunks-cache:
       enabled: true
       replicas: 2
       allocatedMemory: 4096
+      nodeSelector:
+        Project: ${cluster_name}
 
     index-cache:
       enabled: true
       replicas: 2
       allocatedMemory: 1024
+      nodeSelector:
+        Project: ${cluster_name}
 
     metadata-cache:
       enabled: true
       allocatedMemory: 512
+      nodeSelector:
+        Project: ${cluster_name}
 
     results-cache:
       enabled: true
       replicas: 2
       allocatedMemory: 512
+      nodeSelector:
+        Project: ${cluster_name}
 
     minio:
       enabled: false
 
     overrides_exporter:
       replicas: 2
+      nodeSelector:
+        Project: ${cluster_name}
 
     querier:
       replicas: 2
+      nodeSelector:
+        Project: ${cluster_name}
+
 
     query_frontend:
       replicas: 2
+      nodeSelector:
+        Project: ${cluster_name}
+
+    query_scheduler:
+      replicas: 2
+      nodeSelector:
+        Project: ${cluster_name}
+
 
     ruler:
       replicas: 2
+      nodeSelector:
+        Project: ${cluster_name}
 
     store_gateway:
       persistentVolume:
@@ -108,6 +139,9 @@ spec:
       replicas: 2
       zoneAwareReplication:
         enabled: false
+      nodeSelector:
+        Project: ${cluster_name}
+
     nginx:
       replicas: 2
       ingress:
@@ -130,3 +164,5 @@ spec:
         - secretName: mimir-tls
           hosts:
           - mimir.${cluster_domain}
+      nodeSelector:
+        Project: ${cluster_name}
