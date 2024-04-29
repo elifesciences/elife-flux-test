@@ -5,7 +5,7 @@ metadata:
   namespace: podinfo--staging
 spec:
   hosts:
-  - podinfo--staging-scaled.elifesciences.org
+  - podinfo--staging.elifesciences.org
   pathPrefixes:
   - /
   scaleTargetRef:

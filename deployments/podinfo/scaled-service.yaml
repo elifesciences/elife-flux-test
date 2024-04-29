@@ -1,0 +1,7 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: podinfo-scaled
+spec:
+  type: ExternalName
+  externalName: keda-add-ons-http-interceptor-proxy.keda.svc.cluster.local

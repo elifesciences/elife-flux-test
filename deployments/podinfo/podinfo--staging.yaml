@@ -23,6 +23,12 @@ spec:
       - op: replace
         path: /spec/rules/0/host
         value: podinfo--staging.elifesciences.org
+      - op: replace
+        path: /spec/rules/0/http/paths/0/backend/service/name
+        value: podinfo-scaled
+      - op: replace
+        path: /spec/rules/0/http/paths/0/backend/service/port/number
+        value: 8080
   - target:
       kind: Ingress
       name: podinfo
