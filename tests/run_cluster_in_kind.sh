@@ -28,6 +28,8 @@ kubectl create ns flux
 # make sure flux components get installed, with additional components
 flux install --components-extra="image-reflector-controller,image-automation-controller" --toleration-keys=realnode
 
+# Add label to allow cluster-services workloads to select this node
+kubectl label node "$name-control-plane" Project="end-to-end-tests"
 # taint the current node to not schedule workloads by default
 kubectl taint node "$name-control-plane" realnode=true:NoSchedule
 # Install kwok nodes to run "workloads" on
