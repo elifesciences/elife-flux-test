@@ -4,7 +4,8 @@
 2m kustomizations.kustomize.toolkit.fluxcd.io ready flux-system deployments
 
 # Test all system resources have "deployed"
-2m helmrelease ready infra sealed-secrets
+# Give longer timeout to first resource
+5m helmrelease ready infra sealed-secrets
 2m helmrelease ready infra ingress-nginx
 2m helmrelease ready infra cert-manager
 2m helmrelease ready infra external-dns
