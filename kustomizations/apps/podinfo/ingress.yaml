@@ -16,4 +16,4 @@ spec:
               service:
                 name: podinfo
                 port:
-                  number: ${8080:=keda_port}
+                  number: ${keda_port:=8080}
