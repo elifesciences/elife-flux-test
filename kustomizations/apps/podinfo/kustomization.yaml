@@ -6,4 +6,5 @@ resources:
 - service.yaml
 - automations/repository.yaml
 - automations/policy-stable.yaml
+- http-scaled-object.yaml
 - ingress.yaml
