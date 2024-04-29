@@ -1,11 +1,10 @@
 kind: HTTPScaledObject
 apiVersion: http.keda.sh/v1alpha1
 metadata:
-  name: podinfo--staging
-  namespace: podinfo--staging
+  name: podinfo
 spec:
   hosts:
-  - podinfo--staging.elifesciences.org
+  - "${hostname}"
   pathPrefixes:
   - /
   scaleTargetRef:
@@ -18,4 +17,4 @@ spec:
     min: 0
     max: 2
   scaledownPeriod: 300
-  targetPendingRequests: 1
+  targetPendingRequests: 5
