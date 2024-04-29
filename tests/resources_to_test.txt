@@ -26,7 +26,6 @@
 2m helmrelease ready infra oauth2-proxy
 2m helmrelease ready infra cert-manager
 2m helmrelease ready db-operator-system opensearch-operator
-2m helmrelease ready grafana kube-state-metrics
 
 2m kustomizations.kustomize.toolkit.fluxcd.io ready monitoring monitoring-flux
 
