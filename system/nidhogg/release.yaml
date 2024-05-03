@@ -8,11 +8,10 @@ spec:
   interval: 5m
   chart:
     spec:
-      chart: nidhogg
-      version: "0.1.0"
+      chart: charts/nidhogg
       interval: 5m
       sourceRef:
-        kind: HelmRepository
+        kind: GitRepository
         name: nidhogg
   values:
     image:

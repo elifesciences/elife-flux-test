@@ -1,10 +1,11 @@
 ---
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
 metadata:
   name: nidhogg
   namespace: nidhogg
 spec:
-  type: "oci"
-  interval: 5m0s
-  url: oci://ghcr.io/pelotech/charts/nidhogg
+  interval: 10m0s
+  ref:
+    tag: v0.5.1
+  url: https://github.com/pelotech/nidhogg
