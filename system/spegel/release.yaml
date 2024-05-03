@@ -14,3 +14,8 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: spegel
+  values:
+    tolerations:
+    - key: nidhogg.uswitch.com/spegel.spegel
+      operator: "Exists"
+      effect: NoSchedule
