@@ -3,3 +3,11 @@ kind: Kustomization
 resources:
 - release.yaml
 - datasource.yaml
+
+secretGenerator:
+- name: kubernetes-mixin
+  files:
+  - kubernetes-mixin/prometheus_rules.yaml
+  - kubernetes-mixin/prometheus_alerts.yaml
+generatorOptions:
+  disableNameSuffixHash: true
