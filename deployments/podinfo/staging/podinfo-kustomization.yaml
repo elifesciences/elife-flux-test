@@ -15,26 +15,22 @@ spec:
   images:
   - name: docker.io/stefanprodan/podinfo
     newTag: 6.6.2 # {"$imagepolicy": "podinfo--staging:podinfo-stable:tag"}
+  postBuild:
+    substitute:
+      hostname: podinfo--staging.elifesciences.org
   patches:
-  - target:
-      kind: Ingress
-      name: podinfo
-    patch: |
-      - op: replace
-        path: /spec/rules/0/host
-        value: podinfo--staging.elifesciences.org
-  - target:
-      kind: Ingress
-      name: podinfo
-    patch: |
-      apiVersion: networking.k8s.io/v1
-      kind: Ingress
-      metadata:
-        name: podinfo
-        namespace: podinfo
-        annotations:
-          nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
+  # - target:
+  #     kind: Ingress
+  #     name: podinfo
+  #   patch: |
+  #     apiVersion: networking.k8s.io/v1
+  #     kind: Ingress
+  #     metadata:
+  #       name: podinfo
+  #       namespace: podinfo
+  #       annotations:
+  #         nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
+  #         nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
   - target:
       kind: Deployment
     patch: |

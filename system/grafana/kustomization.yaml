@@ -3,7 +3,7 @@ kind: Kustomization
 namespace: grafana
 resources:
 - namespace.yaml
-- grafana-charts
+- grafana-helm-repo
 - grafana
 - mimir
 - loki
