@@ -20,16 +20,6 @@ spec:
     remediation:
       retries: 5
 
-  valuesFrom:
-  - kind: ConfigMap
-    name: kubernetes-mixin
-    valuesKey: prometheus_rules.yaml
-    targetPath: alertmanager.config.rules
-  - kind: ConfigMap
-    name: kubernetes-mixin
-    valuesKey: prometheus_alerts.yaml
-    targetPath: alertmanager.config.rules
-
   values:
     rollout_operator:
       enabled: false
@@ -60,6 +50,11 @@ spec:
         enabled: true
       nodeSelector:
         Project: ${cluster_name}
+      extraSecretMounts:
+      - name: kubernetes-mixin
+        mountPath: /etc/alertmanager
+        secretName: kubernetes-mixin
+        readOnly: true
 
     compactor:
       persistentVolume:
