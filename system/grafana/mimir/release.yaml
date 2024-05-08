@@ -20,6 +20,16 @@ spec:
     remediation:
       retries: 5
 
+  valuesFrom:
+  - kind: ConfigMap
+    name: kubernetes-mixin
+    valuesKey: prometheus_rules.yaml
+    targetPath: alertmanager.config.rules
+  - kind: ConfigMap
+    name: kubernetes-mixin
+    valuesKey: prometheus_alerts.yaml
+    targetPath: alertmanager.config.rules
+
   values:
     rollout_operator:
       enabled: false
