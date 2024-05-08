@@ -2,8 +2,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
-  name: prometheus-stack
-  namespace: monitoring
+  name: prometheus
 
 spec:
   interval: 5m
