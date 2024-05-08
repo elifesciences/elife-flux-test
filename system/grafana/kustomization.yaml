@@ -8,3 +8,4 @@ resources:
 - mimir
 - loki
 - k8s-monitoring
+- kubernetes-mixin
