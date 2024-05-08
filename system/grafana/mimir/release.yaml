@@ -38,6 +38,8 @@ spec:
           storage_prefix: alertmanager
         ruler_storage:
           storage_prefix: ruler
+        limits:
+          compactor_blocks_retention_period: 1h
     serviceAccount:
       annotations:
         eks.amazonaws.com/role-arn: arn:aws:iam::512686554592:role/elife-${cluster_name}-mimir-cluster-role
