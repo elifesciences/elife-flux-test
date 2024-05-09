@@ -70,7 +70,8 @@ spec:
       spec:
         nodeSelector:
           Project: ${cluster_name}
-        externalURL: https://vmalert.${cluster_domain}
+        extraArgs:
+          'external.url': https://vmalert.${cluster_domain}
       ingress:
         enabled: true
         annotations:
