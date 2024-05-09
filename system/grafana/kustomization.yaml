@@ -7,4 +7,5 @@ resources:
 - grafana
 - mimir
 - loki
-- k8s-monitoring
+# - k8s-monitoring
+- alloy
