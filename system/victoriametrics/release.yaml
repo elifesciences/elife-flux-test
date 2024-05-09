@@ -73,6 +73,8 @@ spec:
       enabled: false
       forceDeployDatasource: true
       sidecar:
+        dashboards:
+          label: grafana_dashboard
         datasources:
           label: grafana_datasource
     # to sit alongside kube-prometheus-stack. This can be removed if that is no longer deployed
