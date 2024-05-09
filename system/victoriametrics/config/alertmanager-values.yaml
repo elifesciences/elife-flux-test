@@ -85,3 +85,4 @@ alertmanager:
           - url: test
             send_resolved: false
       - name: Watchdog
+      - name: 'null'
