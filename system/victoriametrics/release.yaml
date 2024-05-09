@@ -29,6 +29,8 @@ spec:
       spec:
         retentionPeriod: "3" # months
         vmstorage:
+          nodeSelector:
+            Project: ${cluster_name}
           storage:
             volumeClaimTemplate:
               spec:
@@ -38,6 +40,8 @@ spec:
                     storage: 125Gi
 
         vmselect:
+          nodeSelector:
+            Project: ${cluster_name}
           storage:
             volumeClaimTemplate:
               spec:
@@ -47,9 +51,13 @@ spec:
             limits:
               cpu: 1000m
         vminsert:
+          nodeSelector:
+            Project: ${cluster_name}
           extraArgs:
            maxLabelsPerTimeseries: "35"
     vmagent:
+      nodeSelector:
+        Project: ${cluster_name}
       spec:
         resources:
           limits:
@@ -77,11 +85,9 @@ spec:
           label: grafana_dashboard
         datasources:
           label: grafana_datasource
-    # to sit alongside kube-prometheus-stack. This can be removed if that is no longer deployed
-    prometheus-node-exporter:
-      service:
-        port: 9101
     alertmanager:
+      nodeSelector:
+        Project: ${cluster_name}
       spec:
         externalURL: https://alertmanager.${cluster_domain}
       ingress:
@@ -190,3 +196,6 @@ spec:
         KubeCPUOvercommit: true
     kubeControllerManager:
       enabled: false  # lives on EKS
+    victoria-metrics-operator:
+      nodeSelector:
+        Project: ${cluster_name}
