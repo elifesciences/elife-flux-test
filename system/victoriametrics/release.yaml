@@ -58,7 +58,7 @@ spec:
           nodeSelector:
             Project: ${cluster_name}
           extraArgs:
-            maxLabelsPerTimeseries: "50"
+            maxLabelsPerTimeseries: "35"
     vmagent:
       spec:
         nodeSelector:
