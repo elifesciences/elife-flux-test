@@ -25,6 +25,7 @@ spec:
       valuesKey: healthchecks-io-url
       targetPath: alertmanager.config.receivers[1].webhook_configs[0].url
   values:
+    fullnameOverride: victoriametrics
     vmsingle:
       enabled: false
     vmcluster:
