@@ -56,14 +56,16 @@ spec:
           extraArgs:
             maxLabelsPerTimeseries: "35"
     vmagent:
-      nodeSelector:
-        Project: ${cluster_name}
       spec:
+        nodeSelector:
+          Project: ${cluster_name}
         resources:
           limits:
             cpu: 1000m
     vmalert:
       spec:
+        nodeSelector:
+          Project: ${cluster_name}
         externalURL: https://vmalert.${cluster_domain}
       ingress:
         enabled: true
