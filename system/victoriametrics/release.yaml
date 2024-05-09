@@ -15,7 +15,7 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: alertmanager-config
-      valuesKey: alertmanager.yaml
+      valuesKey: 'alertmanager.yaml'
       targetPath: alertmanager.config
     - kind: Secret
       name: alerts-urls
