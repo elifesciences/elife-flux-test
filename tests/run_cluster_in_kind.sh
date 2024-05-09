@@ -40,7 +40,8 @@ kubectl apply -f $tests_path/kwok/4_smaller_simulated_nodes.yaml
 
 # Preinstall
 # some components require a secret ahead of deployment
-kubectl create ns monitoring
+kubectl create ns victoriametrics
+kubectl create secret generic alert-urls -n victoriametrics --from-literal=slack-api-url=none --from-literal=healthchecks-io-url=none
 # Install cluster stuff and wait
 flux create source git flux-system --url="$repo" --branch="$branch"
 flux create kustomization flux-system --source=flux-system --path="$test_kustomization_path"
