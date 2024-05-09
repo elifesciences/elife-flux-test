@@ -6,3 +6,10 @@ resources:
 - source.yaml
 - release.yaml
 - secrets
+
+configMapGenerator:
+- name: alertmanager-config
+  files:
+  - config/alertmanager.yaml
+  options:
+    disableNameSuffixHash: true
