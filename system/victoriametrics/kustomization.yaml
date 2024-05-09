@@ -1,11 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: grafana
+namespace: victoriametrics
 resources:
 - namespace.yaml
-- grafana-helm-repo
-- grafana
-- mimir
-- loki
-# - k8s-monitoring
-- alloy
+- source.yaml
+- secrets
