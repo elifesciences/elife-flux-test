@@ -14,9 +14,8 @@ spec:
   interval: 1h0m0s
   valuesFrom:
     - kind: ConfigMap
-      name: alertmanager-config
-      valuesKey: 'alertmanager.yaml'
-      targetPath: alertmanager.config
+      name: alertmanager-values
+      valuesKey: 'alertmanager-values.yaml'
     - kind: Secret
       name: alerts-urls
       valuesKey: slack-api-url

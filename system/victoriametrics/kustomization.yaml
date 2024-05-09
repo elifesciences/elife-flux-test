@@ -8,8 +8,8 @@ resources:
 - secrets
 
 configMapGenerator:
-- name: alertmanager-config
+- name: alertmanager-values
   files:
-  - config/alertmanager.yaml
+  - config/alertmanager-values.yaml
   options:
     disableNameSuffixHash: true
