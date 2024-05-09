@@ -39,7 +39,7 @@ spec:
         ruler_storage:
           storage_prefix: ruler
         limits:
-          compactor_blocks_retention_period: 1h
+          compactor_blocks_retention_period: 390d
     serviceAccount:
       annotations:
         eks.amazonaws.com/role-arn: arn:aws:iam::512686554592:role/elife-${cluster_name}-mimir-cluster-role
