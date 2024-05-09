@@ -11,8 +11,8 @@
 2m helmrelease ready ack-system rds
 2m helmrelease ready external-secrets external-secrets
 2m helmrelease ready flux-system template-controller
-2m helmrelease ready grafana loki
-2m helmrelease ready grafana mimir
+2m helmrelease ready loki loki
+2m helmrelease ready victoriametrics victoriametrics
 2m helmrelease ready infra sealed-secrets
 2m helmrelease ready keda keda
 2m helmrelease ready keda keda-add-ons-http
