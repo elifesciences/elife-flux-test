@@ -97,7 +97,7 @@ spec:
             - filter_nginx_podinfo
           bucket: elife-cluster-logs
           credentials_path: /etc/gcp-data-hub-project-log-shipping/credentials.json
-          key_prefix: flux-test/podinfo/dt=%F/
+          key_prefix: ${cluster_name}/podinfo/dt=%F/
           filename_extension: jsonl
           encoding:
             codec: native_json
