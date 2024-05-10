@@ -26,9 +26,6 @@ spec:
       targetPath: alertmanager.config.receivers[1].webhook_configs[0].url
   values:
     fullnameOverride: victoriametrics
-    defaultRules:
-      disabled:
-        KubeletTooManyPods: true
     vmsingle:
       enabled: false
     vmcluster:
@@ -118,6 +115,7 @@ spec:
         kubeApiserver: false # too memory intensive
       disabled:
         KubeCPUOvercommit: true
+        KubeletTooManyPods: true
     kubeControllerManager:
       enabled: false # lives on EKS
     victoria-metrics-operator:
