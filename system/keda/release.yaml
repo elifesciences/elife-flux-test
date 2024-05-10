@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: keda
@@ -17,5 +17,19 @@ spec:
   values:
     crds:
       install: false
+    resources:
+      operator:
+        requests:
+          cpu: 10m
+          memory: 100Mi
+        limits:
+          memory: 100Mi
+      metricServer:
+        limits:
+          cpu: 1
+          memory: 100Mi
+        requests:
+          cpu: 100m
+          memory: 100Mi
     nodeSelector:
       Project: ${cluster_name}
