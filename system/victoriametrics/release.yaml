@@ -26,6 +26,9 @@ spec:
       targetPath: alertmanager.config.receivers[1].webhook_configs[0].url
   values:
     fullnameOverride: victoriametrics
+    defaultRules:
+      disabled:
+        KubeletTooManyPods: true
     vmsingle:
       enabled: false
     vmcluster:
