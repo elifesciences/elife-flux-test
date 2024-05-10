@@ -20,6 +20,10 @@ spec:
       aws_account_id: "512686554592"
       aws_region: us-east-1
 
+      # workaround old cluster names
+      external_dns_cluster_name: flux-test-cluster
+      ingress_loadbalancer_cluster_name: elife-flux-test
+
       # service account arns
       aws_external_secrets_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-external-secrets
       aws_karpenter_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-karpenter-cluster-role
@@ -27,6 +31,7 @@ spec:
       aws_external_dns_service_account_role_arn: arn:aws:iam::512686554592:role/kubernetes-aws--flux-test--external-dns
 
       # oauth2-proxy urls
+      oauth2_proxy_hostname: "auth--test-cluster.elifesciences.org"
       oauth2_proxy_signout_url: "https://auth--test-cluster.elifesciences.org/oauth2/sign_out"
       oauth2_proxy_auth_url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
       oauth2_proxy_auth_signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"

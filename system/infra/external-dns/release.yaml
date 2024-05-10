@@ -22,7 +22,7 @@ spec:
 
   values:
     replicaCount: 1
-    txtOwnerId: flux-test-cluster
+    txtOwnerId: ${external_dns_cluster_name}
     metrics:
       enabled: true
       serviceMonitor:
@@ -30,8 +30,7 @@ spec:
 
     resources:
       limits:
-        cpu: 50m
-        memory: 50Mi
+        memory: 100Mi
       requests:
         memory: 50Mi
         cpu: 10m

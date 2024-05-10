@@ -38,7 +38,7 @@ spec:
     ingress:
       enabled: "true"
       hosts:
-        - auth--test-cluster.elifesciences.org
-    replicaCount: 1
+        - "${oauth2_proxy_hostname}"
+    replicaCount: 2
     nodeSelector:
       Project: ${cluster_name}
