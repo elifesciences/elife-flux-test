@@ -30,6 +30,9 @@ spec:
       nodeSelector:
         Project: ${cluster_name}
     prometheus:
+      kube-state-metrics:
+        nodeSelector:
+          Project: ${cluster_name}
       server:
         nodeSelector:
           Project: ${cluster_name}
