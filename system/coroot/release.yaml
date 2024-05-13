@@ -15,6 +15,8 @@ spec:
         name: coroot
   values:
     corootCE:
+      nodeSelector:
+        Project: ${cluster_name}
       ingress:
         enabled: true
         hostname: coroot.${cluster_domain}
@@ -24,3 +26,17 @@ spec:
         - secretName: coroot-tls
           hosts:
             - coroot.${cluster_domain}
+    corootClusterAgent:
+      nodeSelector:
+        Project: ${cluster_name}
+    prometheus:
+      server:
+        nodeSelector:
+          Project: ${cluster_name}
+
+    node-agent:
+      nodeSelector:
+        Project: ${cluster_name}
+    clickhouse:
+      nodeSelector:
+        Project: ${cluster_name}
