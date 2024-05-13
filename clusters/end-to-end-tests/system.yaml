@@ -21,6 +21,11 @@ spec:
       # TODO: structure repo so that these aren't required
       aws_region: no-north-1
 
+      oauth2_proxy_hostname: "localhost:8080"
+      oauth2_proxy_signout_url: "https://localhost:8080/oauth2/sign_out"
+      oauth2_proxy_auth_url: "https://localhost:8080/oauth2/auth"
+      oauth2_proxy_auth_signin: "https://localhost:8080/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
+
   patches:
   # in a small cluster like kind or minikube the load balancer won't get an external IP.
   # Therefore, we need to disable waiting
