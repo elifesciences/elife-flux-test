@@ -18,3 +18,7 @@ spec:
       ingress:
         enabled: true
         hostname: coroot.${cluster_domain}
+        tls:
+        - secretName: coroot-tls
+          hosts:
+            - coroot.${cluster_domain}
