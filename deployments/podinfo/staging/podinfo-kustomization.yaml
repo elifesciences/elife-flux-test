@@ -43,3 +43,4 @@ spec:
           spec:
             nodeSelector:
               Project: ${cluster_name}
+              karpenter.sh/capacity-type: spot
