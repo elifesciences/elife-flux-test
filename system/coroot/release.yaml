@@ -18,6 +18,8 @@ spec:
       ingress:
         enabled: true
         hostname: coroot.${cluster_domain}
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-prod"
         tls:
         - secretName: coroot-tls
           hosts:
