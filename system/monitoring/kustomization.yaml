@@ -7,6 +7,5 @@ resources:
 - alertrules-misc.yaml
 - alerts
 - dashboards
-- gitops-dashboard
 - kube-web-view
 - metrics-server
