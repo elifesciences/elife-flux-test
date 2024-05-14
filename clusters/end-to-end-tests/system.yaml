@@ -183,15 +183,7 @@ spec:
         name: external-secrets
       spec:
         values:
-          webhook:
-            tolerations:
-            - key: "realnode"
-              operator: "Equal"
-              value: "true"
-              effect: "NoSchedule"
-            nodeSelector:
-              kubernetes.io/hostname: elife-flux-test-control-plane
-          certController:
+          global:
             tolerations:
             - key: "realnode"
               operator: "Equal"
