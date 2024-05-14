@@ -7,13 +7,7 @@ spec:
   provider:
     fake:
       data:
-      - key: "/foo/bar"
-        value: "HELLO1"
-        version: "v1"
-      - key: "/foo/bar"
-        value: "HELLO2"
-        version: "v2"
-      - key: "/foo/baz"
+      - key: "clusters/${cluster_name}/alerts-urls"
         valueMap:
-          foo: example
-          other: thing
+          slack-api-url: http://nowhere
+          healthchecks-io-url: http://nowhere
