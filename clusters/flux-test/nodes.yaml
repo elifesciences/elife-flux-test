@@ -1,0 +1,24 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: nodes
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./nodes/clusters/flux-test
+  prune: true
+  dependsOn:
+    - name: crds
+  postBuild:
+    substitute:
+      cluster_name: flux-test
+      cluster_domain: flux-test.elifesciences.org
+      aws_account_id: "512686554592"
+      aws_region: us-east-1
+
+      # service account arns
+      aws_karpenter_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-karpenter-cluster-role

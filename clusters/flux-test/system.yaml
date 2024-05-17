@@ -26,7 +26,6 @@ spec:
 
       # service account arns
       aws_external_secrets_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-external-secrets
-      aws_karpenter_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-karpenter-cluster-role
       aws_ack_rds_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-rds-controller-cluster-role
       aws_external_dns_service_account_role_arn: arn:aws:iam::512686554592:role/kubernetes-aws--flux-test--external-dns
 
