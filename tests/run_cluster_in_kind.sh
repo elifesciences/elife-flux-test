@@ -23,14 +23,8 @@ flux install --components-extra="image-reflector-controller,image-automation-con
 kubectl label node "$name-control-plane" Project="end-to-end-tests"
 # taint the current node to not schedule workloads by default
 kubectl taint node "$name-control-plane" realnode=true:NoSchedule
-# Install kwok nodes to run "workloads" on
-kubectl apply -f $tests_path/kwok/1_large_simulated_node.yaml
-kubectl apply -f $tests_path/kwok/4_smaller_simulated_nodes.yaml
 
-
-
-# Preinstall
-# Install cluster stuff and wait
+# Install gitops stuff and wait
 flux create source git flux-system --url="$repo" --branch="$branch"
 flux create kustomization flux-system --source=flux-system --path="$test_kustomization_path"
 # Force reconcile of all kustomizations
