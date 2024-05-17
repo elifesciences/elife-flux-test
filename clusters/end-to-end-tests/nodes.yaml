@@ -11,8 +11,6 @@ spec:
     name: flux-system
   path: ./nodes/clusters/flux-test
   prune: true
-  dependsOn:
-    - name: nodes
   postBuild:
     substitute:
       cluster_name: end-to-end-tests
