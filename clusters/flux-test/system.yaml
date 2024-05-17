@@ -13,6 +13,7 @@ spec:
   prune: true
   dependsOn:
     - name: crds
+    - name: nodes
   postBuild:
     substitute:
       cluster_name: flux-test
