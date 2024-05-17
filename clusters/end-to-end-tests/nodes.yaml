@@ -12,7 +12,6 @@ spec:
   path: ./nodes/clusters/flux-test
   prune: true
   dependsOn:
-    - name: crds
     - name: nodes
   postBuild:
     substitute:
