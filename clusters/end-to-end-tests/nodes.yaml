@@ -9,7 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./nodes/clusters/flux-test
+  path: ./nodes/clusters/end-to-end-tests
   prune: true
   postBuild:
     substitute:
