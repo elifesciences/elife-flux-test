@@ -33,6 +33,15 @@ spec:
       spec:
         retentionPeriod: "3" # months
         vmstorage:
+          topologySpreadConstraints:
+          - maxSkew: 1
+            topologyKey: kubernetes.io/hostname
+            whenUnsatisfiable: DoNotSchedule
+            labelSelector:
+              matchLabels:
+                app.kubernetes.io/name: vmstorage
+            matchLabelKeys:
+            - pod-template-hash
           nodeSelector:
             Project: ${cluster_name}
           storage:
@@ -50,6 +59,15 @@ spec:
           extraArgs:
             "memory.allowedPercent": "80"
         vmselect:
+          topologySpreadConstraints:
+          - maxSkew: 1
+            topologyKey: kubernetes.io/hostname
+            whenUnsatisfiable: DoNotSchedule
+            labelSelector:
+              matchLabels:
+                app.kubernetes.io/name: vmselect
+            matchLabelKeys:
+            - pod-template-hash
           nodeSelector:
             Project: ${cluster_name}
           storage:
@@ -63,6 +81,15 @@ spec:
               memory: 250Mi
             limits: {}
         vminsert:
+          topologySpreadConstraints:
+          - maxSkew: 1
+            topologyKey: kubernetes.io/hostname
+            whenUnsatisfiable: DoNotSchedule
+            labelSelector:
+              matchLabels:
+                app.kubernetes.io/name: vminsert
+            matchLabelKeys:
+            - pod-template-hash
           nodeSelector:
             Project: ${cluster_name}
           extraArgs:
