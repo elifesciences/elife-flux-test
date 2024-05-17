@@ -49,8 +49,6 @@ spec:
             limits: {}
           extraArgs:
             "memory.allowedPercent": "80"
-          readinessProbe:
-            failureThreshold: 20
         vmselect:
           nodeSelector:
             Project: ${cluster_name}
