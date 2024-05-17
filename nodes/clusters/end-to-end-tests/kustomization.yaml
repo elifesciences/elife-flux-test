@@ -18,7 +18,7 @@ patches:
           tolerations:
           - key: realnode
             operator: Equal
-            value: true
+            value: "true"
             effect: NoSchedule
           nodeSelector:
             kubernetes.io/hostname: elife-flux-test-control-plane
