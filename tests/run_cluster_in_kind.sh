@@ -14,15 +14,6 @@ echo "Building KinD cluster using '$branch' branch"
 kind delete cluster --name "$name"
 kind create cluster --name "$name" --image=kindest/node:v1.28.9
 
-# install kwok into cluster
-KWOK_RELEASE=v0.5.1
-kubectl apply -f "https://github.com/kubernetes-sigs/kwok/releases/download/${KWOK_RELEASE}/kwok.yaml"
-# patch kwok to run on the realnode
-kubectl patch deployment -n kube-system kwok-controller -p '{"spec":{"template":{"spec":{"tolerations":[{"key":"realnode","operator":"Equal","value":"true","effect":"NoSchedule"}]}}}}'
-kubectl apply -f "https://github.com/kubernetes-sigs/kwok/releases/download/${KWOK_RELEASE}/stage-fast.yaml"
-kubectl apply -f "https://github.com/kubernetes-sigs/kwok/releases/download/${KWOK_RELEASE}/metrics-usage.yaml"
-kubectl wait deployment -n kube-system kwok-controller --timeout=60s --for condition=Available=True
-
 # Install Flux with toleration to run controllers on the real node
 kubectl create ns flux
 # make sure flux components get installed, with additional components
