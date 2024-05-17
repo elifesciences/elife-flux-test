@@ -42,8 +42,5 @@ kubectl apply -f $tests_path/kwok/4_smaller_simulated_nodes.yaml
 # Install cluster stuff and wait
 flux create source git flux-system --url="$repo" --branch="$branch"
 flux create kustomization flux-system --source=flux-system --path="$test_kustomization_path"
-kubectl wait kustomizations.kustomize.toolkit.fluxcd.io --for=condition=ready --timeout=1m -n flux-system flux-system
 # Force reconcile of all kustomizations
-flux reconcile kustomization crds
-flux reconcile kustomization system
-flux reconcile kustomization deployments
+make reconcile
