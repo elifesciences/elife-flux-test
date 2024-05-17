@@ -1,0 +1,42 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kyverno
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kyverno
+      version: "3.2.2"
+      interval: 5m
+      sourceRef:
+        kind: HelmRepository
+        name: kyverno
+  values:
+    admissionController:
+      replicas: 3
+      nodeSelector:
+        Project: ${cluster_name}
+    backgroundController:
+      replicas: 2
+      nodeSelector:
+        Project: ${cluster_name}
+    cleanupController:
+      replicas: 2
+      nodeSelector:
+        Project: ${cluster_name}
+    reportsController:
+      replicas: 2
+      nodeSelector:
+        Project: ${cluster_name}
+    webhooksCleanup:
+      nodeSelector:
+        Project: ${cluster_name}
+    cleanupJobs:
+      admissionReports:
+        nodeSelector:
+          Project: ${cluster_name}
+      clusterAdmissionReports:
+        nodeSelector:
+          Project: ${cluster_name}
