@@ -14,29 +14,41 @@ spec:
         kind: HelmRepository
         name: kyverno
   values:
+    global: &global
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: karpenter.sh/nodepool
+                operator: DoesNotExist
+      tolerations:
+      - key: CriticalAddonsOnly
+        operator: Exists
+      - effect: NoExecute
+        key: node.kubernetes.io/not-ready
+        operator: Exists
+        tolerationSeconds: 300
+      - effect: NoExecute
+        key: node.kubernetes.io/unreachable
+        operator: Exists
+        tolerationSeconds: 300
     admissionController:
       replicas: 3
-      nodeSelector:
-        Project: ${cluster_name}
+      <<: *global
     backgroundController:
       replicas: 2
-      nodeSelector:
-        Project: ${cluster_name}
+      <<: *global
     cleanupController:
       replicas: 2
-      nodeSelector:
-        Project: ${cluster_name}
+      <<: *global
     reportsController:
       replicas: 2
-      nodeSelector:
-        Project: ${cluster_name}
+      <<: *global
     webhooksCleanup:
-      nodeSelector:
-        Project: ${cluster_name}
+      <<: *global
     cleanupJobs:
       admissionReports:
-        nodeSelector:
-          Project: ${cluster_name}
+        <<: *global
       clusterAdmissionReports:
-        nodeSelector:
-          Project: ${cluster_name}
+        <<: *global
