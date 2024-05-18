@@ -11,8 +11,6 @@ spec:
     name: flux-system
   path: ./policies/clusters/flux-test
   prune: true
-  dependsOn:
-    - name: crds
   postBuild:
     substitute:
       cluster_name: flux-test
