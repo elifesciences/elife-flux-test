@@ -1,0 +1,55 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kyverno
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kyverno
+      version: "3.2.2"
+      interval: 5m
+      sourceRef:
+        kind: HelmRepository
+        name: kyverno
+  values:
+    global: &global
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: type
+                operator: NotIn
+                values: ["karpenter", "kwok"] # Don't place this on cluster-controlled nodes
+      tolerations:
+      - key: CriticalAddonsOnly
+        operator: Exists
+      - effect: NoExecute
+        key: node.kubernetes.io/not-ready
+        operator: Exists
+        tolerationSeconds: 300
+      - effect: NoExecute
+        key: node.kubernetes.io/unreachable
+        operator: Exists
+        tolerationSeconds: 300
+    admissionController:
+      replicas: 3
+      <<: *global
+    backgroundController:
+      replicas: 2
+      <<: *global
+    cleanupController:
+      replicas: 2
+      <<: *global
+    reportsController:
+      replicas: 2
+      <<: *global
+    webhooksCleanup:
+      <<: *global
+    cleanupJobs:
+      admissionReports:
+        <<: *global
+      clusterAdmissionReports:
+        <<: *global
