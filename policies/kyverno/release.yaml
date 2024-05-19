@@ -33,6 +33,11 @@ spec:
         key: node.kubernetes.io/unreachable
         operator: Exists
         tolerationSeconds: 300
+        matchLabelKeys:
+        - pod-template-hash
+    admissionController:
+      replicas: 3
+      <<: *global
       topologySpreadConstraints:
       - maxSkew: 1
         topologyKey: kubernetes.io/hostname
@@ -42,20 +47,42 @@ spec:
             app.kubernetes.io/instance: kyverno
             app.kubernetes.io/part-of: kyverno
             app.kubernetes.io/component: admission-controller
-        matchLabelKeys:
-        - pod-template-hash
-    admissionController:
-      replicas: 3
-      <<: *global
     backgroundController:
       replicas: 2
       <<: *global
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/instance: kyverno
+            app.kubernetes.io/part-of: kyverno
+            app.kubernetes.io/component: background-controller
     cleanupController:
       replicas: 2
       <<: *global
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/instance: kyverno
+            app.kubernetes.io/part-of: kyverno
+            app.kubernetes.io/component: cleanup-controller
     reportsController:
       replicas: 2
       <<: *global
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/instance: kyverno
+            app.kubernetes.io/part-of: kyverno
+            app.kubernetes.io/component: reports-controller
     webhooksCleanup:
       <<: *global
     cleanupJobs:
