@@ -3,18 +3,17 @@ kind: ClusterPolicy
 metadata:
   name: spread-pods
   annotations:
-    policies.kyverno.io/title: Spread Pods Across Nodes
-    policies.kyverno.io/category: Sample
-    policies.kyverno.io/subject: Deployment, Pod
+    policies.kyverno.io/title: Spread Pods Across Nodes with standard kubernetes labels
+    policies.kyverno.io/subject: Deployment, StatefulSet, Pod
     policies.kyverno.io/minversion: 1.6.0
     policies.kyverno.io/description: >-
       Deployments to a Kubernetes cluster with multiple availability zones often need to
       distribute those replicas to align with those zones to ensure site-level failures
-      do not impact availability. This policy matches Deployments with the label
-      `distributed=required` and mutates them to spread Pods across zones.
+      do not impact availability. This policy matches Deployments with the standard kubernetes
+      labels and mutates them to spread Pods across zones.
 spec:
   rules:
-    - name: spread-pods-across-nodes with standard app.kubernetes.io/instance, app.kubernetes.io/component and app.kubernetes.io/name labels
+    - name: spread-pods-across-nodes-with-standard-labels
       # Matches any Deployment or STS
       match:
         any:
