@@ -6,6 +6,7 @@ metadata:
     policies.kyverno.io/title: Add nodeSelector and toleration to pods in cluster-services namespaces
     policies.kyverno.io/subject: Pod
     policies.kyverno.io/minversion: 1.6.0
+    pod-policies.kyverno.io/autogen-controllers: Deployment,Job,StatefulSet,ReplicaSet,ReplicationController
 spec:
   rules:
   - name: add-nodeselector
@@ -36,9 +37,6 @@ spec:
           - temporal
     exclude:
       any:
-      - resources:
-          kinds:
-          - DaemonSet
       - resources:
           kinds:
           - Pod
