@@ -20,7 +20,6 @@ spec:
         - resources:
             kinds:
             - Deployment
-            - StatefulSet
             # Temp, restrict to one ns and named object
             namespaces:
             - victoriametrics
@@ -49,6 +48,46 @@ spec:
                   whenUnsatisfiable: DoNotSchedule
                   matchLabelKeys:
                   - pod-template-hash
+                  labelSelector:
+                    matchLabels:
+                      app.kubernetes.io/instance: "{{request.object.spec.template.metadata.labels.\"app.kubernetes.io/instance\"}}"
+                      app.kubernetes.io/component: "{{request.object.spec.template.metadata.labels.\"app.kubernetes.io/component\"}}"
+                      app.kubernetes.io/name: "{{request.object.spec.template.metadata.labels.\"app.kubernetes.io/name\"}}"
+    - name: spread-pods-across-nodes-with-standard-labels
+      # Matches any Deployment or STS
+      match:
+        any:
+        - resources:
+            kinds:
+            - StatefulSet
+            # Temp, restrict to one ns and named object
+            namespaces:
+            - victoriametrics
+            names:
+            - vmstorage-victoriametrics
+      preconditions:
+        all:
+        - key: "{{request.object.spec.template.metadata.labels.\"app.kubernetes.io/instance\" || ''}}"
+          operator: NotEquals
+          value: ""
+        - key: "{{request.object.spec.template.metadata.labels.\"app.kubernetes.io/component\" || ''}}"
+          operator: NotEquals
+          value: ""
+        - key: "{{request.object.spec.template.metadata.labels.\"app.kubernetes.io/name\" || ''}}"
+          operator: NotEquals
+          value: ""
+      mutate:
+        patchStrategicMerge:
+          spec:
+            template:
+              spec:
+                # Adds the topologySpreadConstraints field if non-existent in the request.
+                +(topologySpreadConstraints):
+                - maxSkew: 1
+                  topologyKey: topology.kubernetes.io/zone
+                  whenUnsatisfiable: DoNotSchedule
+                  matchLabelKeys:
+                  - controller-revision-hash
                   labelSelector:
                     matchLabels:
                       app.kubernetes.io/instance: "{{request.object.spec.template.metadata.labels.\"app.kubernetes.io/instance\"}}"
