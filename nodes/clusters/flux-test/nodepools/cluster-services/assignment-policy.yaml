@@ -24,10 +24,8 @@ spec:
           - gemini
           - grafana
           - infra
-          - karpenter
           - keda
           - kube-system
-          - kyverno
           - loki
           - monitoring
           - nidhogg
@@ -35,6 +33,24 @@ spec:
           - stg
           - vector
           - victoriametrics
+          - temporal
+    exclude:
+      any:
+      - resources:
+          kinds:
+          - Daemonset
+      - resources:
+          kinds:
+          - Pod
+          names:
+          - helm-controller-*
+          - image-automation-controller-*
+          - image-reflector-controller-*
+          - kustomize-controller-*
+          - notification-controller-*
+          - source-controller-*
+          namespaces:
+          - flux-system
     mutate:
       patchStrategicMerge:
         spec:
