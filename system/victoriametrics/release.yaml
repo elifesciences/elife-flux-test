@@ -49,6 +49,7 @@ spec:
             limits: {}
           extraArgs:
             "memory.allowedPercent": "80"
+
         vmselect:
           nodeSelector:
             Project: ${cluster_name}
@@ -74,9 +75,11 @@ spec:
             limits: {}
     vmagent:
       spec:
+        externalLabels:
+          cluster: ${cluster_name}
         extraArgs:
-          "promscrape.kubernetesSDCheckInterval": "10s"
-          "promscrape.suppressScrapeErrorsDelay": "10s"
+          "promscrape.kubernetesSDCheckInterval": "5s"
+          "promscrape.suppressScrapeErrorsDelay": "15s"
         nodeSelector:
           Project: ${cluster_name}
         resources:
@@ -84,6 +87,18 @@ spec:
             cpu: 450m
             memory: 350Mi
           limits: {}
+      ingress:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-prod"
+          nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
+        hosts:
+          - vmagent.${cluster_domain}
+        tls:
+          - secretName: vmagent-tls
+            hosts:
+              - vmagent.${cluster_domain}
     vmalert:
       spec:
         nodeSelector:
@@ -144,6 +159,7 @@ spec:
       disabled:
         KubeCPUOvercommit: true
         KubeletTooManyPods: true
+        TooHighChurnRate: true
     kubeControllerManager:
       enabled: false # lives on EKS
     victoria-metrics-operator:
@@ -199,7 +215,7 @@ spec:
                 metricNamePrefix: gotk
                 metrics:
                   - name: "resource_info"
-                    help: "The current state of a GitOps Toolkit resource."
+                    help: "The current state of a Flux Kustomization resource."
                     each:
                       type: Info
                       info:
@@ -213,12 +229,12 @@ spec:
                       source_name: [ spec, sourceRef, name ]
               - groupVersionKind:
                   group: helm.toolkit.fluxcd.io
-                  version: v2beta2
+                  version: v2
                   kind: HelmRelease
                 metricNamePrefix: gotk
                 metrics:
                   - name: "resource_info"
-                    help: "The current state of a GitOps Toolkit resource."
+                    help: "The current state of a Flux HelmRelease resource."
                     each:
                       type: Info
                       info:
@@ -228,8 +244,10 @@ spec:
                       exported_namespace: [ metadata, namespace ]
                       ready: [ status, conditions, "[type=Ready]", status ]
                       suspended: [ spec, suspend ]
-                      revision: [ status, lastAppliedRevision ]
-                      chart_name: [ spec, chart, spec, chart ]
+                      revision: [ status, history, "0", chartVersion ]
+                      chart_name: [ status, history, "0", chartName ]
+                      chart_app_version: [ status, history, "0", appVersion ]
+                      chart_ref_name: [ spec, chartRef, name ]
                       chart_source_name: [ spec, chart, spec, sourceRef, name ]
               - groupVersionKind:
                   group: source.toolkit.fluxcd.io
@@ -238,7 +256,7 @@ spec:
                 metricNamePrefix: gotk
                 metrics:
                   - name: "resource_info"
-                    help: "The current state of a GitOps Toolkit resource."
+                    help: "The current state of a Flux GitRepository resource."
                     each:
                       type: Info
                       info:
@@ -257,7 +275,7 @@ spec:
                 metricNamePrefix: gotk
                 metrics:
                   - name: "resource_info"
-                    help: "The current state of a GitOps Toolkit resource."
+                    help: "The current state of a Flux Bucket resource."
                     each:
                       type: Info
                       info:
@@ -272,12 +290,12 @@ spec:
                       bucket_name: [ spec, bucketName ]
               - groupVersionKind:
                   group: source.toolkit.fluxcd.io
-                  version: v1beta2
+                  version: v1
                   kind: HelmRepository
                 metricNamePrefix: gotk
                 metrics:
                   - name: "resource_info"
-                    help: "The current state of a GitOps Toolkit resource."
+                    help: "The current state of a Flux HelmRepository resource."
                     each:
                       type: Info
                       info:
@@ -291,12 +309,12 @@ spec:
                       url: [ spec, url ]
               - groupVersionKind:
                   group: source.toolkit.fluxcd.io
-                  version: v1beta2
+                  version: v1
                   kind: HelmChart
                 metricNamePrefix: gotk
                 metrics:
                   - name: "resource_info"
-                    help: "The current state of a GitOps Toolkit resource."
+                    help: "The current state of a Flux HelmChart resource."
                     each:
                       type: Info
                       info:
@@ -316,7 +334,7 @@ spec:
                 metricNamePrefix: gotk
                 metrics:
                   - name: "resource_info"
-                    help: "The current state of a GitOps Toolkit resource."
+                    help: "The current state of a Flux OCIRepository resource."
                     each:
                       type: Info
                       info:
@@ -335,7 +353,7 @@ spec:
                 metricNamePrefix: gotk
                 metrics:
                   - name: "resource_info"
-                    help: "The current state of a GitOps Toolkit resource."
+                    help: "The current state of a Flux Alert resource."
                     each:
                       type: Info
                       info:
@@ -343,7 +361,6 @@ spec:
                           name: [ metadata, name ]
                     labelsFromPath:
                       exported_namespace: [ metadata, namespace ]
-                      ready: [ status, conditions, "[type=Ready]", status ]
                       suspended: [ spec, suspend ]
               - groupVersionKind:
                   group: notification.toolkit.fluxcd.io
@@ -352,7 +369,7 @@ spec:
                 metricNamePrefix: gotk
                 metrics:
                   - name: "resource_info"
-                    help: "The current state of a GitOps Toolkit resource."
+                    help: "The current state of a Flux Provider resource."
                     each:
                       type: Info
                       info:
@@ -360,7 +377,6 @@ spec:
                           name: [ metadata, name ]
                     labelsFromPath:
                       exported_namespace: [ metadata, namespace ]
-                      ready: [ status, conditions, "[type=Ready]", status ]
                       suspended: [ spec, suspend ]
               - groupVersionKind:
                   group: notification.toolkit.fluxcd.io
@@ -369,7 +385,7 @@ spec:
                 metricNamePrefix: gotk
                 metrics:
                   - name: "resource_info"
-                    help: "The current state of a GitOps Toolkit resource."
+                    help: "The current state of a Flux Receiver resource."
                     each:
                       type: Info
                       info:
@@ -387,7 +403,7 @@ spec:
                 metricNamePrefix: gotk
                 metrics:
                   - name: "resource_info"
-                    help: "The current state of a GitOps Toolkit resource."
+                    help: "The current state of a Flux ImageRepository resource."
                     each:
                       type: Info
                       info:
@@ -405,7 +421,7 @@ spec:
                 metricNamePrefix: gotk
                 metrics:
                   - name: "resource_info"
-                    help: "The current state of a GitOps Toolkit resource."
+                    help: "The current state of a Flux ImagePolicy resource."
                     each:
                       type: Info
                       info:
@@ -418,12 +434,12 @@ spec:
                       source_name: [ spec, imageRepositoryRef, name ]
               - groupVersionKind:
                   group: image.toolkit.fluxcd.io
-                  version: v1beta1
+                  version: v1beta2
                   kind: ImageUpdateAutomation
                 metricNamePrefix: gotk
                 metrics:
                   - name: "resource_info"
-                    help: "The current state of a GitOps Toolkit resource."
+                    help: "The current state of a Flux ImageUpdateAutomation resource."
                     each:
                       type: Info
                       info:
