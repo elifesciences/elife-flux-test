@@ -41,10 +41,12 @@ spec:
           spec:
             template:
               spec:
-                # Adds the topologySpreadConstraints field if non-existent in the request.
                 +(topologySpreadConstraints):
                 - maxSkew: 1
-                  topologyKey: topology.kubernetes.io/zone
+                  # Ideally we would use the zone, but since we replicate greater than the number of zone we host, that
+                  # would result in unschedulable workloads
+                  # topologyKey: topology.kubernetes.io/zone
+                  topologyKey: kubernetes.io/hostname
                   whenUnsatisfiable: DoNotSchedule
                   labelSelector:
                     matchLabels:
@@ -79,10 +81,12 @@ spec:
           spec:
             template:
               spec:
-                # Adds the topologySpreadConstraints field if non-existent in the request.
                 +(topologySpreadConstraints):
                 - maxSkew: 1
-                  topologyKey: topology.kubernetes.io/zone
+                  # Ideally we would use the zone, but since we replicate greater than the number of zone we host, that
+                  # would result in unschedulable workloads
+                  # topologyKey: topology.kubernetes.io/zone
+                  topologyKey: kubernetes.io/hostname
                   whenUnsatisfiable: DoNotSchedule
                   labelSelector:
                     matchLabels:
