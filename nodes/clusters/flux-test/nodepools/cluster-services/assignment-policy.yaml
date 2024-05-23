@@ -28,14 +28,14 @@ spec:
           - "sciety*"
     preconditions:
       all:
-      - key: "{{ request.\"object\".metadata.ownerReferences[].kind }}"
+      - key: "{{ [request.\"object\".metadata.ownerReferences[].kind, [request.\"object\".kind]][] }}"
         operator: AllNotIn
         value: DaemonSet
         message: DaemonSets should probably be allocated to all node, regardless of pool
-      - key: "{{ request.\"object\".spec.tolerations[].key }}"
+      - key: "{{ [request.\"object\".spec.template.spec.tolerations, request.\"object\".spec.tolerations][].key }}"
         operator: AllNotIn
         value: CriticalAddonsOnly
-        message: This should be allocated to the core NodePool, not reallocated to cluster services
+        message: This workload should be allocated to the core NodePool, not reallocated to cluster services
     mutate:
       patchStrategicMerge:
         spec:
