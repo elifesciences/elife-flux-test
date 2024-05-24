@@ -20,6 +20,7 @@ spec:
           kinds:
           - Pod
           namespaces:
+          - kube-system
           - "basex-validator*"
           - "data-hub*"
           - "epp*"
