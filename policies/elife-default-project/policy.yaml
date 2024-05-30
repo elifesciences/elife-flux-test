@@ -40,13 +40,13 @@ spec:
         message: This workload should be allocated to the core NodePool, not reallocated to cluster services
     mutate:
       patchesJson6902: |-
-        - op: replace
+        - op: add
           path: "/metadata/annotations/elifesciences.org~1project"
           value: "{{ default_project }}"
-        - op: replace
+        - op: add
           path: "/metadata/labels/elifesciences.org~1project"
           value: "{{ default_project }}"
-        - op: replace
+        - op: add
           path: "/spec/nodeSelector/elifesciences.org~1project"
           value: "{{ default_project }}"
         - op: add
