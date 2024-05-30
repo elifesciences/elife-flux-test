@@ -36,16 +36,16 @@ spec:
         value: CriticalAddonsOnly
         message: This workload should be allocated to the core NodePool, not reallocated to cluster services
     mutate:
-      patchStrategicMerge:
-        metadata:
-          annotations:
-            elifesciences.org/project: "{{ default_project }}"
-          labels:
-            elifesciences.org/project: "{{ default_project }}"
-        spec:
-          nodeSelector:
-            elifesciences.org/project: "{{ default_project }}"
       patchesJson6902: |-
+        - op: add
+          path: "/metadata/annotations/elifesciences.org~1project"
+          value: "{{ default_project }}"
+        - op: add
+          path: "/metadata/labels/elifesciences.org~1project"
+          value: "{{ default_project }}"
+        - op: add
+          path: "/spec/nodeSelector/elifesciences.org~1project"
+          value: "{{ default_project }}"
         - op: add
           path: "/spec/tolerations/-"
           value:
