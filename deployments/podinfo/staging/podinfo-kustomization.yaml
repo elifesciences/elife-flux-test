@@ -18,7 +18,7 @@ spec:
   postBuild:
     substitute:
       hostname: podinfo--staging.elifesciences.org
-  patches:
+  # patches:
   # - target:
   #     kind: Ingress
   #     name: podinfo
