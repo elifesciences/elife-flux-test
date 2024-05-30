@@ -45,8 +45,11 @@ spec:
         spec:
           nodeSelector:
             elifesciences.org/project: "{{ default_project }}"
-          tolerations:
-          - key: project
+      patchesJson6902: |-
+        - op: add
+          path: "/spec/tolerations/-"
+          value:
+            key: project
             value: "{{ default_project }}"
             operator: "Equal"
             effect: "NoSchedule"
