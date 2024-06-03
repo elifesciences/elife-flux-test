@@ -27,9 +27,6 @@ spec:
       - key: "{{ default_project }}"
         operator: NotEquals
         value: ""
-      - key: "project"
-        operator: AnyNotIn
-        value: "{{ request.object.spec.tolerations[].key || `[]` }}"
       - key: "{{ [request.\"object\".metadata.ownerReferences[].kind, [request.\"object\".kind]][] }}"
         operator: AllNotIn
         value: DaemonSet
