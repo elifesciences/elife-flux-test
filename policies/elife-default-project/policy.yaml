@@ -79,10 +79,6 @@ spec:
       - key: "{{ default_project }}"
         operator: NotEquals
         value: ""
-      - key: "{{ [request.\"object\".metadata.ownerReferences[].kind, [request.\"object\".kind]][] }}"
-        operator: AllNotIn
-        value: DaemonSet
-        message: DaemonSets should probably be allocated to all node, regardless of pool
       - key: "{{ [request.\"object\".spec.template.spec.tolerations, request.\"object\".spec.tolerations][].key }}"
         operator: AllNotIn
         value: CriticalAddonsOnly
@@ -113,10 +109,6 @@ spec:
       - key: "{{ default_project }}"
         operator: NotEquals
         value: ""
-      - key: "{{ [request.\"object\".metadata.ownerReferences[].kind, [request.\"object\".kind]][] }}"
-        operator: AllNotIn
-        value: DaemonSet
-        message: DaemonSets should probably be allocated to all node, regardless of pool
       - key: "{{ [request.\"object\".spec.template.spec.tolerations, request.\"object\".spec.tolerations][].key }}"
         operator: AllNotIn
         value: CriticalAddonsOnly
