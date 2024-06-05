@@ -29,4 +29,6 @@ spec:
         eks.amazonaws.com/role-arn: ${aws_ack_s3_service_account_role_arn}
 
     resourceTags:
-      Cluster: "${cluster_name}"
+    - services.k8s.aws/controller-version=%CONTROLLER_SERVICE%-%CONTROLLER_VERSION%
+    - services.k8s.aws/namespace=%K8S_NAMESPACE%
+    - Cluster=${cluster_name}
