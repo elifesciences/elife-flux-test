@@ -27,3 +27,6 @@ spec:
     serviceAccount:
       annotations:
         eks.amazonaws.com/role-arn: ${aws_ack_rds_service_account_role_arn}
+
+    resourceTags:
+      Cluster: "${cluster_name}"
