@@ -21,7 +21,7 @@ spec:
         jmesPath: "metadata.annotations.\"elifesciences.org/default-project\" || ''"
     - name: default_project
       variable:
-        value: "{{ request.object.metadata.annotations.\"elifesciences.org/default-project\" || default_namespace_project || '' }}"
+        value: "{{ request.object.metadata.annotations.\"elifesciences.org/project\" || default_namespace_project || '' }}"
     preconditions:
       all:
       - key: "{{ default_project }}"
@@ -70,6 +70,43 @@ spec:
         jmesPath: "metadata.annotations.\"elifesciences.org/default-project\" || ''"
     - name: default_project
       variable:
+        value: "{{ request.object.metadata.annotations.\"elifesciences.org/project\" || default_namespace_project || '' }}"
+    preconditions:
+      all:
+      - key: "{{ default_project }}"
+        operator: NotEquals
+        value: ""
+      - key: "{{ [request.\"object\".spec.template.spec.tolerations, request.\"object\".spec.tolerations][].key }}"
+        operator: AllNotIn
+        value: CriticalAddonsOnly
+        message: This workload should be allocated to the core NodePool, not reallocated to cluster services
+    mutate:
+      patchStrategicMerge:
+        metadata:
+          annotations:
+            elifesciences.org/project: "{{ default_project }}"
+          labels:
+            elifesciences.org/project: "{{ default_project }}"
+        spec:
+          template:
+            metadata:
+              annotations:
+                elifesciences.org/project: "{{ default_project }}"
+              labels:
+                elifesciences.org/project: "{{ default_project }}"
+  - name: add-default-project-cronjob
+    match:
+      any:
+      - resources:
+          kinds:
+          - CronJob
+    context:
+    - name: default_namespace_project
+      apiCall:
+        urlPath: "/api/v1/namespaces/{{request.namespace}}"
+        jmesPath: "metadata.annotations.\"elifesciences.org/project\" || ''"
+    - name: default_project
+      variable:
         value: "{{ request.object.metadata.annotations.\"elifesciences.org/default-project\" || default_namespace_project || '' }}"
     preconditions:
       all:
@@ -87,40 +124,12 @@ spec:
             elifesciences.org/project: "{{ default_project }}"
           labels:
             elifesciences.org/project: "{{ default_project }}"
-  - name: add-default-project-cronjob
-    match:
-      any:
-      - resources:
-          kinds:
-          - CronJob
-    context:
-    - name: default_namespace_project
-      apiCall:
-        urlPath: "/api/v1/namespaces/{{request.namespace}}"
-        jmesPath: "metadata.annotations.\"elifesciences.org/default-project\" || ''"
-    - name: default_project
-      variable:
-        value: "{{ request.object.metadata.annotations.\"elifesciences.org/default-project\" || default_namespace_project || '' }}"
-    preconditions:
-      all:
-      - key: "{{ default_project }}"
-        operator: NotEquals
-        value: ""
-      - key: "{{ [request.\"object\".spec.template.spec.tolerations, request.\"object\".spec.tolerations][].key }}"
-        operator: AllNotIn
-        value: CriticalAddonsOnly
-        message: This workload should be allocated to the core NodePool, not reallocated to cluster services
-    mutate:
-      patchStrategicMerge:
         spec:
-          metadata:
-          annotations:
-            elifesciences.org/project: "{{ default_project }}"
-          labels:
-            elifesciences.org/project: "{{ default_project }}"
           jobTemplate:
-            metadata:
-              annotations:
-                elifesciences.org/project: "{{ default_project }}"
-              labels:
-                elifesciences.org/project: "{{ default_project }}"
+            spec:
+              template:
+                metadata:
+                  annotations:
+                    elifesciences.org/project: "{{ default_project }}"
+                  labels:
+                    elifesciences.org/project: "{{ default_project }}"
