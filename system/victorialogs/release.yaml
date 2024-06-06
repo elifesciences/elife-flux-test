@@ -24,7 +24,9 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
         hosts:
-          - victorialogs.${cluster_domain}
+          - name: victorialogs.${cluster_domain}
+            path: /select
+            port: http
         tls:
           - secretName: victorialogs-tls
             hosts:
