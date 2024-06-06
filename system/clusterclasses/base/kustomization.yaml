@@ -17,3 +17,4 @@ resources:
 - ../../template-controller
 - ../../vector
 - ../../victoriametrics
+- ../../victorialogs

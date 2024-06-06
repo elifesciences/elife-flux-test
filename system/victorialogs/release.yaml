@@ -1,0 +1,31 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: victorialogs
+spec:
+  releaseName: victorialogs
+  chart:
+    spec:
+      chart: victoria-logs-single
+      sourceRef:
+        kind: HelmRepository
+        name: victoriametrics
+      version: "0.5.1"
+  interval: 1h0m0s
+  values:
+    server:
+      retentionPeriod: 1
+      persistentVolume:
+        enabled: true
+      ingress:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-prod"
+          nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
+          nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
+        hosts:
+          - victorialogs.${cluster_domain}
+        tls:
+          - secretName: victorialogs-tls
+            hosts:
+              - victorialogs.${cluster_domain}
