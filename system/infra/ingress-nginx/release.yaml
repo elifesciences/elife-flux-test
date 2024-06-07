@@ -53,11 +53,10 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "10254"
       resources:
-        limits:
-          memory: 600Mi
+        limits: {}
         requests:
-          cpu: 100m
-          memory: 300Mi
+          cpu: 80m
+          memory: 250Mi
       replicaCount: 2
       watchIngressWithoutClass: true
       allowSnippetAnnotations: true
