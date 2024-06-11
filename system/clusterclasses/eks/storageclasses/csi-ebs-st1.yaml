@@ -10,3 +10,4 @@ allowVolumeExpansion: true
 parameters:
   fsType: ext4
   type: st1
+  tagSpecification_1: "Project=${cluster_name}"
