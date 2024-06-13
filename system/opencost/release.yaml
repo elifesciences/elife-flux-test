@@ -23,6 +23,8 @@ spec:
     serviceAccount:
       eks.amazonaws.com/role-arn: ${aws_opencost_service_account_role_arn}
     opencost:
+      cloudCost:
+        enabled: false
       exporter:
         defaultClusterId: "${cluster_name}"
         extraEnv:
