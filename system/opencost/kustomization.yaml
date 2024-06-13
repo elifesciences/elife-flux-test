@@ -6,3 +6,8 @@ resources:
 - source.yaml
 - release.yaml
 - servicescrape.yaml
+
+configMapGenerator:
+- name: opencost-cloud-integration
+  files:
+  - config/cloud-integration.json
