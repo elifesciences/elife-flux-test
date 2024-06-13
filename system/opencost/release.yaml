@@ -29,6 +29,6 @@ spec:
       prometheus:
         external:
           enabled: true
-          url: http://vmselect-vm-victoria-metrics-k8s-stack.victoriametrics.svc:8481/select/0/prometheus
+          url: http://vmselect-victoriametrics.victoriametrics.svc:8481/select/0/prometheus
         internal:
           enabled: false
