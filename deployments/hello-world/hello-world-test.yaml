@@ -1,9 +1,8 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: hello-world-app
+  name: hello-world-test
 spec:
-  replicas: 1
   template:
     spec:
       containers:
@@ -13,7 +12,6 @@ spec:
         - psql
         - "-c"
         - "SELECT version();"
-        imagePullPolicy: IfNotPresent
         env:
         - name: PGHOST
           valueFrom:
