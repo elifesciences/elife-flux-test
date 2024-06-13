@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: hello-world
 resources:
 - namespace.yaml
+- hello-world-database.yaml
