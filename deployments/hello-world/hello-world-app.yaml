@@ -11,6 +11,8 @@ spec:
         name: hello-world-app
         command:
         - psql
+        - "-c"
+        - "SELECT version();"
         imagePullPolicy: IfNotPresent
         env:
         - name: PGHOST
