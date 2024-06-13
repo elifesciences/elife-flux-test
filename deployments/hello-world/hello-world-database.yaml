@@ -19,7 +19,7 @@ spec:
     postgresVersion: 14
     instances:
     - name: instance1
-      replicas: 1
+      replicas: 3
       dataVolumeClaimSpec:
         storageClassName: ebs-gp3
         accessModes:
