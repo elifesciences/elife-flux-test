@@ -14,8 +14,8 @@
       "regionNetworkEgress": "0.01",
       "internetNetworkEgress": "0.143",
 
-      "projectID": "${aws_account_id}",
-      "awsSpotDataRegion":"${aws_region}",
+      "projectID": "512686554592",
+      "awsSpotDataRegion":"us-east-1",
       "awsSpotDataBucket": "elife-cost-data",
       "awsSpotDataPrefix": "spot-instance-data",
       "spotLabel": "eks.amazonaws.com/capacityType",
