@@ -20,6 +20,8 @@ spec:
       retries: 5
 
   values:
+    serviceAccount:
+      eks.amazonaws.com/role-arn: ${aws_opencost_service_account_role_arn}
     opencost:
       exporter:
         defaultClusterId: "${cluster_name}"
