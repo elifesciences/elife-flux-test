@@ -32,3 +32,18 @@ spec:
           url: http://vmselect-victoriametrics.victoriametrics.svc:8481/select/0/prometheus
         internal:
           enabled: false
+      ui:
+        ingress:
+          enabled: true
+          annotations:
+            cert-manager.io/cluster-issuer: "letsencrypt-prod"
+            nginx.ingress.kubernetes.io/auth-url: "${oauth2_proxy_auth_url}"
+            nginx.ingress.kubernetes.io/auth-signin: "${oauth2_proxy_auth_signin}"
+          hosts:
+          - host: opencost.${cluster_domain}
+            paths:
+            - /
+          tls:
+          - secretName: opencost-tls
+            hosts:
+            - opencost.${cluster_domain}
