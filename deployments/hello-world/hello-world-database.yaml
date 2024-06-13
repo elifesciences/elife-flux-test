@@ -22,3 +22,8 @@ spec:
       replicas: 1
       dataVolumeClaimSpec:
         storageClassName: ebs-gp3
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
