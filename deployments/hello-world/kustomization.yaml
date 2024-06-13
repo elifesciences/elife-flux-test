@@ -4,7 +4,7 @@ namespace: hello-world
 resources:
 - namespace.yaml
 - hello-world-database.yaml
-- hello-world-app.yaml
+- hello-world-test.yaml
 
 labels:
 - includeSelectors: true
