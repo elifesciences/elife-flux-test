@@ -15,22 +15,22 @@ spec:
         env:
         - name: PGHOST
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               name: hello-world-database-pguser-hello-world-database
               key: pgbouncer-host
         - name: PGPORT
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               name: hello-world-database-pguser-hello-world-database
               key: pgbouncer-port
         - name: PGDATABASE
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               name: hello-world-database-pguser-hello-world-database
               key: dbname
         - name: PGUSER
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               name: hello-world-database-pguser-hello-world-database
               key: user
         - name: PGPASSWORD
