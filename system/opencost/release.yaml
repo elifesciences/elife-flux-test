@@ -25,7 +25,7 @@ spec:
     opencost:
       cloudIntegrationSecret: opencost-cloud-integration
       cloudCost:
-        enabled: false
+        enabled: true
       exporter:
         defaultClusterId: "${cluster_name}"
         extraEnv:
