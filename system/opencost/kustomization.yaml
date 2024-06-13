@@ -11,6 +11,5 @@ secretGenerator:
 - name: opencost-cloud-integration
   files:
   - config/cloud-integration.json
-  - config/cloud-configurations.json
   options:
     disableNameSuffixHash: true
