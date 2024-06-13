@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-app
+spec:
+  replicas: 1
+  spec:
+    containers:
+    - image: postgres:14
+      name: hello-world-app
+      command:
+      - psql
+      imagePullPolicy: IfNotPresent
+      env:
+      - name: PGHOST
+        valueFrom:
+          configMapKeyRef:
+            name: hello-world-database-pguser-hello-world-database
+            key: pgbouncer-host
+      - name: PGPORT
+        valueFrom:
+          configMapKeyRef:
+            name: hello-world-database-pguser-hello-world-database
+            key: pgbouncer-port
+      - name: PGDATABASE
+        valueFrom:
+          configMapKeyRef:
+            name: hello-world-database-pguser-hello-world-database
+            key: dbname
+      - name: PGUSER
+        valueFrom:
+          configMapKeyRef:
+            name: hello-world-database-pguser-hello-world-database
+            key: user
+      - name: PGPASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: hello-world-database-pguser-hello-world-database
+            key: password
