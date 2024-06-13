@@ -17,3 +17,8 @@ spec:
       interval: 1m
   values:
     postgresVersion: 14
+    instances:
+    - name: instance1
+      replicas: 1
+      dataVolumeClaimSpec:
+        storageClassName: ebs-gp3
