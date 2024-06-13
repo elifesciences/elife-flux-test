@@ -27,3 +27,15 @@ spec:
         resources:
           requests:
             storage: 5Gi
+    backups:
+      pgbackrest:
+        repos:
+        - name: repo1
+          volume:
+            volumeClaimSpec:
+              storageClassName: ebs-gp3
+              accessModes:
+              - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 1Gi
