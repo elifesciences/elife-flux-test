@@ -7,7 +7,7 @@ resources:
 - release.yaml
 - servicescrape.yaml
 
-configMapGenerator:
+secretGenerator:
 - name: opencost-cloud-integration
   files:
   - config/cloud-integration.json
