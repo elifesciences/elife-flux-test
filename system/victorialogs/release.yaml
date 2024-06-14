@@ -17,12 +17,14 @@ spec:
       retentionPeriod: 1
       persistentVolume:
         enabled: true
+        storageClass: ebs-gp3
+        size: 3Gi
       ingress:
         enabled: true
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt-prod"
-          nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
-          nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
+          nginx.ingress.kubernetes.io/auth-url: "${oauth2_proxy_auth_url}"
+          nginx.ingress.kubernetes.io/auth-signin: "${oauth2_proxy_auth_signin}"
         hosts:
           - name: victorialogs.${cluster_domain}
             path: /select
