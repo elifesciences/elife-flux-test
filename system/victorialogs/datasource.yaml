@@ -9,6 +9,6 @@ data:
     apiVersion: 1
     datasources:
       - name: vicrtorialogs
-        type: vicrtorialogs-datasource
+        type: vicrtorialogs
         access: proxy
         url: "http://victorialogs-victoria-logs-single-server.victorialogs:9428/"
