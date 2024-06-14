@@ -10,7 +10,7 @@ spec:
   releaseName: opensearch
   chart:
     spec:
-      chart: opensearch-chart
+      chart: opensearchservice-chart
       version: 0.0.25
       sourceRef:
         kind: HelmRepository
