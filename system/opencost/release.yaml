@@ -20,6 +20,7 @@ spec:
       retries: 5
 
   values:
+    loglevel: debug
     serviceAccount:
       eks.amazonaws.com/role-arn: ${aws_opencost_service_account_role_arn}
     opencost:
