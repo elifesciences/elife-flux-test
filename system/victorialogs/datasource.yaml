@@ -8,7 +8,7 @@ data:
   datasource.yaml: |-
     apiVersion: 1
     datasources:
-      - name: vicrtorialogs
-        type: vicrtorialogs
+      - name: victorialogs
+        type: victorialogs
         access: proxy
         url: "http://victorialogs-victoria-logs-single-server.victorialogs:9428/"
