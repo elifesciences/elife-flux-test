@@ -36,11 +36,16 @@
       "matchFileNames": [".tool-versions"],
       "matchDepNames": ["kubectl"],
       "enabled": false
-    },
+    }
+  ],
+  "customManagers": [
     {
-      "matchDepNames": ["karpenter"],
-      "registryUrls": ["oci://public.ecr.aws/karpenter"],
-      "datasource": "docker"
+      "customType": "regex",
+      "fileMatch": ["nodes/karpenter/release.yaml"],
+      "datasource": "docker",
+      "matchStrings": [
+        "version:\\s(?<versioning>.*?)"
+      ]
     }
   ]
 }
