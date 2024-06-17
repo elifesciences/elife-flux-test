@@ -36,7 +36,10 @@
       "matchFileNames": [".tool-versions"],
       "matchDepNames": ["kubectl"],
       "enabled": false
+    },
+    {
+      "matchDepNames": ["karpenter"],
+      "registryUrls": ["oci://public.ecr.aws/karpenter"]
     }
-
   ]
 }
