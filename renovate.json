@@ -39,7 +39,8 @@
     },
     {
       "matchDepNames": ["karpenter"],
-      "registryUrls": ["oci://public.ecr.aws/karpenter"]
+      "registryUrls": ["oci://public.ecr.aws/karpenter"],
+      "datasource": "docker"
     }
   ]
 }
