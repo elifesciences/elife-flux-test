@@ -37,16 +37,5 @@
       "matchDepNames": ["kubectl"],
       "enabled": false
     }
-  ],
-  "customManagers": [
-    {
-      "customType": "regex",
-      "fileMatch": ["nodes/karpenter/release.yaml"],
-      "datasourceTemplate": "docker",
-      "depNameTemplate": "karpenter",
-      "matchStrings": [
-        "version:\\s(?<versioning>.*?)"
-      ]
-    }
   ]
 }
