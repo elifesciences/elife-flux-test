@@ -42,7 +42,8 @@
     {
       "customType": "regex",
       "fileMatch": ["nodes/karpenter/release.yaml"],
-      "datasource": "docker",
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "karpenter",
       "matchStrings": [
         "version:\\s(?<versioning>.*?)"
       ]
