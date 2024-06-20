@@ -16,3 +16,4 @@ spec:
   postBuild:
     substitute:
       cluster_name: flux-test
+      aws_region: us-east-1
