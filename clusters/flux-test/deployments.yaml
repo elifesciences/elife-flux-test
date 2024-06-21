@@ -17,3 +17,7 @@ spec:
     substitute:
       cluster_name: flux-test
       aws_region: us-east-1
+
+      # AWS roles useful for global actions
+      aws_backup_service_account_role_arn: "arn:aws:iam::512686554592:role/elife-flux-test-backups-cluster-role"
+      aws_backup_s3_bucket: "elife-flux-test-backups"

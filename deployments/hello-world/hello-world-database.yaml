@@ -30,14 +30,17 @@ spec:
     backups:
       pgbackrest:
         global:
-          repo1-path: /pgbackrest/my-cluster/repo1
+          repo1-path: /hello-world/hello-world/
           repo1-retention-full: '14'
           repo1-retention-full-type: time
           repo1-s3-key-type: web-id
+        metadata:
+          annotations:
+            eks.amazonaws.com/role-arn: "${aws_backup_service_account_role_arn}"
         repos:
         - name: repo1
           s3:
-            bucket: elife-flux-test-hello-world
+            bucket: ${aws_backup_s3_bucket}
             region: ${aws_region}
             endpoint: s3.${aws_region}.amazonaws.com
           schedules:
