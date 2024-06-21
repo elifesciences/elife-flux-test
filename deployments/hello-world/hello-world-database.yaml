@@ -31,14 +31,10 @@ spec:
       pgbackrest:
         repos:
         - name: repo1
+          s3:
+            bucket: elife-flux-test-hello-world
+            region: ${aws_region}
+            endpoint: s3.${aws_region}.amazonaws.com
           schedules:
             full: "0 0 * * 6"
             differential: "0 1 * * 1-6"
-          volume:
-            volumeClaimSpec:
-              storageClassName: ebs-gp3
-              accessModes:
-              - ReadWriteOnce
-              resources:
-                requests:
-                  storage: 1Gi
