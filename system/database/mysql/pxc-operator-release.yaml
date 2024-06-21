@@ -22,10 +22,18 @@ spec:
 
   values:
     watchAllNamespaces: true
-    annotations:
-      eks.amazonaws.com/role-arn: "${aws_backup_service_account_role_arn}"
     resources:
       limits: {}
       requests:
         cpu: 58m
         memory: 100Mi
+  postRenderers:
+  - kustomize:
+      patches:
+      - target:
+          kind: ServiceAccount
+          name: pxc-operator
+        patch: |
+          - op: "add"
+            path: "/metadata/annotations/eks.amazonaws.com~1role-arn"
+            value: "${aws_backup_service_account_role_arn}"
