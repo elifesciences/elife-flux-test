@@ -1,0 +1,7 @@
+apiVersion: pgv2.percona.com/v2
+kind: PerconaPGBackup
+metadata:
+  name: test-backup
+spec:
+  pgCluster: hello-world-database
+  repoName: repo1
