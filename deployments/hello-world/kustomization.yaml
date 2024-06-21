@@ -5,7 +5,6 @@ resources:
 - namespace.yaml
 - hello-world-database.yaml
 - hello-world-test.yaml
-- hello-world-s3.yaml
 - test-backup.yaml
 
 labels:

@@ -1,6 +1,0 @@
-apiVersion: s3.services.k8s.aws/v1alpha1
-kind: Bucket
-metadata:
-  name: s3-store
-spec:
-  name: elife-flux-test-hello-world
