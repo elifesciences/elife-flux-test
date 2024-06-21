@@ -1,0 +1,9 @@
+apiVersion: pxc.percona.com/v1
+kind: PerconaXtraDBClusterBackup
+metadata:
+  name: test-backup
+  finalizers:
+    - delete-s3-backup
+spec:
+  pxcCluster: hello-world-pxc-database
+  storageName: elife-flux-test-backups
