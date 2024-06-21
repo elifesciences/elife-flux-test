@@ -1,48 +1,73 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2
-kind: HelmRelease
+apiVersion: pgv2.percona.com/v2
+kind: PerconaPGCluster
 metadata:
   name: hello-world-database
+  namespace: hello-world
 spec:
-  interval: 1m
-  releaseName: hello-world-database
-  chart:
-    spec:
-      chart: pg-db
-      version: 2.3.18
-      sourceRef:
-        kind: HelmRepository
-        name: percona
-        namespace: db-operator-system
-      interval: 1m
-  values:
-    postgresVersion: 14
-    instances:
-    - name: instance1
+  crVersion: 2.3.1
+  image: percona/percona-postgresql-operator:2.3.1-ppg14-postgres
+  postgresVersion: 14
+  port: 5432
+  instances:
+  - name: instance1
+    replicas: 3
+    dataVolumeClaimSpec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 5Gi
+      storageClassName: ebs-gp3
+  backups:
+    pgbackrest:
+      global:
+        repo1-path: /hello-world/hello-world/
+        repo1-retention-full: "14"
+        repo1-retention-full-type: time
+        repo1-s3-key-type: web-id
+      image: percona/percona-postgresql-operator:2.3.1-ppg14-pgbackrest
+      manual:
+        repoName: repo1
+      metadata:
+        annotations:
+          eks.amazonaws.com/role-arn: "${aws_backup_service_account_role_arn}"
+      repoHost:
+        affinity:
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    postgres-operator.crunchydata.com/data: pgbackrest
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+      repos:
+      - name: repo1
+        s3:
+          bucket: elife-flux-test-backups
+          endpoint: s3.us-east-1.amazonaws.com
+          region: us-east-1
+        schedules:
+          differential: 0 1 * * 1-6
+          full: 0 0 * * 6
+  pmm:
+    enabled: false
+  proxy:
+    pgBouncer:
+      image: percona/percona-postgresql-operator:2.3.1-ppg14-pgbouncer
+      exposeSuperusers: true
+      port: 5432
       replicas: 3
-      dataVolumeClaimSpec:
-        storageClassName: ebs-gp3
-        accessModes:
-        - ReadWriteOnce
-        resources:
-          requests:
-            storage: 5Gi
-    backups:
-      pgbackrest:
-        global:
-          repo1-path: /hello-world/hello-world/
-          repo1-retention-full: '14'
-          repo1-retention-full-type: time
-          repo1-s3-key-type: web-id
-        metadata:
-          annotations:
-            eks.amazonaws.com/role-arn: "${aws_backup_service_account_role_arn}"
-        repos:
-        - name: repo1
-          s3:
-            bucket: ${aws_backup_s3_bucket}
-            region: ${aws_region}
-            endpoint: s3.${aws_region}.amazonaws.com
-          schedules:
-            full: "0 0 * * 6"
-            differential: "0 1 * * 1-6"
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  postgres-operator.crunchydata.com/role: pgbouncer
+              topologyKey: kubernetes.io/hostname
+            weight: 1
+  standby:
+    enabled: false
+  unmanaged: false
