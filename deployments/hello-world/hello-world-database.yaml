@@ -29,6 +29,11 @@ spec:
             storage: 5Gi
     backups:
       pgbackrest:
+        global:
+          repo1-path: /pgbackrest/my-cluster/repo1
+          repo1-retention-full: '14'
+          repo1-retention-full-type: time
+          repo1-s3-key-type: web-id
         repos:
         - name: repo1
           s3:
