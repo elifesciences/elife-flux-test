@@ -1,0 +1,9 @@
+apiVersion: psmdb.percona.com/v1
+kind: PerconaServerMongoDBBackup
+metadata:
+  name: test-backup
+  finalizers:
+    - delete-s3-backup
+spec:
+  clusterName: hello-world-psmdb-dat
+  storageName: elife-flux-test-backups

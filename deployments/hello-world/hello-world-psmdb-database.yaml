@@ -24,7 +24,15 @@ spec:
     sharding:
       enabled: false
     backup:
-      enabled: false
+      enabled: true
+      storages:
+        elife-flux-test-backups:
+          type: s3
+          s3:
+            annotations:
+              eks.amazonaws.com/role-arn: "${aws_backup_service_account_role_arn}"
+            bucket: "${aws_backup_s3_bucket}"
+            region: "${aws_region}"
     replsets:
       rs0:
         name: replicaset

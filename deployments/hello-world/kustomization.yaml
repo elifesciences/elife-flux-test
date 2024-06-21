@@ -9,6 +9,7 @@ resources:
 - hello-world-test.yaml
 - test-pg-backup.yaml
 - test-pxc-backup.yaml
+- test-psmdb-backup.yaml
 
 labels:
 - includeSelectors: true
