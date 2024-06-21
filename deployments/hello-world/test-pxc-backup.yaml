@@ -5,5 +5,5 @@ metadata:
   finalizers:
     - delete-s3-backup
 spec:
-  pxcCluster: hello-world-pxc-database
+  pxcCluster: hello-world-pxc-datab
   storageName: elife-flux-test-backups
