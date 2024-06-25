@@ -16,3 +16,7 @@ spec:
   postBuild:
     substitute:
       cluster_name: end-to-end-tests
+
+      # AWS roles useful for global actions
+      aws_backup_service_account_role_arn: "nope"
+      aws_backup_s3_bucket: "does-not-exist"
