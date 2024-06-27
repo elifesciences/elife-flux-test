@@ -25,6 +25,8 @@ spec:
       enabled: false
     backup:
       enabled: true
+      image:
+        tag: 2.4.1-multi
       storages:
         elife-flux-test-backups:
           type: s3
