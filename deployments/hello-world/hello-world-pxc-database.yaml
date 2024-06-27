@@ -35,3 +35,8 @@ spec:
       persistence:
         storageClass: csi-ebs-gp3
         size: 3Gi
+      nodeSelector:
+        kubernetes.io/arch: amd64
+    haproxy:
+      nodeSelector:
+        kubernetes.io/arch: amd64
