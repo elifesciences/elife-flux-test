@@ -28,6 +28,8 @@ spec:
       requests:
         cpu: 30m
         memory: 15Mi
+    nodeSelector:
+      kubernetes.io/arch: arm64
   postRenderers:
   - kustomize:
       patches:
