@@ -20,4 +20,4 @@ resources:
 - ../../vector
 - ../../victoriametrics
 - ../../victorialogs
-- ../../opencost
+# - ../../opencost
