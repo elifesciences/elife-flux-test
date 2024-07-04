@@ -28,6 +28,9 @@ spec:
               operator: In
               values:
               - amd64
+  metadata:
+    annotations:
+      eks.amazonaws.com/role-arn: "${aws_backup_service_account_role_arn}"
   backups:
     pgbackrest:
       global:
@@ -38,9 +41,6 @@ spec:
       image: percona/percona-postgresql-operator:2.3.1-ppg14-pgbackrest
       manual:
         repoName: repo1
-      metadata:
-        annotations:
-          eks.amazonaws.com/role-arn: "${aws_backup_service_account_role_arn}"
       repoHost:
         affinity:
           nodeAffinity:
