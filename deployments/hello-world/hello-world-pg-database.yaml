@@ -5,7 +5,7 @@ metadata:
   name: hello-world-database
   namespace: hello-world
 spec:
-  crVersion: 2.3.1
+  crVersion: 2.4.0
   image: percona/percona-postgresql-operator:2.3.1-ppg14-postgres
   postgresVersion: 14
   port: 5432
