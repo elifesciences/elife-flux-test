@@ -6,7 +6,7 @@ metadata:
   namespace: hello-world
 spec:
   crVersion: 2.4.0
-  image: percona/percona-postgresql-operator:2.3.1-ppg14-postgres
+  image: percona/percona-postgresql-operator:2.4.0-ppg14-postgres
   postgresVersion: 14
   port: 5432
   instances:
@@ -38,7 +38,7 @@ spec:
         repo1-retention-full: "14"
         repo1-retention-full-type: time
         repo1-s3-key-type: web-id
-      image: percona/percona-postgresql-operator:2.3.1-ppg14-pgbackrest
+      image: percona/percona-postgresql-operator:2.4.0-ppg14-pgbackrest
       manual:
         repoName: repo1
       repoHost:
@@ -73,7 +73,7 @@ spec:
     image: percona/pmm-client:2.41.0
   proxy:
     pgBouncer:
-      image: percona/percona-postgresql-operator:2.3.1-ppg14-pgbouncer
+      image: percona/percona-postgresql-operator:2.4.0-ppg14-pgbouncer
       exposeSuperusers: true
       port: 5432
       replicas: 3
