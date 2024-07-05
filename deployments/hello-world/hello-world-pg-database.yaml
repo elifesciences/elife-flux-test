@@ -41,9 +41,6 @@ spec:
       image: percona/percona-postgresql-operator:2.4.0-ppg14-pgbackrest
       manual:
         repoName: repo1
-      metadata:
-        annotations:
-          eks.amazonaws.com/role-arn: "${aws_backup_service_account_role_arn}"
       repoHost:
         affinity:
           nodeAffinity:
@@ -68,9 +65,9 @@ spec:
           bucket: elife-flux-test-backups
           endpoint: s3.us-east-1.amazonaws.com
           region: us-east-1
-        schedules:
-          differential: 0 1 * * 1-6
-          full: 0 0 * * 6
+        # schedules:
+        #   differential: 0 1 * * 1-6
+        #   full: 0 0 * * 6
   pmm:
     enabled: false
     image: percona/pmm-client:2.41.0
