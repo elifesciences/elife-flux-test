@@ -3,11 +3,11 @@ kind: Kustomization
 namespace: hello-world
 resources:
 - namespace.yaml
-- hello-world-pg-database.yaml
+# - hello-world-pg-database.yaml
 # - hello-world-pxc-database.yaml
 # - hello-world-psmdb-database.yaml
 - hello-world-test.yaml
-- test-pg-backup.yaml
+# - test-pg-backup.yaml
 # - test-pxc-backup.yaml
 # - test-psmdb-backup.yaml
 
