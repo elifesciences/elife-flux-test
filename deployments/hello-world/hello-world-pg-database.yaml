@@ -41,6 +41,9 @@ spec:
       image: percona/percona-postgresql-operator:2.4.0-ppg14-pgbackrest
       manual:
         repoName: repo1
+      metadata:
+        annotations:
+          eks.amazonaws.com/role-arn: "${aws_backup_service_account_role_arn}"
       repoHost:
         affinity:
           nodeAffinity:
