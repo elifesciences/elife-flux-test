@@ -21,6 +21,7 @@ spec:
       retries: 5
 
   values:
+    logLevel: "DEBUG"
     watchAllNamespaces: true
 
     resources:
