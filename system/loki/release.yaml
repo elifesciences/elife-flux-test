@@ -29,6 +29,8 @@ spec:
           cpu: 10m
           memory: 90Mi
         limits: null
+      persistence:
+        storageClass: ebs-gp3
 
     read:
       replicas: 3
@@ -45,6 +47,8 @@ spec:
           cpu: 80m
           memory: 500Mi
         limits: null
+      persistence:
+        storageClass: ebs-gp3
 
     gateway:
       replicas: 1
