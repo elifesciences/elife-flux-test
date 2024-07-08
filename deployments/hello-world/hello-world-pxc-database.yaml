@@ -33,7 +33,7 @@ spec:
       # request certs with cert-manager, not helm charts
       certManager: true
       persistence:
-        storageClass: csi-ebs-gp3
+        storageClass: ebs-gp3
         size: 3Gi
       nodeSelector:
         kubernetes.io/arch: amd64
