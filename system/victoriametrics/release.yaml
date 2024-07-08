@@ -36,7 +36,7 @@ spec:
           storage:
             volumeClaimTemplate:
               spec:
-                storageClassName: csi-ebs-st1
+                storageClassName: ebs-st1
                 resources:
                   requests:
                     storage: 125Gi
@@ -51,7 +51,7 @@ spec:
           storage:
             volumeClaimTemplate:
               spec:
-                storageClassName: csi-ebs-gp3
+                storageClassName: ebs-gp3
 
           resources:
             requests:
