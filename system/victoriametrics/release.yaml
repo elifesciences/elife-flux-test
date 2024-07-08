@@ -143,11 +143,6 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
     defaultRules:
-      groups:
-        kubeScheduler:
-          create: false # lives on EKS
-        kubeApiserver:
-          create: false # too memory intensive
       disabled:
         KubeMemoryOvercommit: true
         KubeCPUOvercommit: true
@@ -156,6 +151,10 @@ spec:
         TooManyScrapeErrors: true
     kubeControllerManager:
       enabled: false # lives on EKS
+    kubeScheduler:
+      enabled: false # lives on EKS
+    kubeApiserver:
+      enabled: false # too memory intensive
     victoria-metrics-operator:
       operator:
         disable_prometheus_converter: false
