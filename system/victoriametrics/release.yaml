@@ -143,12 +143,17 @@ spec:
           nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
           nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
     defaultRules:
-      disabled:
-        KubeMemoryOvercommit: true
-        KubeCPUOvercommit: true
-        KubeletTooManyPods: true
-        TooHighChurnRate: true
-        TooManyScrapeErrors: true
+      rules:
+        KubeMemoryOvercommit:
+          create: false
+        KubeCPUOvercommit:
+          create: false
+        KubeletTooManyPods:
+          create: false
+        TooHighChurnRate:
+          create: false
+        TooManyScrapeErrors:
+          create: false
     kubeControllerManager:
       enabled: false # lives on EKS
     kubeScheduler:
