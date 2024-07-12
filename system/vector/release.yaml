@@ -64,16 +64,6 @@ spec:
           type: kubernetes_logs
           extra_label_selector: app.kubernetes.io/name==ingress-nginx
       transforms:
-        json_logs:
-          type: remap
-          inputs:
-            - logs
-          source: |
-            json, err = parse_json(.message)
-            if err == null {
-              .json = json
-              del(.message)
-            }
         nginx_json_parse:
           type: remap
           inputs:
@@ -107,7 +97,7 @@ spec:
             codec: native_json
         local_victorialogs:
           inputs:
-          - json_logs
+          - logs
           type: elasticsearch
           endpoints:
           - "http://victorialogs-victoria-logs-single-server.victorialogs:9428/insert/elasticsearch/"
