@@ -34,6 +34,13 @@ spec:
             bucket: "${aws_backup_s3_bucket}"
             region: "${aws_region}"
             prefix: "hello-world-psmdb"
+      tasks:
+      - name: "daily-backup"
+        enabled: true
+        schedule: "0 0 * * *"
+        keep: 3
+        type: logical
+        storageName: elife-flux-test-backups
     replsets:
       rs0:
         name: replicaset
