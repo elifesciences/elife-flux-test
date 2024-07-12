@@ -9,7 +9,6 @@ resources:
 - hello-world-psmdb-serviceaccount.yaml
 - hello-world-test.yaml
 # - test-pxc-backup.yaml
-- test-psmdb-backup.yaml
 
 labels:
 - includeSelectors: true
