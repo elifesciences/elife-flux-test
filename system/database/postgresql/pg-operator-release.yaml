@@ -35,7 +35,7 @@ spec:
       patches:
       - target:
           kind: ServiceAccount
-          name: pxc-operator
+          name: pg-operator
         patch: |
           - op: "add"
             path: "/metadata/annotations/eks.amazonaws.com~1role-arn"
