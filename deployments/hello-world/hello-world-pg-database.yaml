@@ -41,7 +41,7 @@ spec:
       image: percona/percona-postgresql-operator:2.4.0-ppg14-pgbackrest
       manual:
         repoName: repo1
-      repoHost:
+      jobs:
         affinity:
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
