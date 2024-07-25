@@ -9,9 +9,7 @@ get-started for github](https://fluxcd.io/docs/installation/#github-and-github-e
 
 1.  Configure your `kubectl` using your aws credentials.
 
-        aws eks update-kubeconfig \
-           --name kubernetes-aws--flux-test \
-           --role arn:aws:iam::512686554592:role/kubernetes-aws--flux-test--AmazonEKSUserRole
+        aws eks update-kubeconfig --name kubernetes-aws--flux-test
 
 2.  Create/locate a [personal access token](https://github.com/settings/tokens), Install flux with all controllers on the cluster linked to this repo
 
