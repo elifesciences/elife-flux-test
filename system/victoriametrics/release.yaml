@@ -66,6 +66,20 @@ spec:
               cpu: 250m
               memory: 200Mi
             limits: {}
+      ingress:
+        select:
+          enabled: true
+          path: /select/0/vmui/
+          hosts:
+            - victoriametrics.${cluster_domain}
+          tls:
+            - secretName: victoriametrics-select-tls
+              hosts:
+                - victoriametrics.${cluster_domain}
+          annotations:
+            cert-manager.io/cluster-issuer: "letsencrypt-prod"
+            nginx.ingress.kubernetes.io/auth-url: "${oauth2_proxy_auth_url}"
+            nginx.ingress.kubernetes.io/auth-signin: "${oauth2_proxy_auth_signin}"
     vmagent:
       spec:
         externalLabels:
