@@ -38,3 +38,11 @@ spec:
       - secretName: kubecost-tls
         hosts:
         - kubecost.${cluster_domain}
+    kubecostProductConfigs:
+      clusterProfile: development
+      spotLabel: karpenter.sh/capacity-type
+      spotLabelValue: spot
+      projectID: ${aws_account_id}
+      awsSpotDataRegion: ${aws_region}
+      awsSpotDataBucket: elife-cost-data
+      awsSpotDataPrefix: spot-instance-data
