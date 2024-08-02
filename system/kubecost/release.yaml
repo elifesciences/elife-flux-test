@@ -1,0 +1,34 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kubecost
+
+spec:
+  interval: 1m
+  timeout: 10m
+  releaseName: kubecost
+  chart:
+    spec:
+      chart: kubecost
+      version: 2.3.4
+      sourceRef:
+        kind: HelmRepository
+        name: kubecost
+      interval: 1m
+  install:
+    remediation:
+      retries: 5
+  values:
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: "letsencrypt-prod"
+        nginx.ingress.kubernetes.io/auth-url: "${oauth2_proxy_auth_url}"
+        nginx.ingress.kubernetes.io/auth-signin: "${oauth2_proxy_auth_signin}"
+      hosts:
+      - kubecost.${cluster_domain}
+      tls:
+      - secretName: kubecost-tls
+        hosts:
+        - kubecost.${cluster_domain}
