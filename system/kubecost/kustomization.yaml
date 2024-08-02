@@ -1,8 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: loki
+namespace: kubecost
 resources:
 - namespace.yaml
 - source.yaml
 - release.yaml
-- datasource.yaml
