@@ -42,7 +42,7 @@ spec:
                     storage: 125Gi
           resources:
             requests:
-              cpu: 450m
+              cpu: 300m
               memory: 1884Mi
             limits: {}
           extraArgs:
