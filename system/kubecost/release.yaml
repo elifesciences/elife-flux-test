@@ -38,6 +38,9 @@ spec:
       - secretName: kubecost-tls
         hosts:
         - kubecost.${cluster_domain}
+    serviceAccount:
+      annotations:
+        eks.amazonaws.com/role-arn: ${aws_kubecost_service_account_role_arn}
     kubecostProductConfigs:
       clusterProfile: development
       spotLabel: karpenter.sh/capacity-type

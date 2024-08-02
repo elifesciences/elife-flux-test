@@ -34,7 +34,7 @@ spec:
       aws_ack_opensearch_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-opensearch-controller-cluster-role
       aws_ack_elasticache_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-elasticache-controller-cluster-role
       aws_external_dns_service_account_role_arn: arn:aws:iam::512686554592:role/kubernetes-aws--flux-test--external-dns
-      aws_opencost_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-opencost-cluster-role
+      aws_kubecost_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-kubecost-cluster-role
       aws_backup_service_account_role_arn: "arn:aws:iam::512686554592:role/elife-flux-test-backups-cluster-role"
       aws_backup_s3_bucket: "elife-flux-test-backups"
 
