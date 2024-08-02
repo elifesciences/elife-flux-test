@@ -10,7 +10,7 @@ spec:
   releaseName: kubecost
   chart:
     spec:
-      chart: kubecost
+      chart: cost-analyzer
       version: 2.3.4
       sourceRef:
         kind: HelmRepository
