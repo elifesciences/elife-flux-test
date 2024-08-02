@@ -20,6 +20,12 @@ spec:
     remediation:
       retries: 5
   values:
+    prometheus:
+      server:
+        persistentVolume:
+          storageClass: ebs-gp3
+    persistentVolume:
+      storageClass: ebs-gp3
     ingress:
       enabled: true
       annotations:
