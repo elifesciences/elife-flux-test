@@ -11,6 +11,7 @@ spec:
         elifesciences.org/project: "${cluster_name}"
         type: karpenter
     spec:
+      expireAfter: 720h # 30 * 24h = 720h
       nodeClassRef:
         group: karpenter.k8s.aws/v1
         kind: EC2NodeClass
@@ -34,11 +35,9 @@ spec:
         - key: "topology.kubernetes.io/zone"
           operator: In
           values: ["us-east-1c", "us-east-1d"]
-      disruption:
-        consolidationPolicy: WhenEmptyOrUnderutilized
-        expireAfter: 720h # 30 * 24h = 720h
-        budgets:
-        - nodes: "1"
-
   limits:
     cpu: 1000
+  disruption:
+    consolidationPolicy: WhenEmptyOrUnderutilized
+    budgets:
+    - nodes: "1"
