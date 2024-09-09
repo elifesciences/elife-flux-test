@@ -3,4 +3,4 @@ kind: Kustomization
 namespace: karpenter
 resources:
 - nodeclass.yaml
-- nodepool-old.yaml
+- nodepool.yaml
