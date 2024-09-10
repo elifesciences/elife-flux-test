@@ -33,3 +33,8 @@ spec:
         requests:
           cpu: 10m
           memory: 10Mi
+    podIdentity:
+      aws:
+        irsa:
+          enabled: true
+          roleArn: "${aws_keda_service_account_role_arn}"
