@@ -5,3 +5,5 @@ resources:
 - namespace.yaml
 - source.yaml
 - release.yaml
+- gateway-configuration.yaml
+- gateway-class.yaml
