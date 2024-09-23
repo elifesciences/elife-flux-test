@@ -11,9 +11,9 @@ spec:
     protocol: HTTP
     port: 80
   - name: https
-    hostname: api.test-gateway.elifesciences.org
     port: 443
     protocol: HTTPS
+    hostname: api.test-gateway.elifesciences.org
     tls:
       mode: Terminate
       certificateRefs:
