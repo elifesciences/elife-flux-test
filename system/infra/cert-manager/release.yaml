@@ -21,6 +21,8 @@ spec:
       retries: 5
 
   values:
+    config:
+      enableGatewayAPI: true
     installCRDs: false
     prometheus:
       servicemonitor:
