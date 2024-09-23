@@ -22,6 +22,12 @@ spec:
   values:
     prometheus:
       server:
+        resources:
+          request:
+            cpu: 312m
+            memory: 1500Mi
+          limits:
+            memory: 1500Mi
         persistentVolume:
           storageClass: ebs-gp3
     persistentVolume:
@@ -41,6 +47,28 @@ spec:
     serviceAccount:
       annotations:
         eks.amazonaws.com/role-arn: ${aws_kubecost_service_account_role_arn}
+    kubecostModel:
+      resources:
+        request:
+          cpu: 1000m
+          memory: 646Mi
+        limits:
+          memory: 646Mi
+    kubecostAggregator:
+      resources:
+        request:
+          cpu: 1000m
+          memory: 1483Mi
+        limits:
+          cpu: 1000m
+          memory: 15000Mi
+      cloudCost:
+        resources:
+          request:
+            cpu: 384m
+            memory: 70Mi
+          limits:
+            memory: 70Mi
     kubecostProductConfigs:
       clusterProfile: development
       spotLabel: karpenter.sh/capacity-type
