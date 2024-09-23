@@ -14,5 +14,3 @@ spec:
         name: kong
       interval: 1m
   values:
-    image:
-      tag: 1.3
