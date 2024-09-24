@@ -14,6 +14,11 @@ spec:
         spec:
           nodeSelector:
             elifesciences.org/project: ${cluster_name}
+          tolerations:
+          - effect: NoSchedule
+            key: project
+            operator: Equal
+            value: flux-test
           containers:
           - name: proxy
             readinessProbe:
@@ -30,6 +35,11 @@ spec:
         spec:
           nodeSelector:
             elifesciences.org/project: ${cluster_name}
+          tolerations:
+          - effect: NoSchedule
+            key: project
+            operator: Equal
+            value: flux-test
           containers:
           - name: controller
             env:
