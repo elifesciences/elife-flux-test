@@ -21,7 +21,6 @@ spec:
       retries: 5
 
   values:
-    logLevel: debug
     txtOwnerId: ${external_dns_cluster_name}
     metrics:
       enabled: true
