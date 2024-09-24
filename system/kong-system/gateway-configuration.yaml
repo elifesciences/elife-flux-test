@@ -6,11 +6,6 @@ spec:
   dataPlaneOptions:
     deployment:
       podTemplateSpec:
-        metadata:
-          annotations:
-            elifesciences.org/project: ${cluster_name}
-          labels:
-            elifesciences.org/project: ${cluster_name}
         spec:
           nodeSelector:
             elifesciences.org/project: ${cluster_name}
@@ -27,11 +22,6 @@ spec:
   controlPlaneOptions:
     deployment:
       podTemplateSpec:
-        metadata:
-          annotations:
-            elifesciences.org/project: ${cluster_name}
-          labels:
-            elifesciences.org/project: ${cluster_name}
         spec:
           nodeSelector:
             elifesciences.org/project: ${cluster_name}
