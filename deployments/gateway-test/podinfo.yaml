@@ -29,6 +29,12 @@ spec:
     - path:
         type: PathPrefix
         value: /podinfo
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          replacePrefixMatch: /
+          type: ReplacePrefixMatch
     backendRefs:
     - name: podinfo
       namespace: podinfo--staging
