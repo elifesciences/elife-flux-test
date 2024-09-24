@@ -23,3 +23,10 @@ spec:
             env:
             - name: CONTROLLER_LOG_LEVEL
               value: debug
+            resources:
+              limits:
+                cpu: 200m
+                memory: 200Mi
+              requests:
+                cpu: 100m
+                memory: 100Mi
