@@ -8,6 +8,7 @@ spec:
   - group: gateway.networking.k8s.io
     kind: Gateway
     name: api-gateway
+  hostnames: api.test-gateway.elifesciences.org
   rules:
   - matches:
     - path:
