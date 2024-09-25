@@ -5,7 +5,7 @@ metadata:
   namespace: gateway--test
 spec:
   type: ExternalName
-  externalName: domain--test.elife.internal
+  externalName: continuumtest--gateway.elife.internal
   ports:
   - protocol: TCP
     port: 80
