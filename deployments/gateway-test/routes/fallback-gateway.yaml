@@ -40,5 +40,5 @@ spec:
         value: /
     backendRefs:
     - name: fallback-gateway
-      namespace: gateway--staging
+      namespace: gateway--test
       port: 80
