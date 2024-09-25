@@ -41,6 +41,12 @@ spec:
     - path:
         type: PathPrefix
         value: /
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          replacePrefixMatch: /
+          type: ReplacePrefixMatch
     backendRefs:
     - name: fallback-gateway
       namespace: gateway--test
