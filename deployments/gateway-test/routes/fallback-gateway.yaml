@@ -15,6 +15,8 @@ apiVersion: gateway.networking.k8s.io/v1
 metadata:
   name: fallback
   namespace: gateway--test
+  annotations: 
+    konghq.com/preserve-host: "false"
 spec:
   parentRefs:
   - group: gateway.networking.k8s.io
