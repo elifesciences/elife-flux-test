@@ -2,11 +2,11 @@
 kind: GatewayClass
 apiVersion: gateway.networking.k8s.io/v1
 metadata:
-  name: kong
+  name: api-gateway
+  namespace: gateway--test
 spec:
   controllerName: konghq.com/gateway-operator
   parametersRef:
     group: gateway-operator.konghq.com
     kind: GatewayConfiguration
-    name: kong
-    namespace: kong-system
+    name: api-gateway
