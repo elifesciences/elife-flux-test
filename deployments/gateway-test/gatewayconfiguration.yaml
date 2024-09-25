@@ -26,6 +26,8 @@ spec:
             env:
             - name: CONTROLLER_LOG_LEVEL
               value: debug
+            - name: CONTROLLER_DUMP_CONFIG
+              value: "true"
             resources:
               limits:
                 cpu: 200m
