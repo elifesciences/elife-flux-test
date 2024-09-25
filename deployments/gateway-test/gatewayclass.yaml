@@ -10,3 +10,4 @@ spec:
     group: gateway-operator.konghq.com
     kind: GatewayConfiguration
     name: api-gateway
+    namespace: gateway--test
