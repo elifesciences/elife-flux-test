@@ -19,6 +19,7 @@ spec:
               periodSeconds: 1
   controlPlaneOptions:
     deployment:
+      podTemplateSpec:
         spec:
           containers:
           - name: controller
