@@ -18,6 +18,8 @@ apiVersion: gateway.networking.k8s.io/v1
 metadata:
   name: podinfo
   namespace: gateway--test
+  annotations:
+    konghq.com/plugins: rate-limit-5-min
 spec:
   parentRefs:
   - group: gateway.networking.k8s.io
