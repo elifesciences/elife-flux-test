@@ -3,10 +3,6 @@ apiVersion: gateway-operator.konghq.com/v1beta1
 metadata:
   name: api-gateway
   namespace: gateway--test
-  annotations:
-    elifesciences.org/project: ${cluster_name}
-  labels:
-    elifesciences.org/project: ${cluster_name}
 spec:
   dataPlaneOptions:
     network:
@@ -15,19 +11,7 @@ spec:
           type: ClusterIP # internal gateway only
     deployment:
       podTemplateSpec:
-        metadata:
-          annotations:
-            elifesciences.org/project: ${cluster_name}
-          labels:
-            elifesciences.org/project: ${cluster_name}
         spec:
-          nodeSelector:
-            elifesciences.org/project: ${cluster_name}
-          tolerations:
-          - effect: NoSchedule
-            key: project
-            operator: Equal
-            value: flux-test
           containers:
           - name: proxy
             readinessProbe:
@@ -35,20 +19,7 @@ spec:
               periodSeconds: 1
   controlPlaneOptions:
     deployment:
-      podTemplateSpec:
-        metadata:
-          annotations:
-            elifesciences.org/project: ${cluster_name}
-          labels:
-            elifesciences.org/project: ${cluster_name}
         spec:
-          nodeSelector:
-            elifesciences.org/project: ${cluster_name}
-          tolerations:
-          - effect: NoSchedule
-            key: project
-            operator: Equal
-            value: ${cluster_name}
           containers:
           - name: controller
             env:
