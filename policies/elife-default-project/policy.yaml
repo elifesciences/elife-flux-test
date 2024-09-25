@@ -84,6 +84,10 @@ spec:
         operator: NotEquals
         value: controlplane
         message: This workload belongs to kong, and kong does not like us touching its things, see https://github.com/Kong/gateway-operator/issues/500
+      - key: "{{ request.\"object\".metadata.labels.\"konghq.com/gateway-operator\" || '' }}"
+        operator: NotEquals
+        value: dataplane
+        message: This workload belongs to kong, and kong does not like us touching its things, see https://github.com/Kong/gateway-operator/issues/500
     mutate:
       patchStrategicMerge:
         metadata:
