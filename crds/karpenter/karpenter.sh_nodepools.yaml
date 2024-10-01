@@ -1078,5 +1078,5 @@ spec:
       clientConfig:
         service:
           name: karpenter
-          namespace: kube-system
+          namespace: karpenter
           port: 8443
