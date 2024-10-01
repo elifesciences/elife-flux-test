@@ -10,4 +10,4 @@ fi
 
 cd $(dirname $0)
 
-curl -L https://github.com/cert-manager/cert-manager/releases/download/$1/cert-manager.crds.yaml > cert-manager.crd.yaml
+curl -sL https://github.com/cert-manager/cert-manager/releases/download/$1/cert-manager.crds.yaml > cert-manager.crd.yaml
