@@ -21,10 +21,10 @@ spec:
             kind: ClusterRole
             name: kong-gateway-operator-gateway-operator-manager-role
           patch: |
-            op: add
-            path: /rules/-
-            value:
-              - apiGroups:
+            - op: add
+              path: /rules/-
+              value:
+                apiGroups:
                 - gateway-operator.konghq.com
                 resources:
                 - dataplanemetricsextensions
