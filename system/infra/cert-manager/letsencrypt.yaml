@@ -8,7 +8,7 @@ spec:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: it-admin@elifesciences.org
     privateKeySecretRef:
-      name: letsencrypt-prod
+      name: letsencrypt
     solvers:
     - dns01:
         route53: {}
