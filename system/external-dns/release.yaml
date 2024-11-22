@@ -33,7 +33,7 @@ spec:
 
     # Configuration for Route53 DNS.
     txtOwnerId: ${external_dns_cluster_name}
-    policy: upsert-only
+    policy: sync
     provider:
       name: aws
     extraArgs:
