@@ -16,6 +16,9 @@ spec:
   values:
     serviceMonitor:
       enabled: true
+    serviceAccount:
+      annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::512686554592:role/elife-flux-test-external-dns-cluster-role
     resources:
       requests:
         memory: 60Mi
