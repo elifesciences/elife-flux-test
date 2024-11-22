@@ -30,6 +30,7 @@ spec:
     - gateway-tlsroute
     - gateway-tcproute
     - gateway-udproute
+    triggerLoopOnEvent: false
 
     # Configuration for Route53 DNS.
     txtOwnerId: ${external_dns_cluster_name}
