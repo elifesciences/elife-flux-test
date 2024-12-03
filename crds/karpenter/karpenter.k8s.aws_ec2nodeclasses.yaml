@@ -737,8 +737,3 @@ spec:
       storage: true
       subresources:
         status: {}
-  conversion:
-    webhook:
-      clientConfig:
-        service:
-          namespace: karpenter
