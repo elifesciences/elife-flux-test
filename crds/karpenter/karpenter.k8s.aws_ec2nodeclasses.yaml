@@ -18,8 +18,6 @@ spec:
       - ec2ncs
     singular: ec2nodeclass
   scope: Cluster
-  conversion:
-    strategy: None
   versions:
     - additionalPrinterColumns:
         - jsonPath: .status.conditions[?(@.type=="Ready")].status
