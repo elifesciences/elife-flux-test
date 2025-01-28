@@ -5,6 +5,8 @@ metadata:
   namespace: podinfo
   labels:
     app: podinfo
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
     - host: "${hostname}"
