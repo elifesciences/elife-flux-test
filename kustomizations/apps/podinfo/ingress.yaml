@@ -17,3 +17,7 @@ spec:
                 name: podinfo-scaler
                 port:
                   number: ${keda_port:=8080}
+  tls:
+  - hosts:
+    - "${hostname}"
+    secretName: podinfo-tls
