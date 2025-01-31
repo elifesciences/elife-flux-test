@@ -21,7 +21,7 @@ spec:
 
   resources:
     - id: deployment
-      definition:
+      template:
         apiVersion: apps/v1
         kind: Deployment
         metadata:
@@ -94,7 +94,7 @@ spec:
                     memory: 64Mi
 
     - id: service
-      definition:
+      template:
         apiVersion: v1
         kind: Service
         metadata:
