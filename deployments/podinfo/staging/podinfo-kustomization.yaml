@@ -1,33 +1,33 @@
-# apiVersion: kustomize.toolkit.fluxcd.io/v1
-# kind: Kustomization
-# metadata:
-#   name: podinfo--staging
-#   namespace: podinfo--staging
-# spec:
-#   interval: 1m0s
-#   sourceRef:
-#     kind: GitRepository
-#     name: flux-system
-#     namespace: flux-system
-#   path: ./kustomizations/apps/podinfo
-#   prune: true
-#   targetNamespace: podinfo--staging
-#   images:
-#   - name: docker.io/stefanprodan/podinfo
-#     newTag: 6.7.1 # {"$imagepolicy": "podinfo--staging:podinfo-stable:tag"}
-#   postBuild:
-#     substitute:
-#       hostname: podinfo--staging.elifesciences.org
-#   # patches:
-#   # - target:
-#   #     kind: Ingress
-#   #     name: podinfo
-#   #   patch: |
-#   #     apiVersion: networking.k8s.io/v1
-#   #     kind: Ingress
-#   #     metadata:
-#   #       name: podinfo
-#   #       namespace: podinfo
-#   #       annotations:
-#   #         nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
-#   #         nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: podinfo--staging
+  namespace: podinfo--staging
+spec:
+  interval: 1m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  path: ./kustomizations/apps/podinfo
+  prune: true
+  targetNamespace: podinfo--staging
+  images:
+  - name: docker.io/stefanprodan/podinfo
+    newTag: 6.7.1 # {"$imagepolicy": "podinfo--staging:podinfo-stable:tag"}
+  postBuild:
+    substitute:
+      hostname: podinfo--staging.elifesciences.org
+  # patches:
+  # - target:
+  #     kind: Ingress
+  #     name: podinfo
+  #   patch: |
+  #     apiVersion: networking.k8s.io/v1
+  #     kind: Ingress
+  #     metadata:
+  #       name: podinfo
+  #       namespace: podinfo
+  #       annotations:
+  #         nginx.ingress.kubernetes.io/auth-url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
+  #         nginx.ingress.kubernetes.io/auth-signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"

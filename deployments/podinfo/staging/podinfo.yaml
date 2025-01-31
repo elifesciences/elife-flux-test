@@ -1,8 +1,0 @@
-apiVersion: kro.run/v1alpha1
-kind: Podinfo
-metadata:
-  name: podinfo-staging
-  namespace: podinfo--staging
-spec:
-  env: staging
-  replicas: 1
