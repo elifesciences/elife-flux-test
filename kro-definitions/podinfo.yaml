@@ -9,12 +9,10 @@ spec:
     spec:
       env: string
       replicas: integer | default=3
-      image:
-        repo: string | default="stefanprodan/podinfo"
-        tag: string | default="latest"
-      ingress:
-        enabled: boolean | default=false
-        host: string | default=""
+      imageRepo: string | default="stefanprodan/podinfo"
+      imageTag: string | default="latest"
+      ingress: boolean | default=false
+      hostname: string | default=""
     status:
       availableReplicas: ${deployment.status.availableReplicas}
       conditions: ${deployment.status.conditions}
