@@ -13,6 +13,7 @@ resources:
 - ../../kong-system
 - ../../kube-web-view
 - ../../kubecost
+- ../../kro
 - ../../metrics-server
 - ../../monitoring
 - ../../template-controller
