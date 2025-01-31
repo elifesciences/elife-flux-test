@@ -14,7 +14,7 @@ spec:
         tag: string | default="latest"
       ingress:
         enabled: boolean | default=false
-        host: string
+        host: string | default=""
     status:
       availableReplicas: ${deployment.status.availableReplicas}
       conditions: ${deployment.status.conditions}
