@@ -5,3 +5,4 @@ metadata:
   namespace: podinfo--staging
 spec:
   env: staging
+  replicas: 1
