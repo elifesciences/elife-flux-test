@@ -16,7 +16,6 @@ cd $(dirname $0)
 ./victoriametrics/update.sh $(cat ../system/victoriametrics/release.yaml  | yq .spec.chart.spec.version)
 
 ./ack-controllers/common/update.sh $(cat ../system/ack-system/s3-release.yaml  | yq .spec.chart.spec.version)
-./ack-controllers/elasticache-controller/update.sh $(cat ../system/ack-system/elasticache-release.yaml  | yq .spec.chart.spec.version)
 ./ack-controllers/iam-controller/update.sh $(cat ../system/ack-system/iam-release.yaml  | yq .spec.chart.spec.version)
 ./ack-controllers/rds-controller/update.sh $(cat ../system/ack-system/rds-release.yaml  | yq .spec.chart.spec.version)
 ./ack-controllers/s3-controller/update.sh $(cat ../system/ack-system/s3-release.yaml  | yq .spec.chart.spec.version)
