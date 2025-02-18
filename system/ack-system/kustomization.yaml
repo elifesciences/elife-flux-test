@@ -6,7 +6,6 @@ resources:
 - source.yaml
 - rds-release.yaml
 - s3-release.yaml
-- elasticache-release.yaml
 - sqs-release.yaml
 - sns-release.yaml
 - iam-release.yaml
