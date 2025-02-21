@@ -17,7 +17,7 @@ spec:
     image:
       tag: v0.5.1
     configuration:
-      taintRemovalDelayInSeconds: 5
+      taintRemovalDelayInSeconds: 10
       nodeSelector:
       - karpenter.sh/nodepool
       daemonsets:
