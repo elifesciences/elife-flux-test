@@ -21,7 +21,8 @@
       "kustomizations/.+\\.yaml$",
       "policies/.+\\.yaml$",
       "nodes/.+\\.yaml$",
-      "teams/.+\\.yaml$"
+      "teams/.+\\.yaml$",
+      "crds/.+\\.yaml$"
     ]
   },
   "packageRules": [
