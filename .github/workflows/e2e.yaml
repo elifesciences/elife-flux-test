@@ -39,6 +39,10 @@ jobs:
           kubectl get helmreleases.helm.toolkit.fluxcd.io --all-namespaces
           echo "kubectl get all pods"
           kubectl get pods -A -o wide
+      - name: Debug external secrets
+        if: failure()
+        run: |
+          kubectl logs --previous -n external-secrets deployment/external-secrets
       - name: Debug describe nodes
         if: failure()
         run: |
