@@ -42,6 +42,7 @@ jobs:
       - name: Debug external secrets
         if: failure()
         run: |
+          kubectl describe externalsecrets -A
           kubectl logs --previous -n external-secrets deployment/external-secrets
       - name: Debug describe nodes
         if: failure()
