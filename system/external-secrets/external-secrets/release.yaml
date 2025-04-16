@@ -32,12 +32,5 @@ spec:
 
     webhook:
       create: false
-      resources:
-        requests:
-          cpu: 10m
-          memory: 35Mi
     certController:
-      resources:
-        requests:
-          cpu: 10m
-          memory: 180Mi
+      create: false
