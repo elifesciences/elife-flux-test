@@ -30,6 +30,7 @@ spec:
       aws_keda_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-keda-cluster-role
       aws_external_secrets_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-external-secrets
       aws_ack_rds_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-rds-controller-cluster-role
+      aws_ack_route53_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-route53-controller-cluster-role
       aws_ack_s3_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-s3-controller-cluster-role
       aws_ack_sqs_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-sqs-controller-cluster-role
       aws_ack_sns_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-sns-controller-cluster-role
