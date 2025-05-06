@@ -6,7 +6,7 @@ resources:
 - source.yaml
 - release.yaml
 - secrets
-- dashboards
+# - dashboards
 
 configMapGenerator:
 - name: alertmanager-values
