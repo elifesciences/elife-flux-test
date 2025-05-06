@@ -6,11 +6,8 @@ configMapGenerator:
   - kubernetes-nginx-ingress-via-prometheus.json
   - ingress-nginx-request-handling-performance.json
   - ingress-nginx-overview.json
-patches:
-- patch: |
-    apiVersion: v1
-    kind: ConfigMap
-    metadata:
-      name: ingress-dashboards
-      labels:
-        grafana_dashboard: "1"
+  options:
+    labels:
+      grafana_dashboard: "1"
+    annotations:
+      kustomize.toolkit.fluxcd.io/substitute: disabled
