@@ -8,4 +8,3 @@ yq          4.45.4
 kubeconform 0.6.4
 awscli      2.27.16
 helm        3.17.3
-envsubst    1.4.2
