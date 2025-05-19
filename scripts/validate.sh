@@ -54,7 +54,7 @@ echo "# INFO - Validating clusters is conforming to flux schema"
 echo "## INFO - Downloading Flux OpenAPI schemas"
 mkdir -p /tmp/flux-crd-schemas/master-standalone-strict
 curl -sL https://github.com/fluxcd/flux2/releases/latest/download/crd-schemas.tar.gz | tar zxf - -C /tmp/flux-crd-schemas/master-standalone-strict
-find ./clusters -maxdepth 2 -type f -name '*.yaml' -print0 | while IFS= read -r -d $'\0' file;
+find ./clusters -type f -name '*.yaml' -print0 | while IFS= read -r -d $'\0' file;
   do
     echo "## INFO - Validating cluster file ${file}"
     conform_output=$(kubeconform $kubeconform_config ${file})
@@ -67,7 +67,7 @@ done
 
 
 echo "# INFO - Validating kustomize overlays (excluding ./clusters path)"
-find . -type f -name $kustomize_config -not -path "*clusters/*" -print0 | while IFS= read -r -d $'\0' file;
+find . -type f -name $kustomize_config -not -path "./clusters/*" -print0 | while IFS= read -r -d $'\0' file;
   do
     echo "## INFO - Validating kustomization ${file/%$kustomize_config}"
     tmp_dir=$(mktemp -d)
@@ -84,7 +84,7 @@ find . -type f -name $kustomize_config -not -path "*clusters/*" -print0 | while 
     cat $tmp_dir/kustomize_output | kubeconform $kubeconform_config > $tmp_dir/kubeconform_output 2> $tmp_dir/kubeconform_error
     if [[ ${PIPESTATUS[1]} != 0 ]]; then
       echo "## INFO ${file/%$kustomize_config} failed kubeconform, trying with envsubst"
-      cat $tmp_dir/kustomize_output | envsubst -no-unset > $tmp_dir/envsubst_output 2> $tmp_dir/envsubst_error
+      cat $tmp_dir/kustomize_output | flux envsubst --strict > $tmp_dir/envsubst_output 2> $tmp_dir/envsubst_error
       if [[ ${PIPESTATUS[1]} != 0 ]]; then
         echo "## ERROR ${file/%$kustomize_config} failed envsubst"
         cat $tmp_dir/envsubst_error
