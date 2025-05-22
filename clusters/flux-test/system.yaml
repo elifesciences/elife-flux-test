@@ -35,6 +35,7 @@ spec:
       aws_ack_sqs_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-sqs-controller-cluster-role
       aws_ack_sns_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-sns-controller-cluster-role
       aws_ack_iam_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-iam-controller-cluster-role
+      aws_ack_cloudfront_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-cloudfront-controller-cluster-role
       aws_external_dns_service_account_role_arn: arn:aws:iam::512686554592:role/kubernetes-aws--flux-test--external-dns
       aws_cert_manager_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-cert-manager
       aws_backup_service_account_role_arn: "arn:aws:iam::512686554592:role/elife-flux-test-backups-cluster-role"

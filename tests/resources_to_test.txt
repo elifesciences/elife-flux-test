@@ -9,6 +9,13 @@
 2m helmrelease ready db-operator-system pxc-operator
 2m helmrelease ready gitops-dashboard gitops-dashboard
 2m helmrelease ready ack-system rds
+2m helmrelease ready ack-system cloudfront
+2m helmrelease ready ack-system iam
+2m helmrelease ready ack-system rds
+2m helmrelease ready ack-system route53
+2m helmrelease ready ack-system s3
+2m helmrelease ready ack-system sns
+2m helmrelease ready ack-system sqs
 2m helmrelease ready external-dns external-dns
 2m helmrelease ready external-secrets external-secrets
 2m helmrelease ready template-controller template-controller
