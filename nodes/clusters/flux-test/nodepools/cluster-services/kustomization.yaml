@@ -4,3 +4,5 @@ namespace: karpenter
 resources:
 - nodeclass.yaml
 - nodepool.yaml
+
+- al2023nodeclass.yaml
