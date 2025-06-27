@@ -11,32 +11,13 @@ spec:
   chart:
     spec:
       chart: cloudnative-pg
-      version: 2.6.0
+      version: 0.24.0
       sourceRef:
         kind: HelmRepository
-        name: percona
+        name: cnpg
       interval: 1m
   install:
     remediation:
       retries: 5
 
   values:
-    watchAllNamespaces: true
-    resources:
-      limits: {}
-      requests:
-        cpu: 30m
-        memory: 15Mi
-    nodeSelector:
-      kubernetes.io/arch: amd64
-    logLevel: "DEBUG"
-  postRenderers:
-    - kustomize:
-        patches:
-          - target:
-              version: v1
-              kind: ServiceAccount
-            patch: |
-              - op: add
-                path: /metadata/annotations/eks.amazonaws.com~1role-arn
-                value: "${aws_backup_service_account_role_arn}"
