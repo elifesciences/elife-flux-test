@@ -33,7 +33,7 @@
         "pin",
         "digest"
       ],
-      "automerge": true,
+      "automerge": false,
       "assignAutomerge": true,
       "automergeSchedule": [
         "after 7am and before 8am every weekday"
