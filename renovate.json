@@ -10,9 +10,7 @@
       "kustomizations/.+\\.yaml$"
     ]
   },
-  "assignees": [
-    "scottaubrey"
-  ],
+  "assigneesFromCodeOwners": true,
   "flux": {
     "fileMatch": [
       "deployments/.+\\.yaml$",
@@ -33,7 +31,7 @@
         "pin",
         "digest"
       ],
-      "automerge": false,
+      "automerge": true,
       "assignAutomerge": true,
       "automergeSchedule": [
         "after 7am and before 8am every weekday"
