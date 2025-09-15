@@ -25,4 +25,3 @@ spec:
       enabled: true
     spegel:
       logLevel: debug
-    clusterDomain: ""
