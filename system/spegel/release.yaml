@@ -23,3 +23,5 @@ spec:
       enabled: true
     serviceMonitor:
       enabled: true
+    spegel:
+      logLevel: debug
