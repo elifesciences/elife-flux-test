@@ -11,13 +11,3 @@ spec:
     name: flux-system
   path: ./nodes/clusters/flux-test
   prune: true
-  postBuild:
-    substitute:
-      cluster_name: flux-test
-      cluster_domain: flux-test.elifesciences.org
-      aws_account_id: "512686554592"
-      aws_region: us-east-1
-      aws_karpenter_interruption_queue: elife-flux-test-karpenter
-
-      # service account arns
-      aws_karpenter_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-karpenter-cluster-role
