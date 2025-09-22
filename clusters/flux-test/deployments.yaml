@@ -13,6 +13,3 @@ spec:
   prune: true
   dependsOn:
     - name: system
-  postBuild:
-    substitute:
-      aws_account_id: "512686554592"
