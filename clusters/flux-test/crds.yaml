@@ -13,4 +13,4 @@ spec:
   prune: true
   postBuild:
     substitute:
-      cluster_name: flux-test
+      aws_account_id: "512686554592"

@@ -11,3 +11,6 @@ spec:
     name: flux-system
   path: ./policies/clusters/flux-test
   prune: true
+  postBuild:
+    substitute:
+      aws_account_id: "512686554592"
