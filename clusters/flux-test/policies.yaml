@@ -11,9 +11,3 @@ spec:
     name: flux-system
   path: ./policies/clusters/flux-test
   prune: true
-  postBuild:
-    substitute:
-      cluster_name: flux-test
-      cluster_domain: flux-test.elifesciences.org
-      aws_account_id: "512686554592"
-      aws_region: us-east-1
