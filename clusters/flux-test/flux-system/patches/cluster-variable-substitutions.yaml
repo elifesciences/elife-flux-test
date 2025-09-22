@@ -18,7 +18,6 @@ spec:
           postBuild:
             # AWS Config
             aws_region: us-east-1
-            aws_account_id: "\"\"512686554592\"\""
 
             # Cluster config
             cluster_name: flux-test
