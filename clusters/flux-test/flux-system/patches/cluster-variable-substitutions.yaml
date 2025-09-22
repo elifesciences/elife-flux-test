@@ -4,45 +4,6 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
-  postBuild:
-    substitute:
-      # AWS Config
-      aws_account_id: "\"512686554592\""
-      aws_region: us-east-1
-
-      # Cluster config
-      cluster_name: flux-test
-      cluster_domain: flux-test.elifesciences.org
-      cluster_oidc_arn: "arn:aws:iam::512686554592:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/0108D0073AFB87B6669E378F0A9CFB76"
-      cluster_oidc_url: "oidc.eks.us-east-1.amazonaws.com/id/0108D0073AFB87B6669E378F0A9CFB76"
-
-      # Karpenter config
-      aws_karpenter_interruption_queue: elife-flux-test-karpenter
-
-      # S3 Backup config
-      aws_backup_s3_bucket: "elife-flux-test-backups"
-
-      # oauth2-proxy config
-      oauth2_proxy_hostname: "auth--test-cluster.elifesciences.org"
-      oauth2_proxy_signout_url: "https://auth--test-cluster.elifesciences.org/oauth2/sign_out"
-      oauth2_proxy_auth_url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
-      oauth2_proxy_auth_signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
-
-      # Service Accounts
-      aws_backup_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-backups-cluster-role
-      aws_s3_csi_service_account_role_arn: arn:aws:iam::512686554592:role/kubernetes-aws--flux-test--eks_addon_aws_s3_csi_driver
-      aws_karpenter_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-karpenter-cluster-role
-      aws_keda_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-keda-cluster-role
-      aws_external_secrets_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-external-secrets
-      aws_ack_rds_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-rds-controller-cluster-role
-      aws_ack_route53_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-route53-controller-cluster-role
-      aws_ack_s3_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-s3-controller-cluster-role
-      aws_ack_sqs_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-sqs-controller-cluster-role
-      aws_ack_sns_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-sns-controller-cluster-role
-      aws_ack_iam_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-iam-controller-cluster-role
-      aws_ack_cloudfront_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-cloudfront-controller-cluster-role
-      aws_external_dns_service_account_role_arn: arn:aws:iam::512686554592:role/kubernetes-aws--flux-test--external-dns
-      aws_cert_manager_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-cert-manager
   patches:
     - target:
         group: kustomize.toolkit.fluxcd.io
@@ -57,39 +18,39 @@ spec:
           postBuild:
             substitute:
               # AWS Config
-              aws_account_id: "\"${aws_account_id}\""
-              aws_region: ${aws_region}
+              aws_account_id: "\"512686554592\""
+              aws_region: us-east-1
 
               # Cluster config
-              cluster_name: ${cluster_name}
-              cluster_domain: ${cluster_domain}
-              cluster_oidc_arn: ${cluster_oidc_arn}
-              cluster_oidc_url: ${cluster_oidc_url}
+              cluster_name: flux-test
+              cluster_domain: flux-test.elifesciences.org
+              cluster_oidc_arn: "arn:aws:iam::512686554592:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/0108D0073AFB87B6669E378F0A9CFB76"
+              cluster_oidc_url: "oidc.eks.us-east-1.amazonaws.com/id/0108D0073AFB87B6669E378F0A9CFB76"
 
               # Karpenter config
-              aws_karpenter_interruption_queue: ${aws_karpenter_interruption_queue}
+              aws_karpenter_interruption_queue: elife-flux-test-karpenter
 
               # S3 Backup config
-              aws_backup_s3_bucket: ${aws_backup_s3_bucket}
+              aws_backup_s3_bucket: "elife-flux-test-backups"
 
               # oauth2-proxy config
-              oauth2_proxy_hostname: ${oauth2_proxy_hostname}
-              oauth2_proxy_signout_url: ${oauth2_proxy_signout_url}
-              oauth2_proxy_auth_url: ${oauth2_proxy_auth_url}
-              oauth2_proxy_auth_signin: ${oauth2_proxy_auth_signin}
+              oauth2_proxy_hostname: "auth--test-cluster.elifesciences.org"
+              oauth2_proxy_signout_url: "https://auth--test-cluster.elifesciences.org/oauth2/sign_out"
+              oauth2_proxy_auth_url: "https://auth--test-cluster.elifesciences.org/oauth2/auth"
+              oauth2_proxy_auth_signin: "https://auth--test-cluster.elifesciences.org/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
 
               # Service Accounts
-              aws_backup_service_account_role_arn: ${aws_backup_service_account_role_arn}
-              aws_s3_csi_service_account_role_arn: ${aws_s3_csi_service_account_role_arn}
-              aws_karpenter_service_account_role_arn: ${aws_karpenter_service_account_role_arn}
-              aws_keda_service_account_role_arn: ${aws_keda_service_account_role_arn}
-              aws_external_secrets_service_account_role_arn: ${aws_external_secrets_service_account_role_arn}
-              aws_ack_rds_service_account_role_arn: ${aws_ack_rds_service_account_role_arn}
-              aws_ack_route53_service_account_role_arn: ${aws_ack_route53_service_account_role_arn}
-              aws_ack_s3_service_account_role_arn: ${aws_ack_s3_service_account_role_arn}
-              aws_ack_sqs_service_account_role_arn: ${aws_ack_sqs_service_account_role_arn}
-              aws_ack_sns_service_account_role_arn: ${aws_ack_sns_service_account_role_arn}
-              aws_ack_iam_service_account_role_arn: ${aws_ack_iam_service_account_role_arn}
-              aws_ack_cloudfront_service_account_role_arn: ${aws_ack_cloudfront_service_account_role_arn}
-              aws_external_dns_service_account_role_arn: ${aws_external_dns_service_account_role_arn}
-              aws_cert_manager_service_account_role_arn: ${aws_cert_manager_service_account_role_arn}
+              aws_backup_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-backups-cluster-role
+              aws_s3_csi_service_account_role_arn: arn:aws:iam::512686554592:role/kubernetes-aws--flux-test--eks_addon_aws_s3_csi_driver
+              aws_karpenter_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-karpenter-cluster-role
+              aws_keda_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-keda-cluster-role
+              aws_external_secrets_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-external-secrets
+              aws_ack_rds_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-rds-controller-cluster-role
+              aws_ack_route53_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-route53-controller-cluster-role
+              aws_ack_s3_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-s3-controller-cluster-role
+              aws_ack_sqs_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-sqs-controller-cluster-role
+              aws_ack_sns_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-sns-controller-cluster-role
+              aws_ack_iam_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-iam-controller-cluster-role
+              aws_ack_cloudfront_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-ack-cloudfront-controller-cluster-role
+              aws_external_dns_service_account_role_arn: arn:aws:iam::512686554592:role/kubernetes-aws--flux-test--external-dns
+              aws_cert_manager_service_account_role_arn: arn:aws:iam::512686554592:role/elife-flux-test-cert-manager
