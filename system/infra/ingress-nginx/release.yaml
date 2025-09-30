@@ -67,6 +67,6 @@ spec:
         whenUnsatisfiable: DoNotSchedule
         labelSelector:
           matchLabels:
-            app.kubernetes.io/instance: "{{request.object.spec.template.metadata.labels.\"app.kubernetes.io/instance\"}}"
-            app.kubernetes.io/component: "{{request.object.spec.template.metadata.labels.\"app.kubernetes.io/component\"}}"
-            app.kubernetes.io/name: "{{request.object.spec.template.metadata.labels.\"app.kubernetes.io/name\"}}"
+            app.kubernetes.io/component: controller
+            app.kubernetes.io/instance: infra-ingress-nginx
+            app.kubernetes.io/name: ingress-nginx
