@@ -24,7 +24,7 @@ spec:
 
         Objects:
         {{ range $resource, $changes := .Changed.Objects -}}
-        - {{ $resource.Namespace }}/{{ $resource.Kind }} {{ $resource.Name }}
+        - {{ $resource.Kind }} {{ $resource.Namespace }}/{{ $resource.Name }}
           Changes:
         {{- range $_, $change := $changes }}
           - {{ $change.Setter }}: {{ $change.OldValue }} -> {{ $change.NewValue }}
