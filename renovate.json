@@ -62,7 +62,7 @@
       "matchDepNames": [
         "kubectl"
       ],
-      "dependencyDashboardApproval": true
+      "enabled": false
     }
   ]
 }
