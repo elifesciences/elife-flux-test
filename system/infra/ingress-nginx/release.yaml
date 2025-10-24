@@ -58,7 +58,7 @@ spec:
         requests:
           cpu: 80m
           memory: 250Mi
-      replicaCount: 10
+      replicaCount: 5
       watchIngressWithoutClass: true
       allowSnippetAnnotations: true
       topologySpreadConstraints:
