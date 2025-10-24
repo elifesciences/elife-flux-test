@@ -57,12 +57,12 @@
     },
     {
       "matchFileNames": [
-        ".tool-versions"
+        "mise.toml"
       ],
       "matchDepNames": [
         "kubectl"
       ],
-      "enabled": false
+      "dependencyDashboardApproval": true
     }
   ]
 }
