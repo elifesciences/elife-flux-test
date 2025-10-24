@@ -17,4 +17,4 @@ helm = "3.19.0"
 run = "eks-node-viewer --extra-labels=eks-node-viewer/node-age,eks-node-viewer/node-ephemeral-storage-usage,elifesciences.org/project,karpenter.sh/nodepool,topology.kubernetes.io/zone --node-sort=karpenter.sh/nodepool=dsc --resources=cpu,memory"
 
 [tasks.watch-pods-non-running]
-run = "watch -c -w -n0.5 \"kubectl get pod -A -o wide | grep -v 'Running\\|Completed'\""
+run = "watch -c -w -n0.5 \"kubecolor --force-colors get pod -A -o wide | grep --color=always -v 'Running\\|Completed'\""
