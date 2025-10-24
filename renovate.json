@@ -45,12 +45,6 @@
     },
     {
       "matchDepNames": [
-        "descheduler"
-      ],
-      "enabled": false
-    },
-    {
-      "matchDepNames": [
         "podinfo"
       ],
       "enabled": false
