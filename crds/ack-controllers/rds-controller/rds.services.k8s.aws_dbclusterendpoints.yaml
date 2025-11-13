@@ -4,20 +4,20 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.19.0
-  name: functions.cloudfront.services.k8s.aws
+  name: dbclusterendpoints.rds.services.k8s.aws
 spec:
-  group: cloudfront.services.k8s.aws
+  group: rds.services.k8s.aws
   names:
-    kind: Function
-    listKind: FunctionList
-    plural: functions
-    singular: function
+    kind: DBClusterEndpoint
+    listKind: DBClusterEndpointList
+    plural: dbclusterendpoints
+    singular: dbclusterendpoint
   scope: Namespaced
   versions:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Function is the Schema for the Functions API
+        description: DBClusterEndpoint is the Schema for the DBClusterEndpoints API
         properties:
           apiVersion:
             description: |-
@@ -37,38 +37,90 @@ spec:
           metadata:
             type: object
           spec:
-            description: FunctionSpec defines the desired state of Function.
-            properties:
-              functionCode:
-                description: |-
-                  The function code. For more information about writing a CloudFront function,
-                  see Writing function code for CloudFront Functions (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html)
-                  in the Amazon CloudFront Developer Guide.
-                format: byte
-                type: string
-              functionConfig:
-                description: |-
-                  Configuration information about the function, including an optional comment
-                  and the function's runtime.
-                properties:
-                  comment:
-                    type: string
-                  runtime:
-                    type: string
-                type: object
-              name:
-                description: |-
-                  A name to identify the function.
+            description: |-
+              DBClusterEndpointSpec defines the desired state of DBClusterEndpoint.
 
-                  Regex Pattern: `^[a-zA-Z0-9-_]{1,64}$`
+              This data type represents the information you need to connect to an Amazon
+              Aurora DB cluster. This data type is used as a response element in the following
+              actions:
+
+                 * CreateDBClusterEndpoint
+
+                 * DescribeDBClusterEndpoints
+
+                 * ModifyDBClusterEndpoint
+
+                 * DeleteDBClusterEndpoint
+
+              For the data structure that represents Amazon RDS DB instance endpoints,
+              see Endpoint.
+            properties:
+              dbClusterEndpointIdentifier:
+                description: |-
+                  The identifier to use for the new endpoint. This parameter is stored as a
+                  lowercase string.
                 type: string
+              dbClusterIdentifier:
+                description: |-
+                  The DB cluster identifier of the DB cluster associated with the endpoint.
+                  This parameter is stored as a lowercase string.
+                type: string
+              dbClusterIdentifierRef:
+                description: "AWSResourceReferenceWrapper provides a wrapper around
+                  *AWSResourceReference\ntype to provide more user friendly syntax
+                  for references using 'from' field\nEx:\nAPIIDRef:\n\n\tfrom:\n\t
+                  \ name: my-api"
+                properties:
+                  from:
+                    description: |-
+                      AWSResourceReference provides all the values necessary to reference another
+                      k8s resource for finding the identifier(Id/ARN/Name)
+                    properties:
+                      name:
+                        type: string
+                      namespace:
+                        type: string
+                    type: object
+                type: object
+              endpointType:
+                description: 'The type of the endpoint, one of: READER, WRITER, ANY.'
+                type: string
+              excludedMembers:
+                description: |-
+                  List of DB instance identifiers that aren't part of the custom endpoint group.
+                  All other eligible instances are reachable through the custom endpoint. This
+                  parameter is relevant only if the list of static members is empty.
+                items:
+                  type: string
+                type: array
+              staticMembers:
+                description: List of DB instance identifiers that are part of the
+                  custom endpoint group.
+                items:
+                  type: string
+                type: array
+              tags:
+                description: The tags to be assigned to the Amazon RDS resource.
+                items:
+                  description: |-
+                    Metadata assigned to an Amazon RDS resource consisting of a key-value pair.
+
+                    For more information, see Tagging Amazon RDS resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
+                    in the Amazon RDS User Guide or Tagging Amazon Aurora and Amazon RDS resources
+                    (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html)
+                    in the Amazon Aurora User Guide.
+                  properties:
+                    key:
+                      type: string
+                    value:
+                      type: string
+                  type: object
+                type: array
             required:
-            - functionCode
-            - functionConfig
-            - name
+            - dbClusterEndpointIdentifier
             type: object
           status:
-            description: FunctionStatus defines the observed state of Function
+            description: DBClusterEndpointStatus defines the observed state of DBClusterEndpoint
             properties:
               ackResourceMetadata:
                 description: |-
@@ -134,46 +186,20 @@ spec:
                   - type
                   type: object
                 type: array
-              eTag:
-                description: The version identifier for the current version of the
-                  CloudFront function.
-                type: string
-              functionSummary:
-                description: Contains configuration information and metadata about
-                  a CloudFront function.
-                properties:
-                  functionConfig:
-                    description: Contains configuration information about a CloudFront
-                      function.
-                    properties:
-                      comment:
-                        type: string
-                      runtime:
-                        type: string
-                    type: object
-                  functionMetadata:
-                    description: Contains metadata about a CloudFront function.
-                    properties:
-                      createdTime:
-                        format: date-time
-                        type: string
-                      functionARN:
-                        type: string
-                      lastModifiedTime:
-                        format: date-time
-                        type: string
-                      stage:
-                        type: string
-                    type: object
-                  name:
-                    type: string
-                  status:
-                    type: string
-                type: object
-              location:
+              dbClusterEndpointResourceIdentifier:
                 description: |-
-                  The URL of the CloudFront function. Use the URL to manage the function with
-                  the CloudFront API.
+                  A unique system-generated identifier for an endpoint. It remains the same
+                  for the whole life of the endpoint.
+                type: string
+              endpoint:
+                description: The DNS address of the endpoint.
+                type: string
+              status:
+                description: |-
+                  The current status of the endpoint. One of: creating, available, deleting,
+                  inactive, modifying. The inactive state applies to an endpoint that can't
+                  be used for a certain kind of cluster, such as a writer endpoint for a read-only
+                  secondary cluster in a global database.
                 type: string
             type: object
         type: object
