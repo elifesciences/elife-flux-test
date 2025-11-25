@@ -22,26 +22,17 @@ metadata:
   name: amazon-network-flow-monitor-raw
   namespace: amazon-network-flow-monitor
 spec:
-  jobLabel: name
-  job_name: 'amazon-network-flow-monitor'
-  kubernetes_sd_configs:
-  - role: pod
-    namespaces:
+  jobName: amazon-network-flow-monitor
+
+  kubernetesSDConfigs:
+  - namespaces:
       names:
-        - amazon-network-flow-monitor
-  relabel_configs:
-    # 1. Label Mapping (Keep these so we can see what the pod is)
-    - source_labels: [__meta_kubernetes_pod_name]
-      target_label: debug_name
+      - amazon-network-flow-monitor
+    role: pod
 
-    # 2. THE TEST: Hardcode the address to a static value
-    # If this target appears in the UI (as DOWN),
-    # it proves your previous regex/variable substitution was the failure.
-    - target_label: __address__
-      replacement: 127.0.0.1:9109
+  relabelConfigs:
+  - sourceLabels: [__meta_kubernetes_pod_name]
+    targetLabel: debug_name
 
-    # 3. (Comment out the old regex rule for this test)
-    # - regex: ([^:]+)(?::\d+)?
-    #   replacement: $1:9109
-    #   source_labels: [__address__]
-    #   target_label: __address__
+  - replacement: 127.0.0.1:9109
+    targetLabel: __address__
