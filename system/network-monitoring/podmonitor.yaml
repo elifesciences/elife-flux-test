@@ -31,8 +31,8 @@ spec:
         names:
           - amazon-network-flow-monitor
     relabel_configs:
-      - source_labels: [__meta_kubernetes_pod_label_name]
-        regex: aws-network-flow-monitor-agent
+      - source_labels: [__meta_kubernetes_pod_name]
+        regex: aws-network-flow-monitor-agent.*
         action: keep
       - source_labels: [__meta_kubernetes_pod_phase]
         regex: Running
