@@ -31,26 +31,18 @@ spec:
         names:
           - amazon-network-flow-monitor
     relabel_configs:
-      # --- DEBUGGING SECTION ---
-      # 1. Expose the hidden Pod Name as a visible label "debug_name"
+      # 1. Label Mapping (Keep these so we can see what the pod is)
       - source_labels: [__meta_kubernetes_pod_name]
         target_label: debug_name
 
-      # 2. Expose the hidden Pod Phase as a visible label "debug_phase"
-      - source_labels: [__meta_kubernetes_pod_phase]
-        target_label: debug_phase
+      # 2. THE TEST: Hardcode the address to a static value
+      # If this target appears in the UI (as DOWN),
+      # it proves your previous regex/variable substitution was the failure.
+      - target_label: __address__
+        replacement: 127.0.0.1:9109
 
-      # 3. Expose the hidden IP address as a visible label "debug_ip"
-      - source_labels: [__address__]
-        target_label: debug_ip
-
-      # --- NO FILTERS ---
-      # I have deleted all "action: keep" rules.
-      # This forces vmagent to accept EVERY pod in the namespace.
-
-      # --- PORT FIX ---
-      # We still need this, or the target address will be invalid.
-      - source_labels: [__address__]
-        regex: ([^:]+)(?::\d+)?
-        replacement: $1:9109
-        target_label: __address__
+      # 3. (Comment out the old regex rule for this test)
+      # - regex: ([^:]+)(?::\d+)?
+      #   replacement: $1:9109
+      #   source_labels: [__address__]
+      #   target_label: __address__
