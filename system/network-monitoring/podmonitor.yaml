@@ -39,5 +39,5 @@ spec:
         action: keep
       - source_labels: [__address__]
         regex: ([^:]+)(?::\d+)?
-        replacement: ${1}:9109
+        replacement: $${1}:9109
         target_label: __address__
