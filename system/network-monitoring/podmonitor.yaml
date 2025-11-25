@@ -34,5 +34,7 @@ spec:
   - sourceLabels: [__meta_kubernetes_pod_name]
     targetLabel: debug_name
 
-  - replacement: 127.0.0.1:9109
+  - sourceLabels: [__address__]
+    regex: ([^:]+)(?::\d+)?
+    replacement: $1:9109
     targetLabel: __address__
