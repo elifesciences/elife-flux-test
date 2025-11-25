@@ -49,10 +49,10 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
               matchExpressions:
-              # We look for the Interceptor Pods
-              - key: app.kubernetes.io/name
+              # Match the specific component label
+              - key: app.kubernetes.io/component
                 operator: In
                 values:
-                - keda-add-ons-http-interceptor
-            # Critical: We match on the ZONE, not the Hostname
-            topologyKey: topology.kubernetes.io/zone
+                - interceptor
+            # Force them onto the exact same node
+            topologyKey: "kubernetes.io/hostname"
