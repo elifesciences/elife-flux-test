@@ -3,7 +3,7 @@
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMScrapeConfig
 metadata:
-  name: amazon-network-flow-monitor-raw
+  name: amazon-network-flow-monitor
   namespace: amazon-network-flow-monitor
 spec:
   jobName: amazon-network-flow-monitor
