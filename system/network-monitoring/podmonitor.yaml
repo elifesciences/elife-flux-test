@@ -8,9 +8,9 @@ spec:
   namespaceSelector:
     matchNames:
     - amazon-network-flow-monitor
+  selector:
+    matchLabels:
+      name: aws-network-flow-monitor-agent
   podMetricsEndpoints:
   - path: /metrics
     portNumber: 9109
-  selector:
-    matchLabels:
-      name: amazon-network-flow-monitor
