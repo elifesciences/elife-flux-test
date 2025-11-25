@@ -14,3 +14,30 @@ spec:
   podMetricsEndpoints:
   - path: /metrics
     portNumber: 9109
+---
+# Workaround because amazon's addon doesn't specify a container port, so we can't automatically scrape it
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMScrapeConfig
+metadata:
+  name: amazon-network-flow-monitor-raw
+  namespace: amazon-network-flow-monitor
+spec:
+  jobLabel: name
+  config:
+    job_name: 'amazon-network-flow-monitor'
+    kubernetes_sd_configs:
+    - role: pod
+      namespaces:
+        names:
+          - amazon-network-flow-monitor
+    relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_label_name]
+        regex: aws-network-flow-monitor-agent
+        action: keep
+      - source_labels: [__meta_kubernetes_pod_phase]
+        regex: Running
+        action: keep
+      - source_labels: [__address__]
+        regex: ([^:]+)(?::\d+)?
+        replacement: ${1}:9109
+        target_label: __address__
