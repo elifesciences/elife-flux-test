@@ -10,7 +10,7 @@ spec:
     - amazon-network-flow-monitor
   podMetricsEndpoints:
   - path: /metrics
-    port: 9109
+    portNumber: 9109
   selector:
     matchLabels:
       name: amazon-network-flow-monitor
