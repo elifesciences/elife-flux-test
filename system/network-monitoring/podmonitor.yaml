@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: amazon-network-flow-monitor
+  namespace: amazon-network-flow-monitor
+spec:
+  jobLabel: name
+  namespaceSelector:
+    matchNames:
+    - amazon-network-flow-monitor
+  podMetricsEndpoints:
+  - path: /metrics
+    port: 9109
+  selector:
+    matchLabels:
+      name: amazon-network-flow-monitor
