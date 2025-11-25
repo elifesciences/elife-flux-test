@@ -20,6 +20,9 @@ spec:
     interceptor:
       # extend reponse timeout
       responseHeaderTimeout: 180s
+      # reduce polling for interceptor to reduce bandwidth
+      scaledObject:
+        pollingInterval: 500
       resources:
         limits: null
         requests:
@@ -39,6 +42,7 @@ spec:
             cpu: 10m
             memory: 20Mi
     scaler:
+      streamInterval: 500
       resources:
         limits: null
         requests:
@@ -55,4 +59,4 @@ spec:
                 values:
                 - interceptor
             # Force them onto the exact same node
-            topologyKey: "kubernetes.io/hostname"
+            topologyKey: topology.kubernetes.io/zone
