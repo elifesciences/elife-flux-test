@@ -44,3 +44,15 @@ spec:
         requests:
           cpu: 10m
           memory: 15Mi
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              # We look for the Interceptor Pods
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                - keda-add-ons-http-interceptor
+            # Critical: We match on the ZONE, not the Hostname
+            topologyKey: topology.kubernetes.io/zone

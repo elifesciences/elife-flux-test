@@ -23,6 +23,130 @@
   "panels": [
     {
       "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+      "id": 10,
+      "title": "Cost Analysis: Who is sending the most data? (Volume)",
+      "type": "row"
+    },
+    {
+      "datasource": "${DS_PROMETHEUS}",
+      "description": "Total bytes sent by the top 10 most 'chatty' pods over the last 24 hours. High values here drive your 'DataTransfer-Out' and 'Regional' costs.",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": { "type": "linear" },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": { "group": "A", "mode": "none" },
+            "thresholdsStyle": { "mode": "off" }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null }
+            ]
+          },
+          "unit": "decgbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 1 },
+      "id": 11,
+      "options": {
+        "legend": {
+          "calcs": ["lastNotNull"],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Last",
+          "sortDesc": true
+        },
+        "tooltip": { "mode": "single", "sort": "none" }
+      },
+      "targets": [
+        {
+          "expr": "topk(10, sum by (pod) (increase(egress_bytes{namespace=~\"$namespace\"}[24h])))",
+          "legendFormat": "{{pod}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Top Egress Pods (24h Volume)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "${DS_PROMETHEUS}",
+      "description": "Total bytes sent grouped by Namespace over the last 24 hours.",
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": { "legend": false, "tooltip": false, "viz": false },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": { "type": "linear" },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": { "group": "A", "mode": "none" },
+            "thresholdsStyle": { "mode": "off" }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null }
+            ]
+          },
+          "unit": "decgbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 1 },
+      "id": 12,
+      "options": {
+        "legend": {
+          "calcs": ["lastNotNull"],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Last",
+          "sortDesc": true
+        },
+        "tooltip": { "mode": "single", "sort": "none" }
+      },
+      "targets": [
+        {
+          "expr": "topk(10, sum by (namespace) (increase(egress_bytes{namespace=~\"$namespace\"}[24h])))",
+          "legendFormat": "{{namespace}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Top Egress Namespaces (24h Volume)",
+      "type": "timeseries"
+    },
+    {
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 9 },
       "id": 99,
       "title": "AWS EC2 Instance Limits (Zero is Good)",
       "type": "row"
@@ -45,19 +169,23 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 1 },
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 10 },
       "id": 1,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
-        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false }
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        }
       },
       "pluginVersion": "10.0.0",
       "targets": [
         {
-          "expr": "sum by (pod) (bw_in_allowance_exceeded{namespace=\"$namespace\", pod=~\"$pod\"}) + sum by (pod) (bw_out_allowance_exceeded{namespace=\"$namespace\", pod=~\"$pod\"})",
+          "expr": "sum by (pod) (bw_in_allowance_exceeded{namespace=~\"$namespace\", pod=~\"$pod\"}) + sum by (pod) (bw_out_allowance_exceeded{namespace=~\"$namespace\", pod=~\"$pod\"})",
           "legendFormat": "{{pod}}",
           "refId": "A"
         }
@@ -81,11 +209,11 @@
           "unit": "short"
         }
       },
-      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 1 },
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 10 },
       "id": 2,
       "targets": [
         {
-          "expr": "sum by (pod) (pps_allowance_exceeded{namespace=\"$namespace\", pod=~\"$pod\"})",
+          "expr": "sum by (pod) (pps_allowance_exceeded{namespace=~\"$namespace\", pod=~\"$pod\"})",
           "legendFormat": "{{pod}}",
           "refId": "A"
         }
@@ -109,11 +237,11 @@
           "unit": "short"
         }
       },
-      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 1 },
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 10 },
       "id": 3,
       "targets": [
         {
-          "expr": "sum by (pod) (conntrack_allowance_exceeded{namespace=\"$namespace\", pod=~\"$pod\"})",
+          "expr": "sum by (pod) (conntrack_allowance_exceeded{namespace=~\"$namespace\", pod=~\"$pod\"})",
           "legendFormat": "{{pod}}",
           "refId": "A"
         }
@@ -122,9 +250,9 @@
       "type": "stat"
     },
     {
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 9 },
+      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 18 },
       "id": 100,
-      "title": "Throughput & Flows",
+      "title": "Throughput & Flows (Speed)",
       "type": "row"
     },
     {
@@ -162,20 +290,25 @@
         },
         "overrides": []
       },
-      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 10 },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 19 },
       "id": 4,
       "options": {
-        "legend": { "calcs": [], "displayMode": "list", "placement": "bottom", "showLegend": true },
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
         "tooltip": { "mode": "single", "sort": "none" }
       },
       "targets": [
         {
-          "expr": "sum by (pod) (rate(ingress_bytes{namespace=\"$namespace\", pod=~\"$pod\"}[2m]))",
+          "expr": "sum by (pod) (rate(ingress_bytes{namespace=~\"$namespace\", pod=~\"$pod\"}[2m]))",
           "legendFormat": "Inbound: {{pod}}",
           "refId": "A"
         },
         {
-          "expr": "sum by (pod) (rate(egress_bytes{namespace=\"$namespace\", pod=~\"$pod\"}[2m]))",
+          "expr": "sum by (pod) (rate(egress_bytes{namespace=~\"$namespace\", pod=~\"$pod\"}[2m]))",
           "legendFormat": "Outbound: {{pod}}",
           "refId": "B"
         }
@@ -190,16 +323,16 @@
           "unit": "pps"
         }
       },
-      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 10 },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 19 },
       "id": 5,
       "targets": [
         {
-          "expr": "sum by (pod) (rate(ingress_packets{namespace=\"$namespace\", pod=~\"$pod\"}[2m]))",
+          "expr": "sum by (pod) (rate(ingress_packets{namespace=~\"$namespace\", pod=~\"$pod\"}[2m]))",
           "legendFormat": "In: {{pod}}",
           "refId": "A"
         },
         {
-          "expr": "sum by (pod) (rate(egress_packets{namespace=\"$namespace\", pod=~\"$pod\"}[2m]))",
+          "expr": "sum by (pod) (rate(egress_packets{namespace=~\"$namespace\", pod=~\"$pod\"}[2m]))",
           "legendFormat": "Out: {{pod}}",
           "refId": "B"
         }
@@ -215,16 +348,16 @@
           "unit": "short"
         }
       },
-      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 18 },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 27 },
       "id": 6,
       "targets": [
         {
-          "expr": "sum by (pod) (ingress_flow{namespace=\"$namespace\", pod=~\"$pod\"})",
+          "expr": "sum by (pod) (ingress_flow{namespace=~\"$namespace\", pod=~\"$pod\"})",
           "legendFormat": "In Flows: {{pod}}",
           "refId": "A"
         },
         {
-          "expr": "sum by (pod) (egress_flow{namespace=\"$namespace\", pod=~\"$pod\"})",
+          "expr": "sum by (pod) (egress_flow{namespace=~\"$namespace\", pod=~\"$pod\"})",
           "legendFormat": "Out Flows: {{pod}}",
           "refId": "B"
         }
@@ -240,7 +373,11 @@
   "templating": {
     "list": [
       {
-        "current": { "selected": false, "text": "Prometheus", "value": "Prometheus" },
+        "current": {
+          "selected": false,
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
         "hide": 0,
         "includeAll": false,
         "label": "Datasource",
@@ -254,13 +391,13 @@
         "type": "datasource"
       },
       {
-        "allValue": null,
+        "allValue": ".*",
         "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(egress_bytes, namespace)",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Namespace",
-        "multi": false,
+        "multi": true,
         "name": "namespace",
         "options": [],
         "query": {
@@ -276,7 +413,7 @@
       {
         "allValue": ".*",
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(egress_bytes{namespace=\"$namespace\"}, pod)",
+        "definition": "label_values(egress_bytes{namespace=~\"$namespace\"}, pod)",
         "hide": 0,
         "includeAll": true,
         "label": "Pod",
@@ -284,7 +421,7 @@
         "name": "pod",
         "options": [],
         "query": {
-          "query": "label_values(egress_bytes{namespace=\"$namespace\"}, pod)",
+          "query": "label_values(egress_bytes{namespace=~\"$namespace\"}, pod)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -295,10 +432,10 @@
       }
     ]
   },
-  "time": { "from": "now-3h", "to": "now" },
+  "time": { "from": "now-24h", "to": "now" },
   "timepicker": {},
   "timezone": "",
-  "title": "AWS Network Flow Monitor",
+  "title": "AWS Network Flow Monitor (EKS)",
   "uid": "aws-network-flow-monitor",
   "version": 1,
   "weekStart": ""
