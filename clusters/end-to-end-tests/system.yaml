@@ -201,3 +201,21 @@ spec:
             effect: "NoSchedule"
           nodeSelector:
             kubernetes.io/hostname: elife-flux-test-control-plane
+  - target:
+      kind: HelmRelease
+      name: victoriametrics
+    patch: |-
+      apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      metadata:
+        name: victoriametrics
+      spec:
+        values:
+          victoria-metrics-operator:
+            tolerations:
+            - key: "realnode"
+              operator: "Equal"
+              value: "true"
+              effect: "NoSchedule"
+            nodeSelector:
+              kubernetes.io/hostname: elife-flux-test-control-plane
