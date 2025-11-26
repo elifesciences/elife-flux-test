@@ -33,7 +33,10 @@ spec:
   patches:
   # in a small cluster like kind or minikube the load balancer won't get an external IP.
   # Therefore, we need to disable waiting
-  - patch: |-
+  - target:
+      kind: HelmRelease
+      name: ingress-nginx
+    patch: |-
       apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       metadata:
@@ -62,10 +65,10 @@ spec:
                 nodeSelector:
                   kubernetes.io/hostname: elife-flux-test-control-plane
 
-    target:
+  - target:
       kind: HelmRelease
-      name: ingress-nginx
-  - patch: |-
+      name: metrics-server
+    patch: |-
       apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       metadata:
@@ -82,21 +85,6 @@ spec:
             effect: "NoSchedule"
           nodeSelector:
             kubernetes.io/hostname: elife-flux-test-control-plane
-    target:
-      kind: HelmRelease
-      name: metrics-server
-  - target:
-      kind: HelmRelease
-      name: mimir
-    patch: |
-      apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      metadata:
-        name: mimir
-        namespace: grafana
-      spec:
-        install:
-          disableWait: true
   - target:
       kind: HelmRelease
       name: opensearch-operator
