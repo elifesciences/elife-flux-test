@@ -188,6 +188,8 @@ spec:
   - target:
       kind: HelmRelease
       name: victoriametrics
+    # Force operator to run on the realnode
+    # use local-path storage
     patch: |-
       apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
@@ -203,3 +205,15 @@ spec:
               effect: "NoSchedule"
             nodeSelector:
               kubernetes.io/hostname: elife-flux-test-control-plane
+          vmcluster:
+            spec:
+              vmstorage:
+                storage:
+                  volumeClaimTemplate:
+                    spec:
+                      storageClassName: standard
+              vmselect:
+                storage:
+                  volumeClaimTemplate:
+                    spec:
+                      storageClassName: standard
