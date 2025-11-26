@@ -168,19 +168,6 @@ spec:
               effect: "NoSchedule"
             nodeSelector:
               kubernetes.io/hostname: elife-flux-test-control-plane
-  - target:
-      kind: HelmRelease
-      name: nidhogg
-    # Select only the fake nodes
-    patch: |-
-      apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      metadata:
-        name: nidhogg
-      spec:
-        values:
-          nodeSelector:
-            type: kwok
   # Select only the fake nodes
   - target:
       kind: HelmRelease
