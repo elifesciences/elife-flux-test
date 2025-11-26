@@ -33,7 +33,10 @@ spec:
   patches:
   # in a small cluster like kind or minikube the load balancer won't get an external IP.
   # Therefore, we need to disable waiting
-  - patch: |-
+  - target:
+      kind: HelmRelease
+      name: ingress-nginx
+    patch: |-
       apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       metadata:
@@ -62,10 +65,10 @@ spec:
                 nodeSelector:
                   kubernetes.io/hostname: elife-flux-test-control-plane
 
-    target:
+  - target:
       kind: HelmRelease
-      name: ingress-nginx
-  - patch: |-
+      name: metrics-server
+    patch: |-
       apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       metadata:
@@ -82,39 +85,6 @@ spec:
             effect: "NoSchedule"
           nodeSelector:
             kubernetes.io/hostname: elife-flux-test-control-plane
-    target:
-      kind: HelmRelease
-      name: metrics-server
-  - patch: |-
-      apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      metadata:
-        name: vector
-        namespace: logging
-      spec:
-        values:
-          tolerations:
-          - key: "realnode"
-            operator: "Equal"
-            value: "true"
-            effect: "NoSchedule"
-          nodeSelector:
-            kubernetes.io/hostname: elife-flux-test-control-plane
-    target:
-      kind: HelmRelease
-      name: vector
-  - target:
-      kind: HelmRelease
-      name: mimir
-    patch: |
-      apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      metadata:
-        name: mimir
-        namespace: grafana
-      spec:
-        install:
-          disableWait: true
   - target:
       kind: HelmRelease
       name: opensearch-operator
@@ -133,6 +103,20 @@ spec:
             effect: "NoSchedule"
           nodeSelector:
             kubernetes.io/hostname: elife-flux-test-control-plane
+  - target:
+      kind: HelmRelease
+      name: vector
+    # Select only the fake nodes
+    patch: |-
+      apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      metadata:
+        name: vector
+        namespace: logging
+      spec:
+        values:
+          nodeSelector:
+            type: kwok
   - target:
       kind: HelmRelease
       name: cert-manager
@@ -187,6 +171,7 @@ spec:
   - target:
       kind: HelmRelease
       name: nidhogg
+    # Select only the fake nodes
     patch: |-
       apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
@@ -199,8 +184,61 @@ spec:
             operator: "Equal"
             value: "true"
             effect: "NoSchedule"
+  # Select only the fake nodes
+  - target:
+      kind: HelmRelease
+      name: spegel
+    patch: |-
+      apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      metadata:
+        name: spegel
+      spec:
+        values:
           nodeSelector:
-            kubernetes.io/hostname: elife-flux-test-control-plane
+            type: kwok
+  - target:
+      kind: HelmRelease
+      name: victoriametrics
+    # Force operator to run on the realnode
+    # turn off persistence
+    patch: |-
+      apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      metadata:
+        name: victoriametrics
+      spec:
+        values:
+          victoria-metrics-operator:
+            tolerations:
+            - key: "realnode"
+              operator: "Equal"
+              value: "true"
+              effect: "NoSchedule"
+            nodeSelector:
+              kubernetes.io/hostname: elife-flux-test-control-plane
+          vmcluster:
+            spec:
+              vmstorage:
+                storage:
+                  emptyDir: {}
+              vmselect:
+                storage:
+                  emptyDir: {}
+  - target:
+      kind: HelmRelease
+      name: victorialogs
+    # use local-path storage
+    patch: |-
+      apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      metadata:
+        name: victoriametrics
+      spec:
+        values:
+          server:
+            persistentVolume:
+              enabled: false
   - target:
       kind: HelmRelease
       name: kyverno
