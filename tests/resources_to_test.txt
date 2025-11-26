@@ -4,6 +4,7 @@
 2m kustomizations.kustomize.toolkit.fluxcd.io ready flux-system deployments
 
 # Test all system resources have "deployed"
+2m helmrelease ready kyverno kyverno
 2m helmrelease ready db-operator-system psmdb-operator
 2m helmrelease ready db-operator-system pg-operator
 2m helmrelease ready db-operator-system pxc-operator
