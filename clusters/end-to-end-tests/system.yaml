@@ -105,6 +105,20 @@ spec:
             kubernetes.io/hostname: elife-flux-test-control-plane
   - target:
       kind: HelmRelease
+      name: vector
+    # Select only the fake nodes
+    patch: |-
+      apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      metadata:
+        name: vector
+        namespace: logging
+      spec:
+        values:
+          nodeSelector:
+            type: kwok
+  - target:
+      kind: HelmRelease
       name: cert-manager
     patch: |-
       apiVersion: helm.toolkit.fluxcd.io/v2
