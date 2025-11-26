@@ -189,7 +189,7 @@ spec:
       kind: HelmRelease
       name: victoriametrics
     # Force operator to run on the realnode
-    # use local-path storage
+    # turn off persistence
     patch: |-
       apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
@@ -209,11 +209,21 @@ spec:
             spec:
               vmstorage:
                 storage:
-                  volumeClaimTemplate:
-                    spec:
-                      storageClassName: standard
+                  emptyDir: {}
               vmselect:
                 storage:
-                  volumeClaimTemplate:
-                    spec:
-                      storageClassName: standard
+                  emptyDir: {}
+  - target:
+      kind: HelmRelease
+      name: victorialogs
+    # use local-path storage
+    patch: |-
+      apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      metadata:
+        name: victoriametrics
+      spec:
+        values:
+          server:
+            persistentVolume:
+              enabled: false
