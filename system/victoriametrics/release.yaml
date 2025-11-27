@@ -49,6 +49,10 @@ spec:
           extraArgs:
             "inmemoryDataFlushInterval": "15s"
         vmselect:
+          replicaCount: 5
+          serviceSpec:
+            spec:
+              trafficDistribution: PreferClose
           storage:
             volumeClaimTemplate:
               spec:
@@ -60,6 +64,10 @@ spec:
               memory: 150Mi
             limits: {}
         vminsert:
+          replicaCount: 5
+          serviceSpec:
+            spec:
+              trafficDistribution: PreferClose
           extraArgs:
             maxLabelsPerTimeseries: "55"
           resources:
