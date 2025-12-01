@@ -25,6 +25,7 @@
 2m helmrelease ready infra sealed-secrets
 2m helmrelease ready keda keda
 2m helmrelease ready keda keda-add-ons-http
+2m helmrelease ready kyverno kyverno
 2m helmrelease ready metrics-server metrics-server
 2m helmrelease ready nidhogg nidhogg
 2m helmrelease ready spegel spegel
