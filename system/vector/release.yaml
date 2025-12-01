@@ -88,7 +88,7 @@ spec:
                 "topology.kubernetes.io/zone",
                 "type"
               ]
-              .kubernetes.node_labels = filter(.kubernetes.node_labels) -> |key, value| { contains(allowed_labels, key) }
+              .kubernetes.node_labels = filter(object!(.kubernetes.node_labels)) -> |key, value| { contains(allowed_labels, key) }
             }
         nginx_json_parse:
           type: remap
