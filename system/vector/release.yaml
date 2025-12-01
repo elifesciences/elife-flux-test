@@ -72,6 +72,24 @@ spec:
           type: kubernetes_logs
           extra_label_selector: app.kubernetes.io/name==ingress-nginx
       transforms:
+        filter_node_labels:
+          type: remap
+          inputs:
+            - logs
+          source: |
+            if exists(.kubernetes.node_labels) {
+              allowed_labels = [
+                "elifesciences.org/project",
+                "karpenter.sh/capacity-type",
+                "karpenter.sh/nodepool",
+                "kubernetes.io/arch",
+                "kubernetes.io/hostname",
+                "node.kubernetes.io/instance-type",
+                "topology.kubernetes.io/zone",
+                "type"
+              ]
+              .kubernetes.node_labels = filter(.kubernetes.node_labels, |key, value| contains(allowed_labels, key))
+            }
         nginx_json_parse:
           type: remap
           inputs:
@@ -105,7 +123,7 @@ spec:
             codec: native_json
         local_victorialogs:
           inputs:
-          - logs
+          - filter_node_labels
           type: elasticsearch
           endpoints:
           - "http://victorialogs-victoria-logs-single-server.victorialogs:9428/insert/elasticsearch/"
