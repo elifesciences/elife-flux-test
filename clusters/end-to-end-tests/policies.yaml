@@ -53,3 +53,9 @@ spec:
                 operator: "Equal"
                 value: "true"
                 effect: "NoSchedule"
+          migration:
+            tolerations:
+              - key: "realnode"
+                operator: "Equal"
+                value: "true"
+                effect: "NoSchedule"
