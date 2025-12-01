@@ -49,6 +49,14 @@ spec:
       sources:
         logs:
           type: kubernetes_logs
+          insert_namespace_fields: false
+          pod_annotation_fields:
+            container_id: ""
+            container_image_id: ""
+            pod_uid: ""
+            pod_annotations: ""
+          namespace_annotation_fields:
+            namespace_labels: ""
         host_metrics:
           filesystem:
             devices:
