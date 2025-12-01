@@ -27,10 +27,29 @@ spec:
       spec:
         values:
           global:
+            nodeSelector:
+              kubernetes.io/hostname: elife-flux-test-control-plane
+          admissionController:
             tolerations:
               - key: "realnode"
                 operator: "Equal"
                 value: "true"
                 effect: "NoSchedule"
-            nodeSelector:
-              kubernetes.io/hostname: elife-flux-test-control-plane
+          backgroundController:
+            tolerations:
+              - key: "realnode"
+                operator: "Equal"
+                value: "true"
+                effect: "NoSchedule"
+          cleanupController:
+            tolerations:
+              - key: "realnode"
+                operator: "Equal"
+                value: "true"
+                effect: "NoSchedule"
+          reportsController:
+            tolerations:
+              - key: "realnode"
+                operator: "Equal"
+                value: "true"
+                effect: "NoSchedule"
