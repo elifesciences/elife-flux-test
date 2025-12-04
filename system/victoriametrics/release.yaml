@@ -34,6 +34,14 @@ spec:
         retentionPeriod: "1" # months
         vmstorage:
           replicaCount: 1
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: topology.kubernetes.io/zone
+                    operator: In
+                    values: ["us-east-1d"]
           storage:
             volumeClaimTemplate:
               spec:
@@ -49,7 +57,15 @@ spec:
           extraArgs:
             "inmemoryDataFlushInterval": "15s"
         vmselect:
-          replicaCount: 5
+          replicaCount: 2
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: topology.kubernetes.io/zone
+                    operator: In
+                    values: ["us-east-1d"]
           serviceSpec:
             spec:
               trafficDistribution: PreferClose
@@ -64,7 +80,15 @@ spec:
               memory: 150Mi
             limits: {}
         vminsert:
-          replicaCount: 5
+          replicaCount: 2
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: topology.kubernetes.io/zone
+                    operator: In
+                    values: ["us-east-1d"]
           serviceSpec:
             spec:
               trafficDistribution: PreferClose
