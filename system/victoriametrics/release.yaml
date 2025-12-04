@@ -33,7 +33,7 @@ spec:
       spec:
         retentionPeriod: "1" # months
         vmstorage:
-          replicaCount: 1
+          replicaCount: 2
           affinity:
             nodeAffinity:
               requiredDuringSchedulingIgnoredDuringExecution:
