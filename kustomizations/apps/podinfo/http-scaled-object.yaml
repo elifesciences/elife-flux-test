@@ -14,7 +14,7 @@ spec:
     service: podinfo
     port: 9898
   replicas:
-    min: 1
+    min: 0
     max: 2
   scaledownPeriod: 30
   targetPendingRequests: 5
