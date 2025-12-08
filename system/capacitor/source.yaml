@@ -1,9 +1,13 @@
 ---
 apiVersion: source.toolkit.fluxcd.io/v1
-kind: HelmRepository
+kind: OCIRepository
 metadata:
-  name: capacitor
+  name: capacitor-next
 spec:
   interval: 1h0m0s
-  type: oci
-  url: oci://ghcr.io/gimlet-io
+  url: oci://ghcr.io/gimlet-io/charts/capacitor-next
+  layerSelector:
+    mediaType: "application/vnd.cncf.helm.chart.content.v1.tar+gzip"
+    operation: copy
+  ref:
+    tag: "2025-11.2"

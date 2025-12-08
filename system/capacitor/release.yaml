@@ -6,11 +6,10 @@ metadata:
 spec:
   chart:
     spec:
-      chart: charts/capacitor-next
+      chart: capacitor-next
       sourceRef:
-        kind: HelmRepository
+        kind: OCIRepository
         name: capacitor
-      version: 2025-11.2
   interval: 10m
   timeout: 5m
   values: {}
