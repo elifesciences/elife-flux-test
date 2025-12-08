@@ -9,7 +9,7 @@ spec:
       chart: capacitor-next
       sourceRef:
         kind: HelmRepository
-        name: capacitor
+        name: capacitor-next
       version: 2025-11.2
   interval: 10m
   timeout: 5m
