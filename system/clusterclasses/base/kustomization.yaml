@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
 - ../../infra
 - ../../ack-system
-- ../../capacitor
+# - ../../capacitor
 - ../../database
 - ../../external-dns
 - ../../external-secrets
