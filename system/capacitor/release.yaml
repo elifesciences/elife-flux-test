@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: capacitor-next
+      chart: charts/capacitor-next
       sourceRef:
         kind: HelmRepository
         name: capacitor
