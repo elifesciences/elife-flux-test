@@ -4,3 +4,4 @@ namespace: capacitor
 resources:
 - namespace.yaml
 - source.yaml
+- release.yaml
