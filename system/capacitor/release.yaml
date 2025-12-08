@@ -6,7 +6,7 @@ metadata:
 spec:
   chartRef:
     kind: OCIRepository
-    name: capacitor
+    name: capacitor-next
   interval: 10m
   timeout: 5m
   values: {}
