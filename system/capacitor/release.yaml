@@ -4,12 +4,9 @@ kind: HelmRelease
 metadata:
   name: capacitor
 spec:
-  chart:
-    spec:
-      chart: capacitor-next
-      sourceRef:
-        kind: OCIRepository
-        name: capacitor
+  chartRef:
+    kind: OCIRepository
+    name: capacitor
   interval: 10m
   timeout: 5m
   values: {}
