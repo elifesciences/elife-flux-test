@@ -5,4 +5,4 @@ resources:
 - volumesnapshotclasses
 - secret-store
 - ../base
-- ../../amazon-network-flow-monitor
+# - ../../amazon-network-flow-monitor
