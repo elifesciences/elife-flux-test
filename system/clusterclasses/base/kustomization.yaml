@@ -10,6 +10,7 @@ resources:
 - ../../gitops-dashboard
 - ../../gemini
 - ../../grafana
+- ../../haproxy-ingress
 - ../../keda
 - ../../kong-system
 - ../../kube-web-view
