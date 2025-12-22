@@ -5,4 +5,5 @@ resources:
 - volumesnapshotclasses
 - secret-store
 - ../base
+- ../../aws-load-balancer-controller
 # - ../../amazon-network-flow-monitor
