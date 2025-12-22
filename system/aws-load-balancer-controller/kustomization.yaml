@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: kube-system
 resources:
 - source.yaml
+- release.yaml
