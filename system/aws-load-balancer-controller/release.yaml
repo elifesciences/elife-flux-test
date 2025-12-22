@@ -26,6 +26,8 @@ spec:
 
   values:
     clusterName: ${cluster_name}
+    vpcId: ${aws_vpc_id}
+    region: ${aws_region}
     serviceAccount:
       annotations:
         eks.amazonaws.com/role-arn: ${aws_load_balancer_controller_service_account_role_arn}

@@ -20,6 +20,7 @@ spec:
               # AWS Config
               aws_region: us-east-1
               aws_account_id: "512686554592"
+              aws_vpc_id: "vpc-78a2071d"
 
               # Cluster config
               cluster_name: flux-test
