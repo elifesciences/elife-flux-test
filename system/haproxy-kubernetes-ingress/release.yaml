@@ -48,3 +48,8 @@ spec:
           hdr(User-Agent)
         log-format: |
           {"timestamp": "%tr", "requestID": "%ID", "proxyUpstreamName": "%b", "clientIP": "%cp", "status": %ST, "httpRequest":{"requestMethod": "%HM", "requestUrl": "%HU", "xForwardedFor": "%[capture.req.hdr(0)]", "userAgent": "%[capture.req.hdr(1)]", "latency": "%Tt ms"}}
+        global-config-snippet: |
+          resolvers kubernetes
+            nameserver dns1 172.20.0.10:53
+            hold valid 10s
+            accepted_payload_size 8192
