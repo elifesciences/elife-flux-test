@@ -8,5 +8,4 @@ resources:
 - automations/policy-stable.yaml
 - http-scaled-object.yaml
 - service-scaler.yaml
-- service-scaler-backend.yaml
 - ingress.yaml
