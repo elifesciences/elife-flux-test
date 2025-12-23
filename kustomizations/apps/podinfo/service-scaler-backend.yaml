@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: podinfo-scaler-backend
+  namespace: podinfo--staging
+  annotations:
+    haproxy.org/server: "keda-add-ons-http-interceptor-proxy.keda.svc.cluster.local"
+    haproxy.org/port: "8080"
+    haproxy.org/check: "true"
+spec:
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
