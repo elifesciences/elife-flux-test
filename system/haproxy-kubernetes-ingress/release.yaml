@@ -1,0 +1,47 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kubernetes-ingress
+  namespace: haproxy-kubernetes-ingress
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kubernetes-ingress
+      version: 1.47.0
+      sourceRef:
+        kind: HelmRepository
+        name: haproxytech
+      interval: 1m
+  install:
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: 3
+
+  values:
+    controller:
+      replicaCount: 5
+      ingressClass: haproxy
+      service:
+        type: LoadBalancer
+        annotations:
+          service.beta.kubernetes.io/aws-load-balancer-type: "external"
+          service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+          service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'false'
+          service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
+          service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+
+      logging:
+        level: info
+        traffic:
+          address: stdout
+          format: raw
+          facility: daemon
+      config:
+        log-format: |
+          {"timestamp": "%tr", "requestID": "%ID", "proxyUpstreamName": "%b", "proxyProtocolAddr":"%cp", "status": %ST, "httpRequest":{"requestMethod": "%HM", "requestUrl": "%[hdr(host)]%HU", "requestSize": "%U", "responseSize": "%B", "latency": "%Tt ms", "protocol":"%HV", "xForwardedFor": "%[hdr(X-Forwarded-For)]"}}
