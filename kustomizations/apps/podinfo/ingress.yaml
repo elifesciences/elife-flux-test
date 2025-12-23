@@ -8,6 +8,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
+  ingressClassName: haproxy
   rules:
     - host: "${hostname}"
       http:
