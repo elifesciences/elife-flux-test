@@ -44,4 +44,4 @@ spec:
           facility: daemon
       config:
         log-format: |
-          {"timestamp": "%tr", "requestID": "%ID", "proxyUpstreamName": "%b", "proxyProtocolAddr":"%cp", "status": %ST, "httpRequest":{"requestMethod": "%HM", "requestUrl": "%[hdr(host)]%HU", "requestSize": "%U", "responseSize": "%B", "latency": "%Tt ms", "protocol":"%HV", "xForwardedFor": "%[hdr(X-Forwarded-For)]"}}
+          {"timestamp": "%tr", "requestID": "%ID", "proxyUpstreamName": "%b", "proxyProtocolAddr":"%cp", "status": %ST, "httpRequest":{"requestMethod": "%HM", "requestUrl": "%HU", "requestSize": "%U", "responseSize": "%B", "latency": "%Tt ms", "protocol":"%HV", "xForwardedFor": "%{+Q}[hdr(X-Forwarded-For)]"}}
