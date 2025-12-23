@@ -41,17 +41,14 @@ spec:
 
       config:
         use-proxy-protocol: "true"
+        forwardfor: "add"
         h2: "true"
-        compression-algo: "gzip"
-        compression-min-size: "0"
-        gzip-types: "text/plain text/css application/json application/javascript text/xml application/xml"
-        use-forwarded-headers: "true"
         syslog-endpoint: "stdout"
         syslog-format: "raw"
         http-log-format: |
-          {"timestamp": "%tr", "requestID": "%ID", "proxyUpstreamName": "%b", "proxyAlternativeUpstreamName": "", "proxyProtocolAddr":"%cp", "proxyProtocolPort":"%sp", "upstreamStatus": "%ST", "upstreamAddr": "%si:%sp","httpRequest":{"requestMethod": "%HM", "requestUrl": "%[hdr(host)]%HU", "status": %ST,"requestSize": "%U", "responseSize": "%B", "userAgent": "%[capture.req.hdr(0)]", "remoteIp": "%ci", "referer": "%[capture.req.hdr(1)]", "latency": "%Tt ms", "protocol":"%HV", "xForwardedFor": "%[hdr(X-Forwarded-For)]", "xOriginalForwardedFor": "", "xForwardedHost": "%[hdr(X-Forwarded-Host)]"}}
-        https-log-format: |
-          {"timestamp": "%tr", "requestID": "%ID", "proxyUpstreamName": "%b", "proxyAlternativeUpstreamName": "", "proxyProtocolAddr":"%cp", "proxyProtocolPort":"%sp", "upstreamStatus": "%ST", "upstreamAddr": "%si:%sp","httpRequest":{"requestMethod": "%HM", "requestUrl": "%[hdr(host)]%HU", "status": %ST,"requestSize": "%U", "responseSize": "%B", "userAgent": "%[capture.req.hdr(0)]", "remoteIp": "%ci", "referer": "%[capture.req.hdr(1)]", "latency": "%Tt ms", "protocol":"%HV", "xForwardedFor": "%[hdr(X-Forwarded-For)]", "xOriginalForwardedFor": "", "xForwardedHost": "%[hdr(X-Forwarded-Host)]"}}
+          {"timestamp":"%tr","requestID":"%ID","proxyUpstreamName":"%b","proxyAlternativeUpstreamName":"","proxyProtocolAddr":"%cp","proxyProtocolPort":"%sp","upstreamStatus":"%ST","upstreamAddr":"%si:%sp","httpRequest":{"requestMethod":"%HM","requestUrl":"%[hdr(host)]%HU","status":%ST,"requestSize":"%U","responseSize":"%B","userAgent":"%[capture.req.hdr(0)]","remoteIp":"%ci","referer":"%[capture.req.hdr(1)]","latency":"%Ttms","protocol":"%HV","xForwardedFor":"%[hdr(X-Forwarded-For)]","xOriginalForwardedFor":"","xForwardedHost":"%[hdr(X-Forwarded-Host)]"}}
+        # https-log-format: |
+        #   {"timestamp":"%tr","requestID":"%ID","proxyUpstreamName":"%b","proxyAlternativeUpstreamName":"","proxyProtocolAddr":"%cp","proxyProtocolPort":"%sp","upstreamStatus":"%ST","upstreamAddr":"%si:%sp","httpRequest":{"requestMethod":"%HM","requestUrl":"%[hdr(host)]%HU","status":%ST,"requestSize":"%U","responseSize":"%B","userAgent":"%[capture.req.hdr(0)]","remoteIp":"%ci","referer":"%[capture.req.hdr(1)]","latency":"%Ttms","protocol":"%HV","xForwardedFor":"%[hdr(X-Forwarded-For)]","xOriginalForwardedFor":"","xForwardedHost":"%[hdr(X-Forwarded-Host)]"}}
 
         # To capture UserAgent and Referer for the log format above, we must explicitly capture them.
         http-log-receiver: |
