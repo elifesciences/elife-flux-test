@@ -35,7 +35,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/controller: "disabled"
     haproxy.org/backend-config-snippet: |
-      default-server resolvers kubernetes init-addr last,libc,none
+      server keda-interceptor keda-add-ons-http-interceptor-proxy.keda.svc.cluster.local:8080 check resolvers kubernetes init-addr last,libc,none
 spec:
   ingressClassName: haproxy
   rules:
