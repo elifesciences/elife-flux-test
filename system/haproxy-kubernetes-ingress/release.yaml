@@ -43,5 +43,8 @@ spec:
           format: raw
           facility: daemon
       config:
+        request-capture: |
+          hdr(X-Forwarded-For)
+          hdr(User-Agent)
         log-format: |
-          {"timestamp": "%tr", "requestID": "%ID", "proxyUpstreamName": "%b", "proxyProtocolAddr":"%cp", "status": %ST, "httpRequest":{"requestMethod": "%HM", "requestUrl": "%HU", "requestSize": "%U", "responseSize": "%B", "latency": "%Tt ms", "protocol":"%HV", "xForwardedFor": "%{+Q}[hdr(X-Forwarded-For)]"}}
+          {"timestamp": "%tr", "requestID": "%ID", "proxyUpstreamName": "%b", "clientIP": "%cp", "status": %ST, "httpRequest":{"requestMethod": "%HM", "requestUrl": "%HU", "xForwardedFor": "%[capture.req.hdr(0)]", "userAgent": "%[capture.req.hdr(1)]", "latency": "%Tt ms"}}
