@@ -43,7 +43,7 @@ spec:
           format: raw
           facility: daemon
       config:
-        proxy-protocol: "10.0.0.0/16" # our VPC
+        proxy-protocol: "0.0.0.0/0"
         request-capture: |
           hdr(X-Forwarded-For)
           hdr(User-Agent)
