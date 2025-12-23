@@ -4,3 +4,4 @@ namespace: haproxy-ingress
 resources:
 - namespace.yaml
 - source.yaml
+- release.yaml
