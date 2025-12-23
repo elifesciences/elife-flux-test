@@ -43,6 +43,7 @@ spec:
         use-proxy-protocol: "true"
         h2: "true"
         compression-algo: "gzip"
+        compression-min-size: "0"
         gzip-types: "text/plain text/css application/json application/javascript text/xml application/xml"
         use-forwarded-headers: "true"
         syslog-endpoint: "stdout"
