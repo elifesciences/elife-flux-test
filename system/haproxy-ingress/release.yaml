@@ -45,7 +45,8 @@ spec:
         compression-algo: "gzip"
         gzip-types: "text/plain text/css application/json application/javascript text/xml application/xml"
         use-forwarded-headers: "true"
-        log-receiver: "stdout"
+        syslog-endpoint: "stdout"
+        syslog-format: "raw"
         log-format: |
           {"timestamp": "%tr", "requestID": "%ID", "proxyUpstreamName": "%b", "proxyAlternativeUpstreamName": "", "proxyProtocolAddr":"%cp", "proxyProtocolPort":"%sp", "upstreamStatus": "%ST", "upstreamAddr": "%si:%sp","httpRequest":{"requestMethod": "%HM", "requestUrl": "%[hdr(host)]%HU", "status": %ST,"requestSize": "%U", "responseSize": "%B", "userAgent": "%[capture.req.hdr(0)]", "remoteIp": "%ci", "referer": "%[capture.req.hdr(1)]", "latency": "%Tt ms", "protocol":"%HV", "xForwardedFor": "%[hdr(X-Forwarded-For)]", "xOriginalForwardedFor": "", "xForwardedHost": "%[hdr(X-Forwarded-Host)]"}}
 
