@@ -34,7 +34,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/controller: "disabled"
-    haproxy.org/server-address: "keda-add-ons-http-interceptor-proxy.keda.svc.cluster.local"
+    haproxy.org/server: "keda-add-ons-http-interceptor-proxy.keda.svc.cluster.local"
     haproxy.org/server-port: "8080"
     haproxy.org/backend-config-snippet: |
       default-server resolvers kubernetes
