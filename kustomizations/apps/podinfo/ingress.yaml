@@ -34,10 +34,8 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     external-dns.alpha.kubernetes.io/controller: "disabled"
-    haproxy.org/backend-config-snippet: |
-      # Force traffic to the KEDA interceptor by its internal DNS name
-      # HAProxy will resolve this DNS name at runtime
-      server keda-interceptor keda-add-ons-http-interceptor-proxy.keda.svc.cluster.local:8080 check resolvers kubernetes
+    haproxy.org/server-address: "keda-add-ons-http-interceptor-proxy.keda.svc.cluster.local"
+    haproxy.org/server-port: "8080"
 spec:
   ingressClassName: haproxy
   rules:
