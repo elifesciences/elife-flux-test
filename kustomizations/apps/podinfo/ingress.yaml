@@ -10,6 +10,7 @@ metadata:
     haproxy-ingress.github.io/config-backend: |
       compression algo gzip
       compression type text/css text/less text/plain text/xml application/xml application/json application/javascript
+      compression minsize-res 0
 spec:
   ingressClassName: haproxy
   rules:
