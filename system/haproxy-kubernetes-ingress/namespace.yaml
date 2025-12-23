@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: haproxy-kubernetes-ingress
+  annotations:
+    elifesciences.org/default-project: ${cluster_name}
