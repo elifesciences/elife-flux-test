@@ -7,6 +7,9 @@ metadata:
     app: podinfo
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
+    haproxy-ingress.github.io/config-backend: |
+      compression algo gzip
+      compression type text/css text/less text/plain text/xml application/xml application/json application/javascript
 spec:
   ingressClassName: haproxy
   rules:
