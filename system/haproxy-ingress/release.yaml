@@ -42,6 +42,7 @@ spec:
       config:
         use-proxy-protocol: "true"
         h2: "true"
+        compression-algo: "gzip"
         gzip-types: "text/plain text/css application/json application/javascript text/xml application/xml"
         use-forwarded-headers: "true"
         log-receiver: "stdout"
