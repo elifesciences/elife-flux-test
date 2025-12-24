@@ -13,7 +13,7 @@ metadata:
   namespace: traefik
 spec:
   forwardAuth:
-    address: "${oauth2_proxy_auth_url}"
+    address: "${oauth2_proxy_hostname}/oauth2/auth"
     trustForwardHeader: true
     authResponseHeaders:
       - "X-Auth-Request-User"
@@ -33,6 +33,6 @@ spec:
       name: infra-oauth2-proxy
       namespace: infra
       port: 80
-    query: "/oauth2/start"
+    query: "/oauth2/start?rd={url}"
     statusRewrites:
       "401": 302
