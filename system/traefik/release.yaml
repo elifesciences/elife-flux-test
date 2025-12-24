@@ -21,6 +21,13 @@ spec:
     remediation:
       retries: 3
   values:
+    logs:
+      general:
+        format: json
+        level: DEBUG
+      access:
+        enabled: true
+        format: json
     deployment:
       replicas: 5
     providers:
