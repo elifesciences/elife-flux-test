@@ -30,11 +30,14 @@ spec:
     deployment:
       replicas: 5
     providers:
+      kubernetesCRD:
+          allowCrossNamespace: true
       kubernetesIngress:
         ingressClass: traefik
         enabled: true
         allowEmptyServices: true
         allowExternalNameServices: true
+        allowCrossNamespace: true
     service:
       annotations:
         service.beta.kubernetes.io/aws-load-balancer-type: "external"
