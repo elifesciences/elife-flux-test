@@ -18,6 +18,7 @@ resources:
 - ../../nidhogg
 - ../../spegel
 - ../../template-controller
+- ../../traefik
 - ../../vector
 - ../../victoriametrics
 - ../../victorialogs
