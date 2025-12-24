@@ -34,3 +34,5 @@ spec:
       namespace: infra
       port: 80
     query: "/oauth2/start"
+    statusRewrites:
+      "401": 302
