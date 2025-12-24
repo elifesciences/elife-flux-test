@@ -23,6 +23,7 @@ spec:
   values:
     providers:
       kubernetesIngress:
+        ingressClass: traefik
         enabled: true
         allowEmptyServices: true
     ports:
