@@ -21,6 +21,8 @@ spec:
     remediation:
       retries: 3
   values:
+    deployment:
+      replicas: 5
     providers:
       kubernetesIngress:
         ingressClass: traefik
