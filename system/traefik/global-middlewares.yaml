@@ -30,7 +30,7 @@ spec:
     status:
       - "401"
     service:
-      name: oauth2-proxy
+      name: infra-oauth2-proxy
       namespace: infra
       port: 80
     query: "/oauth2/start"
