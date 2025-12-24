@@ -1,0 +1,34 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: traefik
+spec:
+  chart:
+    spec:
+      chart: traefik
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+      version: 38.0.1
+  interval: 1h0m0s
+  values:
+    providers:
+      kubernetesIngress:
+        enabled: true
+        allowEmptyServices: true
+    ports:
+      web:
+        proxyProtocol:
+          trustedIPs:
+            - "10.0.0.0/16"
+        forwardedHeaders:
+          trustedIPs:
+            - "10.0.0.0/16"
+      websecure:
+        proxyProtocol:
+          trustedIPs:
+            - "10.0.0.0/16"
+        forwardedHeaders:
+          trustedIPs:
+            - "10.0.0.0/16"
