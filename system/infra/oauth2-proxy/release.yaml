@@ -35,6 +35,7 @@ spec:
       cookie-domain: .elifesciences.org
       scope: "user:email,read:org"
       set-xauthrequest: true
+      reverse-proxy: true
     ingress:
       enabled: "true"
       hosts:
