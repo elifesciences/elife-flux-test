@@ -7,34 +7,6 @@ metadata:
     app: podinfo
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    external-dns.alpha.kubernetes.io/controller: "disabled"
-spec:
-  ingressClassName: traefik
-  rules:
-    - host: "${hostname}"
-      http:
-        paths:
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: podinfo-scaler
-                port:
-                  number: ${keda_port:=8080}
-  tls:
-  - hosts:
-    - "${hostname}"
-    secretName: podinfo-tls
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: podinfo-traefik
-  namespace: podinfo
-  labels:
-    app: podinfo
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
 spec:
   ingressClassName: traefik
   rules:
