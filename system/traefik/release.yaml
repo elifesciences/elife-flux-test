@@ -26,6 +26,7 @@ spec:
         ingressClass: traefik
         enabled: true
         allowEmptyServices: true
+        allowExternalNameServices: true
     ports:
       web:
         proxyProtocol:
