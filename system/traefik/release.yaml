@@ -31,7 +31,8 @@ spec:
       replicas: 5
     providers:
       kubernetesCRD:
-          allowCrossNamespace: true
+        enabled: true
+        allowCrossNamespace: true
       kubernetesIngress:
         ingressClass: traefik
         enabled: true
