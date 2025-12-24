@@ -38,7 +38,6 @@ spec:
         enabled: true
         allowEmptyServices: true
         allowExternalNameServices: true
-        allowCrossNamespace: true
     service:
       annotations:
         service.beta.kubernetes.io/aws-load-balancer-type: "external"
