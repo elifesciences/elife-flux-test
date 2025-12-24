@@ -30,7 +30,7 @@ spec:
         hosts:
         - gitops-dashboard--${cluster_domain}
       annotations:
-        traefik.ingress.kubernetes.io/router.middlewares: traefik-elife-oauth-signin@kubernetescrd,traefik-elife-oauth-auth@kubernetescrd
+        traefik.ingress.kubernetes.io/router.middlewares: traefik-elife-oauth@kubernetescrd
         cert-manager.io/cluster-issuer: letsencrypt
     adminUser:
       create: true
