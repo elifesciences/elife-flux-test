@@ -19,3 +19,18 @@ spec:
       - "X-Auth-Request-User"
       - "X-Auth-Request-Email"
       - "Set-Cookie"
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: elife-oauth-signin
+  namespace: traefik
+spec:
+  errors:
+    status:
+      - "401"
+    service:
+      name: oauth2-proxy
+      namespace: infra
+      port: 80
+    query: "/oauth2/start"
