@@ -44,6 +44,8 @@ spec:
         service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
     ports:
       web:
+        middlewares:
+          - compress@kubernetescrd
         proxyProtocol:
           trustedIPs:
             - "10.0.0.0/16"
@@ -51,6 +53,8 @@ spec:
           trustedIPs:
             - "10.0.0.0/16"
       websecure:
+        middlewares:
+          - compress@kubernetescrd
         proxyProtocol:
           trustedIPs:
             - "10.0.0.0/16"
