@@ -64,6 +64,37 @@ spec:
                   effect: "NoSchedule"
                 nodeSelector:
                   kubernetes.io/hostname: elife-flux-test-control-plane
+  - target:
+      kind: HelmRelease
+      name: traefik
+    patch: |-
+      apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      metadata:
+        name: traefik
+        namespace: traefik
+      spec:
+        install:
+          disableWait: true
+        values:
+          controller:
+            replicaCount: 1
+            tolerations:
+            - key: "realnode"
+              operator: "Equal"
+              value: "true"
+              effect: "NoSchedule"
+            nodeSelector:
+              kubernetes.io/hostname: elife-flux-test-control-plane
+            admissionWebhooks:
+              patch:
+                tolerations:
+                - key: "realnode"
+                  operator: "Equal"
+                  value: "true"
+                  effect: "NoSchedule"
+                nodeSelector:
+                  kubernetes.io/hostname: elife-flux-test-control-plane
 
   - target:
       kind: HelmRelease
