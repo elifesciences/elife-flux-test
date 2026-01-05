@@ -9,6 +9,7 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt"
     nginx.ingress.kubernetes.io/auth-url: "${oauth2_proxy_auth_url}"
     nginx.ingress.kubernetes.io/auth-signin: "${oauth2_proxy_auth_signin}"
+    external-dns.alpha.kubernetes.io/controller: "disabled"
 spec:
   rules:
     - host: "k8s-dashboard.${cluster_domain}"
@@ -34,7 +35,6 @@ metadata:
     application: kube-web-view
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt"
-    external-dns.alpha.kubernetes.io/controller: "disabled"
     traefik.ingress.kubernetes.io/router.middlewares: traefik-elife-oauth@kubernetescrd
 spec:
   ingressClassName: traefik
