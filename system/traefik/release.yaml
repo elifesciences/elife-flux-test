@@ -29,6 +29,10 @@ spec:
         format: json
     deployment:
       replicas: 5
+    ingressClass:
+      name: traefik
+      enabled: true
+      isDefaultClass: false
     providers:
       kubernetesCRD:
         enabled: true
