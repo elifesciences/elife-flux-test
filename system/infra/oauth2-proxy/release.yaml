@@ -22,8 +22,8 @@ spec:
       retries: 5
 
   dependsOn:
-  - name: sealed-secrets
-    namespace: infra
+    - name: sealed-secrets
+      namespace: infra
 
   values:
     config:
@@ -44,9 +44,9 @@ spec:
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt
       tls:
-      - secretName: oauth2-proxy-tls
-        hosts:
-          - "${oauth2_proxy_hostname}"
+        - secretName: oauth2-proxy-tls
+          hosts:
+            - "${oauth2_proxy_hostname}"
     replicaCount: 2
     resources:
       requests:
