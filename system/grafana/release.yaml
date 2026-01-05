@@ -65,39 +65,3 @@ spec:
       requests:
         cpu: 20m
         memory: 133Mi
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
-    traefik.ingress.kubernetes.io/router.middlewares: traefik-elife-oauth@kubernetescrd
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      auth_request_set $user   $upstream_http_x_auth_request_user;
-      auth_request_set $email  $upstream_http_x_auth_request_email;
-      proxy_set_header X-User  $user;
-      proxy_set_header X-Email $email;
-  labels:
-    app.kubernetes.io/instance: grafana
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: grafana
-    app.kubernetes.io/version: 12.3.1
-  name: grafana-traefik
-  namespace: grafana
-spec:
-  ingressClassName: traefik
-  rules:
-    - host: grafana.flux-test.elifesciences.org
-      http:
-        paths:
-          - backend:
-              service:
-                name: grafana
-                port:
-                  number: 80
-            path: /
-            pathType: Prefix
-  tls:
-    - hosts:
-        - grafana.flux-test.elifesciences.org
-      secretName: grafana-tls
