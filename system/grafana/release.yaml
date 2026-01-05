@@ -89,7 +89,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: grafana
     app.kubernetes.io/version: 12.3.1
-  name: grafana
+  name: grafana-traefik
   namespace: grafana
 spec:
   ingressClassName: traefik
