@@ -52,6 +52,7 @@ spec:
     ingress:
       enabled: true
       annotations:
+        external-dns.alpha.kubernetes.io/controller: "disabled"
         cert-manager.io/cluster-issuer: "letsencrypt"
         nginx.ingress.kubernetes.io/auth-url: "${oauth2_proxy_auth_url}"
         nginx.ingress.kubernetes.io/auth-signin: "${oauth2_proxy_auth_signin}"
@@ -75,7 +76,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    external-dns.alpha.kubernetes.io/controller: "disabled"
     cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.middlewares: traefik-elife-oauth@kubernetescrd
     nginx.ingress.kubernetes.io/configuration-snippet: |
