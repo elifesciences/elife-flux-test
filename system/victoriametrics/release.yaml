@@ -105,7 +105,7 @@ spec:
           ingressClassName: traefik
           annotations:
             cert-manager.io/cluster-issuer: "letsencrypt"
-            external-dns.alpha.kubernetes.io/controller: "disabled"
+
             traefik.ingress.kubernetes.io/router.middlewares: traefik-elife-oauth@kubernetescrd
           hosts:
             - victoriametrics.${cluster_domain}
@@ -130,7 +130,6 @@ spec:
         ingressClassName: traefik
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt"
-          external-dns.alpha.kubernetes.io/controller: "disabled"
           traefik.ingress.kubernetes.io/router.middlewares: traefik-elife-oauth@kubernetescrd
         hosts:
           - vmagent.${cluster_domain}
@@ -152,7 +151,6 @@ spec:
         ingressClassName: traefik
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt"
-          external-dns.alpha.kubernetes.io/controller: "disabled"
           traefik.ingress.kubernetes.io/router.middlewares: traefik-elife-oauth@kubernetescrd
         hosts:
           - vmalert.${cluster_domain}
@@ -184,7 +182,6 @@ spec:
         ingressClassName: traefik
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt"
-          external-dns.alpha.kubernetes.io/controller: "disabled"
           traefik.ingress.kubernetes.io/router.middlewares: traefik-elife-oauth@kubernetescrd
         hosts:
           - alertmanager.${cluster_domain}
