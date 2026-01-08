@@ -32,5 +32,5 @@ metadata:
   namespace: test-redirect
 spec:
   redirectRegex:
-    regex: /(.*)$
-    replacement: https://bbc.co.uk/${1}
+    regex: ^https?://[^/]+(.*)
+    replacement: https://bbc.co.uk${1}
