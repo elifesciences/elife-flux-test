@@ -33,5 +33,5 @@ metadata:
 spec:
   redirectRegex:
     regex: ^https?://[^/]+(.*)
-    replacement: https://bbc.co.uk${1}
+    replacement: https://bbc.co.uk$${1}
     permanent: true
