@@ -10,7 +10,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: traefik
-      version: 38.0.1
+      version: 38.0.2
   interval: 1h0m0s
   install:
     crds: Skip
