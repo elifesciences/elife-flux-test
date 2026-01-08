@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: http-svc
+  namespace: test-redirect
 spec:
   selector:
     app: http-svc
