@@ -8,6 +8,7 @@ metadata:
   name: test-redirect
   namespace: test-redirect
 spec:
+  ingressClassName: traefik
   rules:
   - host: test-redirect.${cluster_domain}
     http:
