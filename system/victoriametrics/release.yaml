@@ -110,6 +110,7 @@ spec:
                 - victoriametrics.${cluster_domain}
           annotations:
             cert-manager.io/cluster-issuer: "letsencrypt"
+            external-dns.alpha.kubernetes.io/controller: "disabled"
             nginx.ingress.kubernetes.io/auth-url: "${oauth2_proxy_auth_url}"
             nginx.ingress.kubernetes.io/auth-signin: "${oauth2_proxy_auth_signin}"
     vmagent:
@@ -128,6 +129,7 @@ spec:
         enabled: true
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt"
+          external-dns.alpha.kubernetes.io/controller: "disabled"
           nginx.ingress.kubernetes.io/auth-url: "${oauth2_proxy_auth_url}"
           nginx.ingress.kubernetes.io/auth-signin: "${oauth2_proxy_auth_signin}"
         hosts:
@@ -149,6 +151,7 @@ spec:
         enabled: true
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt"
+          external-dns.alpha.kubernetes.io/controller: "disabled"
           nginx.ingress.kubernetes.io/auth-url: "${oauth2_proxy_auth_url}"
           nginx.ingress.kubernetes.io/auth-signin: "${oauth2_proxy_auth_signin}"
         hosts:
@@ -186,6 +189,7 @@ spec:
               - alertmanager.${cluster_domain}
         annotations:
           cert-manager.io/cluster-issuer: "letsencrypt"
+          external-dns.alpha.kubernetes.io/controller: "disabled"
           nginx.ingress.kubernetes.io/auth-url: "${oauth2_proxy_auth_url}"
           nginx.ingress.kubernetes.io/auth-signin: "${oauth2_proxy_auth_signin}"
     defaultRules:
@@ -507,7 +511,6 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.middlewares: traefik-elife-oauth@kubernetescrd
-    external-dns.alpha.kubernetes.io/controller: "disabled"
   labels:
     app: vmagent
     app.kubernetes.io/instance: victoriametrics
@@ -540,7 +543,6 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.middlewares: traefik-elife-oauth@kubernetescrd
-    external-dns.alpha.kubernetes.io/controller: "disabled"
   labels:
     app: vmalert
     app.kubernetes.io/instance: victoriametrics
@@ -573,7 +575,6 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.middlewares: traefik-elife-oauth@kubernetescrd
-    external-dns.alpha.kubernetes.io/controller: "disabled"
   labels:
     app: alertmanager
     app.kubernetes.io/instance: victoriametrics
@@ -606,7 +607,6 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
     traefik.ingress.kubernetes.io/router.middlewares: traefik-elife-oauth@kubernetescrd
-    external-dns.alpha.kubernetes.io/controller: "disabled"
   labels:
     app: vmselect
     app.kubernetes.io/instance: victoriametrics
