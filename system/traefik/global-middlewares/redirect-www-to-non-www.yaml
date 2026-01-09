@@ -7,5 +7,5 @@ metadata:
 spec:
   redirectRegex:
     regex: "^https?://www\\.(.*)"
-    replacement: "https://${1}"
+    replacement: "https://$${1}"
     permanent: true
