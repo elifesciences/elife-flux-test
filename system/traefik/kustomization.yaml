@@ -8,3 +8,4 @@ resources:
 - global-middlewares/compress.yaml
 - global-middlewares/elife-oauth.yaml
 - global-middlewares/redirect-www-to-non-www.yaml
+- global-middlewares/mitigate-cve-2025-64459.yaml
