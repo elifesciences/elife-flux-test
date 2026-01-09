@@ -23,6 +23,7 @@ spec:
   tls:
   - hosts:
     - test-redirect.${cluster_domain}
+    - www.test-redirect.${cluster_domain}
     secretName: test-redirect.${cluster_domain}-tls
 ---
 apiVersion: traefik.io/v1alpha1
