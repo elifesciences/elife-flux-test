@@ -36,3 +36,33 @@ spec:
     regex: ^https?://[^/]+(.*)
     replacement: https://bbc.co.uk$${1}
     permanent: true
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-redirect-mitigate-cve-2025-64459
+  namespace: test-redirect
+  annotations:
+   traefik.ingress.kubernetes.io/router.priority: "100"
+   traefik.ingress.kubernetes.io/router.rule: >-
+     Host(`api.test.elifesciences.org`) &&
+     (QueryRegexp(`_connector`, `.*`) || QueryRegexp(`_negated`, `.*`))
+   traefik.ingress.kubernetes.io/router.middlewares: traefik-mitigate-cve-2025-64459@kubernetescrd
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: test-redirect.${cluster_domain}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: http-svc
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - test-redirect.${cluster_domain}
+    - www.test-redirect.${cluster_domain}
+    secretName: test-redirect.${cluster_domain}-tls
