@@ -12,5 +12,7 @@ resources:
 
 configMapGenerator:
 - name: nginx-utils-config
+  options:
+    disableNameSuffixHash: true
   files:
   - nginx-utils-config/default.conf
