@@ -31,7 +31,7 @@ spec:
       replicas: 5
       additionalContainers:
       - name: nginx-utils
-        image: nginx:1.29.4
+        image: nginxinc/nginx-unprivileged:1.29.4
         volumeMounts:
         - name: nginx-utils-config
           mountPath: /etc/nginx/conf.d
