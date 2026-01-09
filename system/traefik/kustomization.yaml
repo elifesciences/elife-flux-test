@@ -5,4 +5,5 @@ resources:
 - namespace.yaml
 - source.yaml
 - release.yaml
-- global-middlewares.yaml
+- global-middlewares/compress.yaml
+- global-middlewares/elife-oauth.yaml
