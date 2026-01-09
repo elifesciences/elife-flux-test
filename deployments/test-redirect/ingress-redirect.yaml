@@ -20,16 +20,6 @@ spec:
             name: http-svc
             port:
               number: 80
-  - host: www.test-redirect.${cluster_domain}
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: http-svc
-            port:
-              number: 80
   tls:
   - hosts:
     - test-redirect.${cluster_domain}
