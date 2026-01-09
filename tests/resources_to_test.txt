@@ -37,4 +37,4 @@
 2m kustomizations.kustomize.toolkit.fluxcd.io ready monitoring monitoring-flux
 
 # Test all deployments
-2m deployment Available podinfo--staging podinfo
+2m deployment Available podinfo podinfo
