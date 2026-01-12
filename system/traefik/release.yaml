@@ -42,7 +42,7 @@ spec:
     ingressClass:
       name: traefik
       enabled: true
-      isDefaultClass: false
+      isDefaultClass: true
     providers:
       kubernetesCRD:
         enabled: true
