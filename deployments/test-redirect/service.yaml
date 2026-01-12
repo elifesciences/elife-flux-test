@@ -4,8 +4,6 @@ metadata:
   name: echo
   namespace: test-redirect
 spec:
-  selector:
-    app: echo
   type: ClusterIP
   ports:
   - port: 8080
