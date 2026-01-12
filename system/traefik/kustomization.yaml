@@ -10,6 +10,7 @@ resources:
 - global-middlewares/redirect-www-to-non-www.yaml
 - global-middlewares/mitigate-cve-2025-64459.yaml
 - global-middlewares/deny-robots.yaml
+- global-middlewares/ping.yaml
 
 configMapGenerator:
 - name: nginx-utils-config
