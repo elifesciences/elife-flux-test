@@ -52,6 +52,9 @@ spec:
         enabled: true
         allowEmptyServices: true
         allowExternalNameServices: true
+    ingressRoute:
+      dashboard:
+        enabled: true #only on traefik entrypoint
     service:
       annotations:
         service.beta.kubernetes.io/aws-load-balancer-type: "external"
