@@ -16,3 +16,11 @@ configMapGenerator:
     disableNameSuffixHash: true
   files:
   - nginx-utils-config/default.conf
+- name: traefik-dashboards
+  files:
+    - dashboards/Traefik-Official-Standalone-Dashboard.json
+  options:
+    labels:
+      grafana_dashboard: "1"
+    annotations:
+      kustomize.toolkit.fluxcd.io/substitute: "disabled"
