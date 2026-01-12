@@ -99,3 +99,8 @@ spec:
               annotations:
                 summary: "Traefik Down"
                 description: "{{ $labels.pod }} on {{ $labels.nodename }} is down"
+    experimental:
+      plugins:
+        inlineResponse:
+          moduleName: github.com/tuxgal/traefik_inline_response
+          version: v0.1.2
