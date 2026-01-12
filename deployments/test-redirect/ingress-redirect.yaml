@@ -6,7 +6,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/configuration-snippet: 'return 302 https://bbc.co.uk/;'
     cert-manager.io/cluster-issuer: letsencrypt
-    traefik.ingress.kubernetes.io/router.middlewares: test-redirect-inflightreq@kubernetescrd,traefik-ping@kubernetescrd,traefik-deny-robots@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: test-redirect-inflightreq@kubernetescrd,traefik-ping@kubernetescrd,traefik-deny-robots@kubernetescrd,test-redirect-auth-basic@kubernetescrd
 spec:
   ingressClassName: traefik
   rules:
@@ -85,3 +85,14 @@ metadata:
 spec:
   inFlightReq:
     amount: 10
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: auth-basic
+  namespace: test-redirect
+spec:
+  basicAuth:
+    secret: test-http-basic-auth
+    realm: "Authentication Required - test redirect"
+    removeHeader: true
