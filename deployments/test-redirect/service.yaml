@@ -8,4 +8,4 @@ spec:
     app: http-svc
   type: ClusterIP
   ports:
-  - port: 80
+  - port: 8080
