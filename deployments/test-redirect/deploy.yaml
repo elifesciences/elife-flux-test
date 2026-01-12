@@ -6,10 +6,12 @@ metadata:
   labels:
     app: slow-backend
 spec:
-  containers:
-  - name: slow
-    image: hashicorp/http-echo
-    args:
-    - "-text=hello"
-    - "-listen=:8080"
-    - "-delay=2s" # Artificial delay
+  template:
+    spec:
+      containers:
+      - name: slow
+        image: hashicorp/http-echo
+        args:
+        - "-text=hello"
+        - "-listen=:8080"
+        - "-delay=2s" # Artificial delay
