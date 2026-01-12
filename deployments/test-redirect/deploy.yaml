@@ -1,17 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: slow-backend
+  name: echo
   namespace: test-redirect
   labels:
-    app: slow-backend
+    app: echo
 spec:
   template:
     spec:
       containers:
-      - name: slow
+      - name: echo
         image: hashicorp/http-echo
         args:
         - "-text=hello"
         - "-listen=:8080"
-        - "-delay=2s" # Artificial delay

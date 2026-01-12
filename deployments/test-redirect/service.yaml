@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: http-svc
+  name: echo
   namespace: test-redirect
 spec:
   selector:
-    app: http-svc
+    app: echo
   type: ClusterIP
   ports:
   - port: 8080
