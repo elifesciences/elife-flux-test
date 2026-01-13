@@ -50,8 +50,8 @@ spec:
         auto_assign_org: true
         auto_assign_org_role: Admin
     ingress:
-      ingressClassName: traefik
       enabled: true
+      ingressClassName: traefik
       annotations:
         cert-manager.io/cluster-issuer: "letsencrypt"
         traefik.ingress.kubernetes.io/router.middlewares: traefik-elife-oauth@kubernetescrd
