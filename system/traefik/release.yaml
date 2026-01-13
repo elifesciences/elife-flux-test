@@ -29,16 +29,6 @@ spec:
         format: json
     deployment:
       replicas: 5
-      additionalContainers:
-      - name: nginx-utils
-        image: nginxinc/nginx-unprivileged:1.29.3
-        volumeMounts:
-        - name: nginx-utils-config
-          mountPath: /etc/nginx/conf.d
-      additionalVolumes:
-      - name: nginx-utils-config
-        configMap:
-          name: nginx-utils-config
     ingressClass:
       name: traefik
       enabled: true

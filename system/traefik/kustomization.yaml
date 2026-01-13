@@ -13,11 +13,6 @@ resources:
 - global-middlewares/ping.yaml
 
 configMapGenerator:
-- name: nginx-utils-config
-  options:
-    disableNameSuffixHash: true
-  files:
-  - nginx-utils-config/default.conf
 - name: traefik-dashboards
   files:
     - dashboards/Traefik-Official-Standalone-Dashboard.json
