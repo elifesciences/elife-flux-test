@@ -4,6 +4,7 @@ namespace: traefik-test
 resources:
 - namespace.yaml
 - deployment.yaml
+- service.yaml
 
 labels:
 - includeSelectors: true
