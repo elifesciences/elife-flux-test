@@ -99,5 +99,5 @@ spec:
           moduleName: github.com/tuxgal/traefik_inline_response
           version: v0.1.2
         traefikerrorreplace:
-          modulename: github.com/PseudoResonance/traefikerrorreplace
+          moduleName: github.com/PseudoResonance/traefikerrorreplace
           version: v1.0.1
