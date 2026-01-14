@@ -52,4 +52,4 @@ spec:
     middlewares:
       - name: elife-oauth-signin
       - name: elife-oauth-auth
-      # - name: eLife-oauth-protect-from-401
+      - name: eLife-oauth-protect-from-401
