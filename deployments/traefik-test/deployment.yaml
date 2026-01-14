@@ -12,7 +12,7 @@ spec:
         - name: http
           containerPort: 5678
           protocol: TCP
-        command:
+        args:
         - --status-code=401
         resources:
           limits:
