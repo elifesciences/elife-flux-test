@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: traefik-test
 resources:
 - namespace.yaml
+- deployment.yaml
 
 labels:
 - includeSelectors: true

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traefik-test
+spec:
+  template:
+    spec:
+      containers:
+      - name: echo
+        image: hashicorp/http-echo:latest
+        ports:
+        - name: http
+          containerPort: 5678
+          protocol: TCP
+        command:
+        - --status-code=401
+        resources:
+          limits:
+            cpu: 10m
+            memory: 100Mi
+          requests:
+            cpu: 10m
+            memory: 10Mi
