@@ -27,8 +27,8 @@ spec:
       namespace: infra
       port: 80
     query: "/oauth2/start?rd={url}"
-    # statusRewrites:
-    #   "401": 302
+    statusRewrites:
+      "401": 302
 ---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
