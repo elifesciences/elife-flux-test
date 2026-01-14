@@ -38,5 +38,5 @@ metadata:
 spec:
   chain:
     middlewares:
-      # - name: elife-oauth-signin
+      - name: elife-oauth-signin
       - name: elife-oauth-auth
