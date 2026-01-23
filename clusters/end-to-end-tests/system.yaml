@@ -74,6 +74,8 @@ spec:
         name: traefik
         namespace: traefik
       spec:
+        install:
+          disableWait: true # Needed because the test pod doesn't have values to manipulate where it runs
         values:
           deployment:
             replicas: 1
