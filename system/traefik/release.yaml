@@ -10,7 +10,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: traefik
-      version: 38.0.2
+      version: 39.0.0
   interval: 1h0m0s
   install:
     crds: Skip
@@ -27,6 +27,22 @@ spec:
       access:
         enabled: true
         format: json
+        fields:
+          headers:
+            defaultmode: drop
+            names:
+              # Specific custom headers
+              x-ja4fingerprint: keep
+              X-Forwarded-For: keep
+              X-Original-Forwarded-For: keep
+              X-Forwarded-Host: keep
+
+              # Standard headers
+              User-Agent: keep
+              Referer: keep
+
+              # Useful for tracking
+              X-Request-ID: keep
     deployment:
       replicas: 5
     resources:
@@ -58,8 +74,11 @@ spec:
         service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
     ports:
       web:
-        middlewares:
-          - traefik-compress@kubernetescrd
+        http:
+          encodedCharacters:
+            allowEncodedSlash: true
+          middlewares:
+            - traefik-compress@kubernetescrd
         proxyProtocol:
           trustedIPs:
             - "10.0.0.0/16"
@@ -67,8 +86,11 @@ spec:
           trustedIPs:
             - "10.0.0.0/16"
       websecure:
-        middlewares:
-          - traefik-compress@kubernetescrd
+        http:
+          encodedCharacters:
+            allowEncodedSlash: true
+          middlewares:
+            - traefik-compress@kubernetescrd
         proxyProtocol:
           trustedIPs:
             - "10.0.0.0/16"
