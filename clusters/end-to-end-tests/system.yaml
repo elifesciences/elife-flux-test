@@ -76,7 +76,7 @@ spec:
       spec:
         values:
           deployment:
-            replicaCount: 1
+            replicas: 1
           tolerations:
           - key: "realnode"
             operator: "Equal"
