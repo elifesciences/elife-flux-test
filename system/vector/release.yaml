@@ -112,28 +112,28 @@ spec:
             # 2. Build the httpRequest object
             http = {}
             http.requestMethod = raw.RequestMethod
-            # Combine Host and Path using interpolation (infallible)
-            host = to_string(raw.RequestHost) || ""
-            path = to_string(raw.RequestPath) || ""
-            http.requestUrl = "#{host}#{path}"
+            # Combine Host and Path to recreate the Nginx requestUrl
+            host = to_string(raw.RequestHost) ?? ""
+            path = to_string(raw.RequestPath) ?? ""
+            http.requestUrl = host + path
 
-            http.status = to_int(raw.DownstreamStatus) || 0
-            http.requestSize = to_string(raw.RequestContentSize) || "0"
-            http.responseSize = to_string(raw.DownstreamContentSize) || "0"
+            http.status = to_int(raw.DownstreamStatus) ?? 0
+            http.requestSize = to_string(raw.RequestContentSize) ?? "0"
+            http.responseSize = to_string(raw.DownstreamContentSize) ?? "0"
             http.userAgent = raw."request_User-Agent"
             http.remoteIp = raw.ClientHost
             http.referer = raw."request_Referer"
 
             if exists(raw.Duration) {
-              # Use temporary variable for latency calculation to ensure stability
-              duration = to_float(raw.Duration) || 0.0
-              http.latency = to_string(duration / 1000000000) + " s"
+              # Renamed duration to dur to avoid reserved keyword error
+              dur = to_float(raw.Duration) ?? 0.0
+              http.latency = (to_string(dur / 1000000000.0) ?? "0") + " s"
             }
 
             http.protocol = raw.RequestProtocol
-            http.xForwardedFor = raw."request_X-Forwarded-For" || ""
-            http.xForwardedHost = raw."request_X-Forwarded-Host" || ""
-            http.xOriginalForwardedFor = raw."request_X-Original-Forwarded-For" || ""
+            http.xForwardedFor = raw."request_X-Forwarded-For" ?? ""
+            http.xForwardedHost = raw."request_X-Forwarded-Host" ?? ""
+            http.xOriginalForwardedFor = raw."request_X-Original-Forwarded-For" ?? ""
             http.xJA4Fingerprint = raw."request_x-ja4fingerprint"
 
             # 3. Build the final structure at the root level
@@ -145,7 +145,7 @@ spec:
             output.proxyProtocolAddr = raw.ClientHost
             output.proxyProtocolPort = raw.ClientPort
             output.upstreamAddr = raw.ServiceAddr
-            output.upstreamStatus = to_string(raw.OriginStatus) || ""
+            output.upstreamStatus = to_string(raw.OriginStatus) ?? ""
             output.timestamp = raw.StartUTC
 
             # 4. Replace the event
