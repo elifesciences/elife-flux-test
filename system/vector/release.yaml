@@ -112,10 +112,11 @@ spec:
             # 2. Build the httpRequest object
             http = {}
             http.requestMethod = raw.RequestMethod
-            http.requestUrl = (string(raw.RequestHost) ?? "") + (string(raw.RequestPath) ?? "")
-            http.status = to_int(raw.DownstreamStatus) ?? 0
-            http.requestSize = to_string(raw.RequestContentSize) ?? "0"
-            http.responseSize = to_string(raw.DownstreamContentSize) ?? "0"
+            # Combine Host and Path to recreate the Nginx requestUrl
+            http.requestUrl = (string(raw.RequestHost) || "") + (string(raw.RequestPath) || "")
+            http.status = to_int(raw.DownstreamStatus) || 0
+            http.requestSize = to_string(raw.RequestContentSize) || "0"
+            http.responseSize = to_string(raw.DownstreamContentSize) || "0"
             http.userAgent = raw."request_User-Agent"
             http.remoteIp = raw.ClientHost
             http.referer = raw."request_Referer"
@@ -125,9 +126,9 @@ spec:
             }
 
             http.protocol = raw.RequestProtocol
-            http.xForwardedFor = raw."request_X-Forwarded-For" ?? ""
-            http.xForwardedHost = raw."request_X-Forwarded-Host" ?? ""
-            http.xOriginalForwardedFor = raw."request_X-Original-Forwarded-For" ?? ""
+            http.xForwardedFor = raw."request_X-Forwarded-For" || ""
+            http.xForwardedHost = raw."request_X-Forwarded-Host" || ""
+            http.xOriginalForwardedFor = raw."request_X-Original-Forwarded-For" || ""
             http.xJA4Fingerprint = raw."request_x-ja4fingerprint"
 
             # 3. Build the final structure at the root level
@@ -139,7 +140,7 @@ spec:
             output.proxyProtocolAddr = raw.ClientHost
             output.proxyProtocolPort = raw.ClientPort
             output.upstreamAddr = raw.ServiceAddr
-            output.upstreamStatus = to_string(raw.OriginStatus) ?? ""
+            output.upstreamStatus = to_string(raw.OriginStatus) || ""
             output.timestamp = raw.StartUTC
 
             # 4. Replace the event
