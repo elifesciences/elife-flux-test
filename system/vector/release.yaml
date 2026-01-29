@@ -112,17 +112,22 @@ spec:
             # 2. Build the httpRequest object
             http = {}
             http.requestMethod = raw.RequestMethod
-            # Combine Host and Path to recreate the Nginx requestUrl
-            http.requestUrl = (to_string(raw.RequestHost) || "") + (to_string(raw.RequestPath) || "")
-            http.status = to_int!(raw.DownstreamStatus) || 0
-            http.requestSize = to_string!(raw.RequestContentSize) || "0"
-            http.responseSize = to_string!(raw.DownstreamContentSize) || "0"
+            # Combine Host and Path using interpolation (infallible)
+            host = to_string(raw.RequestHost) || ""
+            path = to_string(raw.RequestPath) || ""
+            http.requestUrl = "#{host}#{path}"
+
+            http.status = to_int(raw.DownstreamStatus) || 0
+            http.requestSize = to_string(raw.RequestContentSize) || "0"
+            http.responseSize = to_string(raw.DownstreamContentSize) || "0"
             http.userAgent = raw."request_User-Agent"
             http.remoteIp = raw.ClientHost
             http.referer = raw."request_Referer"
 
             if exists(raw.Duration) {
-              http.latency = to_string!(to_float!(raw.Duration) / 1000000000) + " s"
+              # Use temporary variable for latency calculation to ensure stability
+              duration = to_float(raw.Duration) || 0.0
+              http.latency = to_string(duration / 1000000000) + " s"
             }
 
             http.protocol = raw.RequestProtocol
@@ -140,7 +145,7 @@ spec:
             output.proxyProtocolAddr = raw.ClientHost
             output.proxyProtocolPort = raw.ClientPort
             output.upstreamAddr = raw.ServiceAddr
-            output.upstreamStatus = to_string!(raw.OriginStatus) || ""
+            output.upstreamStatus = to_string(raw.OriginStatus) || ""
             output.timestamp = raw.StartUTC
 
             # 4. Replace the event
