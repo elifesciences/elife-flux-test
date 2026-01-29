@@ -140,10 +140,6 @@ spec:
             # Helper fields for proxy info
             .proxyProtocolAddr = raw.ClientHost
             .proxyProtocolPort = raw.ClientPort
-
-            # Remove the raw traefik fields to keep the output clean
-            # If you want to keep everything, comment the line below
-            del(raw)
         filter_traefik_podinfo:
           type: filter
           inputs:
