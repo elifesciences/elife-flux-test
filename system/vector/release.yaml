@@ -105,41 +105,45 @@ spec:
           inputs:
             - traefik_logs
           source: |
-            # Parse the initial k8s log wrapper
+            # 1. Parse the incoming message
             raw, err = parse_json(.message)
             if err != null { abort }
 
-            # Create the httpRequest object to match GCP/Nginx format
-            .httpRequest.requestMethod = raw.RequestMethod
-            .httpRequest.requestUrl = (string(raw.RequestHost) ?? "") + (string(raw.RequestPath) ?? "")
-            .httpRequest.status = to_int(raw.DownstreamStatus) ?? 0
-            .httpRequest.requestSize = to_string(raw.RequestContentSize) ?? "0"
-            .httpRequest.responseSize = to_string(raw.DownstreamContentSize) ?? "0"
-            .httpRequest.userAgent = raw."request_User-Agent"
-            .httpRequest.remoteIp = raw.ClientHost
-            .httpRequest.referer = raw."request_Referer"
+            # 2. Build the httpRequest object
+            http = {}
+            http.requestMethod = raw.RequestMethod
+            http.requestUrl = (string(raw.RequestHost) ?? "") + (string(raw.RequestPath) ?? "")
+            http.status = to_int(raw.DownstreamStatus) ?? 0
+            http.requestSize = to_string(raw.RequestContentSize) ?? "0"
+            http.responseSize = to_string(raw.DownstreamContentSize) ?? "0"
+            http.userAgent = raw."request_User-Agent"
+            http.remoteIp = raw.ClientHost
+            http.referer = raw."request_Referer"
 
-            # Convert nanoseconds to "X.Y s" format
             if exists(raw.Duration) {
-              .httpRequest.latency = to_string(to_float(raw.Duration) / 1000000000) + " s"
+              http.latency = to_string(to_float(raw.Duration) / 1000000000) + " s"
             }
 
-            .httpRequest.protocol = raw.RequestProtocol
-            .httpRequest.xForwardedFor = raw."request_X-Forwarded-For"
-            .httpRequest.xForwardedHost = raw."request_X-Forwarded-Host"
-            .httpRequest.xOriginalForwardedFor = raw."request_X-Original-Forwarded-For"
-            .httpRequest.xJA4Fingerprint = raw."request_x-ja4fingerprint"
+            http.protocol = raw.RequestProtocol
+            http.xForwardedFor = raw."request_X-Forwarded-For" ?? ""
+            http.xForwardedHost = raw."request_X-Forwarded-Host" ?? ""
+            http.xOriginalForwardedFor = raw."request_X-Original-Forwarded-For" ?? ""
+            http.xJA4Fingerprint = raw."request_x-ja4fingerprint"
 
-            # Map Top Level Fields
-            .requestID = raw."request_X-Request-ID"
-            .proxyUpstreamName = raw.ServiceName
-            .upstreamAddr = raw.ServiceAddr
-            .upstreamStatus = to_string(raw.OriginStatus) ?? ""
-            .timestamp = raw.StartUTC
+            # 3. Build the final structure at the root level
+            output = {}
+            output.httpRequest = http
+            output.requestID = raw."request_X-Request-ID"
+            output.proxyUpstreamName = raw.ServiceName
+            output.proxyAlternativeUpstreamName = ""
+            output.proxyProtocolAddr = raw.ClientHost
+            output.proxyProtocolPort = raw.ClientPort
+            output.upstreamAddr = raw.ServiceAddr
+            output.upstreamStatus = to_string(raw.OriginStatus) ?? ""
+            output.timestamp = raw.StartUTC
 
-            # Helper fields for proxy info
-            .proxyProtocolAddr = raw.ClientHost
-            .proxyProtocolPort = raw.ClientPort
+            # 4. Replace the event
+            . = output
         filter_traefik_podinfo:
           type: filter
           inputs:
