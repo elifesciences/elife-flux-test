@@ -100,12 +100,62 @@ spec:
               abort
             }
             . = json
+        traefik_json_parse2:
+          type: remap
+          inputs:
+            - traefik_logs
+          source: |
+            # Parse the initial k8s log wrapper
+            raw, err = parse_json(.message)
+            if err != null { abort }
+
+            # Create the httpRequest object to match GCP/Nginx format
+            .httpRequest.requestMethod = raw.RequestMethod
+            .httpRequest.requestUrl = (string(raw.RequestHost) ?? "") + (string(raw.RequestPath) ?? "")
+            .httpRequest.status = to_int(raw.DownstreamStatus) ?? 0
+            .httpRequest.requestSize = to_string(raw.RequestContentSize) ?? "0"
+            .httpRequest.responseSize = to_string(raw.DownstreamContentSize) ?? "0"
+            .httpRequest.userAgent = raw."request_User-Agent"
+            .httpRequest.remoteIp = raw.ClientHost
+            .httpRequest.referer = raw."request_Referer"
+
+            # Convert nanoseconds to "X.Y s" format
+            if exists(raw.Duration) {
+              .httpRequest.latency = to_string(to_float(raw.Duration) / 1000000000) + " s"
+            }
+
+            .httpRequest.protocol = raw.RequestProtocol
+            .httpRequest.xForwardedFor = raw."request_X-Forwarded-For"
+            .httpRequest.xForwardedHost = raw."request_X-Forwarded-Host"
+            .httpRequest.xOriginalForwardedFor = raw."request_X-Original-Forwarded-For"
+            .httpRequest.xJA4Fingerprint = raw."request_x-ja4fingerprint"
+
+            # Map Top Level Fields
+            .requestID = raw."request_X-Request-ID"
+            .proxyUpstreamName = raw.ServiceName
+            .upstreamAddr = raw.ServiceAddr
+            .upstreamStatus = to_string(raw.OriginStatus) ?? ""
+            .timestamp = raw.StartUTC
+
+            # Helper fields for proxy info
+            .proxyProtocolAddr = raw.ClientHost
+            .proxyProtocolPort = raw.ClientPort
+
+            # Remove the raw traefik fields to keep the output clean
+            # If you want to keep everything, comment the line below
+            del(raw)
         filter_traefik_podinfo:
           type: filter
           inputs:
             - traefik_json_parse
           condition: |
             starts_with(string(.RequestAddr) ?? "", "podinfo.flux-test.elifesciences.org")
+        filter_traefik_podinfo2:
+          type: filter
+          inputs:
+            - traefik_json_parse2
+          condition: |
+            starts_with(string(.httpRequest.requestUrl) ?? "", "podinfo.flux-test.elifesciences.org")
       sinks:
         prom_exporter:
           type: prometheus_exporter
@@ -118,6 +168,16 @@ spec:
           bucket: elife-cluster-logs
           credentials_path: /etc/gcp-data-hub-project-log-shipping/credentials.json
           key_prefix: ${cluster_name}/podinfo/dt=%F/
+          filename_extension: jsonl
+          encoding:
+            codec: native_json
+        flux_test_podinfo_gcp2:
+          type: gcp_cloud_storage
+          inputs:
+            - filter_traefik_podinfo2
+          bucket: elife-cluster-logs
+          credentials_path: /etc/gcp-data-hub-project-log-shipping/credentials.json
+          key_prefix: ${cluster_name}/podinfo2/dt=%F/
           filename_extension: jsonl
           encoding:
             codec: native_json
