@@ -123,18 +123,16 @@ spec:
             http.userAgent = raw."request_User-Agent"
             http.remoteIp = raw.ClientHost
             http.referer = raw."request_Referer"
-
-            if exists(raw.Duration) {
-              # Renamed duration to dur to avoid reserved keyword error
-              dur = to_float(raw.Duration) ?? 0.0
-              http.latency = to_string(dur / 1000000000.0) + " s"
-            }
-
             http.protocol = raw.RequestProtocol
             http.xForwardedFor = raw."request_X-Forwarded-For" || ""
             http.xForwardedHost = raw."request_X-Forwarded-Host" || ""
             http.xOriginalForwardedFor = raw."request_X-Original-Forwarded-For" || ""
             http.xJA4Fingerprint = raw."request_x-ja4fingerprint" || ""
+
+            if exists(raw.Duration) {
+              dur = to_float(raw.Duration) ?? 0.0
+              http.latency = to_string(dur / 1000000000.0) + " s"
+            }
 
             # 3. Build the final structure at the root level
             output = {}
