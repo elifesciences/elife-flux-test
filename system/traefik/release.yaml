@@ -74,9 +74,11 @@ spec:
         service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
     ports:
       web:
-        redirectTo:
-          port: websecure
-          priority: 10
+        redirections:
+          entryPoint:
+            to: websecure
+            scheme: https
+            permanent: true
         http:
           encodedCharacters:
             allowEncodedSlash: true
