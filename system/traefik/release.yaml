@@ -74,16 +74,16 @@ spec:
         service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
     ports:
       web:
-        redirections:
-          entryPoint:
-            to: websecure
-            scheme: https
-            permanent: true
         http:
           encodedCharacters:
             allowEncodedSlash: true
           middlewares:
             - traefik-compress@kubernetescrd
+          redirections:
+            entryPoint:
+              to: websecure
+              scheme: https
+              permanent: true
         proxyProtocol:
           trustedIPs:
             - "10.0.0.0/16"
