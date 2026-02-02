@@ -32,6 +32,9 @@ spec:
         - key: "kubernetes.io/arch"
           operator: In
           values: ["amd64", "arm64"]
+        - key: "karpenter.k8s.aws/instance-cpu"
+          operator: Gt
+          values: ["2"]
       startupTaints:
         - key: nidhogg.uswitch.com/spegel.spegel
           effect: NoSchedule
