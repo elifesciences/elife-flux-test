@@ -72,7 +72,7 @@ spec:
         service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "false"
         service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
         service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
-        alb.ingress.kubernetes.io/tags: Cluster=${cluster_name},Project=${cluster_name}
+        service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: Cluster=${cluster_name},Project=${cluster_name}
     ports:
       web:
         http:
