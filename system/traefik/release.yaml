@@ -43,8 +43,6 @@ spec:
 
               # Useful for tracking
               X-Request-ID: keep
-    deployment:
-      replicas: 5
     resources:
       requests:
         cpu: 25m
@@ -129,3 +127,26 @@ spec:
         traefikerrorreplace:
           moduleName: github.com/PseudoResonance/traefikerrorreplace
           version: v1.0.1
+        htransformation:
+          moduleName: "github.com/tomMoulard/htransformation"
+          version: "v0.3.3"
+    deployment:
+      replicas: 5
+      initContainers:
+        - name: check-plugins
+          image: alpine:latest
+          command: ["sh", "-c"]
+          args:
+            - |
+              PLUGINS="https://plugins.traefik.io/public/download/github.com/tuxgal/traefik_inline_response/v0.1.2
+                https://plugins.traefik.io/public/download/github.com/PseudoResonance/traefikerrorreplace/v1.0.1
+                https://plugins.traefik.io/public/download/github.com/tomMoulard/htransformation/v0.3.3"
+
+              for url in $PLUGINS; do
+                echo "Checking $url..."
+                if ! wget --spider -q --timeout=10 "$url"; then
+                  echo "CRITICAL: Plugin download check failed for $url. Aborting pod startup."
+                  exit 1
+                fi
+              done
+              echo "All plugins reachable. Proceeding..."
