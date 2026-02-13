@@ -11,5 +11,5 @@ spec:
       chart: reloader
       interval: 5m
       sourceRef:
-        kind: GitRepository
+        kind: HelmRepository
         name: stakater
