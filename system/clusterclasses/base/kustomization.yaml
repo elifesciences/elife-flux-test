@@ -16,6 +16,7 @@ resources:
 - ../../metrics-server
 - ../../monitoring
 - ../../nidhogg
+- ../../reloader
 - ../../spegel
 - ../../template-controller
 - ../../traefik
