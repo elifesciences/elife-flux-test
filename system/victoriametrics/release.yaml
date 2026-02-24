@@ -56,6 +56,7 @@ spec:
             limits: {}
           extraArgs:
             "inmemoryDataFlushInterval": "15s"
+            "dedup.minScrapeInterval": "30s"
         vmselect:
           replicaCount: 2
           affinity:
@@ -79,6 +80,10 @@ spec:
               cpu: 200m
               memory: 150Mi
             limits: {}
+          extraArgs:
+            "dedup.minScrapeInterval": "30s"
+            "search.cacheTimestampOffset": "10m"
+            "search.maxQueryDuration": "120s"
         vminsert:
           replicaCount: 2
           affinity:
