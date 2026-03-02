@@ -39,7 +39,7 @@ spec:
                 +(topologySpreadConstraints):
                 - maxSkew: 1
                   topologyKey: topology.kubernetes.io/zone
-                  whenUnsatisfiable: ScheduleAnyway
+                  whenUnsatisfiable: DoNotSchedule
                   labelSelector:
                     matchLabels:
                       app.kubernetes.io/instance: "{{request.object.spec.template.metadata.labels.\"app.kubernetes.io/instance\"}}"
@@ -80,7 +80,7 @@ spec:
                 +(topologySpreadConstraints):
                 - maxSkew: 1
                   topologyKey: topology.kubernetes.io/zone
-                  whenUnsatisfiable: ScheduleAnyway
+                  whenUnsatisfiable: DoNotSchedule
                   labelSelector:
                     matchLabels:
                       app.kubernetes.io/instance: "{{request.object.spec.template.metadata.labels.\"app.kubernetes.io/instance\"}}"
