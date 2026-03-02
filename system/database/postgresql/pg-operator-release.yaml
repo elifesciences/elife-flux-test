@@ -27,7 +27,7 @@ spec:
       limits: {}
       requests:
         cpu: 30m
-        memory: 15Mi
+        memory: 250Mi
     nodeSelector:
       kubernetes.io/arch: amd64
   postRenderers:
