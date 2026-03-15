@@ -102,7 +102,7 @@ spec:
           resources:
             requests:
               cpu: 250m
-              memory: 200Mi
+              memory: 450Mi
             limits: {}
       ingress:
         select:
@@ -228,7 +228,7 @@ spec:
       resources:
         requests:
           cpu: 20m
-          memory: 150Mi
+          memory: 550Mi
         limits: {}
       rbac:
         extraRules:
