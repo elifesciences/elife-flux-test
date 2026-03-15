@@ -20,7 +20,7 @@ spec:
       resources:
         requests:
           cpu: 10m
-          memory: 90Mi
+          memory: 250Mi
       alerts:
         enabled: true
         searchNamespace: ALL
