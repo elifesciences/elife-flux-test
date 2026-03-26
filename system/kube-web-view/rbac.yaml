@@ -131,6 +131,11 @@ rules:
   - gateways
   - httproutes
   verbs: [list, get]
+- apiGroups:
+  - external-secrets.io
+  resources:
+  - externalsecrets
+  verbs: [list, get]
 
 ---
 kind: ClusterRoleBinding
