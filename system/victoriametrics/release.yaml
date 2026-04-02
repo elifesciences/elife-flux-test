@@ -84,6 +84,7 @@ spec:
             "dedup.minScrapeInterval": "30s"
             "search.cacheTimestampOffset": "10m"
             "search.maxQueryDuration": "120s"
+            "search.maxConcurrentRequests": "8"
         vminsert:
           replicaCount: 2
           affinity:
