@@ -85,6 +85,7 @@ spec:
             "search.cacheTimestampOffset": "10m"
             "search.maxQueryDuration": "120s"
             "search.maxConcurrentRequests": "8"
+            "search.maxQueueDuration": "30s"
         vminsert:
           replicaCount: 2
           affinity:
