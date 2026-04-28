@@ -1,0 +1,16 @@
+apiVersion: http.keda.sh/v1beta1
+kind: InterceptorRoute
+metadata:
+  name: podinfo
+spec:
+  target:
+    service: podinfo
+    port: 9898
+  rules:
+    - hosts:
+        - "${hostname}"
+      paths:
+        - value: /
+  scalingMetric:
+    concurrency:
+      targetValue: 5
