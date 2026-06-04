@@ -8,7 +8,7 @@ kubie = "0.28.0"
 kind = "0.32.0"
 kustomize = "5.8.1"
 yq = "4.53.2"
-kubeconform = "0.7.0"
+kubeconform = "0.8.0"
 awscli = "2.34.61"
 helm = "4.2.0"
 
