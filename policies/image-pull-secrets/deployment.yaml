@@ -12,7 +12,7 @@ spec:
       - name: image-pull-secrets
       containers:
       - name: echo
-        image: rknt/worktimer-sync:20260627150950-068f610
+        image: elifesciences/test-please-ignore
         ports:
         - name: http
           containerPort: 5678
