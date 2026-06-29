@@ -4,6 +4,9 @@ metadata:
   name: image-pull-secrets-test
 spec:
   template:
+    metadata:
+      labels:
+        app: image-pull-secrets-test
     spec:
       imagePullSecrets:
       - name: image-pull-secrets
@@ -23,3 +26,6 @@ spec:
           requests:
             cpu: 10m
             memory: 10Mi
+  selector:
+    matchLabels:
+      app: image-pull-secrets-test
