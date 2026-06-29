@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-pull-secrets-test
+spec:
+  template:
+    spec:
+      imagePullSecrets:
+      - name: image-pull-secrets
+      containers:
+      - name: echo
+        image: hashicorp/http-echo:latest
+        ports:
+        - name: http
+          containerPort: 5678
+          protocol: TCP
+        args:
+        - --status-code=401
+        resources:
+          limits:
+            cpu: 10m
+            memory: 100Mi
+          requests:
+            cpu: 10m
+            memory: 10Mi
