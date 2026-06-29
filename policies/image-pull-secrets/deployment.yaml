@@ -12,7 +12,7 @@ spec:
       - name: image-pull-secrets
       containers:
       - name: echo
-        image: elifesciences/test-please-ignore
+        image: elifesciences/test-please-ignore:echo
         ports:
         - name: http
           containerPort: 5678
