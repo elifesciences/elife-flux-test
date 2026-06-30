@@ -210,6 +210,14 @@ spec:
           create: false
         TooManyScrapeErrors:
           create: false
+        KubeAPIDown:
+          create: false
+        KubeControllerManagerDown:
+          create: false
+        KubeSchedulerDown:
+          create: false
+        RecordingRulesNoData:
+          create: false
     kubeControllerManager:
       enabled: false # lives on EKS
     kubeScheduler:
