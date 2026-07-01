@@ -9,7 +9,7 @@ kind = "0.32.0"
 kustomize = "5.8.1"
 yq = "4.53.3"
 kubeconform = "0.8.0"
-awscli = "2.35.13"
+awscli = "2.35.14"
 helm = "4.2.2"
 
 
