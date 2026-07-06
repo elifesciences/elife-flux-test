@@ -26,7 +26,6 @@
 2m helmrelease ready keda keda-add-ons-http
 2m helmrelease ready kyverno kyverno
 2m helmrelease ready metrics-server metrics-server
-  2m helmrelease ready spegel spegel
 2m helmrelease ready traefik traefik
 2m helmrelease ready template-controller template-controller
 2m helmrelease ready vector vector

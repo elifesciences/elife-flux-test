@@ -157,19 +157,6 @@ spec:
               effect: "NoSchedule"
             nodeSelector:
               kubernetes.io/hostname: elife-flux-test-control-plane
-  # Select only the fake nodes
-  - target:
-      kind: HelmRelease
-      name: spegel
-    patch: |-
-      apiVersion: helm.toolkit.fluxcd.io/v2
-      kind: HelmRelease
-      metadata:
-        name: spegel
-      spec:
-        values:
-          nodeSelector:
-            type: kwok
   - target:
       kind: HelmRelease
       name: victoriametrics
