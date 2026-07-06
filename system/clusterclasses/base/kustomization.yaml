@@ -15,7 +15,6 @@ resources:
 - ../../kube-web-view
 - ../../metrics-server
 - ../../monitoring
-- ../../nidhogg
 - ../../reloader
 - ../../spegel
 - ../../template-controller
