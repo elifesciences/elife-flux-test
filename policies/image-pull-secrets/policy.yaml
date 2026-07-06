@@ -14,6 +14,11 @@ spec:
           - resources:
               kinds:
                 - Pod
+      preconditions:
+        any:
+          - key: "docker.io"
+            operator: AnyIn
+            value: "{{ images.containers.*.registry }}"
       mutate:
         patchStrategicMerge:
           spec:
