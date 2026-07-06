@@ -8,8 +8,6 @@ spec:
       labels:
         app: image-pull-secrets-test
     spec:
-      imagePullSecrets:
-      - name: image-pull-secrets
       containers:
       - name: echo
         image: elifesciences/test-please-ignore:echo
