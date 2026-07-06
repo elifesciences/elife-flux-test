@@ -4,3 +4,4 @@ namespace: kyverno
 resources:
 - secret.yaml
 - deployment.yaml
+- policy.yaml
