@@ -3,3 +3,4 @@ kind: Kustomization
 namespace: kyverno
 resources:
 - policy.yaml
+- cluster-external-secret.yaml
