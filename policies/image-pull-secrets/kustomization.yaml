@@ -4,3 +4,4 @@ namespace: kyverno
 resources:
 - policy.yaml
 - cluster-external-secret.yaml
+- background-controller-rbac.yaml
