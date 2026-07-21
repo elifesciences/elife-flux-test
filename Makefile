@@ -5,6 +5,10 @@ validate:
 
 test: validate
 
+end2end:
+	./tests/run_cluster_in_kind.sh $$(git branch --show-current)
+	./tests/run_tests.sh
+
 
 # targets for interacting with flux in the cluster
 reconcile:
