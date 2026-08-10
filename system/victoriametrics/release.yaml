@@ -41,7 +41,7 @@ spec:
                 - matchExpressions:
                   - key: topology.kubernetes.io/zone
                     operator: In
-                    values: ["us-east-1d"]
+                    values: ["us-east-1c"]
           storage:
             volumeClaimTemplate:
               spec:
@@ -66,7 +66,7 @@ spec:
                 - matchExpressions:
                   - key: topology.kubernetes.io/zone
                     operator: In
-                    values: ["us-east-1d"]
+                    values: ["us-east-1c"]
           serviceSpec:
             spec:
               trafficDistribution: PreferClose
@@ -95,7 +95,7 @@ spec:
                 - matchExpressions:
                   - key: topology.kubernetes.io/zone
                     operator: In
-                    values: ["us-east-1d"]
+                    values: ["us-east-1c"]
           serviceSpec:
             spec:
               trafficDistribution: PreferClose
