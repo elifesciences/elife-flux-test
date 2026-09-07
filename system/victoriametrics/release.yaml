@@ -34,14 +34,6 @@ spec:
         retentionPeriod: "1" # months
         vmstorage:
           replicaCount: 2
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                - matchExpressions:
-                  - key: topology.kubernetes.io/zone
-                    operator: In
-                    values: ["us-east-1c"]
           storage:
             volumeClaimTemplate:
               spec:
@@ -59,14 +51,6 @@ spec:
             "dedup.minScrapeInterval": "30s"
         vmselect:
           replicaCount: 2
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                - matchExpressions:
-                  - key: topology.kubernetes.io/zone
-                    operator: In
-                    values: ["us-east-1c"]
           serviceSpec:
             spec:
               trafficDistribution: PreferClose
@@ -88,14 +72,6 @@ spec:
             "search.maxQueueDuration": "30s"
         vminsert:
           replicaCount: 2
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                - matchExpressions:
-                  - key: topology.kubernetes.io/zone
-                    operator: In
-                    values: ["us-east-1c"]
           serviceSpec:
             spec:
               trafficDistribution: PreferClose
