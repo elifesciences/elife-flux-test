@@ -15,6 +15,7 @@ resources:
 - ../../kube-web-view
 - ../../metrics-server
 - ../../monitoring
+- ../../namespace-editors-role
 - ../../reloader
 - ../../template-controller
 - ../../traefik
