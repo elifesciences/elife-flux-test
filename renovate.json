@@ -7,6 +7,7 @@
   "kubernetes": {
     "fileMatch": [
       "^system/kube-web-view/deployment\\.yaml$",
+      "^system/dash0/kube-state-metrics/deployment\\.yaml$",
       "kustomizations/.+\\.yaml$"
     ]
   },
