@@ -1,0 +1,134 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: dash0-operator
+  namespace: dash0
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: dash0-operator
+      version: 0.161.0
+      interval: 5m
+      sourceRef:
+        kind: HelmRepository
+        name: dash0-operator
+  values:
+    operator:
+      clusterName: ${cluster_name}
+      prometheusCrdSupportEnabled: true
+      collectors:
+        daemonSetCollectorContainerResources:
+          requests:
+            memory: 128Mi
+          limits:
+            memory: 500Mi
+        daemonSetTolerations:
+          - operator: Exists
+        filelogOffsetSyncStorageVolume:
+          name: filelogreceiver-offsets
+          hostPath:
+            path: /data/dash0-operator/offset-storage
+            type: DirectoryOrCreate
+      dash0Export:
+        enabled: true
+        dataset: ${cluster_name}
+        endpoint: ingress.us-east-1.aws.dash0.com:4317
+        apiEndpoint: https://api.us-east-1.aws.dash0.com
+        secretRef:
+          name: dash0-credentials
+          key: token
+      transform:
+        error_mode: ignore
+        metric_statements:
+          # Traefik labels its metrics by method, protocol, code and TLS details, multiplying
+          # series per exported_service. Sum datapoints down to what the dashboards and checks
+          # use. This runs per scraped Traefik pod, so the pod remains a dimension: dropping it
+          # would interleave the cumulative counters of different pods in one series.
+          # The scrape target labels (endpoint, namespace, pod, container, service) are kept;
+          # they are constant per pod.
+          - context: metric
+            statements:
+              - >-
+                aggregate_on_attributes("sum", ["exported_service", "entrypoint", "code", "endpoint", "namespace", "pod", "container", "service"])
+                where IsMatch(metric.name, "^traefik_(service|entrypoint)_requests(_total)?$")
+              - >-
+                aggregate_on_attributes("sum", ["exported_service", "entrypoint", "endpoint", "namespace", "pod", "container", "service"])
+                where IsMatch(metric.name, "^traefik_(service|entrypoint)_")
+                and not IsMatch(metric.name, "^traefik_(service|entrypoint)_requests(_total)?$")
+      # Cluster-wide metric filters. Filters in monitoringTemplate only apply to auto-monitored
+      # namespaces, which excludes the operator's own dash0 namespace (one collector per node).
+      filter:
+        error_mode: ignore
+        # Metric names in OTTL use OTel dot-notation (k8s.container.restarts).
+        # PromQL and the Dash0 UI expose them with underscores (k8s_container_restarts).
+        metrics:
+          metric:
+            # Whole namespaces are excluded via the dash0.com/enable=false label on
+            # the namespace itself (see system/{vector,victorialogs,victoriametrics}),
+            # which also stops the collector scraping those pods in the first place.
+            #
+            # --- Entire families not used in any alert ---
+            - 'IsMatch(name, "^mongodb_")'       # mongo metrics
+            # Go runtime and controller internals of every scraped target (flux, cert-manager, ...)
+            - 'IsMatch(name, "^(go|process|controller_runtime|workqueue|rest_client|opentelemetry_allocator)_")'
+            # Flux controller internals; gotk_resource_info comes from system/flux-metrics
+            - 'IsMatch(name, "^gotk_") and name != "gotk_resource_info"'
+            # Collector self-monitoring (otelcol*) bypasses this pipeline, see the spam filter in checks/
+            # Container usage details, checks only use container.cpu.usage and container.memory.working_set
+            - 'IsMatch(name, "^container[.](memory[.](rss|usage|page_faults|major_page_faults|available)|filesystem[.].*|cpu[.]time)$")'
+            # Pod-level duplicates of the container metrics. Checks only use k8s.pod.filesystem.usage;
+            # k8s.pod.cpu.usage and k8s.pod.memory.working_set are kept for Dash0's pod resource views.
+            - 'IsMatch(name, "^k8s[.]pod[.](cpu[.]time|memory[.](usage|rss|page_faults|major_page_faults|available)|filesystem[.](capacity|available))$")'
+            - 'IsMatch(name, "^k8s[.]pod[.].*_utilization$")'
+            - 'IsMatch(name, "^k8s[.]pod[.]network[.]")'
+            - 'IsMatch(name, "^k8s[.](replicaset|job)[.]")'
+            - 'name == "k8s.container.ready"'
+            - 'name == "k8s.container.status.state"'
+            - 'name == "k8s.volume.inodes.used"'
+            # Operators: checks only use externalsecret_status_condition,
+            # certmanager_certificate_ready_status and certmanager_certificate_expiration_timestamp_seconds
+            - 'name == "externalsecret_sync_calls_total" or name == "externalsecret_reconcile_duration"'
+            - 'IsMatch(name, "^certmanager_certificate_(not_before|not_after|renewal)_timestamp_seconds$")'
+            # Traefik: dashboards and checks only use service requests/duration/response bytes
+            # and entrypoint requests
+            - 'IsMatch(name, "^traefik_(tls_certs_not_after|service_requests_(bytes|tls)_total|entrypoint_(request_duration_seconds|requests_(bytes|tls)_total|responses_bytes_total))$")'
+          datapoint:
+            # Checks only look at PVCs, the bulk are emptyDir, configMap and secret volumes
+            - 'IsMatch(metric.name, "^k8s[.]volume[.]") and resource.attributes["k8s.volume.type"] != "persistentVolumeClaim"'
+            # One series per possible reason per container, almost all 0
+            - 'metric.name == "k8s.container.status.reason" and value_int == 0 and value_double == 0'
+      autoMonitorNamespaces:
+        enabled: false
+      selfMonitoring:
+        enabled: true
+      monitoringTemplate:
+        spec:
+          instrumentWorkloads:
+            mode: none
+          logCollection:
+            enabled: true
+          eventCollection:
+            enabled: true
+          prometheusScraping:
+            enabled: true
+          synchronizePersesDashboards: false
+          synchronizePrometheusRules: false
+          filter:
+            logs:
+              log_records:
+                # Logs are opt-in per workload via the dash0.com/log-level pod label,
+                # whose value is the minimum severity to ship (trace|debug|info|warn|error).
+                # Records without a parsed severity (UNSPECIFIED) are always kept.
+                #
+                # k8s events (eventCollection) pass through this same filter.
+                # To avoid applying the log level filter to k8s events (that are shipped as logs)
+                # we check if k8s.event.name is nil.
+                - 'attributes["k8s.event.name"] == nil and resource.attributes["k8s.pod.label.dash0.com/log-level"] == nil'
+                - 'attributes["k8s.event.name"] == nil and resource.attributes["k8s.pod.label.dash0.com/log-level"] == "debug" and severity_number > SEVERITY_NUMBER_UNSPECIFIED and severity_number < SEVERITY_NUMBER_DEBUG'
+                - 'attributes["k8s.event.name"] == nil and resource.attributes["k8s.pod.label.dash0.com/log-level"] == "info" and severity_number > SEVERITY_NUMBER_UNSPECIFIED and severity_number < SEVERITY_NUMBER_INFO'
+                - 'attributes["k8s.event.name"] == nil and resource.attributes["k8s.pod.label.dash0.com/log-level"] == "warn" and severity_number > SEVERITY_NUMBER_UNSPECIFIED and severity_number < SEVERITY_NUMBER_WARN'
+                - 'attributes["k8s.event.name"] == nil and resource.attributes["k8s.pod.label.dash0.com/log-level"] == "error" and severity_number > SEVERITY_NUMBER_UNSPECIFIED and severity_number < SEVERITY_NUMBER_ERROR'
+                # Limit namespace k8s events to severity > WARN, all cluster scoped events are shipped regardless of level
+                - 'attributes["k8s.event.name"] != nil and severity_number < SEVERITY_NUMBER_WARN and resource.attributes["k8s.namespace.name"] != nil and resource.attributes["k8s.namespace.name"] != ""'
