@@ -12,8 +12,3 @@ resources:
 - platform-integrations.yaml
 - notification-channel.yaml
 - spam-filter-collector-self-monitoring.yaml
-- synthetic-checks.yaml
-patches:
-- path: synthetic-checks-defaults.yaml
-  target:
-    kind: Dash0SyntheticCheck
