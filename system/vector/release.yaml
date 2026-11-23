@@ -21,8 +21,6 @@ spec:
 
   values:
     role: Agent
-    podMonitor:
-      enabled: true
     resources:
       requests:
         cpu: 10m
@@ -45,49 +43,10 @@ spec:
         enabled: true
         address: 127.0.0.1:8686
       sources:
-        logs:
-          type: kubernetes_logs
-          insert_namespace_fields: false
-          pod_annotation_fields:
-            container_id: ""
-            container_image_id: ""
-            pod_uid: ""
-            pod_annotations: ""
-          namespace_annotation_fields:
-            namespace_labels: ""
-        host_metrics:
-          filesystem:
-            devices:
-              excludes: [binfmt_misc]
-            filesystems:
-              excludes: [binfmt_misc]
-            mountPoints:
-              excludes: ["*/proc/sys/fs/binfmt_misc"]
-          type: host_metrics
-        internal_metrics:
-          type: internal_metrics
         traefik_logs:
           type: kubernetes_logs
           extra_label_selector: app.kubernetes.io/name==traefik
       transforms:
-        filter_node_labels:
-          type: remap
-          inputs:
-            - logs
-          source: |
-            if exists(.kubernetes.node_labels) {
-              allowed_labels = [
-                "elifesciences.org/project",
-                "karpenter.sh/capacity-type",
-                "karpenter.sh/nodepool",
-                "kubernetes.io/arch",
-                "kubernetes.io/hostname",
-                "node.kubernetes.io/instance-type",
-                "topology.kubernetes.io/zone",
-                "type"
-              ]
-              .kubernetes.node_labels = filter(object!(.kubernetes.node_labels)) -> |key, value| { includes(allowed_labels, key) }
-            }
         traefik_json_parse:
           type: remap
           inputs:
@@ -159,10 +118,6 @@ spec:
           condition: |
             starts_with(string(.httpRequest.requestUrl) ?? "", "podinfo.flux-test.elifesciences.org")
       sinks:
-        prom_exporter:
-          type: prometheus_exporter
-          inputs: [host_metrics, internal_metrics]
-          address: 0.0.0.0:9090
         flux_test_podinfo_gcp:
           type: gcp_cloud_storage
           inputs:
@@ -183,17 +138,3 @@ spec:
           filename_extension: jsonl
           encoding:
             codec: native_json
-        local_victorialogs:
-          inputs:
-          - filter_node_labels
-          type: elasticsearch
-          endpoints:
-          - "http://victorialogs-victoria-logs-single-server.victorialogs:9428/insert/elasticsearch/"
-          mode: "bulk"
-          api_version: "v8"
-          healthcheck:
-            enabled: false
-          query:
-            _msg_field: "message"
-            _time_field: "timestamp"
-            _stream_fields: "kubernetes.pod_namespace,kubernetes.container_name"
