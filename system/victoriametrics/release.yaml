@@ -176,7 +176,7 @@ spec:
             hosts:
               - alertmanager.${cluster_domain}
     defaultRules:
-      create: false
+      enabled: false
       rules:
         KubeMemoryOvercommit:
           create: false
