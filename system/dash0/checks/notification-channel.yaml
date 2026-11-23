@@ -8,7 +8,7 @@ metadata:
   namespace: dash0-checks
 spec:
   display:
-    name: Alerts
+    name: Flux Test Alerts
   type: slack_bot
   slackBotConfig:
     teamId: T025LBBQS
@@ -20,3 +20,6 @@ spec:
       - - key: dash0.failed_check.max_status
           operator: is
           value: critical
+      - - key: dash0.dataset
+          operator: is
+          value: flux-test
