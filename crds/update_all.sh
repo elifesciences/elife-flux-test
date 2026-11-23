@@ -13,7 +13,6 @@ cd $(dirname $0)
 ./pxc-operator/update.sh $(cat ../system/database/mysql/pxc-operator-release.yaml  | yq .spec.chart.spec.version)
 ./sealed-secrets/update.sh $(cat ../system/infra/sealed-secrets/release.yaml  | yq .spec.chart.spec.version)
 ./template-controller/update.sh $(cat ../system/template-controller/release.yaml  | yq .spec.chart.spec.version)
-./victoriametrics/update.sh $(cat ../system/victoriametrics/release.yaml  | yq .spec.chart.spec.version)
 
 # Standalone CRD only (no perses-operator HelmRelease in this repo to derive the version from)
 ./perses-dashboards/update.sh v0.4.0
