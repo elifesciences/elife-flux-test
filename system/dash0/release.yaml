@@ -66,7 +66,7 @@ spec:
         metrics:
           metric:
             # Whole namespaces are excluded via the dash0.com/enable=false label on
-            # the namespace itself (see system/{vector,victorialogs,victoriametrics}),
+            # the namespace itself (see system/vector),
             # which also stops the collector scraping those pods in the first place.
             #
             # --- Entire families not used in any alert ---

@@ -6,8 +6,7 @@ Observability
 =============
 
 - [Kubernetes Dashboard](https://dashboard--test-cluster.elifesciences.org)
-- [Prometheus (Metrics)](https://prometheus--test-cluster.elifesciences.org)
-- [Alertmanager](https://alertmanager--test-cluster.elifesciences.org)
+- [Dash0](https://app.dash0.com) (metrics, logs, alerts and dashboards, select `flux-test` dataset in top left dropdown)
 
 
 Overview of the Cluster
