@@ -15,6 +15,9 @@ cd $(dirname $0)
 ./template-controller/update.sh $(cat ../system/template-controller/release.yaml  | yq .spec.chart.spec.version)
 ./victoriametrics/update.sh $(cat ../system/victoriametrics/release.yaml  | yq .spec.chart.spec.version)
 
+# Standalone CRD only (no perses-operator HelmRelease in this repo to derive the version from)
+./perses-dashboards/update.sh v0.4.0
+
 ./ack-controllers/common/update.sh $(cat ../system/ack-system/s3-release.yaml  | yq .spec.chart.spec.version)
 ./ack-controllers/iam-controller/update.sh $(cat ../system/ack-system/iam-release.yaml  | yq .spec.chart.spec.version)
 ./ack-controllers/rds-controller/update.sh $(cat ../system/ack-system/rds-release.yaml  | yq .spec.chart.spec.version)
