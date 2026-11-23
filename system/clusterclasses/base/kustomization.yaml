@@ -10,7 +10,6 @@ resources:
 - ../../external-secrets
 - ../../gitops-dashboard
 - ../../gemini
-- ../../grafana
 - ../../keda
 - ../../kong-system
 - ../../kube-web-view

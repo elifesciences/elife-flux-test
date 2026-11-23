@@ -18,18 +18,6 @@ The cluster also dumps logs to Loggly.
 
 -   Prometheus will add all ServiceMonitors in cluster
 
-## Grafana Dashboards
-
--   add a `ConfigMap` to the `adm` namespace containing the dashboard’s
-    json
-
--   add the `grafana_dashboard: "1` label
-
--   see `releases/adm/ingress-nginx-dashboard-main.yaml` for an example
-
--   in the future maybe switch to something like
-    [grafana-operator](https://github.com/integr8ly/grafana-operator)
-
 ## Alertmanager
 
 -   add a `PrometheusRule` object

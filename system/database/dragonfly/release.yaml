@@ -16,8 +16,6 @@ spec:
   values:
     serviceMonitor:
       enabled: true
-    grafanaDashboard:
-      enabled: true
     manager:
       extraArgs:
       - --metrics-bind-address=0.0.0.0:8080

@@ -6,7 +6,6 @@ Observability
 =============
 
 - [Kubernetes Dashboard](https://dashboard--test-cluster.elifesciences.org)
-- [Grafana Dashboards](https://grafana--test-cluster.elifesciences.org)
 - [Prometheus (Metrics)](https://prometheus--test-cluster.elifesciences.org)
 - [Alertmanager](https://alertmanager--test-cluster.elifesciences.org)
 
