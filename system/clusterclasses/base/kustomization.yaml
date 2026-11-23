@@ -14,7 +14,6 @@ resources:
 - ../../kong-system
 - ../../kube-web-view
 - ../../metrics-server
-- ../../monitoring
 - ../../namespace-editors-role
 - ../../reloader
 - ../../template-controller

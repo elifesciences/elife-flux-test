@@ -28,7 +28,5 @@
 2m helmrelease ready template-controller template-controller
 2m helmrelease ready vector vector
 
-2m kustomizations.kustomize.toolkit.fluxcd.io ready monitoring monitoring-flux
-
 # Test all deployments
 2m deployment Available podinfo podinfo
