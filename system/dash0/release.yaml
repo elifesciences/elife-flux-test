@@ -100,7 +100,7 @@ spec:
             # One series per possible reason per container, almost all 0
             - 'metric.name == "k8s.container.status.reason" and value_int == 0 and value_double == 0'
       autoMonitorNamespaces:
-        enabled: false
+        enabled: true
       selfMonitoring:
         enabled: true
       monitoringTemplate:
