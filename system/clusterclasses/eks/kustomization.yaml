@@ -6,4 +6,3 @@ resources:
 - secret-store
 - ../base
 - ../../aws-load-balancer-controller
-# - ../../amazon-network-flow-monitor
