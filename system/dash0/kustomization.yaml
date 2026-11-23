@@ -5,3 +5,5 @@ resources:
 - namespace.yaml
 - source.yaml
 - secret.yaml
+- checks-kustomization.yaml
+- dashboards-kustomization.yaml

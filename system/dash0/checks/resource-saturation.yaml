@@ -1,0 +1,220 @@
+---
+# Resource saturation on node, container and PVC level.
+#
+# Expressions are scaled to percent so thresholds read naturally.
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: resource-saturation
+  namespace: dash0-checks
+spec:
+  groups:
+    - name: resource-saturation
+      rules:
+        # --- Node ---
+        - alert: NodeCpuSaturated
+          # CPU is compressible: workloads slow down but nothing is killed. Review only.
+          # iowait is idle CPU waiting on disk, so it is excluded along with idle.
+          expr: >-
+            sum by (k8s_node_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (
+              avg by (k8s_node_name, cpu_mode, dash0_resource_id, dash0_resource_name, dash0_resource_type) (system_cpu_utilization_ratio{cpu_mode!~"^(idle|wait)$"})
+            ) * 100 > $__threshold
+          for: 1h
+          annotations:
+            summary: Node {{ $labels.k8s_node_name }} CPU above {{ $__threshold }}% for an hour
+            dash0-threshold-degraded: "90"
+
+        - alert: NodeMemorySaturated
+          expr: >-
+            max by (k8s_node_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (system_memory_utilization_ratio{system_memory_state="used"}) * 100
+            > $__threshold
+          for: 15m
+          annotations:
+            summary: Node {{ $labels.k8s_node_name }} memory above {{ $__threshold }}%
+            description: Near full, the kubelet evicts pods and the kernel OOM kills containers.
+            dash0-threshold-degraded: "90"
+
+        - alert: NodeDiskSaturated
+          # kubelet image GC starts at 85% and hard eviction at 90% (nodefs.available < 10%).
+          expr: >-
+            max by (k8s_node_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (1 - k8s_node_filesystem_available_bytes / k8s_node_filesystem_capacity_bytes) * 100
+            > $__threshold
+          for: 15m
+          annotations:
+            summary: Node {{ $labels.k8s_node_name }} disk above {{ $__threshold }}%
+            description: >-
+              kubelet is evicting pods due to Node disk being too full
+            dash0-threshold-degraded: "90"
+
+        - alert: NodeDiskFullOutsidePods
+          # Catches nodes heading for eviction before NodeEvictingPods does. On evicting nodes
+          # pods' own ephemeral storage is well under 1GiB, while container images take most of
+          # the root volume. Images in use by running pods cannot be garbage collected, so the
+          # disk is too small for the images scheduled onto it. Value is the percentage of the
+          # disk used by anything other than pods. Review only: NodeEvictingPods alerts once the
+          # kubelet acts on it.
+          expr: >-
+            (
+              max by (k8s_node_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (
+                1 - k8s_node_filesystem_available_bytes / k8s_node_filesystem_capacity_bytes
+              )
+              - on (k8s_node_name) group_left ()
+              (
+                sum by (k8s_node_name) (k8s_pod_filesystem_usage_bytes)
+                / on (k8s_node_name) max by (k8s_node_name) (k8s_node_filesystem_capacity_bytes)
+              )
+            ) * 100 > $__threshold
+          for: 30m
+          annotations:
+            summary: Node {{ $labels.k8s_node_name }} disk is more than {{ $__threshold }}% full with data outside pods, mostly container images
+            description: >-
+              The kubelet evicts pods once the disk is 90% full, and pods' own ephemeral storage
+              is not what fills it. Give the node pool's EC2NodeClass a larger root volume
+              (blockDeviceMappings volumeSize) or shrink the images of the workloads it runs.
+            dash0-threshold-degraded: "80"
+
+        - alert: PodStorageBeyondRequest
+          # Under disk pressure the kubelet evicts pods by their ephemeral-storage usage above
+          # request, and the scheduler only reserves requested storage, so large unrequested
+          # usage both causes and suffers evictions. Pods without a request count as requesting 0.
+          # Value is the usage above request as a percentage of the node's disk. Review only.
+          expr: >-
+            (
+              max by (k8s_namespace_name, k8s_pod_name, k8s_node_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (
+                k8s_pod_filesystem_usage_bytes
+              )
+              - on (k8s_namespace_name, k8s_pod_name) group_left ()
+              (
+                sum by (k8s_namespace_name, k8s_pod_name) (k8s_container_ephemeralstorage_request_bytes)
+                or on (k8s_namespace_name, k8s_pod_name)
+                0 * max by (k8s_namespace_name, k8s_pod_name) (k8s_pod_filesystem_usage_bytes)
+              )
+            )
+            / on (k8s_node_name) group_left ()
+            max by (k8s_node_name) (k8s_node_filesystem_capacity_bytes)
+            * 100 > $__threshold
+          for: 15m
+          annotations:
+            summary: Pod {{ $labels.k8s_namespace_name }}/{{ $labels.k8s_pod_name }} uses more than {{ $__threshold }}% of node {{ $labels.k8s_node_name }}'s disk beyond its ephemeral-storage request
+            description: >-
+              Set an ephemeral-storage request on the pod's containers that covers its usage, so the
+              scheduler reserves the space and the kubelet does not evict it first.
+            dash0-threshold-degraded: "5"
+
+        - alert: NodeEvictingPods
+          # Eviction frees disk (or memory) right away, so usage on an evicting node oscillates
+          # around the eviction threshold and never stays high long enough for the checks above.
+          # Counting the kubelet's Evicted events catches that. Karpenter also emits Evicted
+          # events when consolidating nodes; those are excluded via the reporting controller.
+          #
+          # The event body names the resource the node is low on. It cannot be extracted with
+          # label_replace, so each resource is matched on the body and labelled separately;
+          # "other" catches anything unmatched so no eviction goes uncounted.
+          # Pod names and the node pool cannot be put in the summary: a series per pod would
+          # be an issue per pod, and node labels are not shipped.
+          #
+          # The event counts belong to the evicted pods' resources, so the node's resource labels
+          # are joined in from k8s_node_condition_ready to make the node the affected resource.
+          # Nodes are often gone before the 1h window ends, so their labels are looked up over
+          # the same window; topk guards against a node name reused by a new node.
+          expr: >-
+            (
+              (
+                label_replace(
+                  sum by (k8s_node_name) (
+                    increase({otel_metric_name="dash0.logs", k8s_event_reason="Evicted", k8s_event_reporting_controller="kubelet", otel_log_body=~"ephemeral-storage|DiskPressure"}[1h])
+                  ), "resource", "disk", "", "")
+                or
+                label_replace(
+                  sum by (k8s_node_name) (
+                    increase({otel_metric_name="dash0.logs", k8s_event_reason="Evicted", k8s_event_reporting_controller="kubelet", otel_log_body=~"memory|MemoryPressure"}[1h])
+                  ), "resource", "memory", "", "")
+                or
+                label_replace(
+                  sum by (k8s_node_name) (
+                    increase({otel_metric_name="dash0.logs", k8s_event_reason="Evicted", k8s_event_reporting_controller="kubelet", otel_log_body!~"ephemeral-storage|DiskPressure|memory|MemoryPressure"}[1h])
+                  ), "resource", "other", "", "")
+              )
+              + on (k8s_node_name) group_left (dash0_resource_id, dash0_resource_name, dash0_resource_type)
+              (0 * topk by (k8s_node_name) (1,
+                max by (k8s_node_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (last_over_time(k8s_node_condition_ready[1h]))
+              ))
+            ) >= $__threshold
+          annotations:
+            summary: Node {{ $labels.k8s_node_name }} is evicting pods (low on {{ $labels.resource }})
+            description: >-
+              The evicted pods and their usage are in the logs: filter on
+              k8s.event.reason = Evicted and k8s.node.name = {{ $labels.k8s_node_name }}.
+              For disk, the kubelet evicts the largest ephemeral-storage consumers first, and pods
+              without ephemeral-storage requests get scheduled onto nodes that are already full.
+              Set requests on the heavy consumers or give the node pool a larger root volume.
+              For memory, check the pods' memory requests against their usage.
+            dash0-threshold-degraded: "1"
+            dash0-threshold-critical: "5"
+
+        # --- Container ---
+        - alert: ContainerCpuNearLimit
+          # Containers at their CPU limit are throttled. Review only.
+          expr: >-
+            max by (k8s_namespace_name, k8s_pod_name, k8s_container_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (container_cpu_usage)
+            /
+            max by (k8s_namespace_name, k8s_pod_name, k8s_container_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (k8s_container_cpu_limit)
+            * 100 > $__threshold
+          for: 1h
+          annotations:
+            summary: "{{ $labels.k8s_namespace_name }}/{{ $labels.k8s_pod_name }} container {{ $labels.k8s_container_name }} CPU above {{ $__threshold }}% of limit"
+            dash0-threshold-degraded: "90"
+
+        - alert: ContainerMemoryNearLimit
+          # Some workloads (e.g. JVMs like opensearch) sit at ~90% by design. Review only;
+          # actual OOM kills are covered by workload checks.
+          expr: >-
+            max by (k8s_namespace_name, k8s_pod_name, k8s_container_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (container_memory_working_set_bytes)
+            /
+            max by (k8s_namespace_name, k8s_pod_name, k8s_container_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (k8s_container_memory_limit_bytes)
+            * 100 > $__threshold
+          for: 1h
+          annotations:
+            summary: "{{ $labels.k8s_namespace_name }}/{{ $labels.k8s_pod_name }} container {{ $labels.k8s_container_name }} memory above {{ $__threshold }}% of limit"
+            dash0-threshold-degraded: "95"
+
+        # --- PVC ---
+        - alert: PvcDiskSaturated
+          expr: >-
+            max by (k8s_namespace_name, k8s_persistentvolumeclaim_name) (
+              1 - k8s_volume_available_bytes{k8s_volume_type="persistentVolumeClaim"}
+                / k8s_volume_capacity_bytes{k8s_volume_type="persistentVolumeClaim"}
+            ) * 100 > $__threshold
+          for: 15m
+          annotations:
+            summary: PVC {{ $labels.k8s_namespace_name }}/{{ $labels.k8s_persistentvolumeclaim_name }} is filling up
+            description: Expand the PVC (the storage classes allow volume expansion) or free up space.
+            dash0-threshold-degraded: "80"
+            dash0-threshold-critical: "90"
+
+        - alert: PvcInodesSaturated
+          # Despite the _ratio suffix, inodes and inodes_free are counts.
+          expr: >-
+            max by (k8s_namespace_name, k8s_persistentvolumeclaim_name) (
+              1 - k8s_volume_inodes_free_ratio{k8s_volume_type="persistentVolumeClaim"}
+                / k8s_volume_inodes_ratio{k8s_volume_type="persistentVolumeClaim"}
+            ) * 100 > $__threshold
+          for: 15m
+          annotations:
+            summary: PVC {{ $labels.k8s_namespace_name }}/{{ $labels.k8s_persistentvolumeclaim_name }} is running out of inodes
+            dash0-threshold-degraded: "80"
+            dash0-threshold-critical: "90"
+
+    - name: resource-saturation-long-window
+      interval: 10m
+      rules:
+        - alert: PvcDiskFillingUp
+          # Catches growth before the static thresholds above do. A 24h lookback smooths
+          # short bursts (e.g. compaction, index merges) out of the 48h projection.
+          expr: >-
+            max by (k8s_namespace_name, k8s_persistentvolumeclaim_name) (
+              predict_linear(k8s_volume_available_bytes{k8s_volume_type="persistentVolumeClaim"}[24h], 48 * 3600)
+            ) < 0
+          for: 1h
+          annotations:
+            summary: PVC {{ $labels.k8s_namespace_name }}/{{ $labels.k8s_persistentvolumeclaim_name }} predicted to be full within 48 hours

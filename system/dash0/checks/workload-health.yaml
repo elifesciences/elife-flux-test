@@ -1,0 +1,179 @@
+---
+# Health of individual workloads (Deployments, StatefulSets and their containers).
+#
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: workload-health
+  namespace: dash0-checks
+spec:
+  groups:
+    - name: workload-health
+      rules:
+        # --- Availability ---
+        - alert: WorkloadUnavailable
+          # Scale up from zero (KEDA) briefly has 1 desired and 0 available replicas.
+          expr: >-
+            (
+              max by (k8s_namespace_name, k8s_deployment_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (
+                k8s_deployment_desired{k8s_namespace_name!~"^(${core_namespaces})$"}
+              ) > 0
+              and
+              max by (k8s_namespace_name, k8s_deployment_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (k8s_deployment_available) == 0
+            )
+            or
+            (
+              max by (k8s_namespace_name, k8s_statefulset_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (k8s_statefulset_desired_pods) > 0
+              and
+              max by (k8s_namespace_name, k8s_statefulset_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (k8s_statefulset_ready_pods) == 0
+            )
+          for: 10m
+          annotations:
+            # Only one of the two name labels is set; printing a missing label renders "<no value>".
+            # Dash0 rejects summary templates over 255 characters.
+            summary: "{{ $labels.k8s_namespace_name }}/{{ with $labels.k8s_deployment_name }}{{ . }}{{ else }}{{ $labels.k8s_statefulset_name }}{{ end }} has no available replicas"
+            description: >-
+              Every replica is down, so whatever it serves is down. Check the pods for
+              crash loops, failed scheduling or image pulls.
+
+        # --- Replica mismatches ---
+        - alert: ReplicasMissing
+          # Only gaps that last are reported. Rescheduled pods (Karpenter consolidation, spot
+          # interruptions) leave gaps of a few minutes each, which never last 20 minutes;
+          expr: >-
+            (
+              max by (k8s_namespace_name, k8s_deployment_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (
+                k8s_deployment_desired{k8s_namespace_name!~"^(${core_namespaces})$"}
+              )
+              -
+              max by (k8s_namespace_name, k8s_deployment_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (k8s_deployment_available)
+            ) > 0
+            or
+            (
+              max by (k8s_namespace_name, k8s_statefulset_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (k8s_statefulset_desired_pods)
+              -
+              max by (k8s_namespace_name, k8s_statefulset_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (k8s_statefulset_ready_pods)
+            ) > 0
+          for: 20m
+          annotations:
+            summary: "{{ $labels.k8s_namespace_name }}/{{ with $labels.k8s_deployment_name }}{{ . }}{{ else }}{{ $labels.k8s_statefulset_name }}{{ end }} is missing replicas"
+            description: >-
+              Running with reduced capacity or redundancy. Usually a stuck rollout, a pod
+              that cannot be scheduled, or a crash looping replica.
+
+        # --- Failed pods ---
+        - alert: PodFailed
+          # k8s.pod.phase: 1 = Pending, 2 = Running, 3 = Succeeded, 4 = Failed, 5 = Unknown
+          # Failed is terminal: the pod stays Failed until it is deleted (e.g. by the Job's
+          # history limit or ttlSecondsAfterFinished), so this reports for as long as it exists.
+          # A Job retries failed pods up to its backoffLimit, so a failed pod only counts once
+          # no other pod of the same Job is pending, running or has succeeded. Pods outside
+          # a Job have no k8s_job_name and are never excluded.
+          # The Job waits up to 6 minutes (exponential backoff, capped) before creating the
+          # next pod. The 10 minute `for` covers that wait, so a retry still to come does
+          # not report.
+          expr: >-
+            (
+              count by (k8s_namespace_name, k8s_job_name, k8s_pod_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (
+                k8s_pod_phase == 4
+              )
+              unless on (k8s_namespace_name, k8s_job_name) (
+                k8s_pod_phase{k8s_job_name!=""} < 4
+              )
+            ) >= $__threshold
+          for: 10m
+          annotations:
+            summary: "Pod {{ $labels.k8s_namespace_name }}/{{ $labels.k8s_pod_name }} has failed"
+            description: >-
+              A container exited with an error and will not be restarted (restartPolicy Never
+              or OnFailure, typically a Job), or the kubelet evicted the pod. Check the pod's
+              status reason and the k8s events shipped as logs for why.
+              Delete the failed pod to clear the check.
+            dash0-threshold-degraded: "1"
+
+        # --- OOM kills ---
+        - alert: ContainerOomKilled
+          # Containers whose last termination was an OOM kill within the last hour.
+          # From system/dash0/kube-state-metrics: a container's last termination keeps its
+          # reason and time until it terminates again, so a kill is never missed between
+          # scrapes. k8s.container.status.reason only shows OOMKilled until the restart.
+          # KSM's namespace, pod and container labels name the killed container; they take
+          # precedence over the scrape's own namespace and pod labels.
+          # Containers that are not restarted (restartPolicy Never) leave a failed pod, see
+          # PodFailed. Kills in pods that are deleted since no longer show.
+          # Joined with k8s_container_restarts (only shipped once a container has restarted)
+          # to set the affected resource; without a match the kill is still reported. topk keeps
+          # one series per container: one with several resource ids fails the whole query.
+          expr: >-
+            (
+              (
+                max by (k8s_namespace_name, k8s_pod_name, k8s_container_name) (
+                  label_replace(label_replace(label_replace(
+                    max by (namespace, pod, container) (
+                      kube_pod_container_status_last_terminated_reason{reason="OOMKilled"}
+                    )
+                    and on (namespace, pod, container)
+                    max by (namespace, pod, container) (
+                      kube_pod_container_status_last_terminated_timestamp
+                    ) > time() - 3600,
+                  "k8s_namespace_name", "$1", "namespace", "(.*)"),
+                  "k8s_pod_name", "$1", "pod", "(.*)"),
+                  "k8s_container_name", "$1", "container", "(.*)")
+                )
+                * on (k8s_namespace_name, k8s_pod_name, k8s_container_name) group_left (dash0_resource_id, dash0_resource_name, dash0_resource_type)
+                (
+                  topk by (k8s_namespace_name, k8s_pod_name, k8s_container_name) (1,
+                    max by (k8s_namespace_name, k8s_pod_name, k8s_container_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (
+                      k8s_container_restarts
+                    )
+                  ) > bool 0
+                )
+              )
+              or on (k8s_namespace_name, k8s_pod_name, k8s_container_name)
+              max by (k8s_namespace_name, k8s_pod_name, k8s_container_name) (
+                label_replace(label_replace(label_replace(
+                  max by (namespace, pod, container) (
+                    kube_pod_container_status_last_terminated_reason{reason="OOMKilled"}
+                  )
+                  and on (namespace, pod, container)
+                  max by (namespace, pod, container) (
+                    kube_pod_container_status_last_terminated_timestamp
+                  ) > time() - 3600,
+                "k8s_namespace_name", "$1", "namespace", "(.*)"),
+                "k8s_pod_name", "$1", "pod", "(.*)"),
+                "k8s_container_name", "$1", "container", "(.*)")
+              )
+            ) >= $__threshold
+          annotations:
+            summary: "{{ $labels.k8s_namespace_name }}/{{ $labels.k8s_pod_name }} container {{ $labels.k8s_container_name }} was OOM killed"
+            description: >-
+              The container exceeded its memory limit and was killed and restarted. Compare
+              container.memory.working_set against the limit before raising it; a usage that
+              keeps growing points to a leak. Repeated kills also show in ContainerRestarting.
+            dash0-threshold-degraded: "1"
+
+    - name: workload-health-long-window
+      interval: 5m
+      rules:
+        # --- Restarts ---
+        - alert: ContainerRestarting
+          # A 6 hour window also catches containers that run a while between crashes and so
+          # never stay in CrashLoopBackOff, typically repeated OOM kills under load. A crash
+          # loop reaches the critical threshold within the first hour.
+          # A single restart is common (node issues, one-off OOM) and is not reported.
+          expr: >-
+            (
+              max by (k8s_namespace_name, k8s_pod_name, k8s_container_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (
+                max_over_time(k8s_container_restarts[6h])
+              )
+              -
+              min by (k8s_namespace_name, k8s_pod_name, k8s_container_name, dash0_resource_id, dash0_resource_name, dash0_resource_type) (
+                min_over_time(k8s_container_restarts[6h])
+              )
+            ) >= $__threshold
+          annotations:
+            summary: "{{ $labels.k8s_namespace_name }}/{{ $labels.k8s_pod_name }} container {{ $labels.k8s_container_name }} has been restarted more than once in the last 6 hours"
+            description: >-
+              Restarts can have a variety of reasons e.g. OOMkills, startup errors.
+            dash0-threshold-degraded: "3"
+            dash0-threshold-critical: "6"

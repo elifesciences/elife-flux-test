@@ -1,0 +1,46 @@
+---
+# Flux reconciliation failures. Review only: a failing reconciliation blocks deploys
+# but does not by itself degrade a running service.
+#
+# Flux itself exports no per-object Ready metric (gotk_reconcile_condition was removed in
+# Flux 2.1), so gotk_resource_info comes from system/dash0/kube-state-metrics.
+#
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: flux-health
+  namespace: dash0-checks
+spec:
+  groups:
+    - name: flux-health
+      interval: 10m
+      rules:
+        - alert: FluxResourceNotReady
+          # Objects that were Ready=False and never Ready=True in the last 30m.
+          # A failing object passes through Ready=Unknown on every reconcile (for the length
+          # of a health check timeout, on a Kustomization), which would reset a `for:`.
+          # Objects without a Ready condition (OCI HelmRepositories) never match.
+          # Suspended objects are left out; spec.suspend is empty unless set.
+          # Dash0 derives the affected resource from OTel attributes on the result, so the
+          # object's namespace (exported_namespace) is copied to k8s_namespace_name; without
+          # it the affected resource shows as "unknown". The copy happens after aggregating:
+          # the raw series carry KSM's own resource attributes (k8s.namespace.name is
+          # dash0-kube-state-metrics), and a k8s_namespace_name set on them is dropped by a
+          # later `by (k8s_namespace_name)`.
+          expr: >-
+            label_replace(
+              max by (customresource_kind, exported_namespace, name, reason) (
+                max_over_time(gotk_resource_info{ready="False", suspended!="true"}[30m])
+              ),
+              "k8s_namespace_name", "$1", "exported_namespace", "(.*)"
+            ) >= $__threshold
+            unless on (customresource_kind, exported_namespace, name)
+            max by (customresource_kind, exported_namespace, name) (
+              max_over_time(gotk_resource_info{ready="True"}[30m])
+            )
+          annotations:
+            summary: "{{ $labels.customresource_kind }} {{ $labels.exported_namespace }}/{{ $labels.name }} is not ready: {{ $labels.reason }}"
+            description: >-
+              Check the Warning events for this object in the logs, or
+              `flux get all -A --status-selector ready=false`.
+            dash0-threshold-degraded: "1"
