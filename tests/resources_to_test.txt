@@ -28,7 +28,6 @@
 2m helmrelease ready traefik traefik
 2m helmrelease ready template-controller template-controller
 2m helmrelease ready vector vector
-2m helmrelease ready victoriametrics victoriametrics
 
 2m kustomizations.kustomize.toolkit.fluxcd.io ready monitoring monitoring-flux
 
