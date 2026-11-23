@@ -4,5 +4,4 @@ namespace: dash0-dashboards
 resources:
 - namespace.yaml
 - monitoring.yaml
-- karpenter.yaml
 - daily.yaml
