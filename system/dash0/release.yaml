@@ -129,6 +129,8 @@ spec:
             # Traefik: dashboards and checks only use service requests/duration/response bytes
             # and entrypoint requests
             - 'IsMatch(name, "^traefik_(tls_certs_not_after|service_requests_(bytes|tls)_total|entrypoint_(request_duration_seconds|requests_(bytes|tls)_total|responses_bytes_total))$")'
+            # Karpenter: no dashboards or checks use these in the test cluster
+            - 'IsMatch(name, "^karpenter_")'
             # Client, SDK and leader election internals of controllers (karpenter, ...)
             - 'IsMatch(name, "^(client_go|aws_sdk_go|operator|leader_election|certwatcher|promhttp)_")'
           datapoint:
