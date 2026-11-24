@@ -16,18 +16,14 @@ spec:
       rules:
         # --- Check evaluation ---
         - alert: ChecksNotEvaluating
-          # Split by type: synthetic checks emit the same metric and would otherwise
-          # mask check rules no longer being evaluated.
-          expr: >-
-            label_replace(absent(dash0_check_evaluation_outcome{dash0_check_type="check_rule"}), "check_type", "check_rule", "", "")
-            or
-            label_replace(absent(dash0_check_evaluation_outcome{dash0_check_type="synthetic.http"}), "check_type", "synthetic.http", "", "")
+          # Test environment has no synthetic checks so filter to check rules
+          expr: absent(dash0_check_evaluation_outcome{dash0_check_type="check_rule"})
           for: 15m
           annotations:
-            summary: No Dash0 evaluation outcomes recorded for {{ $labels.check_type }} checks
+            summary: No Dash0 evaluation outcomes recorded for check rules
             description: >-
               Dash0 emits dash0.check.evaluation.outcome for evaluated checks.
-              Absence means checks are not synchronised (PrometheusRules / synthetic checks) or not evaluated.
+              Absence means check rules are not synchronised (PrometheusRules) or not evaluated.
               Note this cannot detect Dash0 evaluation being down entirely, since this check would not run either.
 
         # --- Collectors shipping ---
